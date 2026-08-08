@@ -1,0 +1,111 @@
+generated: '2026-08-07'
+method: derived
+status: candidate
+source: openapi/_original/*-swagger.json
+published_server: null
+search_evidence:
+- what: MCP server on the provider surface
+  result: none found
+  checked:
+  - https://developer.bitvore.com/ (full SPA route table + all JS chunks)
+  - https://api.bitvore.com/swagger-resources
+  - npm registry search "bitvore" (0 results)
+  - GitHub org https://github.com/bitvore (0 public repos)
+note: No hosted or remote MCP server is published by Bitvore. The tools below are a CANDIDATE surface derived from
+  real operationIds in the harvested Swagger documents — each tool inherits its input contract from the referenced
+  operation. Nothing here is served by Bitvore today.
+server:
+  name: bitvore
+  transport: http
+  url: null
+tools:
+- name: search_corporate_news
+  category: News
+  description: Search Cellenus corporate news and material business events by organization, signal, significance
+    and date range.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleNewsSearchUsingGET
+- name: search_corporate_news_advanced
+  category: News
+  description: Run a structured/advanced corporate news query (POST body) across the Cellenus corporate dataset.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleCorpAdvancedSearchUsingPOST_1
+- name: get_enriched_record
+  category: News
+  description: Fetch the full enriched record for one news article key, including signals, sentiment and referenced
+    organizations.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleGetEnrichedRecordUsingGET
+- name: search_news_by_portfolio
+  category: News
+  description: Return corporate news matched against a saved portfolio of organizations.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handlePortfolioNewsSearchUsingGET
+- name: search_economic_news
+  category: News
+  description: Search US economic news by geographic location.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleEconSearchUsingGET_1
+- name: lookup_organization
+  category: Organizations
+  description: Look up a surveilled organization by name or identifier and return its bvId.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleOrgLookupUsingGET_1
+- name: get_organization
+  category: Organizations
+  description: Get an organization record by bvId, including alternate identifiers (CUSIP/ISIN/SEDOL/FIGI).
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleGetOrgUsingGET_2
+- name: match_organizations
+  category: Organizations
+  description: Bulk-match a list of company names/identifiers to Bitvore organizations.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleOrgMatchingUsingPOST_1
+- name: get_sentiment_scores
+  category: Sentiment
+  description: Query trended sentiment, growth and risk scores for organizations over a date range.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleSentimentScoreQueryUsingGET_1
+- name: search_filings
+  category: Filings
+  description: Search financial filing summaries (SEC submissions) for surveilled organizations.
+  source_operation: openapi/bitvore-corporate-openapi.yml#getFilingsUsingGET_1
+- name: get_filing
+  category: Filings
+  description: Retrieve a single financial filing by filing id.
+  source_operation: openapi/bitvore-corporate-openapi.yml#getFilingUsingGET
+- name: list_portfolios
+  category: Portfolios
+  description: List the caller’s corporate portfolios.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleGetPortfoliosUsingGET_1
+- name: create_portfolio
+  category: Portfolios
+  description: Create a corporate portfolio with a chosen idScheme (bvid, cusip, or a custom foreign id scheme).
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleAddPortfolioUsingPOST_1
+- name: add_portfolio_items
+  category: Portfolios
+  description: Add organizations to a corporate portfolio.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleAddPortfolioItemsUsingPOST_1
+- name: upload_portfolio_items
+  category: Portfolios
+  description: Bulk-load a portfolio from a CSV file upload.
+  source_operation: openapi/bitvore-corporate-openapi.yml#handleUploadPortfolioItemsUsingPOST_1
+- name: list_datasets
+  category: Datasets
+  description: Download a yearly Cellenus corporate dataset export (gzip/zip).
+  source_operation: openapi/bitvore-corporate-openapi.yml#getYearlyDatasetsUsingGET
+- name: get_changesets
+  category: Datasets
+  description: List available changesets (records added / modified / removed) for offline dataset reconciliation.
+  source_operation: openapi/bitvore-corporate-openapi.yml#getChangesetsUsingGET
+- name: search_muni_news_by_cusip
+  category: Muni
+  description: Search municipal bond news by CUSIP.
+  source_operation: openapi/bitvore-muni-openapi.yml#handleCusipMuniSearchUsingGET
+- name: search_muni_news_by_location
+  category: Muni
+  description: Search municipal news by state/county/city location.
+  source_operation: openapi/bitvore-muni-openapi.yml#handleLocationMuniSearchUsingGET
+- name: search_muni_news_by_portfolio
+  category: Muni
+  description: Return municipal news matched against a saved CUSIP portfolio.
+  source_operation: openapi/bitvore-muni-openapi.yml#handlePortfolioMuniSearchUsingGET
+- name: create_muni_portfolio
+  category: Muni
+  description: Create a municipal bond portfolio keyed on CUSIP.
+  source_operation: openapi/bitvore-muni-openapi.yml#handleAddPortfolioUsingPOST_2
+- name: issue_access_token
+  category: Auth
+  description: Exchange the registered client id + API key for an OAuth 2.0 client-credentials bearer token.
+  source_operation: openapi/bitvore-security-openapi.yml#issueAccessTokenUsingPOST

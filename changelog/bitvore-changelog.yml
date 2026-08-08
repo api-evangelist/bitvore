@@ -1,0 +1,51 @@
+generated: '2026-08-07'
+method: searched
+source: https://developer.bitvore.com/v2/release
+raw_source: https://developer.bitvore.com/v2/docs/release-information.md
+scheme: dated release notes (no semver tags on the API itself; spec info.version is 2.1 Corporate / 2.0 Muni)
+current_version: v2 (Corporate 2.1, Muni 2.0)
+latest_entry: '2023-09-01'
+note: The published release-notes page has not been added to since 2023-09-01. The API remains live and served.
+entries:
+- date: '2023-09-01'
+  breaking: true
+  title: Themes products & services no longer supported
+  highlights:
+  - All API endpoints returning a Theme-related value now return an empty list.
+- date: '2023-08-18'
+  breaking: false
+  title: ESG Sentiment in Corporate News responses
+  highlights:
+  - ESG-specific sentiment returned in the range -1.0 (negative) to 1.0 (positive).
+  - Requires additional Bitvore credentials to access.
+- date: '2022-09-11'
+  breaking: false
+  title: Additional ESG signals
+  highlights:
+  - 'Environmental: Waste & hazardous materials management; Water & wastewater management.'
+  - 'Social: Child labor laws; Access & affordability.'
+  - 'Governance: Executive pay; Tax avoidance / tax evasion.'
+- date: '2021-12-24'
+  breaking: true
+  title: Full Content removed from News API responses
+  highlights:
+  - Removed due to upstream vendor requirements.
+- date: '2021-10-01'
+  breaking: false
+  title: Custom Id support folded into the Portfolio API
+  highlights:
+  - Per-portfolio custom-id to Bitvore-id mappings, replacing the single account-wide v1 Id Map.
+  - Removes the need for multiple API calls to resolve customer identifiers.
+- date: '2021-04-30'
+  breaking: true
+  title: Cellenus v2 APIs
+  highlights:
+  - New /v2/corp/ and /v2/muni/ product path prefixes.
+  - Action-specific endpoints replace the single multi-parameter legacy request.
+  - Required startDate/endDate date ranges replace the offset parameter.
+  - ISO 8601 datetime replaces separate date + timezone fields.
+  - Plural parameter names for multi-value params (bvId -> bvIds, signal -> signals).
+  - New Changesets export (records added / modified / removed).
+  - 'Alternate organization identifiers: CUSIP, ISIN, SEDOL, FIGI.'
+  - Article and source location added to news records and datasets.
+  - Correct HTTP status codes on all calls; list/paged results wrapped in a paged response object.

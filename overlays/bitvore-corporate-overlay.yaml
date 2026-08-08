@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bitvore Corporate API
+  version: 1.0.0
+extends: openapi/bitvore-corporate-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bitvore
+    x-apievangelist-harvested: '2026-08-07'
+    x-apievangelist-source: https://api.bitvore.com/v2/api-docs?group=v2-Corp
+    x-apievangelist-spec-version: Swagger 2.0 (not converted to OpenAPI 3.x by the provider)
+    x-apievangelist-owner: Bitvore Corp. — data analytics unit acquired by BondWave, November 2024
+- target: $
+  update:
+    x-apievangelist-conventions: conventions/bitvore-conventions.yml
+    x-apievangelist-errors: errors/bitvore-problem-types.yml
+    x-apievangelist-authentication: authentication/bitvore-authentication.yml
+    x-apievangelist-lifecycle: lifecycle/bitvore-lifecycle.yml

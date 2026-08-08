@@ -1,0 +1,48 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Bitvore
+providerId: bitvore
+created: '2026-08-07'
+modified: '2026-08-07'
+generated: '2026-08-07'
+method: searched
+description: Bitvore publishes no rate limit for its own HTTP API — there is no 429 response, no X-RateLimit-* header,
+  and no quota page anywhere on developer.bitvore.com; volume is governed by the commercial licence. The one published,
+  enforceable numeric limit on a first-party Bitvore surface is the throttle declared on the Microsoft-certified
+  Bitvore Cellenus Power Platform connector.
+sources:
+- https://learn.microsoft.com/en-us/connectors/bitvorecellenus/
+- https://developer.bitvore.com/v2/getting-started
+- https://developer.bitvore.com/v2/docs/security
+tags:
+- Rate Limiting
+- Financial Data
+- News
+headers:
+  rateLimit: null
+  retryAfter: null
+responseCodes:
+  throttled: null
+  note: No 429 declared in any of the six harvested Swagger documents (121 operations). Observed error codes are
+    400, 401, 404, 500.
+limits:
+- name: Bitvore Cellenus Power Platform connector
+  scope: connection
+  metric: requests_per_minute
+  limit: 100
+  timeFrame: minute
+  source: https://learn.microsoft.com/en-us/connectors/bitvorecellenus/
+  note: 'Declared as "API calls per connection: 100 / 60 seconds" on the Microsoft-certified connector published
+    by Bitvore Corp.'
+undocumented_surfaces:
+- surface: https://api.bitvore.com/v2/corp/*
+  published_limit: null
+- surface: https://api.bitvore.com/v2/muni/*
+  published_limit: null
+- surface: https://api.bitvore.com/oauth/accesstoken
+  published_limit: null
+page_size_ceiling:
+  param: pageSize
+  default: 100
+  maximum: 1000
+  source: https://learn.microsoft.com/en-us/connectors/bitvorecellenus/ (Organization Search parameter reference)

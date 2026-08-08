@@ -1,0 +1,32 @@
+generated: '2026-08-07'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: bondwave.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  2 16:01:33 2026 GMT
+  hsts: false
+- host: developer.bitvore.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 14 23:59:59 2026 GMT
+  hsts: false
+- host: api.bitvore.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Nov 22 17:25:39 2026 GMT
+  hsts: null
+domains:
+- domain: bondwave.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: bitvore.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

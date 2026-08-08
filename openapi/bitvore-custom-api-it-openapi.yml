@@ -1,0 +1,581 @@
+swagger: '2.0'
+info:
+  description: 'Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the
+    latest API version to avoid possible disruption.
+
+
+    * The Intelligence API has been replaced by the Corp News API.
+
+    * The Municipal Bond API has been replaced by the Muni News API.'
+  version: Deprecated 2019
+  title: Deprecated Custom APIs
+  license:
+    name: Copyright Bitvore Corp. 2026
+host: api.bitvore.com
+basePath: /
+tags:
+- name: Bond
+  description: Municipal Bond API
+- name: Intel
+  description: Intelligence API
+paths:
+  /bondapi/cusip/{cusip}:
+    get:
+      tags:
+      - Bond
+      summary: Search for intelligence by CUSIP
+      description: "Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most\
+        \ 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time.\
+        \ An example of a request is as follows:\n\n    GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n\
+        \    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      operationId: handleGetCusipUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: cusip
+        in: path
+        description: cusip
+        required: true
+        type: string
+      - name: startDate
+        in: query
+        description: Intelligence published date to start from. Format is yyyy-mm-dd.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: endDate
+        in: query
+        description: Intelligence published date to end with. Format is yyyy-mm-dd.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        type: string
+        default: GMT
+        allowEmptyValue: false
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/MuniBondNewsSearchResponse'
+            originalRef: MuniBondNewsSearchResponse
+        '401':
+          description: Unauthorized to view news.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /bondapi/stateSector/{state}/{sector}:
+    get:
+      tags:
+      - Bond
+      summary: Search for intelligence by state and sector.
+      description: "Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific\
+        \ timeframe can be specified in the call using a date range or a number of days back in time. An example of a request\
+        \ is as follows:\n\n    GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n   \
+        \ X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      operationId: handleStateSectorUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: state
+        in: path
+        description: State (two character state code) to query about.
+        required: true
+        type: string
+      - name: sector
+        in: path
+        description: Sector to query about, i.e., Education.
+        required: true
+        type: string
+      - name: startDate
+        in: query
+        description: Intelligence published date to start from. Format is yyyy-mm-dd.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: endDate
+        in: query
+        description: Intelligence published date to end with. Format is yyyy-mm-dd.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        type: string
+        default: GMT
+        allowEmptyValue: false
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/MuniBondNewsSearchResponse'
+            originalRef: MuniBondNewsSearchResponse
+        '401':
+          description: Unauthorized to view news.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /bondapi/version:
+    get:
+      tags:
+      - Bond
+      summary: Returns the API version
+      operationId: getVersionUsingGET_4
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+        '401':
+          description: Unauthorized to get version.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /intelapi/intel:
+    get:
+      tags:
+      - Intel
+      summary: Search for business intelligence
+      description: "Intelligence is returned for companies, cusips, states, cities, or sectors baed on supplied parameters.\
+        \ Intelligence can be pulled for at most 31 days. A specific timeframe can be specified in the call using a date range\
+        \ or a number of days back in time.\n\nCorporate intelligence can be gathered by searching with a Bitvore ID (BvId)\
+        \ identifying a company, a portfolio ID (a named set of companies), a coprorate business signal, or a foreign ID mapped\
+        \ to a company using the Identification API. An example of a request using a BvId is as follows:\n\n    GET /intelapi/intel?bvId=b1000abc&offset=3&tz=GMT\
+        \ HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nMunicipal and economic intelligence can\
+        \ be gathered by searching with a CUSIP, city, state, or sector. An example of using a cusip is:\n\n    GET /intelapi/intel?cusip=123456789&offset=3&tz=GMT\
+        \ HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of using a state and sector is:\n\
+        \n    GET /intelapi/intel?state=ca&amp;sector=education&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n \
+        \   X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      operationId: handleNewsSearchUsingGET_2
+      produces:
+      - application/json
+      parameters:
+      - name: bvId
+        in: query
+        description: One or more Bitvore IDs identifying entities to retrieve corporate intel for, should not be used with
+          other identifying parameters.
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        allowEmptyValue: false
+      - name: portfolioId
+        in: query
+        description: ID identifying a portfolio to retrieve intel for, should not be used with other identifying parameters.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: cusip
+        in: query
+        description: One or more CUSIPs identifying the bonds to retrieve intel for, should not be used with other identifying
+          parameters.
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        allowEmptyValue: false
+      - name: state
+        in: query
+        description: State to retrieve municipal and economic intel for. Must not be used with the bvId or cusip parameters.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: city
+        in: query
+        description: City to retrieve municipal and economic intel for, must be used with the state parameter and not with
+          the bvId or cusip parameters.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: sector
+        in: query
+        description: Sector to retrieve municipal and economic intel for, must be used with the state parameter and not with
+          the bvId, cusip, or economic parameters.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: economic
+        in: query
+        description: Restrict to economic news for an area, must be used with the state or city parameter and notwith the
+          bvId, cusip, or sector parameters.
+        required: false
+        type: boolean
+        default: false
+        allowEmptyValue: false
+      - name: signal
+        in: query
+        description: One or more signals (i.e., Bankruptcy, Wrongdoing) to restrict the returned corporate intel to.
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        allowEmptyValue: false
+      - name: text
+        in: query
+        description: Keyword or phrase to search for intel when not using a portfolio
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: foreignId
+        in: query
+        description: One or more Foreign IDs identifying the entities to retrieve corporate intel for, the IDs must be registered
+          in an identification scheme associated with the API client.
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        allowEmptyValue: false
+      - name: startDate
+        in: query
+        description: Intelligence published date to start from. Format is yyyy-mm-dd for daily intel or yyyy-mm-dd'T'HH:mm
+          if you want it down to the hour or minute. Should not be used if offset parameter is.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: endDate
+        in: query
+        description: Intelligence published date to end with. Format is yyyy-mm-dd for daily (inclusive) intel or yyyy-mm-dd'T'HH:mm
+          if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today.
+        required: false
+        type: string
+        allowEmptyValue: false
+      - name: offset
+        in: query
+        description: Number of days back intelligence should be returned for. Should not be used with startDate.
+        required: false
+        type: integer
+        format: int32
+        allowEmptyValue: false
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        type: string
+        default: GMT
+        allowEmptyValue: false
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing
+          completed) "available". Default is published.
+        required: false
+        type: string
+        default: published
+        allowEmptyValue: false
+      - name: limit
+        in: query
+        description: Maximum number of record to return.
+        required: false
+        type: integer
+        default: 100
+        format: int32
+        allowEmptyValue: false
+      - name: significance
+        in: query
+        description: Significance of records to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter
+          is a threshold so a value of MEDIUM will return MEDIUM and HIGH significant records.
+        required: false
+        type: string
+        default: HIGH
+        allowEmptyValue: false
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/IntelligenceSearchResponse'
+            originalRef: IntelligenceSearchResponse
+        '401':
+          description: Unauthorized to view intelligence.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+        '500':
+          description: Internal error.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /intelapi/version:
+    get:
+      tags:
+      - Intel
+      summary: Returns the API version
+      operationId: getVersionUsingGET_3
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+        '401':
+          description: Unauthorized to get version.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+        '500':
+          description: Internal error.
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+securityDefinitions:
+  BasicAuth:
+    type: basic
+definitions:
+  BasicResponse:
+    type: object
+    properties:
+      response:
+        type: object
+        description: Response payload
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: BasicResponse
+    description: Default response wrapper for API requests.
+  IntelligenceRecord:
+    type: object
+    required:
+    - recordType
+    properties:
+      availableAt:
+        type: string
+        example: '2017-06-29T21:41:21.109Z'
+        description: Date published
+      body:
+        type: string
+        example: ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday. ACME literally
+          paid peanuts.
+        description: Content of the intelligence
+      cities:
+        type: array
+        example: Irvine, Mission Viejo
+        description: Cities affected
+        items:
+          type: string
+      collectedAt:
+        type: string
+        example: '2017-06-29T21:41:21.109Z'
+        description: Date collected
+      collectedSourceUrl:
+        type: string
+        example: http:/aggregator.com?id=11
+        description: URL to where it was collected from
+      counties:
+        type: array
+        example: Orange, San Diego
+        description: Counties affected
+        items:
+          type: string
+      cusips:
+        type: array
+        example: 02361DAP5, 002824AV2
+        description: Cusips affected
+        items:
+          type: string
+      description:
+        type: string
+        example: ACME announces long awaited acquisition. To continue reading this document, click here for the original version.
+        description: Description of the record
+      key:
+        type: string
+        example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+        description: Key uniquely identifying the record
+      previewImageUrl:
+        type: string
+        example: http://acme.com/resources/coyote.jpg
+        description: URL of a preview image
+      publishedAt:
+        type: string
+        example: '2017-06-29T21:41:21.109Z'
+        description: Date available
+      recordType:
+        type: string
+        example: WEBCONTENT
+        description: Type of record
+      referencedOrgs:
+        type: array
+        description: List of organizations referenced in the intelligence
+        items:
+          $ref: '#/definitions/OrganizationReference'
+          originalRef: OrganizationReference
+      sectors:
+        type: array
+        example: Education, Utilities
+        description: Sectors the intelligence pertains to
+        items:
+          type: string
+      signals:
+        type: array
+        example: Merger
+        description: Material situations/events identified in the intelligence
+        items:
+          type: string
+      significance:
+        type: string
+        example: HIGH
+        description: Significance of the intelligence, possible values are "HIGH" and "MEDIUM"
+      sourceUrl:
+        type: string
+        example: http://acme.com/press
+        description: URL to the original source of the intelligence
+      states:
+        type: array
+        example: California, Nevada
+        description: States affected
+        items:
+          type: string
+      title:
+        type: string
+        example: ACME aquires Wile E. Coyote
+        description: Title
+    title: IntelligenceRecord
+    description: Single intelligence item.
+  IntelligenceSearchResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of intelligence records returned by search
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          $ref: '#/definitions/IntelligenceRecord'
+          originalRef: IntelligenceRecord
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: IntelligenceSearchResponse
+    description: Intelligence search response.
+  MuniBondNewsRecord:
+    type: object
+    properties:
+      recordType:
+        type: string
+        example: WEBCONTENT
+        description: Type of the record
+      rowKey:
+        type: string
+        example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+        description: Key uniquely idenfiying the record
+      tags:
+        type: object
+        description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties
+          representing each tag like { "city" : [ "Irvine"] }'
+      timestamp:
+        type: string
+        example: 2017-07-03T08:52:33+0000
+        description: Timestamp of the record
+    title: MuniBondNewsRecord
+    description: Single intelligence item.
+  MuniBondNewsSearchResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of news records returned by search
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          $ref: '#/definitions/MuniBondNewsRecord'
+          originalRef: MuniBondNewsRecord
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+      total:
+        type: integer
+        format: int32
+        example: 10
+        description: Total number of news records that matched the search, may be more than returned
+    title: MuniBondNewsSearchResponse
+    description: News search response.
+  OrganizationReference:
+    type: object
+    properties:
+      bvId:
+        type: string
+        example: b00001ab7
+        description: Bitvore Id of the organization
+      name:
+        type: string
+        example: ACME Corp
+        description: Name of the organization
+    title: OrganizationReference
+    description: Reference to an organization
+  ReasonResponse«string,string»:
+    type: object
+    properties:
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: string
+        description: Response payload
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: ReasonResponse«string,string»
+    description: A response used to explain a failure or issue with the request.

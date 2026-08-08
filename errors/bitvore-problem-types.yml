@@ -1,0 +1,100 @@
+generated: '2026-08-07'
+method: derived
+source: openapi/_original/*-swagger.json (Swagger 2.0 harvested from https://api.bitvore.com/v2/api-docs)
+format: vendor-envelope
+note: Bitvore does not use RFC 9457 application/problem+json. Every response — success and failure — is wrapped
+  in a common envelope with a boolean "success" flag; failures carry "reason" (a short machine-ish code such as
+  access_denied / internal_error) and "reasonSupport" (a longer human explanation). HTTP status is set correctly
+  as of the v2 (2021-04-30) release.
+envelope:
+  success: boolean — indicates whether the call succeeded
+  reason: string — short failure reason (e.g. access_denied, internal_error, "Could not locate subject.")
+  reasonSupport: object|string — longer description of the failure
+  response: object|array|string — payload, or the error constant (e.g. UNAUTHORIZED, INTERNAL_SERVER_ERROR)
+  schemas:
+  - ReasonResponse
+  - AccessDeniedResponse
+  - InternalErrorResponse
+  - BasicResponse
+  - OAuthError
+oauth_errors:
+  endpoint: POST https://api.bitvore.com/oauth/accesstoken
+  schema: OAuthError
+  fields:
+  - error
+  - error_description
+problems:
+- status: 400
+  title: Invalid parameter
+  occurrences: 9
+  response_schemas:
+  - ReasonResponse
+  - OAuthError
+  observed_descriptions:
+  - Invalid parameter
+  - Invalid parameter used
+  - Bad requet
+  example_operations:
+  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST
+  - openapi/bitvore-security-openapi.yml#issueAccessTokenUsingPOST
+  - openapi/bitvore-corporate-openapi.yml#handleGetOrgUsingGET_1
+  - openapi/bitvore-corporate-openapi.yml#handleOrgLookupUsingGET_1
+- status: 401
+  title: Unauthorized
+  occurrences: 104
+  response_schemas:
+  - ReasonResponse
+  - AccessDeniedResponse
+  - BasicResponse
+  observed_descriptions:
+  - Unauthorized
+  - Unauthorized to access the specified foreign Id system
+  - Unauthorized to view intelligence
+  - Unauthorized to get version
+  - Unauthorized to view news
+  - Unauthorized to view organizations
+  - Unauthorized to view filings
+  - Unauthorized to add portfolio items
+  example_operations:
+  - openapi/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
+  - openapi/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/bitvore-legacy-openapi.yml#getVersionUsingGET
+- status: 404
+  title: Not found
+  occurrences: 63
+  response_schemas:
+  - ReasonResponse
+  observed_descriptions:
+  - Not Found
+  - Portfolio with given Id not found
+  - Foreign Id system could not be found
+  - Foreign Id system or foreign Id could not be found
+  example_operations:
+  - openapi/bitvore-legacy-openapi.yml#handleDownloadMapUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleAddMappingsUsingPOST
+  - openapi/bitvore-legacy-openapi.yml#handleDeleteMappingsUsingDELETE
+  - openapi/bitvore-legacy-openapi.yml#handleGetMappingUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleModifyMappingUsingPUT
+  - openapi/bitvore-legacy-openapi.yml#handleRemoveMappingUsingDELETE
+- status: 500
+  title: Internal error
+  occurrences: 106
+  response_schemas:
+  - ReasonResponse
+  - InternalErrorResponse
+  - BasicResponse
+  - OAuthError
+  observed_descriptions:
+  - Internal error
+  example_operations:
+  - openapi/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
+  - openapi/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST

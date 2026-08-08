@@ -1,0 +1,28 @@
+generated: '2026-08-07'
+method: derived
+source: openapi/bitvore-corporate-openapi.yml, openapi/bitvore-legacy-openapi.yml, openapi/bitvore-muni-openapi.yml
+schemes:
+- name: OAuth
+  source: openapi/bitvore-corporate-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.bitvore.com/oauth/accesstoken
+- name: OAuth
+  source: openapi/bitvore-legacy-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.bitvore.com/oauth/accesstoken
+- name: OAuth
+  source: openapi/bitvore-muni-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.bitvore.com/oauth/accesstoken
+scopes:
+- scope: Global
+  description: Includes all Bitvore APIs
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  - openapi/bitvore-muni-openapi.yml

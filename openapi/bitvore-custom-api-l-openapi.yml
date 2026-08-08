@@ -1,0 +1,1348 @@
+swagger: '2.0'
+info:
+  description: 'Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the
+    latest API version to avoid possible disruption.
+
+
+    * The Intelligence API has been replaced by the Corp News API.
+
+    * The Municipal Bond API has been replaced by the Muni News API.'
+  version: Deprecated 2019
+  title: Deprecated Custom APIs
+  license:
+    name: Copyright Bitvore Corp. 2026
+host: api.bitvore.com
+basePath: /
+tags:
+- name: Alert API
+  description: Alerts API
+- name: Muni API
+  description: Municipal API
+- name: Portfolios API
+  description: Muni Portfolio Controller
+paths:
+  /muni/alerts:
+    get:
+      tags:
+      - Alert API
+      summary: Get a list of all Alerts
+      operationId: handleListAlertsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: uid
+        in: query
+        description: uid
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertDefinition'
+            originalRef: AlertDefinition
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/limit/{alertId}/{limit}:
+    post:
+      tags:
+      - Alert API
+      summary: Set alert limit
+      operationId: handleSetAlertLimitUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: alertId
+        in: path
+        description: alertId
+        required: true
+        type: integer
+        format: int64
+      - name: limit
+        in: path
+        description: limit
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/record/{rowkey}:
+    get:
+      tags:
+      - Alert API
+      summary: Get record
+      operationId: handleAlertRecordUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: rowkey
+        in: path
+        description: rowkey
+        required: true
+        type: string
+      - name: alertId
+        in: query
+        description: alertId
+        required: false
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MuniBondNewsRecord'
+            originalRef: MuniBondNewsRecord
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/results/{transactionid}:
+    get:
+      tags:
+      - Alert API
+      summary: Get alert results
+      operationId: handleAlertResultsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: transactionid
+        in: path
+        description: transactionid
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertResults'
+            originalRef: AlertResults
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/transactions/{alertId}:
+    get:
+      tags:
+      - Alert API
+      summary: Get a alert transactions list
+      operationId: handleAlertTransactionsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: alertId
+        in: path
+        description: alertId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertTransactions'
+            originalRef: AlertTransactions
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/version:
+    get:
+      tags:
+      - Alert API
+      summary: Get API version
+      operationId: handleAlertAPIVersionUsingGET
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/search/cusip/{cusip}:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news by CUSIP
+      operationId: searchWithCUSIPUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: cusip
+        in: path
+        description: cusip
+        required: true
+        type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        type: integer
+        default: 0
+        format: int32
+      - name: count
+        in: query
+        description: count
+        required: false
+        type: integer
+        default: 50
+        format: int32
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        type: string
+        default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        type: string
+        default: ALERT
+        enum:
+        - NONE
+        - LOOKUP
+        - ALERT
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MuniBondNewsSearchResponse'
+            originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/search/portfolio/{watchlistId}:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news by WatchList
+      operationId: searchWithWatchListUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: watchlistId
+        in: path
+        description: watchlistId
+        required: true
+        type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        type: integer
+        default: 0
+        format: int32
+      - name: count
+        in: query
+        description: count
+        required: false
+        type: integer
+        default: 50
+        format: int32
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        type: string
+        default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        type: string
+        default: ALERT
+        enum:
+        - NONE
+        - LOOKUP
+        - ALERT
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MuniBondNewsSearchResponse'
+            originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/search/vql:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news using VQL
+      operationId: searchWithVqlUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: q
+        in: query
+        description: q
+        required: false
+        type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        type: integer
+        default: 0
+        format: int32
+      - name: count
+        in: query
+        description: count
+        required: false
+        type: integer
+        default: 50
+        format: int32
+      - name: state
+        in: query
+        description: state
+        required: false
+        type: string
+      - name: citynews
+        in: query
+        description: citynews
+        required: false
+        type: string
+      - name: countynews
+        in: query
+        description: countynews
+        required: false
+        type: string
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        type: string
+        default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        type: string
+        default: ALERT
+        enum:
+        - NONE
+        - LOOKUP
+        - ALERT
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MuniBondNewsSearchResponse'
+            originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/version:
+    get:
+      tags:
+      - Muni API
+      summary: Returns the API version
+      operationId: getVersionUsingGET_5
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BasicResponse'
+            originalRef: BasicResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios:
+    get:
+      tags:
+      - Portfolios API
+      summary: Get Portfolios
+      description: Returns all portfolios for a user.
+      operationId: handleGetPortfoliosUsingGET_3
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioResponse'
+            originalRef: PortfolioResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    post:
+      tags:
+      - Portfolios API
+      summary: Add Portfolio
+      description: Creates a new portfolio
+      operationId: handleAddPortfolioUsingPOST_3
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: portfolio
+        description: portfolio
+        required: true
+        schema:
+          $ref: '#/definitions/PortfolioSummary'
+          originalRef: PortfolioSummary
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioSummary'
+            originalRef: PortfolioSummary
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios/{portfolioId}:
+    get:
+      tags:
+      - Portfolios API
+      summary: Get Portfolio
+      description: Returns a portfolio by Id. Items can be optionally returned.
+      operationId: handleGetPortfolioUsingGET_3
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioSummary'
+            originalRef: PortfolioSummary
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    put:
+      tags:
+      - Portfolios API
+      summary: Update Portfolio
+      description: Changes the portfolio with the given Id, the result of the changes are returned as a portfolio
+      operationId: handleModifyPortfolioUsingPUT_3
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: portfolio
+        description: portfolio
+        required: true
+        schema:
+          $ref: '#/definitions/PortfolioSummary'
+          originalRef: PortfolioSummary
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioSummary'
+            originalRef: PortfolioSummary
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    delete:
+      tags:
+      - Portfolios API
+      summary: Delete Portfolio
+      description: Deletes the portfolio with the given Id
+      operationId: handleDeletePortfolioUsingDELETE_3
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios/{portfolioId}/itemUploads:
+    post:
+      tags:
+      - Portfolios API
+      summary: Upload Portfolio Items
+      description: Uploads a CSV file of portfolio items. The Id Scheme column must exist in the header; CUSIP for Muni API
+        and BVID for Corp API
+      operationId: handleUploadPortfolioItemsUsingPOST_3
+      consumes:
+      - multipart/form-data
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: formData
+        name: replaceItems
+        description: Replace items (true|false), otherwise append/update
+        required: false
+        schema:
+          type: boolean
+      - name: file
+        in: formData
+        description: Portfolio CSV file
+        required: true
+        type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioSummary'
+            originalRef: PortfolioSummary
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios/{portfolioId}/items:
+    get:
+      tags:
+      - Portfolios API
+      summary: Return Portfolio Items
+      description: Returns the items in the portfolio with the given Id
+      operationId: handleGetPortfolioItemsUsingGET_3
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemResponse'
+            originalRef: PortfolioItemResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    post:
+      tags:
+      - Portfolios API
+      summary: Add Portfolio Item
+      description: Adds items to the portfolio with the given Id, the added items are returned
+      operationId: handleAddPortfolioItemsUsingPOST_3
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: items
+        description: items
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/PortfolioItem'
+            originalRef: PortfolioItem
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemResponse'
+            originalRef: PortfolioItemResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    put:
+      tags:
+      - Portfolios API
+      summary: Replace Portfolio Items
+      description: Replaces the items in the portfolio with the given Id, the added items are returned
+      operationId: handleReplacePortfolioItemsUsingPUT_3
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: items
+        description: items
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/PortfolioItem'
+            originalRef: PortfolioItem
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemResponse'
+            originalRef: PortfolioItemResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    delete:
+      tags:
+      - Portfolios API
+      summary: Delete Portfolio Items
+      description: Deletes the specified items in the portfolio with the given Id. If ids is null, all items will be deleted.
+      operationId: handleDeletePortfolioItemsUsingDELETE_6
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - name: ids
+        in: query
+        description: Id of item(s) to remove
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        allowEmptyValue: false
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios/{portfolioId}/items/ids:
+    get:
+      tags:
+      - Portfolios API
+      summary: Return Portfolio Ids
+      description: Returns the ids in the portfolio
+      operationId: handleGetPortfolioItemsByValuesUsingGET_2
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemIdsResponse'
+            originalRef: PortfolioItemIdsResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    post:
+      tags:
+      - Portfolios API
+      summary: Add Portfolio items by Ids
+      description: Adds items to the portfolio with the given Ids, the added items are returned. Adding by id will override
+        existing customId mappings for that id.
+      operationId: handleAddPortfolioItemsByValuesUsingPOST_2
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: ids
+        description: ids
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemIdsResponse'
+            originalRef: PortfolioItemIdsResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+    put:
+      tags:
+      - Portfolios API
+      summary: Replace Portfolio Items
+      description: Replaces the items in the portfolio with the given Id, the added items are returned. Replacing by id will
+        override existing customId mappings for that id.
+      operationId: handleReplacePortfolioItemsByValuesUsingPUT_2
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: ids
+        description: ids
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PortfolioItemIdsResponse'
+            originalRef: PortfolioItemIdsResponse
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/portfolios/{portfolioId}/items/{id}:
+    delete:
+      tags:
+      - Portfolios API
+      summary: Delete Portfolio Item
+      description: Deletes the specified item in the portfolio with the given Id
+      operationId: handleDeletePortfolioItemsUsingDELETE_7
+      produces:
+      - '*/*'
+      parameters:
+      - name: portfolioId
+        in: path
+        description: Portfolio Id
+        required: true
+        type: integer
+        format: int64
+      - name: id
+        in: path
+        description: Id of item to remove
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ReasonResponse'
+            originalRef: ReasonResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+securityDefinitions:
+  BasicAuth:
+    type: basic
+definitions:
+  AlertDefinition:
+    type: object
+    properties:
+      alertId:
+        type: integer
+        format: int64
+      alertName:
+        type: string
+      alertTime:
+        type: string
+    title: AlertDefinition
+  AlertResult:
+    type: object
+    properties:
+      cusips:
+        type: array
+        items:
+          type: string
+      rowKey:
+        type: string
+    title: AlertResult
+  AlertResults:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/AlertResult'
+          originalRef: AlertResult
+      transactionId:
+        type: integer
+        format: int64
+    title: AlertResults
+  AlertTransactionEntry:
+    type: object
+    properties:
+      alertTime:
+        type: string
+      count:
+        type: integer
+        format: int32
+      transactionId:
+        type: integer
+        format: int64
+    title: AlertTransactionEntry
+  AlertTransactions:
+    type: object
+    properties:
+      alertId:
+        type: integer
+        format: int64
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/AlertTransactionEntry'
+          originalRef: AlertTransactionEntry
+    title: AlertTransactions
+  BasicResponse:
+    type: object
+    properties:
+      response:
+        type: object
+        description: Response payload
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: BasicResponse
+    description: Default response wrapper for API requests.
+  InputStream:
+    type: object
+    title: InputStream
+  ItemCustomId:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 00XAD6
+        description: A custom id of the portfolio item
+        maxLength: 40
+      type:
+        type: string
+        example: FOREIGN_ID
+        description: A type or name of the custom id
+        maxLength: 40
+    title: ItemCustomId
+    description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
+  MuniBondNewsRecord:
+    type: object
+    properties:
+      recordType:
+        type: string
+        example: WEBCONTENT
+        description: Type of the record
+      rowKey:
+        type: string
+        example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+        description: Key uniquely idenfiying the record
+      tags:
+        type: object
+        description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties
+          representing each tag like { "city" : [ "Irvine"] }'
+      timestamp:
+        type: string
+        example: 2017-07-03T08:52:33+0000
+        description: Timestamp of the record
+    title: MuniBondNewsRecord
+    description: Single intelligence item.
+  MuniBondNewsSearchResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of news records returned by search
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          $ref: '#/definitions/MuniBondNewsRecord'
+          originalRef: MuniBondNewsRecord
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+      total:
+        type: integer
+        format: int32
+        example: 10
+        description: Total number of news records that matched the search, may be more than returned
+    title: MuniBondNewsSearchResponse
+    description: News search response.
+  PortfolioItem:
+    type: object
+    required:
+    - id
+    properties:
+      customIds:
+        type: array
+        description: 'Optional: Up to 4 client defined custom ids. Convenience property to map client Ids with Bitvore Ids.'
+        items:
+          $ref: '#/definitions/ItemCustomId'
+          originalRef: ItemCustomId
+      id:
+        type: string
+        example: 008000AA7
+        description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the portfolio
+      name:
+        type: string
+        example: ACME Corp
+        description: Name of the portfolio item, not required for API input but will be returned from API calls
+    title: PortfolioItem
+    description: Identifies an item in a portfolio
+  PortfolioItemIdsResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of portfolio item ids returned
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          type: string
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: PortfolioItemIdsResponse
+    description: A response used to explain a failure or issue with the request.
+  PortfolioItemResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of portfolio items returned
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          $ref: '#/definitions/PortfolioItem'
+          originalRef: PortfolioItem
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: PortfolioItemResponse
+    description: Portfolio item response.
+  PortfolioResponse:
+    type: object
+    required:
+    - count
+    properties:
+      count:
+        type: integer
+        format: int32
+        example: 1
+        description: Number of portfolios returned
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: string
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: array
+        description: Response payload
+        items:
+          $ref: '#/definitions/PortfolioSummary'
+          originalRef: PortfolioSummary
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: PortfolioResponse
+    description: Portfolio response.
+  PortfolioSummary:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 25
+        description: Unique Id of the portfolio
+      idScheme:
+        type: string
+        description: Scheme used for identifying porfolio items, supported values are "cusip" for Muni API and "bvid" for
+          Corp API
+      name:
+        type: string
+        example: My Portfolio
+        description: Name of the portfolio
+    title: PortfolioSummary
+    description: Summary information about a portfolio.
+  ReasonResponse:
+    type: object
+    properties:
+      reason:
+        type: string
+        example: Could not locate subject.
+        description: Text reason for the failure (if not successful)
+      reasonSupport:
+        type: object
+        example: Longer description of the missing subject.
+        description: Additional information about the failure (if not successful)
+      response:
+        type: object
+        description: Response payload
+      success:
+        type: boolean
+        example: true
+        description: Indicates whether the call was successful or not
+    title: ReasonResponse
+    description: A response used to explain a failure or issue with the request.

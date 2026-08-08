@@ -1,0 +1,39 @@
+generated: '2026-08-07'
+method: derived
+source: openapi/bitvore-corporate-openapi.yml, openapi/bitvore-custom-api-it-openapi.yml, openapi/bitvore-custom-api-l-openapi.yml,
+  openapi/bitvore-legacy-openapi.yml, openapi/bitvore-muni-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: API key
+  type: apiKey
+  in: header
+  parameter: X-BV-APIKEY
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+- name: OAuth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.bitvore.com/oauth/accesstoken
+    scopes: 1
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/bitvore-custom-api-it-openapi.yml
+  - openapi/bitvore-custom-api-l-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml

@@ -1,0 +1,64 @@
+generated: '2026-08-07'
+method: searched
+source: https://developer.bitvore.com/v2/release
+versioning:
+  scheme: uri-path
+  current: v2
+  current_spec_versions:
+    Corporate: '2.1'
+    Muni: '2.0'
+    Legacy: '1.0'
+  docs: https://developer.bitvore.com/v2/docs/api-reference
+  upgrade_guide: https://developer.bitvore.com/v2/release
+deprecation:
+  policy_url: https://developer.bitvore.com/v2/release
+  sunset_header: false
+  deprecation_header: false
+  observed: Deprecation is communicated in the dated release notes and by marking whole Swagger groups "Deprecated
+    Custom APIs" — there is no RFC 8594 Sunset/Deprecation header and no published end-of-life calendar.
+  retired_capabilities:
+  - what: Themes products & services
+    date: '2023-09-01'
+    effect: All endpoints returning a Theme value now return an empty list.
+  - what: Full Content in News API responses
+    date: '2021-12-24'
+    effect: Removed due to upstream vendor requirements.
+  - what: offset parameter
+    date: '2021-04-30'
+    effect: Removed in v2 in favour of required startDate/endDate ranges.
+deprecated_operations:
+- openapi/bitvore-corporate-openapi.yml#downloadFilingsUsingGET_1
+- openapi/bitvore-corporate-openapi.yml#downloadFilingUsingGET_1
+deprecated_api_groups:
+- group: z-Custom API I.T.
+  spec: openapi/bitvore-custom-api-it-openapi.yml
+  info_version: Deprecated 2019
+  operations: 5
+- group: z-Custom API L.
+  spec: openapi/bitvore-custom-api-l-openapi.yml
+  info_version: Deprecated 2019
+  operations: 24
+legacy_surface:
+  spec: openapi/bitvore-legacy-openapi.yml
+  status: still served at api.bitvore.com
+  docs: https://developer.bitvore.com/v1/docs/overview
+sla:
+  published: false
+  evidence: No SLA or uptime commitment published on the developer portal.
+status_page:
+  published: false
+  evidence: status.bitvore.com does not resolve (connection failure); no status link on developer.bitvore.com.
+corporate_status:
+  owner: BondWave LLC
+  event: BondWave acquired Bitvore’s fixed-income / data-analytics business unit, announced November 2024.
+  observed: bitvore.com now 301s to https://bondwave.com/muni-news/ and www.bitvore.com no longer resolves, while
+    developer.bitvore.com and api.bitvore.com remain live and serving the Cellenus API surface.
+  evidence:
+  - url: https://bitvore.com/
+    status: 301
+    redirects_to: https://bondwave.com/muni-news/
+  - url: https://www.bitvore.com/
+    status: 0
+    note: DNS/connection failure
+  - url: https://api.bitvore.com/swagger-resources
+    status: 200

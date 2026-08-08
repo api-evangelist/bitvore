@@ -1,0 +1,153 @@
+generated: '2026-08-07'
+method: probed
+source: direct HTTPS probe of every host in apis.yml and every Swagger host declaration
+summary:
+  hosts_probed: 5
+  documents_found: 0
+  files_saved: 0
+  note: Bitvore publishes no /.well-known/ discovery surface. The five 200s recorded below are the developer portal
+    SPA and the SSO app answering with an HTML shell for any path — they were verified as HTML and rejected, not
+    saved. api.bitvore.com (the API host itself) returns a clean 404 on every well-known path.
+hosts:
+- host: https://api.bitvore.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://developer.bitvore.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://base.bitvore.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    saved: false
+    rejected: SPA catch-all — the Quasar single-page app answers 200 with its HTML shell for every unknown path,
+      including every /.well-known/* path. Not a real discovery document.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://bitvore.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://developerapi.bitvore.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  - path: /llms.txt
+    status: 403
+  - path: /robots.txt
+    status: 403

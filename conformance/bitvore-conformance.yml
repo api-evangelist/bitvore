@@ -1,0 +1,58 @@
+generated: '2026-08-07'
+method: derived
+source: openapi/_original/*-swagger.json + https://developer.bitvore.com/v2/docs/security
+standards:
+- id: swagger-2.0
+  conforms: true
+  evidence: 'All six published groups at https://api.bitvore.com/v2/api-docs declare swagger: "2.0" (springfox).'
+- id: openapi-3.x
+  conforms: false
+  evidence: Provider publishes Swagger 2.0 only; no OpenAPI 3.x document found on any host.
+- id: oauth2
+  conforms: true
+  evidence: securityDefinitions declare an oauth2 scheme with flow "application" (client_credentials) and tokenUrl
+    https://api.bitvore.com/oauth/accesstoken.
+- id: rfc6749-client-credentials
+  conforms: true
+  evidence: POST /oauth/accesstoken with grant_type=client_credentials, client_id, client_secret.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: Access token is presented as a Bearer token in the Authorization header; the security docs cite RFC
+    6750 explicitly.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 404 on api.bitvore.com.
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on api.bitvore.com; no OIDC scheme in any spec.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a vendor envelope (success/reason/reasonSupport/response); no application/problem+json anywhere
+    in the specs.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on api.bitvore.com, developer.bitvore.com and bitvore.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header documented; deprecation is announced in dated release notes only.
+- id: json:api
+  conforms: false
+  evidence: Custom success/response envelope, not the JSON:API document structure.
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency key header or parameter in any of the 121 harvested operations.
+- id: pagination
+  conforms: true
+  evidence: Consistent pageNo/pageSize request params with returned/total response fields across 22 operations.
+- id: cusip-isin-sedol-figi-identifiers
+  conforms: true
+  evidence: Organization records carry CUSIP, ISIN, SEDOL and FIGI alternate identifiers (v2 release notes; Organization
+    definitions).
+- id: sasb-esg-signal-taxonomy
+  conforms: partial
+  evidence: ESG signal set is organised on SASB-style Environmental/Social/Governance categories (release notes
+    2022-09-11); Bitvore publishes its own signal glossary rather than claiming SASB certification.
+compliance_program:
+  published: false
+  evidence: 'No trust center, SOC 2 / ISO 27001 statement, or compliance page found on bitvore.com, developer.bitvore.com
+    or api.bitvore.com (probe-security-programs.py: vdp=none trust=none).'

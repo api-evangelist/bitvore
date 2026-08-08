@@ -1,0 +1,590 @@
+generated: '2026-08-07'
+method: derived
+source: openapi/_original/*-swagger.json definitions ($ref links + id-reference fields)
+summary:
+  definitions_total: 81
+  entities_graphed: 60
+  core_entities:
+  - CorpNewsArticle
+  - MuniNewsArticle
+  - EconNewsArticle
+  - Organization
+  - Portfolio
+  - PortfolioItem
+  - FinancialFiling
+  - OrganizationSentimentScore
+  - Signal
+  identifier_schemes:
+  - bvId (Bitvore organization id)
+  - CUSIP
+  - ISIN
+  - SEDOL
+  - FIGI
+  - FIPS (economic/geographic)
+  - customer foreign id via idScheme
+entities:
+- name: AlertDefinition
+  fields: 3
+  sources:
+  - openapi/bitvore-custom-api-l-openapi.yml
+  relationships: []
+- name: AlertResult
+  fields: 2
+  sources:
+  - openapi/bitvore-custom-api-l-openapi.yml
+  relationships: []
+- name: AlertTransactionEntry
+  fields: 3
+  sources:
+  - openapi/bitvore-custom-api-l-openapi.yml
+  relationships: []
+- name: AlertTransactions
+  fields: 2
+  sources:
+  - openapi/bitvore-custom-api-l-openapi.yml
+  relationships:
+  - to: AlertTransactionEntry
+    kind: has_many
+    via: transactions
+- name: Changeset
+  fields: 4
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: EventProperty
+    kind: has_many
+    via: properties
+- name: Channel
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships: []
+- name: CorpNewsArticle
+  fields: 22
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: Organization
+    kind: has_many
+    via: matchedArticleOrgs
+  - to: Organization
+    kind: has_many
+    via: matchedOrgs
+  - to: Organization
+    kind: has_many
+    via: referencedOrgHierarchy
+  - to: Organization
+    kind: has_many
+    via: referencedOrgs
+- name: CorpNewsArticleLegacy
+  fields: 19
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationReference
+    kind: has_many
+    via: matchedArticleOrgs
+  - to: OrganizationReference
+    kind: has_many
+    via: matchedOrgs
+  - to: OrganizationReference
+    kind: has_many
+    via: referencedOrgHierarchy
+  - to: OrganizationReference
+    kind: has_many
+    via: referencedOrgs
+- name: CorpNewsSearchResponseLegacy
+  fields: 6
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: CorpNewsArticleLegacy
+    kind: has_many
+    via: response
+- name: CorporateNewsRequest
+  fields: 13
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: OrganizationScope
+    kind: has_one
+    via: orgScope
+- name: CorporateNewsRequestLegacy
+  fields: 15
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationScopeLegacy
+    kind: has_one
+    via: orgScope
+- name: EconomicNewsArticle
+  fields: 15
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+  relationships: []
+- name: EconomicNewsArticleLegacy
+  fields: 12
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: EconomicNewsSearchResponseLegacy
+  fields: 6
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: EconomicNewsArticleLegacy
+    kind: has_many
+    via: response
+- name: EnrichedRecord
+  fields: 5
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships: []
+- name: EventProperty
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships: []
+- name: Exchange
+  fields: 3
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: File
+  fields: 15
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: File
+    kind: has_one
+    via: absoluteFile
+  - to: File
+    kind: has_one
+    via: canonicalFile
+  - to: File
+    kind: has_one
+    via: parentFile
+- name: FinancialFiling
+  fields: 10
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: Organization
+    kind: has_one
+    via: org
+- name: FinancialFilingLegacy
+  fields: 9
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationReference
+    kind: has_one
+    via: org
+- name: FinancialFilingsSearchResponseLegacy
+  fields: 6
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: FinancialFilingLegacy
+    kind: has_many
+    via: response
+- name: IDMapping
+  fields: 3
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: (external identifier)
+    kind: references
+    via: foreignId
+- name: IndustrySummary
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: InputStreamResource
+  fields: 8
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: File
+    kind: has_one
+    via: file
+  - to: InputStream
+    kind: has_one
+    via: inputStream
+  - to: URI
+    kind: has_one
+    via: uri
+  - to: URL
+    kind: has_one
+    via: url
+- name: IntelligenceRecord
+  fields: 19
+  sources:
+  - openapi/bitvore-custom-api-it-openapi.yml
+  relationships:
+  - to: OrganizationReference
+    kind: has_many
+    via: referencedOrgs
+- name: ItemCustomId
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-custom-api-l-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+  relationships: []
+- name: Listing
+  fields: 4
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships: []
+- name: MuniBondNewsRecord
+  fields: 4
+  sources:
+  - openapi/bitvore-custom-api-it-openapi.yml
+  - openapi/bitvore-custom-api-l-openapi.yml
+  relationships: []
+- name: MuniNewsArticle
+  fields: 19
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+  relationships: []
+- name: MuniNewsArticleLegacy
+  fields: 15
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: MuniNewsSearchResponseLegacy
+  fields: 6
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: MuniNewsArticleLegacy
+    kind: has_many
+    via: response
+- name: MunicipalNewsRequest
+  fields: 15
+  sources:
+  - openapi/bitvore-muni-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: cusip
+  - to: (external identifier)
+    kind: references
+    via: portfolioId
+- name: MunicipalNewsRequestLegacy
+  fields: 16
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: cusip
+  - to: (external identifier)
+    kind: references
+    via: portfolioId
+- name: OAuthError
+  fields: 2
+  sources:
+  - openapi/bitvore-security-openapi.yml
+  relationships: []
+- name: OrgSpec
+  fields: 12
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: cusip
+  - to: (external identifier)
+    kind: references
+    via: figi
+  - to: (external identifier)
+    kind: references
+    via: isin
+  - to: (external identifier)
+    kind: references
+    via: sedol
+- name: Organization
+  fields: 10
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: (external identifier)
+    kind: references
+    via: isin
+  - to: Listing
+    kind: has_many
+    via: listings
+- name: OrganizationDetails
+  fields: 40
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: cusip
+  - to: Exchange
+    kind: has_one
+    via: exchange
+  - to: (external identifier)
+    kind: references
+    via: figi
+  - to: (external identifier)
+    kind: references
+    via: isin
+  - to: IndustrySummary
+    kind: has_one
+    via: naicsIndustry
+  - to: OrganizationSummaryLegacy
+    kind: has_one
+    via: parent
+  - to: SearchTerm
+    kind: has_many
+    via: searchTerms
+  - to: (external identifier)
+    kind: references
+    via: sedol
+  - to: IndustrySummary
+    kind: has_one
+    via: sicIndustry
+  - to: OrganizationSummaryLegacy
+    kind: has_one
+    via: ultimateParent
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: Channel
+    kind: has_many
+    via: channels
+  - to: Listing
+    kind: has_many
+    via: listings
+- name: OrganizationQueryCriteria
+  fields: 6
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships: []
+- name: OrganizationQueryCriteriaLegacy
+  fields: 6
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: OrganizationReference
+  fields: 9
+  sources:
+  - openapi/bitvore-custom-api-it-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: (external identifier)
+    kind: references
+    via: isin
+- name: OrganizationScope
+  fields: 5
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: OrganizationQueryCriteria
+    kind: has_one
+    via: orgQuery
+  - to: (external identifier)
+    kind: references
+    via: portfolioId
+- name: OrganizationScopeLegacy
+  fields: 4
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: (external identifier)
+    kind: references
+    via: foreignId
+  - to: OrganizationQueryCriteriaLegacy
+    kind: has_one
+    via: orgQuery
+  - to: (external identifier)
+    kind: references
+    via: portfolioId
+- name: OrganizationSearchResponseLegacy
+  fields: 7
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationSummaryLegacy
+    kind: has_many
+    via: response
+- name: OrganizationSentimentScoreResponseLegacy
+  fields: 4
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationSentimentScoreTimeSeriesLegacy
+    kind: has_one
+    via: response
+- name: OrganizationSentimentScoreSeries
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+- name: OrganizationSentimentScoreSeriesLegacy
+  fields: 2
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+- name: OrganizationSentimentScoreTimeSeries
+  fields: 3
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: OrganizationSentimentScoreSeries
+    kind: has_many
+    via: series
+  - to: TimeSeriesTimeline
+    kind: has_one
+    via: timeline
+- name: OrganizationSentimentScoreTimeSeriesLegacy
+  fields: 3
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: bvId
+  - to: OrganizationSentimentScoreSeriesLegacy
+    kind: has_many
+    via: series
+  - to: TimeSeriesTimeline
+    kind: has_one
+    via: timeline
+- name: OrganizationSummary
+  fields: 18
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: (external identifier)
+    kind: references
+    via: cusip
+  - to: (external identifier)
+    kind: references
+    via: figi
+  - to: (external identifier)
+    kind: references
+    via: isin
+  - to: OrganizationSummary
+    kind: has_one
+    via: parent
+  - to: (external identifier)
+    kind: references
+    via: sedol
+- name: OrganizationSummaryLegacy
+  fields: 11
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationSummaryLegacy
+    kind: has_one
+    via: parent
+- name: PortfolioItem
+  fields: 3
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-custom-api-l-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+  relationships:
+  - to: ItemCustomId
+    kind: has_many
+    via: customIds
+- name: PortfolioSummary
+  fields: 3
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-custom-api-l-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  - openapi/bitvore-muni-openapi.yml
+  relationships: []
+- name: PotentialOrganizationMatch
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: Organization
+    kind: has_one
+    via: org
+- name: PotentialOrganizationMatchLegacy
+  fields: 2
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: OrganizationSummaryLegacy
+    kind: has_one
+    via: org
+- name: SearchTerm
+  fields: 2
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: SingleOrganizationMatchingResult
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  relationships:
+  - to: PotentialOrganizationMatch
+    kind: has_many
+    via: candidates
+  - to: OrgSpec
+    kind: has_one
+    via: spec
+- name: SingleOrganizationMatchingResultLegacy
+  fields: 2
+  sources:
+  - openapi/bitvore-legacy-openapi.yml
+  relationships:
+  - to: PotentialOrganizationMatchLegacy
+    kind: has_many
+    via: candidates
+- name: TimeSeriesTimeline
+  fields: 2
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: URI
+  fields: 17
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []
+- name: URL
+  fields: 11
+  sources:
+  - openapi/bitvore-corporate-openapi.yml
+  - openapi/bitvore-legacy-openapi.yml
+  relationships: []

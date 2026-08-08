@@ -1,0 +1,117 @@
+generated: '2026-08-07'
+method: searched
+source: https://developer.bitvore.com/v2/getting-started
+docs: https://developer.bitvore.com/v2/docs/security
+derived_from:
+- openapi/_original/bitvore-corporate-swagger.json
+- openapi/_original/bitvore-muni-swagger.json
+base_url: https://api.bitvore.com/
+product_paths:
+  corporate: /v2/corp/
+  municipal: /v2/muni/
+  oauth: /oauth/
+  legacy_v1: unprefixed paths (/corpnews, /muninews, /portfolioapi, /entityapi, /idapi, /financialfiling, /sentimentscores)
+authentication:
+  styles:
+  - api-key-query
+  - api-key-header
+  - oauth2-client-credentials-bearer
+  query_param:
+    name: key
+    applies_to: GET requests and dataset exports only
+  header:
+    name: X-BV-APIKEY
+    applies_to: GET and POST; REQUIRED for POST
+  bearer:
+    header: Authorization
+    format: Bearer <access_token>
+    rfc: RFC 6750
+    token_url: https://api.bitvore.com/oauth/accesstoken
+    grant: client_credentials
+    refresh_token: false
+    note: client_id = registered client username, client_secret = the API key. No refresh token is issued; re-request
+      on expiry (example expires_in 1800s).
+  scoping: The API key itself carries product scope — Corporate and Municipal datasets are separately licensed and
+    issue separate keys.
+  artifact: authentication/bitvore-authentication.yml
+idempotency:
+  supported: false
+  evidence: No Idempotency-Key header, no idempotency parameter, and no idempotency section anywhere in the six
+    harvested Swagger documents or the published getting-started / security docs.
+pagination:
+  style: page-number
+  params:
+  - name: pageNo
+    in: query
+    description: Zero/one-based page number of the result set (see per-operation description)
+  - name: pageSize
+    in: query
+    description: Number of items per page
+  legacy_params:
+  - name: offset
+    in: query
+    note: v1 only — removed in v2 in favour of startDate/endDate date-range paging
+  response_fields:
+    response: array of items
+    returned: items in this page
+    total: total items available
+    success: boolean
+  response_schemas:
+  - CorpNewsResultsResponse
+  - MuniNewsResponse
+  - EnrichedRecordsResponse
+  - PortfolioItemResponse
+  evidence: openapi/_original/*-swagger.json — 22 operations declare pageNo/pageSize; paged response wrappers documented
+    as "A paged result response."
+date_ranges:
+  params:
+  - startDate
+  - endDate
+  - dateType
+  - tz
+  format: ISO 8601 datetime (date + timezone combined into a single ISO value as of v2)
+  required: true
+  note: 'From the v2 release notes: "For requests that have a date range parameter, the dates are now required."'
+response_envelope:
+  shape:
+    success: boolean
+    response: payload
+    returned: int (paged)
+    total: int (paged)
+    reason: string (failures)
+    reasonSupport: object|string (failures)
+  errors: errors/bitvore-problem-types.yml
+content_types:
+  produces:
+  - application/json
+  - text/json
+  - application/x-gzip
+  - application/zip
+  consumes:
+  - application/json
+  - multipart/form-data (portfolio item uploads)
+  - application/x-www-form-urlencoded (oauth)
+request_tracing:
+  supported: false
+  evidence: No request-id / correlation-id header documented or present in any harvested spec.
+rate_limiting:
+  documented: false
+  evidence: No 429 response, no X-RateLimit-* header, and no rate-limit page in the published developer docs. Volume
+    is governed by the commercial licence, not a published quota.
+versioning:
+  style: uri-path
+  current: v2
+  previous: v1 (unprefixed legacy paths, still served)
+  artifact: lifecycle/bitvore-lifecycle.yml
+plural_parameter_convention: Multi-value parameters end in "s" (bvIds, signals) as of v2; the v1 singular forms
+  (bvId, signal) are the legacy shape.
+identifiers:
+  primary: bvId — the Bitvore organization identifier
+  alternates:
+  - CUSIP
+  - ISIN
+  - SEDOL
+  - FIGI
+  note: CUSIP, ISIN and SEDOL require a valid API licence to receive.
+  customer_ids: Custom foreign-id → bvId mappings are carried per-portfolio via idScheme (v2); the v1 Id Map API
+    (/idapi) is the legacy equivalent.

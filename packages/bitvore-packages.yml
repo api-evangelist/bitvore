@@ -1,0 +1,44 @@
+generated: '2026-08-07'
+method: searched
+source: npm registry search, PyPI, RubyGems, GitHub org, https://developer.bitvore.com/
+description: Bitvore ships NO first-party client libraries. Every registry probe returned empty and the GitHub organization
+  has zero public repositories. The docs tell developers to use cURL, Postman or their own HTTP client. What Bitvore
+  does publish first-party is a Microsoft-certified Power Platform connector.
+packages: []
+registry_evidence:
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=bitvore
+  status: 200
+  results: 0
+- registry: pypi
+  query: https://pypi.org/pypi/bitvore/json
+  status: 404
+- registry: rubygems
+  query: https://rubygems.org/api/v1/search.json?query=bitvore
+  status: 200
+  results: 0
+- registry: github
+  query: https://api.github.com/orgs/bitvore/repos
+  status: 200
+  public_repos: 0
+  note: The org github.com/bitvore exists (created 2020-01-07, name "Bitvore Corp.") but publishes nothing.
+connectors:
+- name: Bitvore Cellenus
+  platform: Microsoft Power Platform (Power Automate, Power Apps, Logic Apps, Copilot Studio)
+  publisher: Bitvore Corp.
+  official: true
+  status: Preview
+  class: Premium / Standard (Logic Apps)
+  url: https://learn.microsoft.com/en-us/connectors/bitvorecellenus/
+  marketplace: https://azuremarketplace.microsoft.com/en-us/marketplace/apps/bitvore1578961172370.cellenus-saas-tx-1
+  auth: API Key (securestring), per-connection, not shareable
+  scope: Organizations / Entity API only — Organization Details, Organization Matching, Organization Search, Return
+    API Version (deprecated)
+  backing_operations:
+  - handleGetOrgUsingGET
+  - handleOrgMatchingUsingPOST
+  - handleOrgLookupUsingGET
+  - getVersionUsingGET_2
+  backing_spec: openapi/bitvore-legacy-openapi.yml
+  throttle: 100 API calls per connection per 60 seconds
+  documented: '2024-03-01'
