@@ -1,18 +1,144 @@
 aid: bitvore
 name: Bitvore
-description: 'Bitvore is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Bitvore Corp. builds Cellenus, an AI/NLP platform that reads unstructured public text — global news,
+  press releases, SEC filings and proxy statements, earnings-call transcripts — and turns it into
+  structured material business events, signals, trended sentiment, and growth and risk scores. Coverage
+  spans 500,000+ surveilled companies across 60,000+ sources, sold as two separately licensed datasets:
+  Cellenus Corporate Intelligence (corporate and economic news, organizations, financial filings,
+  sentiment scores) and Cellenus Municipal (municipal bond news by CUSIP, location, FIPS and sector),
+  with an ESG signal and scoring layer over both. Access is by REST API, bulk dataset and changeset
+  exports, and a Microsoft-certified Power Platform connector. Bitvore's fixed-income data-analytics
+  unit was acquired by BondWave in November 2024; bitvore.com now redirects to bondwave.com/muni-news/,
+  while developer.bitvore.com and api.bitvore.com remain live and serving the Cellenus API surface.
+image: https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/u/shgogna/version-mismatches-special-train/1.0.1670.3520/bitvorecellenus/icon.png
 url: https://raw.githubusercontent.com/api-evangelist/bitvore/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-07'
 modified: '2026-08-07'
 tags:
-- Company
-apis: []
+- financial-data
+- market-intelligence
+- alternative-data
+- news-api
+- nlp
+- esg
+- municipal-bonds
+- credit-risk
+- company-data
+- sentiment-analysis
+- unstructured-data
+- fixed-income
+apis:
+- name: Cellenus Corporate API
+  description: >-
+    Corporate news and material business events for surveilled public and private companies, plus US
+    economic news by location and FIPS code, organization lookup/match/detail with CUSIP, ISIN, SEDOL
+    and FIGI alternate identifiers, SEC financial filing summaries and submissions, trended sentiment,
+    growth and risk scores, organization portfolios, and bulk dataset and changeset exports. Swagger 2.0,
+    28 paths across 37 operations. Authenticated with a licensed Corporate API key.
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - financial-data
+  - market-intelligence
+  - company-data
+  - news-api
+  - esg
+  - sentiment-analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-corporate-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Overlay
+    url: overlays/bitvore-corporate-overlay.yaml
+- name: Cellenus Municipal API
+  description: >-
+    Municipal bond news and issuer events from the Cellenus Municipal dataset, searchable by CUSIP,
+    state/county/city location, FIPS code, sector, or a saved CUSIP portfolio, plus US economic news
+    for a geography and full CUSIP portfolio management. Swagger 2.0, 12 paths across 21 operations.
+    Requires a separately licensed Municipal API key.
+  humanURL: https://developer.bitvore.com/v2/docs/overview/muni
+  baseURL: https://api.bitvore.com/v2/muni/
+  tags:
+  - municipal-bonds
+  - fixed-income
+  - financial-data
+  - news-api
+  - credit-risk
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-muni-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Overlay
+    url: overlays/bitvore-muni-overlay.yaml
+- name: Bitvore OAuth 2.0 Token API
+  description: >-
+    Bitvore's OAuth 2.0 authorization server. Exchanges a registered client id and the licensed API key
+    (sent as client_secret) for a bearer access token using the client_credentials grant, so the API key
+    is not transmitted on every call. Tokens are presented per RFC 6750; no refresh token is issued, so
+    a new token must be requested on expiry. A single "Global" scope covers all Bitvore APIs.
+  humanURL: https://developer.bitvore.com/v2/docs/security
+  baseURL: https://api.bitvore.com/oauth/
+  tags:
+  - authentication
+  - oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-security-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Overlay
+    url: overlays/bitvore-security-overlay.yaml
+- name: Bitvore Legacy (v1) API
+  description: >-
+    The pre-2021 unprefixed Bitvore surface, still served at api.bitvore.com — /corpnews, /muninews,
+    /econnews, /entityapi (organization lookup, match and detail), /idapi (account-wide foreign-id to
+    bvId mapping), /financialfiling, /portfolioapi and /sentimentscores. Superseded by the v2 Corporate
+    and Municipal APIs; the published upgrade guide documents the parameter and path changes.
+    Swagger 2.0, 22 paths across 33 operations.
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/
+  tags:
+  - financial-data
+  - news-api
+  - company-data
+  - legacy
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-legacy-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+  - type: Overlay
+    url: overlays/bitvore-legacy-overlay.yaml
+- name: Bitvore Custom APIs (deprecated)
+  description: >-
+    Two per-customer Swagger groups published alongside the main API and marked "Deprecated 2019" in
+    their own info.version — an Alert/Muni/Portfolios surface and a Bond/Intel surface, both secured
+    with HTTP Basic rather than the API-key or OAuth schemes the current APIs use. Captured because they
+    are enumerated in the provider's own public /swagger-resources index and remain served.
+  humanURL: https://developer.bitvore.com/v2/docs/api-reference
+  baseURL: https://api.bitvore.com/
+  tags:
+  - legacy
+  - deprecated
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-custom-api-it-openapi.yml
+  - type: OpenAPI
+    url: openapi/bitvore-custom-api-l-openapi.yml
+  - type: Overlay
+    url: overlays/bitvore-custom-api-it-overlay.yaml
+  - type: Overlay
+    url: overlays/bitvore-custom-api-l-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +146,69 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://bondwave.com/muni-news/
+- type: DeveloperPortal
+  url: https://developer.bitvore.com/
+- type: Documentation
+  url: https://developer.bitvore.com/v2/docs/api-reference
+- type: APIReference
+  url: https://developer.bitvore.com/v2/docs/api-reference
+- type: GettingStarted
+  url: https://developer.bitvore.com/v2/getting-started
+- type: SignUp
+  url: https://developer.bitvore.com/get-access
+- type: Support
+  url: mailto:support@bitvore.com
+- type: GitHubOrganization
+  url: https://github.com/bitvore
+- type: ChangeLog
+  url: https://developer.bitvore.com/v2/release
+- type: ChangeLog
+  url: changelog/bitvore-changelog.yml
+- type: Deprecation
+  url: https://developer.bitvore.com/v2/release
+- type: Lifecycle
+  url: lifecycle/bitvore-lifecycle.yml
+- type: Authentication
+  url: authentication/bitvore-authentication.yml
+- type: OAuthScopes
+  url: scopes/bitvore-scopes.yml
+- type: Conventions
+  url: conventions/bitvore-conventions.yml
+- type: ErrorCatalog
+  url: errors/bitvore-problem-types.yml
+- type: Conformance
+  url: conformance/bitvore-conformance.yml
+- type: DataModel
+  url: data-model/bitvore-data-model.yml
+- type: RateLimits
+  url: rate-limits/bitvore-rate-limits.yml
+- type: Packages
+  url: packages/bitvore-packages.yml
+- type: WellKnown
+  url: well-known/bitvore-well-known.yml
+- type: DomainSecurity
+  url: security/bitvore-domain-security.yml
+- type: LLMsTxt
+  url: llms/bitvore-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Vocabulary
+  url: https://developer.bitvore.com/v2/docs/api-reference/signals
+x-no-mcp-pointer: >-
+  mcp/bitvore-mcp.yml exists but is status:candidate — a tool surface DERIVED from real operationIds, not
+  something Bitvore serves. No MCPServer pointer is emitted, because Bitvore publishes no MCP server.
+x-not-published: >-
+  Deliberately absent, each verified by probe rather than assumed: no /llms.txt (404 on every host), no
+  /.well-known/ documents (404 on api.bitvore.com; the 200s on developer.bitvore.com and base.bitvore.com
+  are the SPA HTML shell), no A2A agent card, no MCP server, no AsyncAPI or webhook surface, no client SDKs
+  on npm/PyPI/RubyGems, no public GitHub repos, no status page (status.bitvore.com does not resolve), no
+  security.txt, no vulnerability-disclosure program, no trust center or published certifications, no
+  published pricing (sales-gated), and no live Bitvore-hosted terms or privacy policy —
+  bitvore.com/privacy-policy/ and bitvore.com/contact-us/, both cited by Bitvore's own Microsoft connector
+  listing, now return 404.
+x-enrichment:
+  date: '2026-08-07'
+  status: enriched
+  artifacts_added: 32
+  pass: local-v1
