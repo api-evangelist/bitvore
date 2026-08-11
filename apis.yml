@@ -32,119 +32,432 @@ tags:
 - unstructured-data
 - fixed-income
 apis:
-- name: Cellenus Corporate API
-  description: >-
-    Corporate news and material business events for surveilled public and private companies, plus US
-    economic news by location and FIPS code, organization lookup/match/detail with CUSIP, ISIN, SEDOL
-    and FIGI alternate identifiers, SEC financial filing summaries and submissions, trended sentiment,
-    growth and risk scores, organization portfolios, and bulk dataset and changeset exports. Swagger 2.0,
-    28 paths across 37 operations. Authenticated with a licensed Corporate API key.
+- aid: bitvore:bitvore-alert-api-api
+  name: Bitvore Alert API API
+  description: Alerts API
   humanURL: https://developer.bitvore.com/v2/docs/overview/corp
   baseURL: https://api.bitvore.com/v2/corp/
   tags:
-  - financial-data
-  - market-intelligence
-  - company-data
-  - news-api
-  - esg
-  - sentiment-analysis
+  - Alert API
   properties:
   - type: OpenAPI
-    url: openapi/bitvore-corporate-openapi.yml
+    url: openapi/bitvore-alert-api-api-openapi.yml
   - type: Documentation
     url: https://developer.bitvore.com/v2/docs/overview/corp
   - type: APIReference
     url: https://developer.bitvore.com/v2/docs/api-reference/corp
-  - type: Overlay
-    url: overlays/bitvore-corporate-overlay.yaml
-- name: Cellenus Municipal API
-  description: >-
-    Municipal bond news and issuer events from the Cellenus Municipal dataset, searchable by CUSIP,
-    state/county/city location, FIPS code, sector, or a saved CUSIP portfolio, plus US economic news
-    for a geography and full CUSIP portfolio management. Swagger 2.0, 12 paths across 21 operations.
-    Requires a separately licensed Municipal API key.
-  humanURL: https://developer.bitvore.com/v2/docs/overview/muni
-  baseURL: https://api.bitvore.com/v2/muni/
-  tags:
-  - municipal-bonds
-  - fixed-income
-  - financial-data
-  - news-api
-  - credit-risk
-  properties:
-  - type: OpenAPI
-    url: openapi/bitvore-muni-openapi.yml
   - type: Documentation
     url: https://developer.bitvore.com/v2/docs/overview/muni
   - type: APIReference
     url: https://developer.bitvore.com/v2/docs/api-reference/muni
-  - type: Overlay
-    url: overlays/bitvore-muni-overlay.yaml
-- name: Bitvore OAuth 2.0 Token API
-  description: >-
-    Bitvore's OAuth 2.0 authorization server. Exchanges a registered client id and the licensed API key
-    (sent as client_secret) for a bearer access token using the client_credentials grant, so the API key
-    is not transmitted on every call. Tokens are presented per RFC 6750; no refresh token is issued, so
-    a new token must be requested on expiry. A single "Global" scope covers all Bitvore APIs.
-  humanURL: https://developer.bitvore.com/v2/docs/security
-  baseURL: https://api.bitvore.com/oauth/
-  tags:
-  - authentication
-  - oauth2
-  properties:
-  - type: OpenAPI
-    url: openapi/bitvore-security-openapi.yml
   - type: Documentation
     url: https://developer.bitvore.com/v2/docs/security
-  - type: Overlay
-    url: overlays/bitvore-security-overlay.yaml
-- name: Bitvore Legacy (v1) API
-  description: >-
-    The pre-2021 unprefixed Bitvore surface, still served at api.bitvore.com — /corpnews, /muninews,
-    /econnews, /entityapi (organization lookup, match and detail), /idapi (account-wide foreign-id to
-    bvId mapping), /financialfiling, /portfolioapi and /sentimentscores. Superseded by the v2 Corporate
-    and Municipal APIs; the published upgrade guide documents the parameter and path changes.
-    Swagger 2.0, 22 paths across 33 operations.
-  humanURL: https://developer.bitvore.com/v1/docs/overview
-  baseURL: https://api.bitvore.com/
-  tags:
-  - financial-data
-  - news-api
-  - company-data
-  - legacy
-  properties:
-  - type: OpenAPI
-    url: openapi/bitvore-legacy-openapi.yml
   - type: Documentation
     url: https://developer.bitvore.com/v1/docs/overview
-  - type: Overlay
-    url: overlays/bitvore-legacy-overlay.yaml
-- name: Bitvore Custom APIs (deprecated)
-  description: >-
-    Two per-customer Swagger groups published alongside the main API and marked "Deprecated 2019" in
-    their own info.version — an Alert/Muni/Portfolios surface and a Bond/Intel surface, both secured
-    with HTTP Basic rather than the API-key or OAuth schemes the current APIs use. Captured because they
-    are enumerated in the provider's own public /swagger-resources index and remain served.
-  humanURL: https://developer.bitvore.com/v2/docs/api-reference
-  baseURL: https://api.bitvore.com/
+- aid: bitvore:bitvore-bond-api
+  name: Bitvore Bond API
+  description: Municipal Bond API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
   tags:
-  - legacy
-  - deprecated
+  - Bond
   properties:
   - type: OpenAPI
-    url: openapi/bitvore-custom-api-it-openapi.yml
+    url: openapi/bitvore-bond-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-corporate-news-api
+  name: Bitvore Corporate News API
+  description: Corp News API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Corporate News
+  properties:
   - type: OpenAPI
-    url: openapi/bitvore-custom-api-l-openapi.yml
-  - type: Overlay
-    url: overlays/bitvore-custom-api-it-overlay.yaml
-  - type: Overlay
-    url: overlays/bitvore-custom-api-l-overlay.yaml
+    url: openapi/bitvore-corporate-news-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-datasets-api-api
+  name: Bitvore Datasets API API
+  description: Export Files and Reports
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Datasets API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-datasets-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-economic-news-api
+  name: Bitvore Economic News API
+  description: Economic News API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Economic News
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-economic-news-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-entity-api
+  name: Bitvore Entity API
+  description: Entity API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Entity
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-entity-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-filings-api-api
+  name: Bitvore Filings API API
+  description: Financial Filings, Submissions and Summaries
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Filings API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-filings-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-financial-filings-api
+  name: Bitvore Financial Filings API
+  description: Financial Filings API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Financial Filings
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-financial-filings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-identification-api
+  name: Bitvore Identification API
+  description: Identification API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Identification
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-identification-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-intel-api
+  name: Bitvore Intel API
+  description: Intelligence API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Intel
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-intel-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-muni-api-api
+  name: Bitvore Muni API API
+  description: Municipal API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Muni API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-muni-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-muni-news-api
+  name: Bitvore Muni News API
+  description: Muni News API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Muni News
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-muni-news-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-news-api-api
+  name: Bitvore News API API
+  description: Precision and Economic News
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - News API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-news-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-oauth2-api
+  name: Bitvore O Auth2 API
+  description: Bitvore OAuth2 Authorization Server API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-organizations-api-api
+  name: Bitvore Organizations API API
+  description: Organization Details and Search
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Organizations API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-organizations-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-portfolio-api
+  name: Bitvore Portfolio API
+  description: Portfolio API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Portfolio
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-portfolio-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-portfolios-api-api
+  name: Bitvore Portfolios API API
+  description: Manage Organization-based Portfolios
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Portfolios API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-portfolios-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-sentiment-scores-api-api
+  name: Bitvore Sentiment Scores API API
+  description: Organization Scores
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Sentiment Scores API
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-sentiment-scores-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-sentiment-scores-api
+  name: Bitvore Sentiment Scores API
+  description: Company Sentiment Score API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
+  baseURL: https://api.bitvore.com/v2/corp/
+  tags:
+  - Sentiment Scores
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-sentiment-scores-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/bitvore-corporate-overlay.yaml
 - type: Website
   url: https://bondwave.com/muni-news/
 - type: DeveloperPortal
