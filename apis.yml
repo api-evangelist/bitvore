@@ -17,7 +17,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.21'
 created: '2026-08-07'
-modified: '2026-08-07'
+modified: '2026-08-14'
 tags:
 - financial-data
 - market-intelligence
@@ -35,8 +35,8 @@ apis:
 - aid: bitvore:bitvore-alert-api-api
   name: Bitvore Alert API API
   description: Alerts API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v2/docs/overview/muni
+  baseURL: https://api.bitvore.com/muni/alerts/
   tags:
   - Alert API
   properties:
@@ -57,8 +57,8 @@ apis:
 - aid: bitvore:bitvore-bond-api
   name: Bitvore Bond API
   description: Municipal Bond API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/bondapi/
   tags:
   - Bond
   properties:
@@ -79,8 +79,8 @@ apis:
 - aid: bitvore:bitvore-corporate-news-api
   name: Bitvore Corporate News API
   description: Corp News API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/corpnews/
   tags:
   - Corporate News
   properties:
@@ -123,8 +123,8 @@ apis:
 - aid: bitvore:bitvore-economic-news-api
   name: Bitvore Economic News API
   description: Economic News API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/econnews/
   tags:
   - Economic News
   properties:
@@ -145,8 +145,8 @@ apis:
 - aid: bitvore:bitvore-entity-api
   name: Bitvore Entity API
   description: Entity API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/entityapi/
   tags:
   - Entity
   properties:
@@ -189,8 +189,8 @@ apis:
 - aid: bitvore:bitvore-financial-filings-api
   name: Bitvore Financial Filings API
   description: Financial Filings API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/financialfiling/
   tags:
   - Financial Filings
   properties:
@@ -211,8 +211,8 @@ apis:
 - aid: bitvore:bitvore-identification-api
   name: Bitvore Identification API
   description: Identification API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/idapi/
   tags:
   - Identification
   properties:
@@ -233,8 +233,8 @@ apis:
 - aid: bitvore:bitvore-intel-api
   name: Bitvore Intel API
   description: Intelligence API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/intelapi/
   tags:
   - Intel
   properties:
@@ -255,8 +255,8 @@ apis:
 - aid: bitvore:bitvore-muni-api-api
   name: Bitvore Muni API API
   description: Municipal API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v2/docs/overview/muni
+  baseURL: https://api.bitvore.com/muni/api/
   tags:
   - Muni API
   properties:
@@ -277,8 +277,8 @@ apis:
 - aid: bitvore:bitvore-muni-news-api
   name: Bitvore Muni News API
   description: Muni News API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/muninews/
   tags:
   - Muni News
   properties:
@@ -300,7 +300,7 @@ apis:
   name: Bitvore News API API
   description: Precision and Economic News
   humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  baseURL: https://api.bitvore.com/v2/
   tags:
   - News API
   properties:
@@ -321,8 +321,8 @@ apis:
 - aid: bitvore:bitvore-oauth2-api
   name: Bitvore O Auth2 API
   description: Bitvore OAuth2 Authorization Server API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v2/docs/security
+  baseURL: https://api.bitvore.com/oauth/
   tags:
   - OAuth2
   properties:
@@ -365,8 +365,8 @@ apis:
 - aid: bitvore:bitvore-portfolio-api
   name: Bitvore Portfolio API
   description: Portfolio API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/portfolioapi/
   tags:
   - Portfolio
   properties:
@@ -388,7 +388,7 @@ apis:
   name: Bitvore Portfolios API API
   description: Manage Organization-based Portfolios
   humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  baseURL: https://api.bitvore.com/v2/
   tags:
   - Portfolios API
   properties:
@@ -431,8 +431,8 @@ apis:
 - aid: bitvore:bitvore-sentiment-scores-api
   name: Bitvore Sentiment Scores API
   description: Company Sentiment Score API
-  humanURL: https://developer.bitvore.com/v2/docs/overview/corp
-  baseURL: https://api.bitvore.com/v2/corp/
+  humanURL: https://developer.bitvore.com/v1/docs/overview
+  baseURL: https://api.bitvore.com/sentimentscores/
   tags:
   - Sentiment Scores
   properties:
@@ -456,6 +456,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/bitvore-agentic-access.yml
 - type: Overlay
   url: overlays/bitvore-corporate-overlay.yaml
 - type: Website
@@ -494,34 +496,69 @@ common:
   url: conformance/bitvore-conformance.yml
 - type: DataModel
   url: data-model/bitvore-data-model.yml
+- type: DataModel
+  url: data-model/bitvore-dataset-export-schema.yml
 - type: RateLimits
   url: rate-limits/bitvore-rate-limits.yml
+- type: Plans
+  url: plans/bitvore-plans-pricing.yml
+- type: Sandbox
+  url: sandbox/bitvore-sandbox.yml
 - type: Packages
   url: packages/bitvore-packages.yml
-- type: WellKnown
-  url: well-known/bitvore-well-known.yml
 - type: DomainSecurity
   url: security/bitvore-domain-security.yml
 - type: LLMsTxt
   url: llms/bitvore-llms.txt
 - type: AgentSkill
   url: skills/_index.yml
+- type: ToolCrosswalk
+  url: mcp/bitvore-tool-crosswalk.yml
+- type: Vocabulary
+  url: vocabulary/bitvore-signals.yml
 - type: Vocabulary
   url: https://developer.bitvore.com/v2/docs/api-reference/signals
+- type: Blog
+  url: https://bondwave.com/posts-archive/
+- type: PrivacyPolicy
+  url: https://bondwave.com/privacy-policy/
+- type: TermsOfService
+  url: https://bondwave.com/legal-information/
 x-no-mcp-pointer: >-
   mcp/bitvore-mcp.yml exists but is status:candidate — a tool surface DERIVED from real operationIds, not
   something Bitvore serves. No MCPServer pointer is emitted, because Bitvore publishes no MCP server.
+x-base-url-repair: >-
+  On 2026-08-14 all 19 api entries carried the same baseURL, https://api.bitvore.com/v2/corp/, and the same corp
+  humanURL — but only four of the nineteen serve a path under /v2/corp. Bitvore runs one host, api.bitvore.com,
+  with absolute paths per product line, exactly as its own Swagger declares (servers[] is the bare host on all six
+  groups). Each baseURL/humanURL was re-pointed from the path prefix its own linked OpenAPI actually serves —
+  /bondapi/, /entityapi/, /idapi/, /intelapi/, /corpnews/, /econnews/, /muninews/, /portfolioapi/,
+  /financialfiling/, /sentimentscores/ for the v1 legacy surface, /muni/api/ and /muni/alerts/ for the municipal
+  surface, /v2/corp/ for the v2 corporate surface, /oauth/ for the token endpoint. No servers[] block was touched.
+x-no-wellknown-pointer: >-
+  well-known/bitvore-well-known.yml records SIX hosts probed and ZERO well-known documents found — every
+  /.well-known/* path is a 404, or on the SPA hosts a 200 carrying the HTML shell. The 2026-08-07 pass wired a
+  WellKnown pointer against that all-404 probe, which credited an absence as a presence. The pointer was removed
+  on 2026-08-14. The probe file stays, because a recorded absence is valid data.
 x-not-published: >-
-  Deliberately absent, each verified by probe rather than assumed: no /llms.txt (404 on every host), no
-  /.well-known/ documents (404 on api.bitvore.com; the 200s on developer.bitvore.com and base.bitvore.com
-  are the SPA HTML shell), no A2A agent card, no MCP server, no AsyncAPI or webhook surface, no client SDKs
-  on npm/PyPI/RubyGems, no public GitHub repos, no status page (status.bitvore.com does not resolve), no
-  security.txt, no vulnerability-disclosure program, no trust center or published certifications, no
-  published pricing (sales-gated), and no live Bitvore-hosted terms or privacy policy —
-  bitvore.com/privacy-policy/ and bitvore.com/contact-us/, both cited by Bitvore's own Microsoft connector
-  listing, now return 404.
+  Deliberately absent, each verified by probe rather than assumed: no /.well-known/ documents on any of six hosts
+  (404 on api.bitvore.com, bitvore.com and bondwave.com; the 200s on developer.bitvore.com and base.bitvore.com
+  are the SPA HTML shell), no A2A agent card, no MCP server, no GraphQL endpoint, no AsyncAPI or webhook surface
+  (the Alert API is a deprecated 2019 polling surface, not a push one), no client SDKs on npm/PyPI/RubyGems, no
+  public GitHub repos, no status page (status.bitvore.com does not resolve), no security.txt,
+  no vulnerability-disclosure program, no trust center or published certifications, no sandbox host or test-mode
+  key prefix, no CLI, no embedded UI components, and no published pricing — access is sales-gated, with a free
+  evaluation key issued by email (products@bitvore.com) and a licensed key from sales@bitvore.com.
+  No Bitvore-hosted /llms.txt exists; the one real llms.txt on the estate is served by the parent brand at
+  bondwave.com/llms.txt and is a Yoast-generated marketing site map with no API content.
+x-parent-brand-properties: >-
+  BondWave LLC acquired Bitvore's fixed-income / data-analytics unit in November 2024 and bitvore.com now 301s to
+  bondwave.com/muni-news/. Bitvore's own privacy policy and contact pages are gone (404), so the Blog,
+  PrivacyPolicy and TermsOfService pointers above resolve to the acquirer's live pages — bondwave.com/posts-archive/,
+  bondwave.com/privacy-policy/ and bondwave.com/legal-information/ (BondWave LLC site terms), each verified 200 on
+  2026-08-14. They are recorded as parent-brand properties, not as Bitvore-hosted documents.
 x-enrichment:
-  date: '2026-08-07'
+  date: '2026-08-14'
   status: enriched
-  artifacts_added: 32
+  artifacts_added: 7
   pass: local-v1
