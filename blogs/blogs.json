@@ -1,0 +1,14 @@
+{
+  "repo": "bitvore",
+  "feeds": [
+    {
+      "source": "https://developer.bitvore.com/v2/docs/api-reference/signals",
+      "feed_url": "https://developer.bitvore.com/v2/docs/api-reference/signals",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-15T12:22:01Z"
+}
