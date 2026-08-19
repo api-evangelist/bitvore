@@ -1,0 +1,358 @@
+openapi: 3.2.0
+info:
+  description: 'Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.
+
+
+    * The Intelligence API has been replaced by the Corp News API.
+
+    * The Municipal Bond API has been replaced by the Muni News API.'
+  version: Deprecated 2019
+  title: Deprecated Custom Muni API API
+  license:
+    name: Copyright Bitvore Corp. 2026
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: Muni API
+  description: Municipal API
+paths:
+  /muni/api/search/cusip/{cusip}:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news by CUSIP
+      operationId: searchWithCUSIPUsingGET
+      parameters:
+      - name: cusip
+        in: path
+        description: cusip
+        required: true
+        schema:
+          type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: count
+        in: query
+        description: count
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        schema:
+          type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        schema:
+          type: string
+          default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        schema:
+          type: string
+          enum:
+          - NONE
+          - LOOKUP
+          - ALERT
+          default: ALERT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsSearchResponse'
+                originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/search/portfolio/{watchlistId}:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news by WatchList
+      operationId: searchWithWatchListUsingGET
+      parameters:
+      - name: watchlistId
+        in: path
+        description: watchlistId
+        required: true
+        schema:
+          type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: count
+        in: query
+        description: count
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        schema:
+          type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        schema:
+          type: string
+          default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        schema:
+          type: string
+          enum:
+          - NONE
+          - LOOKUP
+          - ALERT
+          default: ALERT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsSearchResponse'
+                originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/search/vql:
+    get:
+      tags:
+      - Muni API
+      summary: Search for news using VQL
+      operationId: searchWithVqlUsingGET
+      parameters:
+      - name: q
+        in: query
+        description: q
+        required: false
+        schema:
+          type: string
+      - name: deltaDays
+        in: query
+        description: deltaDays
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: count
+        in: query
+        description: count
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: state
+        in: query
+        description: state
+        required: false
+        schema:
+          type: string
+      - name: citynews
+        in: query
+        description: citynews
+        required: false
+        schema:
+          type: string
+      - name: countynews
+        in: query
+        description: countynews
+        required: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: startDate
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: endDate
+        required: false
+        schema:
+          type: string
+      - name: tz
+        in: query
+        description: tz
+        required: false
+        schema:
+          type: string
+          default: UTC
+      - name: quality
+        in: query
+        description: quality
+        required: false
+        schema:
+          type: string
+          enum:
+          - NONE
+          - LOOKUP
+          - ALERT
+          default: ALERT
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsSearchResponse'
+                originalRef: MuniBondNewsSearchResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/api/version:
+    get:
+      tags:
+      - Muni API
+      summary: Returns the API version
+      operationId: getVersionUsingGET_5
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
+    MuniBondNewsRecord:
+      type: object
+      properties:
+        recordType:
+          type: string
+          example: WEBCONTENT
+          description: Type of the record
+        rowKey:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely idenfiying the record
+        tags:
+          type: object
+          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
+        timestamp:
+          type: string
+          example: 2017-07-03T08:52:33+0000
+          description: Timestamp of the record
+      title: MuniBondNewsRecord
+      description: Single intelligence item.
+    MuniBondNewsSearchResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of news records returned by search
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniBondNewsRecord'
+            originalRef: MuniBondNewsRecord
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 10
+          description: Total number of news records that matched the search, may be more than returned
+      title: MuniBondNewsSearchResponse
+      description: News search response.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

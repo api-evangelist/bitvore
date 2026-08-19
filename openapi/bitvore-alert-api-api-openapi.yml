@@ -1,0 +1,259 @@
+openapi: 3.2.0
+info:
+  description: 'Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.
+
+
+    * The Intelligence API has been replaced by the Corp News API.
+
+    * The Municipal Bond API has been replaced by the Muni News API.'
+  version: Deprecated 2019
+  title: Deprecated Custom Alert API API
+  license:
+    name: Copyright Bitvore Corp. 2026
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: Alert API
+  description: Alerts API
+paths:
+  /muni/alerts:
+    get:
+      tags:
+      - Alert API
+      summary: Get a list of all Alerts
+      operationId: handleListAlertsUsingGET
+      parameters:
+      - name: uid
+        in: query
+        description: uid
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlertDefinition'
+                originalRef: AlertDefinition
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/limit/{alertId}/{limit}:
+    post:
+      tags:
+      - Alert API
+      summary: Set alert limit
+      operationId: handleSetAlertLimitUsingPOST
+      parameters:
+      - name: alertId
+        in: path
+        description: alertId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: path
+        description: limit
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/record/{rowkey}:
+    get:
+      tags:
+      - Alert API
+      summary: Get record
+      operationId: handleAlertRecordUsingGET
+      parameters:
+      - name: rowkey
+        in: path
+        description: rowkey
+        required: true
+        schema:
+          type: string
+      - name: alertId
+        in: query
+        description: alertId
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsRecord'
+                originalRef: MuniBondNewsRecord
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/results/{transactionid}:
+    get:
+      tags:
+      - Alert API
+      summary: Get alert results
+      operationId: handleAlertResultsUsingGET
+      parameters:
+      - name: transactionid
+        in: path
+        description: transactionid
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlertResults'
+                originalRef: AlertResults
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/transactions/{alertId}:
+    get:
+      tags:
+      - Alert API
+      summary: Get a alert transactions list
+      operationId: handleAlertTransactionsUsingGET
+      parameters:
+      - name: alertId
+        in: path
+        description: alertId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlertTransactions'
+                originalRef: AlertTransactions
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /muni/alerts/version:
+    get:
+      tags:
+      - Alert API
+      summary: Get API version
+      operationId: handleAlertAPIVersionUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    MuniBondNewsRecord:
+      type: object
+      properties:
+        recordType:
+          type: string
+          example: WEBCONTENT
+          description: Type of the record
+        rowKey:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely idenfiying the record
+        tags:
+          type: object
+          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
+        timestamp:
+          type: string
+          example: 2017-07-03T08:52:33+0000
+          description: Timestamp of the record
+      title: MuniBondNewsRecord
+      description: Single intelligence item.
+    AlertTransactions:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int64
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertTransactionEntry'
+            originalRef: AlertTransactionEntry
+      title: AlertTransactions
+    AlertResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertResult'
+            originalRef: AlertResult
+        transactionId:
+          type: integer
+          format: int64
+      title: AlertResults
+    AlertDefinition:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int64
+        alertName:
+          type: string
+        alertTime:
+          type: string
+      title: AlertDefinition
+    AlertResult:
+      type: object
+      properties:
+        cusips:
+          type: array
+          items:
+            type: string
+        rowKey:
+          type: string
+      title: AlertResult
+    AlertTransactionEntry:
+      type: object
+      properties:
+        alertTime:
+          type: string
+        count:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int64
+      title: AlertTransactionEntry
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

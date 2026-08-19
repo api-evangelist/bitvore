@@ -1,0 +1,151 @@
+generated: '2026-08-14'
+method: searched
+source: https://developer.bitvore.com/v2/docs/getting-started
+docs:
+- https://developer.bitvore.com/v2/getting-started
+- https://developer.bitvore.com/v2/docs/api-reference/portfolios
+description: >-
+  Bitvore runs NO separate sandbox host and issues no test-mode key prefix — there is one production host,
+  https://api.bitvore.com, and one class of credential. What Bitvore does publish is an evaluation path (a free
+  trial key, requested by email) and a set of real, downloadable seed fixtures (six CSV portfolios of Bitvore
+  entity IDs) that let a new integrator exercise the portfolio + news flow end to end against live data without
+  first assembling their own company list.
+environments:
+- name: production
+  host: https://api.bitvore.com
+  note: The only host Bitvore serves. No sandbox.bitvore.com, no test.bitvore.com, no /sandbox path.
+  probed: '2026-08-14'
+- name: sandbox
+  host: null
+  published: false
+  evidence: >-
+    No sandbox/test environment is named anywhere in the developer portal. The string "sandbox" does not appear in
+    any of the 34 JavaScript chunks that make up developer.bitvore.com, nor in any of the six harvested Swagger
+    documents (121 operations).
+console:
+  published: true
+  kind: interactive-api-console
+  engine: Swagger UI (swagger-ui-dist, embedded in the Quasar developer portal)
+  url: https://developer.bitvore.com/v2/docs/api-reference
+  per_group_urls:
+  - https://developer.bitvore.com/v2/docs/api-reference/corp
+  - https://developer.bitvore.com/v2/docs/api-reference/muni
+  - https://developer.bitvore.com/v2/docs/api-reference/enriched
+  - https://developer.bitvore.com/v2/docs/api-reference/security
+  - https://developer.bitvore.com/v1/docs/api-reference/legacy-api
+  spec_source: https://api.bitvore.com/v2/api-docs?group=<group>
+  evidence: >-
+    The portal bundle defines a SwaggerUI component whose apiUrl computes
+    "https://api.bitvore.com/v2/api-docs?group=" + api and mounts it with
+    SwaggerUIBundle({url, dom_id:"#swagger-ui", layout:"BaseLayout", deepLinking:false, validatorUrl:null,
+    operationsSorter:"alpha", docExpansion:"list"}). Read from
+    https://developer.bitvore.com/js/chunk-common.4999afd4.js on 2026-08-14; the six groups it loads were confirmed
+    live at https://api.bitvore.com/swagger-resources (HTTP 200).
+  requires_key: true
+  note: >-
+    This is a live "try it out" console against the PRODUCTION host — there is no test mode behind it, so any call
+    executed here is a real, metered call made with a real key.
+credentials:
+  modes:
+  - id: trial
+    name: Trial / evaluation key
+    published: true
+    free: true
+    obtain: email
+    contact: products@bitvore.com
+    quote: >-
+      "In order to use the APIs, you must license one of the products and be issued an API key. The products can be
+      evaluated for free with a trial key. To obtain a trial key, contact Bitvore Support."
+    source: https://developer.bitvore.com/v2/docs/getting-started
+  - id: licensed
+    name: Permanent licensed key
+    published: true
+    free: false
+    obtain: sales
+    contact: sales@bitvore.com
+    source: https://developer.bitvore.com/v2/docs/getting-started
+  key_prefix: null
+  key_prefix_note: >-
+    Bitvore publishes no live-vs-test key prefix convention. Documentation examples use the literal placeholder
+    "xyz123" for every key. Product scope is carried by the key itself — the Corporate and Municipal datasets are
+    separately licensed and issue separate keys — not by an environment flag.
+  scoping_artifact: authentication/bitvore-authentication.yml
+test_fixtures:
+- name: Sample Portfolios
+  kind: seed-data
+  format: CSV of Bitvore entity IDs (bvId), one per company
+  purpose: >-
+    Seed a Cellenus portfolio without first mapping your own holdings to the Bitvore knowledge graph, then query
+    news against that portfolio ID.
+  docs: https://developer.bitvore.com/v2/docs/api-reference/portfolios
+  host: https://bitvorestaticassets.blob.core.windows.net/api-docs/
+  host_note: >-
+    Bitvore's own Azure blob storage account (bitvorestaticassets), linked directly from the Bitvore developer
+    portal's Sample Portfolios page — first-party distribution, not a third-party mirror.
+  probed: '2026-08-14'
+  files:
+  - name: S&P 500
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/sp500.csv
+    http_status: 200
+    bytes: 15830
+    content_type: text/csv
+  - name: Forbes Global 2000
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/global2000.csv
+    http_status: 200
+    bytes: 63634
+    content_type: text/csv
+  - name: Inc. 5000
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/inc5000.csv
+    http_status: 200
+    bytes: 156607
+    content_type: text/csv
+  - name: NYSE Traded Companies
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/nyse.csv
+    http_status: 200
+    bytes: 67717
+    content_type: text/csv
+  - name: NASDAQ Traded Companies
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/nasdaq.csv
+    http_status: 200
+    bytes: 80392
+    content_type: text/csv
+  - name: AMEX Traded Companies
+    url: https://bitvorestaticassets.blob.core.windows.net/api-docs/amex.csv
+    http_status: 200
+    bytes: 8178
+    content_type: text/csv
+fixture_flow:
+  description: The three-step flow Bitvore documents for loading a sample portfolio and querying it.
+  steps:
+  - step: 1
+    action: Download one of the sample CSV files above.
+  - step: 2
+    action: Create a named portfolio.
+    operation: handleAddPortfolioUsingPOST_1
+    http: POST https://api.bitvore.com/v2/corp/portfolios
+    body: '{ "name": "SP500Portfolio", "idScheme": "bvid" }'
+    returns: the generated portfolio id
+  - step: 3
+    action: Upload the CSV as portfolio items.
+    operation: handleUploadPortfolioItemsUsingPOST_1
+    http: POST https://api.bitvore.com/v2/corp/portfolios/{portfolioId}/itemUploads
+    encoding: multipart/form-data (file=@sp500.csv)
+  - step: 4
+    action: Query news matched against the portfolio.
+    operation: handlePortfolioNewsSearchUsingGET
+    http: GET https://api.bitvore.com/v2/corp/news?portfolioId={id}
+  skill: skills/bitvore-portfolio-monitoring.md
+worked_examples:
+  published: true
+  source: https://developer.bitvore.com/v2/docs/getting-started
+  note: >-
+    The getting-started guide ships copy-pasteable cURL for every step plus full JSON response bodies for corporate
+    news, municipal news and portfolio creation. The sample data in those bodies is fictional (ACME / Wile E.
+    Coyote), not a live record.
+  example_query: https://api.bitvore.com/v2/corp/news?bvId=b00001ab7
+not_published:
+- test API keys published in the docs
+- test-mode key prefix or environment flag
+- time simulation / test clocks
+- fixture-trigger tooling or event simulators
+- a mock server

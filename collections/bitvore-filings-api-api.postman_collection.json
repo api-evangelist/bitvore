@@ -1,0 +1,1414 @@
+{
+  "item": [
+    {
+      "id": "dc01cbda-a856-4dbf-8959-5ac0084f849c",
+      "name": "Filings API",
+      "description": {
+        "content": "Financial Filings, Submissions and Summaries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b91b830-6b3a-4dc5-9b05-aa1e4643e8eb",
+          "name": "Financial Filings Submissions Search",
+          "request": {
+            "name": "Financial Filings Submissions Search",
+            "description": {
+              "content": "Returns the submission with the given key. The key is a unique identifier that can be found in the response to the Get Summaries call. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default).  An example of downloading a gzipped submission is \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/submissions/060000016b9045f018c6e719ba884ef6605ccf6503a4733cf377651c\n ```\n A sample successful response will be a gzipped tar file of the files from the original submission. If the submission was made to the SEC html files (with accompanying images) as well as a master text file will be included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "filings",
+                "financial",
+                "submissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filingType",
+                  "value": "<string>",
+                  "description": "Types of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "filingType",
+                  "value": "<string>",
+                  "description": "Types of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "Organizations of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "Organizations of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeSummary",
+                  "value": "<boolean>",
+                  "description": "Value of true will return a summary file with the filing files"
+                },
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "Keyword or phrase to search for in the filings."
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned. Available options are name, domainName, ticker, city, state, country"
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned. Available options are name, domainName, ticker, city, state, country"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Filing date to start from. Format is yyyy-mm-dd for daily filings or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Filing date to end with. Format is yyyy-mm-dd for daily (inclusive) filings or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of days back filings should be returned for. Should not be used with startDate. Default is 31."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateType",
+                  "value": "submitted",
+                  "description": "Indicates whether dates to query by should be submission dates \"submitted\" or available dates (processing completed) \"available\". Default is submitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 200."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-gzip"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "74bb15bc-b514-4fea-aee6-e8134856c470",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSummary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26e392e5-32fe-4abe-9848-290fc3ade58b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSummary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e05d4f0-ae71-4fba-9de1-689d9b154ad5",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSummary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7878c5ae-37c0-495b-a683-f55480adddb4",
+          "name": "Financial Filing Submission",
+          "request": {
+            "name": "Financial Filing Submission",
+            "description": {
+              "content": "Returns full submission for the financial filing by filing id. This API operation is a file download operation. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default). \n\nThe following are some examples of using the API. \n\n To query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone using gzip compression (using query param for api key): \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/submissions/70858-000148105721004046&key=xyz123\n ```\n \n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "filings",
+                "financial",
+                "submissions",
+                ":filingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filingId",
+                  "description": "(Required) The Id of the filing"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-gzip"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "12f38047-587b-4d9f-9a6e-1a836086214e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c101a0fc-8bb3-4570-ab25-d780fb2f790a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efacc936-be6d-4bea-8ccb-254252cbda67",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "submissions",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-gzip"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22b26f94-51ee-4e30-ab7e-29cb2f0298ef",
+          "name": "Financial Filing Summaries Search",
+          "request": {
+            "name": "Financial Filing Summaries Search",
+            "description": {
+              "content": "Returns summary information for the financial filings that meet the supplied criteria. Financial filings can be selected with the following options:  \n * Filing Type - Type of filing, i.e., 8-K, 10-Q, etc.\n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only filings submitted by that company.\n * Free Form Text Search - A search for words or phrases can be performed against the filings matching any of the previous options listed. \n * Org Field - By default the subject company of a filing is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org object in the summary. Note: Returning additional fields may cause a small increase in latency. \n \n\nThe following are some examples of using the API. \n\nTo query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone (using query param for api key): \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/summaries?bvId=b00001ab7&offset=30&tz=PST&key=xyz123\n ```\n \n\nTo query for all the 10-Q filings submitted within the last 30 days in the PST timezone: \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/summaries?filingType=10-Q&offset=30&tz=PST&key=xyz123\n ```\n \n\nThe filing summaries are essentially a set of metadata about the filings themselves. The metadata fields are: \n * Key - A unique string identifying the submission in the Bitvore system. \n * Filing Type - The type of filing (i.e., 8-K, 10-Q, etc.). \n * Title - Title of the filing as reported by the regulatory agency. \n * Source URL - A URL to the filing provided by the regulatory agency. \n * Text - A text representation of the filing. For SEC filings this will be the text of the primary filing document only. * Org - A structure that holds identifying information about the company the filing is about. By default the structure will have the Bitvore ID and name of the company. Other fields may be included based on the Org Field parameter. \n * Available At - The date at which the filing was made available by the system. \n * Published At - The date the filing was submitted to the regulatory agency. \n \n\nA sample successful response is: \n\n```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c\",\n \t\t\t\"filingId\": \"70858-000148105721004046\",\n \t\t\t\"filingType\": \"8-K\",\n \t\t\t\"files\": [\"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm\", \"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg\"],\n \t\t\t\"title\": \" 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)\",\n \t\t\t\"sourceUrl\": \"https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm\",\n \t\t\t\"org\": { \"BvId\" : \"b0004hvv7\", \"Name\" : \"BlueLinx Holdings Inc\" }, \n \t\t\t\"publishedAt\": \"2019-06-24T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-24T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "filings",
+                "financial",
+                "summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filingType",
+                  "value": "<string>",
+                  "description": "Types of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "filingType",
+                  "value": "<string>",
+                  "description": "Types of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "Organizations of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "Organizations of filings to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "Keyword or phrase to search for in the filings."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Filing date to start from. Format is yyyy-mm-dd for daily filings or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Filing date to end with. Format is yyyy-mm-dd for daily (inclusive) filings or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of days back filings should be returned for. Should not be used with startDate. Default is 31."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateType",
+                  "value": "submitted",
+                  "description": "Indicates whether dates to query by should be submission dates \"submitted\" or available dates (processing completed) \"available\". Default is submitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned. Available options are name, domainName, ticker, city, state, country"
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned. Available options are name, domainName, ticker, city, state, country"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "74b2831d-ac90-4b3c-ac8b-f665557a089c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"returned\": 10,\n  \"total\": 100,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"files\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filingId\": \"string\",\n      \"filingType\": \"10-K\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"org\": {\n        \"bvId\": \"b00001ab7\",\n        \"city\": \"Irvine\",\n        \"country\": \"United States\",\n        \"domainName\": \"acme.com\",\n        \"factSetId\": \"string\",\n        \"isin\": \"US5949181045\",\n        \"listings\": [\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          },\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          }\n        ],\n        \"name\": \"ACME Corp\",\n        \"state\": \"CA\",\n        \"ticker\": \"string\"\n      },\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"sourceUrl\": \"https://www.sec.gov\",\n      \"text\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"files\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filingId\": \"string\",\n      \"filingType\": \"10-K\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"org\": {\n        \"bvId\": \"b00001ab7\",\n        \"city\": \"Irvine\",\n        \"country\": \"United States\",\n        \"domainName\": \"acme.com\",\n        \"factSetId\": \"string\",\n        \"isin\": \"US5949181045\",\n        \"listings\": [\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          },\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          }\n        ],\n        \"name\": \"ACME Corp\",\n        \"state\": \"CA\",\n        \"ticker\": \"string\"\n      },\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"sourceUrl\": \"https://www.sec.gov\",\n      \"text\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e3adf65-6763-4411-a02c-b35cae497348",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d65abee9-4aaf-4b93-a34d-b1fad061cc1b",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filingType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "submitted"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d900296-b5e1-44b0-a4cd-581659d60405",
+          "name": "Financial Filing",
+          "request": {
+            "name": "Financial Filing",
+            "description": {
+              "content": "Returns a specific financial filing by id. \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/70858-000148105721004046&key=xyz123\n ```\n \n\nA sample successful response is: \n\n```js\n \t{\n \t\t\"key\": \"040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c\",\n \t\t\"filingId\": \"70858-000148105721004046\",\n \t\t\"filingType\": \"8-K\",\n \t\t\"files\": [\"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm\", \"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg\"],\n \t\t\"title\": \" 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)\",\n \t\t\"sourceUrl\": \"https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm\",\n \t\t\"org\": { \"BvId\" : \"b0004hvv7\", \"Name\" : \"BlueLinx Holdings Inc\" }, \n \t\t\"publishedAt\": \"2019-06-24T21:41:19.109Z\",\n \t\t\"availableAt\": \"2017-06-24T21:41:21.109Z\",\n \t}\n ```\n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "filings",
+                "financial",
+                ":filingId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filingId",
+                  "description": "(Required) The Id of the filing"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f37bc9e-4755-41f3-b80f-2fdcb011fde0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n  \"files\": [\n    \"string\",\n    \"string\"\n  ],\n  \"filingId\": \"string\",\n  \"filingType\": \"10-K\",\n  \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n  \"org\": {\n    \"bvId\": \"b00001ab7\",\n    \"city\": \"Irvine\",\n    \"country\": \"United States\",\n    \"domainName\": \"acme.com\",\n    \"factSetId\": \"string\",\n    \"isin\": \"US5949181045\",\n    \"listings\": [\n      {\n        \"exchange\": \"NAS\",\n        \"mic\": \"XNAS\",\n        \"region\": \"US\",\n        \"ticker\": \"ACME\"\n      },\n      {\n        \"exchange\": \"NAS\",\n        \"mic\": \"XNAS\",\n        \"region\": \"US\",\n        \"ticker\": \"ACME\"\n      }\n    ],\n    \"name\": \"ACME Corp\",\n    \"state\": \"CA\",\n    \"ticker\": \"string\"\n  },\n  \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n  \"sourceUrl\": \"https://www.sec.gov\",\n  \"text\": \"string\",\n  \"title\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "729e1a35-e6f5-4f58-a8eb-6f114c564cdd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d3150f9-cd95-4871-b8f1-5d818289c090",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "filings",
+                    "financial",
+                    ":filingId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filingId",
+                      "description": "(Required) The Id of the filing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3e15f548-27f7-4b5b-926d-feb2dcd99a67",
+    "name": "Corporate Filings API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### Cellenus Corporate APIs\nThe Cellenus Corporate APIs consists of three main datasets, \"Corporate, Market & Industry\", \"ESG\", and \"Thematic Trending\" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them. Bitvore currently surveils most public companies traded on US and international exchanges, US companies and international companies. Additionally, new companies required by a customer can be requested to be added to our surveillance.\n\nThe Corporate APIs also includes access to economic news for geographic locations in the United States.\n\nA typical record in the dataset is depicted below.\n\n![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/corp-news-article.png)\n\nAccess to the Corporate Datasets using the Corporate APIs requires its own license and API key.  To register for an API Key please visit [here](http://developer.bitvore.com/v2/getting-started?section=obtain-api-key). \n\nThe Cellenus Corporate APIs, include [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Ecomomic News](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Organizations](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API), [Portfolio Integration](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API), [Sentiment Scores](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Sentiment%20Scores%20API), [Financial Filings](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) and [Datasets](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API).\n\nThe [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news based on company ID (Bitvore ID), portfolio, customer ID, industry, location, and certain company characteristics such as number of employees and annual revenue.\n\nThe [Economic News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news relevant to the economy of a location or region.\n\nThe [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API) provides the ability to search for companies by a variety of company characteristics such as name, web domain, ticker, industry, location, number of employees, and annual revenue. Each company is uniquely identified by a Bitvore ID which can be used as input to query the [News API](http://developer.bitvore.com/v2/docs/overview).\n\nThe [Portfolios API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API) provides the ability to either create and maintain portfolios of companies so that news can be queried in a single call from the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) for a given portfolio or to map your own company ID scheme to Bitvore's so you can query the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) with your own IDs.\n\nThe [Filings API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) provides direct access to the financial filings submitted to regulatory agencies such as the SEC on behalf of companies found in the [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API).\n\nThe [Datasets API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API) provides dataset and changeset exporting. This API provides offline data consumption that can be used with external tools.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

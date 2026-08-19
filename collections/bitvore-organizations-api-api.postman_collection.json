@@ -1,0 +1,1895 @@
+{
+  "item": [
+    {
+      "id": "7d1bd826-b3ef-454f-8b68-ce37cda59a46",
+      "name": "Organizations API",
+      "description": {
+        "content": "Organization Details and Search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c807149-af27-475c-8eb7-bb38bdd9def1",
+          "name": "Organization by Alt-Id",
+          "request": {
+            "name": "Organization by Alt-Id",
+            "description": {
+              "content": "Returns detailed information about the organization with the given Bitvore ID or Alternate ID. The following are the supported ID Scheme parameters: \n\n * BVID - Bitvore ID (default) \n * CUSIP - Requires license: 'CUSIP' \n * FIGI \n * ISIN - Requires license: 'ISIN' \n * SEDOL - Requires license: 'SEDOL' \n \n\n Example Request: \n\n \n\n ```js\n GET https://api.bitvore.com/v2/corp/organizations/byid/BBG001S5TD05?orgIdScheme=FIGI\n ```\n \n\n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "organizations",
+                "byid",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idScheme",
+                  "value": "BVID",
+                  "description": "Organization Id Scheme"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Organization Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33a8b323-29b8-4cf8-a509-f5a5bce2ece1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "byid",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idScheme",
+                      "value": "BVID"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Organization Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"bvId\": \"b00001ab7\",\n  \"channels\": [\n    {\n      \"channel\": \"FACEBOOK\",\n      \"location\": \"https://www.facebook.com/ACME\"\n    },\n    {\n      \"channel\": \"LINKEDIN\",\n      \"location\": \"https://www.facebook.com/ACME\"\n    }\n  ],\n  \"city\": \"Irvine\",\n  \"country\": \"United States\",\n  \"domainName\": \"acme.com\",\n  \"factSetId\": \"string\",\n  \"isin\": \"US5949181045\",\n  \"listings\": [\n    {\n      \"exchange\": \"NAS\",\n      \"mic\": \"XNAS\",\n      \"region\": \"US\",\n      \"ticker\": \"ACME\"\n    },\n    {\n      \"exchange\": \"NAS\",\n      \"mic\": \"XNAS\",\n      \"region\": \"US\",\n      \"ticker\": \"ACME\"\n    }\n  ],\n  \"naicsIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"name\": \"ACME Corp\",\n  \"sicIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"state\": \"CA\",\n  \"ticker\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c83b09e7-bba6-4ebf-a93e-c5640df4ad68",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "byid",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idScheme",
+                      "value": "BVID"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Organization Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3234cb6-328e-4570-8fb6-d25c9ac6a639",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "byid",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idScheme",
+                      "value": "BVID"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Organization Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec290e2d-098b-4624-9885-5b284c23b7f6",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "byid",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idScheme",
+                      "value": "BVID"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Organization Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50d90c37-9fca-4e8b-9963-9bf3dd91330f",
+          "name": "Organization Search",
+          "request": {
+            "name": "Organization Search",
+            "description": {
+              "content": "A lookup takes a single string as input to matching entities. The following are the matching rules used. The search results are ordered according to the rules. \n\n 1. Exact match on name (case insensitive)\n 2. Exact match on ticker\n 3. Exact match on domain name\n 4. Exact match on alias (case insensitive)\n 5. Starts with on name (case insensitive)\n 6. Starts with on ticker\n 7. Starts with on domain name\n 8. Starts with on alias (case insensitive)\n \n\n Example Request: \n\n \n\n ```js\n GET https://api.bitvore.com/v2/corp/organizations/search?q=acme\n ```\n \n\n \n\n 0 or more companies may be returned that match the supplied query criteria. Only summary information for each matching organization is supplied which includes the following fields: \n\n * ID \n * Name \n * Domain Name \n * Ticker \n * State \n * Country \n * Parent \n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "organizations",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Lookup option. Value is used to match multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c47f6eaf-c950-4a27-a69f-18885e6ed018",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"city\": \"Irvine\",\n      \"country\": \"United States\",\n      \"domainName\": \"acme.com\",\n      \"factSetId\": \"string\",\n      \"isin\": \"US5949181045\",\n      \"listings\": [\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"name\": \"ACME Corp\",\n      \"state\": \"CA\",\n      \"ticker\": \"string\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"city\": \"Irvine\",\n      \"country\": \"United States\",\n      \"domainName\": \"acme.com\",\n      \"factSetId\": \"string\",\n      \"isin\": \"US5949181045\",\n      \"listings\": [\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"name\": \"ACME Corp\",\n      \"state\": \"CA\",\n      \"ticker\": \"string\"\n    }\n  ],\n  \"returned\": 10,\n  \"success\": true,\n  \"total\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66056410-8556-4626-a532-6e926efc73af",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6395beb4-e404-4aa8-89ac-5b690a1ff406",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12bafdf5-813a-4b7a-8142-6c8347f1577a",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dab138ca-52dc-4d19-ab7f-d1edda6f48b6",
+          "name": "Organization Matching",
+          "request": {
+            "name": "Organization Matching",
+            "description": {
+              "content": "Attempts to find companies matching input specifications made up of a list of property values. Multiple companies can be matched in a single call. For each organization to match a list of properties and values known by the client (the input specification) are passed in. If possible the system will return a single matching organization for each input specification. If more than one organization matches an input specification and there is not one organization that is more qualified than the others all the candidates will be returned. The following are the organization properties that can be used in input specifications. More than one value can be supplied for each indicating a match of any of the values will be acceptable. \n * Name \n * DomainName \n * Ticker \n * CUSIP - Requires license: 'CUSIP' \n * FIGI \n * ISIN - Requires license: 'ISIN' \n * SEDOL - Requires license: 'SEDOL' \n * NAICSCode \n * SICCode \n * City \n * StateCode \n * Country \n \n\n Tickers formats: \n * Nonqualified - Basic ticker symbol (e.g. T, XOM) \n * Region Qualified - &lt;region&gt;:&lt;ticker&gt; (e.g. US:T, US:XOM) \n * Exchange Qualified - &lt;exchange&gt;:&lt;ticker&gt; (e.g. NYS:T, NAS:XOM) \n \n\n In the following example we'll try to match two companies. In this case they will actually be companies with the same name but by using different properties in the specifications we can see how the system matches differently. The first specification will include the organization name and the state it's in. The second specification will include the organization name and its domain name. \n\n \n\n ```js\n POST https://api.bitvore.com/v2/corp/organizations/match \n Content-Type: application/json \n Accept: application/json \n X-BV-APIKEY: xyz123... \n\n [ \n \t{ \n \t\t\"Name\": [\"Bank of Commerce\"], \n \t\t\"State\": [\"Oklahoma\"] \n \t}, \n \t{ \n \t\t\"Name\": [\"Bank of Commerce\"], \n \t\t\"DomainName\": [\"bocokonline.com\"] \n \t} \n ] \n ```\n \n\n \n\n The first set of candidates is returned for the name/state combination. There are three companies with the input name and state code. Since that is the only input the system could not narrow the candidates down any further. \n\n The second set of candidates is returned for the same name but with a domain name instead of a state code. This input specification matched only one organization in the system which is returned. \n\n The properties that were matched for each candidate are returned in the \"hits\" field. These will match the input specification properties. However, when matching names the system will attempt to match the input name against the organization's names in the Knowledge Graph as well as any known aliases for companies. If the input name matched an alias instead of a organization name the \"Alias\" property will be returned in \"hits\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "organizations",
+                "match"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"city\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"country\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cusip\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"domainName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"figi\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"isin\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"naicsCode\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"name\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sedol\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sicCode\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"state\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ticker\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"city\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"country\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"cusip\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"domainName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"figi\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"isin\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"naicsCode\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"name\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sedol\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sicCode\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"state\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ticker\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bc1a64f2-1256-4e16-b9ea-0fee0a7165b2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  },\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"candidates\": [\n    {\n      \"hits\": [\n        \"Name\",\n        \"DomainName\"\n      ],\n      \"org\": {\n        \"bvId\": \"b00001ab7\",\n        \"city\": \"Irvine\",\n        \"country\": \"United States\",\n        \"domainName\": \"acme.com\",\n        \"factSetId\": \"string\",\n        \"isin\": \"US5949181045\",\n        \"listings\": [\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          },\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          }\n        ],\n        \"name\": \"ACME Corp\",\n        \"state\": \"CA\",\n        \"ticker\": \"string\"\n      }\n    },\n    {\n      \"hits\": [\n        \"Name\",\n        \"DomainName\"\n      ],\n      \"org\": {\n        \"bvId\": \"b00001ab7\",\n        \"city\": \"Irvine\",\n        \"country\": \"United States\",\n        \"domainName\": \"acme.com\",\n        \"factSetId\": \"string\",\n        \"isin\": \"US5949181045\",\n        \"listings\": [\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          },\n          {\n            \"exchange\": \"NAS\",\n            \"mic\": \"XNAS\",\n            \"region\": \"US\",\n            \"ticker\": \"ACME\"\n          }\n        ],\n        \"name\": \"ACME Corp\",\n        \"state\": \"CA\",\n        \"ticker\": \"string\"\n      }\n    }\n  ],\n  \"spec\": {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ead83b9b-204d-4f9b-8860-829754084cad",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  },\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93cd1aff-165d-4f1d-a0bd-5ea7835ad4dd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  },\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "159ea93b-3a2c-43b5-9078-a5d7b3e665e1",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  },\n  {\n    \"city\": [\n      \"Mountain View\"\n    ],\n    \"country\": [\n      \"United States\"\n    ],\n    \"cusip\": [\n      \"ABCD12345\"\n    ],\n    \"domainName\": [\n      \"abc.xyz\"\n    ],\n    \"figi\": [\n      \"BBG009S39JY5\",\n      \"b00001afc\"\n    ],\n    \"isin\": [\n      \"US02079K3059\"\n    ],\n    \"naicsCode\": [\n      \"518210\"\n    ],\n    \"name\": [\n      \"Alphabet\"\n    ],\n    \"sedol\": [\n      \"USABCD12345\"\n    ],\n    \"sicCode\": [\n      \"7374\"\n    ],\n    \"state\": [\n      \"CA\"\n    ],\n    \"ticker\": [\n      \"GOOGL\",\n      \"APPL\",\n      \"F\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79a6b8eb-787b-485d-bd23-224cf97d74cf",
+          "name": "Organization Search",
+          "request": {
+            "name": "Organization Search",
+            "description": {
+              "content": "A search query takes one or more search parameters. A parameter has a name and one or more values. The search will match the organization properties and relationships with the parameters and return only those that have an EXACT match on all input parameters. The following are the supported search parameters: \n\n * name - One or more names to search for \n * ticker - One or more tickers to search for \n * domainName - One or more domain names to search for. \n * location - One or more locations companies must have their headquarters in. Locations are in the format of city/state code/country. If city or state is unspecified the appropriate / delimiters must still be included, i.e., /California/United States.  Must not be used with fips or zip. \n * fips - One or more FIPS codes identifying counties or CBSAs (metropolitan/micropolitan statistical areas) companies must have their headquarters in. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). Must not be used with location or zip. \n * zip - One or more zip codes identifying ZIP Code Tabulation Areas (ZCTAs) companies must have their headquarters in.  Must not be used with location or fips. \n * naics - One or more [NAICS](https://www.naics.com/search/) codes identifying industries the companies must operate in. \n * sic - One or more [SIC](https://www.osha.gov/pls/imis/sicsearch.html) codes identifying industries the companies must operate in. \n * revRange - Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 500, 1000, 10000. The upper bound can be omitted to report over 10B. \n * empRange - Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 100, 250, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 10000. \n \n\n Example Request: \n\n \n\n ```js\n POST https://api.bitvore.com/v2/corp/organizations?domainName=acme.com\n ```\n \n\n \n\n 0 or more companies may be returned that match the supplied query criteria. Only summary information for each matching organization is supplied which includes the following fields: \n\n * ID \n * Name \n * Domain Name \n * Ticker \n * State \n * Country \n * Parent \n \n\n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "organizations",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "One or more names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "One or more names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "One or more tickers to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "One or more tickers to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "domainName",
+                  "value": "<string>",
+                  "description": "One or more domain names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "domainName",
+                  "value": "<string>",
+                  "description": "One or more domain names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "One or more locations organization must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "One or more locations organization must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "fips",
+                  "value": "<string>",
+                  "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "fips",
+                  "value": "<string>",
+                  "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "One or more NAICS codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "naicsCode",
+                  "value": "<string>",
+                  "description": "One or more NAICS codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "sicCode",
+                  "value": "<string>",
+                  "description": "One or more SIC codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "sicCode",
+                  "value": "<string>",
+                  "description": "One or more SIC codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "revRange",
+                  "value": "<string>",
+                  "description": "Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be ommited to report over 1B."
+                },
+                {
+                  "disabled": false,
+                  "key": "empRange",
+                  "value": "<string>",
+                  "description": "Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be ommited to report over 1B."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f75d43e4-ca36-4b23-98fc-5d3d8a1798c6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"city\": \"Irvine\",\n      \"country\": \"United States\",\n      \"domainName\": \"acme.com\",\n      \"factSetId\": \"string\",\n      \"isin\": \"US5949181045\",\n      \"listings\": [\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"name\": \"ACME Corp\",\n      \"state\": \"CA\",\n      \"ticker\": \"string\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"city\": \"Irvine\",\n      \"country\": \"United States\",\n      \"domainName\": \"acme.com\",\n      \"factSetId\": \"string\",\n      \"isin\": \"US5949181045\",\n      \"listings\": [\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"exchange\": \"NAS\",\n          \"mic\": \"XNAS\",\n          \"region\": \"US\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"name\": \"ACME Corp\",\n      \"state\": \"CA\",\n      \"ticker\": \"string\"\n    }\n  ],\n  \"returned\": 10,\n  \"success\": true,\n  \"total\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4089f44f-1d60-4381-8499-f549b6faf6a6",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caf45704-51a1-4e98-9dd2-106e6fcbc8fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a82742f-1a03-4705-90f5-65c8fb6d3359",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naicsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sicCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5802453e-88f7-47e1-9e02-38540d2869ac",
+          "name": "Organization Details",
+          "request": {
+            "name": "Organization Details",
+            "description": {
+              "content": "Returns detailed information about the organization with the given Bitvore ID. The following are the supported ID Scheme parameters: \n\n * BVID - Bitvore ID\n \n\n Example Request: \n\n \n\n ```js\n GET https://api.bitvore.com/v2/corp/organizations/b00001axt\n ```\n \n\n ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "organizations",
+                ":bvId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bvId",
+                  "description": "(Required) Organization BvId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9757a535-ff9d-4820-86dc-ace83b997f0a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    ":bvId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bvId",
+                      "description": "(Required) Organization BvId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"bvId\": \"b00001ab7\",\n  \"channels\": [\n    {\n      \"channel\": \"LINKEDIN\",\n      \"location\": \"https://www.facebook.com/ACME\"\n    },\n    {\n      \"channel\": \"FACEBOOK\",\n      \"location\": \"https://www.facebook.com/ACME\"\n    }\n  ],\n  \"city\": \"Irvine\",\n  \"country\": \"United States\",\n  \"domainName\": \"acme.com\",\n  \"factSetId\": \"string\",\n  \"isin\": \"US5949181045\",\n  \"listings\": [\n    {\n      \"exchange\": \"NAS\",\n      \"mic\": \"XNAS\",\n      \"region\": \"US\",\n      \"ticker\": \"ACME\"\n    },\n    {\n      \"exchange\": \"NAS\",\n      \"mic\": \"XNAS\",\n      \"region\": \"US\",\n      \"ticker\": \"ACME\"\n    }\n  ],\n  \"naicsIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"name\": \"ACME Corp\",\n  \"sicIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"state\": \"CA\",\n  \"ticker\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "587c7274-817e-4add-9de8-56c68bd6b617",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    ":bvId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bvId",
+                      "description": "(Required) Organization BvId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d167a03a-21e8-4753-b8ef-bd8c89759036",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    ":bvId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bvId",
+                      "description": "(Required) Organization BvId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c556921-446d-4f3b-8ad8-fdeb55cf0b13",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "organizations",
+                    ":bvId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bvId",
+                      "description": "(Required) Organization BvId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "03fb9ae8-ee98-4793-a4b8-0f508bcc65cb",
+    "name": "Corporate Organizations API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### Cellenus Corporate APIs\nThe Cellenus Corporate APIs consists of three main datasets, \"Corporate, Market & Industry\", \"ESG\", and \"Thematic Trending\" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them. Bitvore currently surveils most public companies traded on US and international exchanges, US companies and international companies. Additionally, new companies required by a customer can be requested to be added to our surveillance.\n\nThe Corporate APIs also includes access to economic news for geographic locations in the United States.\n\nA typical record in the dataset is depicted below.\n\n![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/corp-news-article.png)\n\nAccess to the Corporate Datasets using the Corporate APIs requires its own license and API key.  To register for an API Key please visit [here](http://developer.bitvore.com/v2/getting-started?section=obtain-api-key). \n\nThe Cellenus Corporate APIs, include [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Ecomomic News](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Organizations](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API), [Portfolio Integration](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API), [Sentiment Scores](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Sentiment%20Scores%20API), [Financial Filings](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) and [Datasets](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API).\n\nThe [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news based on company ID (Bitvore ID), portfolio, customer ID, industry, location, and certain company characteristics such as number of employees and annual revenue.\n\nThe [Economic News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news relevant to the economy of a location or region.\n\nThe [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API) provides the ability to search for companies by a variety of company characteristics such as name, web domain, ticker, industry, location, number of employees, and annual revenue. Each company is uniquely identified by a Bitvore ID which can be used as input to query the [News API](http://developer.bitvore.com/v2/docs/overview).\n\nThe [Portfolios API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API) provides the ability to either create and maintain portfolios of companies so that news can be queried in a single call from the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) for a given portfolio or to map your own company ID scheme to Bitvore's so you can query the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) with your own IDs.\n\nThe [Filings API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) provides direct access to the financial filings submitted to regulatory agencies such as the SEC on behalf of companies found in the [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API).\n\nThe [Datasets API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API) provides dataset and changeset exporting. This API provides offline data consumption that can be used with external tools.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

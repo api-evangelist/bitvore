@@ -1,0 +1,314 @@
+{
+  "item": [
+    {
+      "id": "5ea19226-2846-434d-adf9-30646fac2e28",
+      "name": "Sentiment Scores API",
+      "description": {
+        "content": "Organization Scores",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77f5c83e-d594-4233-84fa-282c60e0fb0d",
+          "name": "Organization Sentiment Score",
+          "request": {
+            "name": "Organization Sentiment Score",
+            "description": {
+              "content": "### Organization Sentiment Scores \n\n Returns the daily sentiment scores of a given type for the specified companies over a period of time. The scores of up to 10 companies identified by their Bitvore ID (BvID) can be returned in a single call. The time period requested can be up to one year. The call options are: \n * BvID - Up to 10 Bitvore ID's of companies to return scores for. \n * Score - Type of score to return. Options are growth, risk, and sentiment (overall sentiment for a company). \n * Start - First day of the time series to return. In the format of yyyy-MM-dd, 2019-10-01 for example. \n * End - Last day of the time series to return. In the format of yyyy-MM-dd, 2019-10-09 for example. \n \n\n The following is an example of using the API to return the growth scores for IBM, BvID b00001ab7, between October 1st and October 7th. \n\n ```js\n GET https://api.bitvore.com/v2/corp/sentimentscores?bvIds=b00001ab7&scoreType=growth&startDate=2019-10-01&endDate=2019-10-07&key=xyz123\n ```\n \n\n The API response will list the timeline of the returned data series as a range. It will then list the scores per day in that range separately for each company requested. The list of scores for a company will be identified by the company's BvID. An example of a response is as follows: \n\n ```js\n {\n \t\"success\": true,\n \t\"response\": {\n \t\t{\n \t\t\t\"timeline\": {\n \t\t\t\t\"start\": \"2019-10-01\",\n \t\t\t\t\"end\": \"2019-10-07\"\n \t\t\t},\n \t\t\t\"series\": [\n \t\t\t\t{\n \t\t\t\t\t\"bvId\": \"b00001ab7\",\n \t\t\t\t\t\"scores\": [\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.15462846,\n \t\t\t\t\t\t0.15462846,\n \t\t\t\t\t\t0.11870702,\n \t\t\t\t\t\t0.11870702\n \t\t\t\t\t]\n \t\t\t\t}\n \t\t\t]\n \t\t}\n \t}\n }\n ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "sentimentscores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bvIds",
+                  "value": "<string>",
+                  "description": "(Required) Bitvore Ids (up to 10) of organizations to get sentiment scores for."
+                },
+                {
+                  "disabled": false,
+                  "key": "bvIds",
+                  "value": "<string>",
+                  "description": "(Required) Bitvore Ids (up to 10) of organizations to get sentiment scores for."
+                },
+                {
+                  "disabled": false,
+                  "key": "scoreType",
+                  "value": "<string>",
+                  "description": "(Required) Type of scores to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "(Required) Day of the first score to return. Format is 'yyyy-MM-dd' according to America/New_York timezone."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "(Required) Day of the last score to return. Format is 'yyyy-MM-dd' according to America/New_York timezone."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2323e67-ae53-44b9-9798-1acaa714925c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "sentimentscores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scoreType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"bvId\": \"b00001ab7\",\n    \"series\": [\n      {\n        \"bvId\": \"b00001ab7\",\n        \"scores\": [\n          3263.3943857122117,\n          6539.31624775591\n        ]\n      },\n      {\n        \"bvId\": \"b00001ab7\",\n        \"scores\": [\n          1296.471578384244,\n          1929.8862384427662\n        ]\n      }\n    ],\n    \"timeline\": {\n      \"end\": \"2017-07-28\",\n      \"start\": \"2017-06-29\"\n    }\n  },\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02501755-bb8a-4ccf-af83-cee23db30c31",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "sentimentscores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scoreType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"access_denied\",\n  \"reasonSupport\": \"You are not authorized for this resource.\",\n  \"response\": \"UNAUTHORIZED\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdccd6a0-7a73-49ea-9d1a-46c6f033edbe",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "sentimentscores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scoreType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"internal_error\",\n  \"reasonSupport\": \"An internal error occured.\",\n  \"response\": \"INTERNAL_SERVER_ERROR\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3c06436d-b4d2-4bfa-b5dc-efb470b2cb47",
+    "name": "Corporate Sentiment Scores API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### Cellenus Corporate APIs\nThe Cellenus Corporate APIs consists of three main datasets, \"Corporate, Market & Industry\", \"ESG\", and \"Thematic Trending\" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them. Bitvore currently surveils most public companies traded on US and international exchanges, US companies and international companies. Additionally, new companies required by a customer can be requested to be added to our surveillance.\n\nThe Corporate APIs also includes access to economic news for geographic locations in the United States.\n\nA typical record in the dataset is depicted below.\n\n![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/corp-news-article.png)\n\nAccess to the Corporate Datasets using the Corporate APIs requires its own license and API key.  To register for an API Key please visit [here](http://developer.bitvore.com/v2/getting-started?section=obtain-api-key). \n\nThe Cellenus Corporate APIs, include [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Ecomomic News](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Organizations](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API), [Portfolio Integration](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API), [Sentiment Scores](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Sentiment%20Scores%20API), [Financial Filings](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) and [Datasets](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API).\n\nThe [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news based on company ID (Bitvore ID), portfolio, customer ID, industry, location, and certain company characteristics such as number of employees and annual revenue.\n\nThe [Economic News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news relevant to the economy of a location or region.\n\nThe [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API) provides the ability to search for companies by a variety of company characteristics such as name, web domain, ticker, industry, location, number of employees, and annual revenue. Each company is uniquely identified by a Bitvore ID which can be used as input to query the [News API](http://developer.bitvore.com/v2/docs/overview).\n\nThe [Portfolios API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API) provides the ability to either create and maintain portfolios of companies so that news can be queried in a single call from the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) for a given portfolio or to map your own company ID scheme to Bitvore's so you can query the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) with your own IDs.\n\nThe [Filings API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) provides direct access to the financial filings submitted to regulatory agencies such as the SEC on behalf of companies found in the [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API).\n\nThe [Datasets API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API) provides dataset and changeset exporting. This API provides offline data consumption that can be used with external tools.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,3413 @@
+{
+  "item": [
+    {
+      "id": "13cc9066-59ef-4334-a95b-b5fcfcb2ce1f",
+      "name": "Portfolio",
+      "description": {
+        "content": "Portfolio API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "369e4529-41b5-4620-aa8e-e28a0585e9f2",
+          "name": "Return User's Portfolios",
+          "request": {
+            "name": "Return User's Portfolios",
+            "description": {
+              "content": "Returns the user's portfolios",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fec308c7-4935-4185-9ab1-fd07a9565c55",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61cedaa4-6e4e-4fd4-814f-46800bae30ab",
+              "name": "Unauthorized to view portfolios",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "146fdb19-0457-4bd3-b5a3-299e04307593",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6d3a468-1694-417c-9005-b2a4fbf2f489",
+          "name": "Add Portfolio",
+          "request": {
+            "name": "Add Portfolio",
+            "description": {
+              "content": "Adds a portfolio. The added porfolio is returned",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"idScheme\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6023e703-4c1c-4300-ac5a-87a0d2884ddb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fca6000-1315-428e-8a15-0e8cd8884788",
+              "name": "Unauthorized to add a portfolio",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b40abb3-7994-4588-aaa7-4713a2a5381f",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6032d3ec-e1b8-46af-9bf7-e48e4e64ed69",
+          "name": "Return Portfolio",
+          "request": {
+            "name": "Return Portfolio",
+            "description": {
+              "content": "Returns the porfolio with the given Id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f97bf282-0749-42ac-9170-4aef1dde93e5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "464105b1-c4e1-467d-97ef-b06bc940f548",
+              "name": "Unauthorized to view the portfolio",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54dab3b1-5c5a-4d2c-9040-48e31fb16233",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "450fe952-f29d-46ef-b3b4-452214618c43",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "775b11c5-e9cc-4733-b6b9-f275c2dcf3ce",
+          "name": "Change Portfolio",
+          "request": {
+            "name": "Change Portfolio",
+            "description": {
+              "content": "Changes the portfolio with the given Id, the result of the changes are returned as a portfolio",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"idScheme\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5205cf65-aed5-4ee5-a671-c73a9b9c679b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b91ebe9c-9a96-4151-aa51-73271c2b8334",
+              "name": "Unauthorized to change the portfolio",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27235537-397e-4fea-9e4d-847b9ea6fa57",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76e29266-53a6-4744-bb34-c5663a597a7b",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"My Portfolio\",\n  \"idScheme\": \"cusip\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f0fdf44-ea0e-4cbe-9146-c9adcc0219a0",
+          "name": "Delete Portfolio",
+          "request": {
+            "name": "Delete Portfolio",
+            "description": {
+              "content": "Deletes the portfolio with the given Id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e6127bb3-7aa4-437b-9b88-315a1a675b06",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"My Portfolio\",\n      \"idScheme\": \"cusip\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29a1e771-e650-4a64-b144-6c07e2057fd9",
+              "name": "Unauthorized to delete the portfolio",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e2c5096-206b-4290-b341-6fb2e3e82662",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "813406e0-4ce9-4b5c-9a4b-441dc3b4e212",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b9e1171-f9e2-48b1-acae-264b5d278a8d",
+          "name": "Upload Portfolio Items",
+          "request": {
+            "name": "Upload Portfolio Items",
+            "description": {
+              "content": "Uploads a CSV file of portfolio items. The Bitvore Id of each item must be present in a column labeled BvID on a header line.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "itemUploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Portolio CSV file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d07c73f8-7cb7-4a1f-9727-4c120e6b8abe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "itemUploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Portolio CSV file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff5556f4-3168-4a15-89ca-742664b5f7f9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "itemUploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Portolio CSV file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f27557b-f7df-4963-aee1-4c1e5e88f888",
+              "name": "Unauthorized to add portfolio items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "itemUploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Portolio CSV file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ee3189e-ea3c-4134-9359-b51c0d061e1e",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "itemUploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Portolio CSV file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e1eb0ed-5698-4831-b6de-6aa6e4595b38",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "itemUploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Portolio CSV file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b4d5dff-ba9b-417d-9a6f-1054e3d5439f",
+          "name": "Return Portfolio Items",
+          "request": {
+            "name": "Return Portfolio Items",
+            "description": {
+              "content": "Returns the items in the portfolio with the given Id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f5dcb529-4ef3-4c1c-9675-043b46821ac7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3545fc-1072-4043-b24d-9eda4c24b38b",
+              "name": "Unauthorized to view the portfolio's items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86670997-0e50-4c85-a835-b370a2248be7",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "802ca8c9-3fc3-4644-be71-608099c6fb42",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cee22399-0389-467b-add5-8c37311d18dd",
+          "name": "Add Portfolio Item",
+          "request": {
+            "name": "Add Portfolio Item",
+            "description": {
+              "content": "Adds items to the portfolio with the given Id, the added items are returned",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22b01c82-10fb-49d0-899e-a87fefce82cc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71de224a-9075-47be-a892-5638af5012ce",
+              "name": "Unauthorized to add portfolio items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b928c571-92ff-408f-8245-6e9e33a766fe",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0e02fff-f683-4df5-90ec-a2d3820b329d",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecbe655f-c7ee-4578-8028-ca75758757ed",
+          "name": "Replace Portfolio Items",
+          "request": {
+            "name": "Replace Portfolio Items",
+            "description": {
+              "content": "Replaces the items in the portfolio with the given Id, the added items are returned",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "866f7614-5f85-43f4-a418-f1f2f5cca7fc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c185842-c5c7-416b-8be0-52671daa5e30",
+              "name": "Unauthorized to change porftolio items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6adadc1-f063-455c-bbcc-eb75df8f04c5",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8638f0c8-2a33-4d23-9ea2-a03ba26a7920",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  },\n  {\n    \"id\": \"008000AA7\",\n    \"name\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11195578-3ffb-4793-81cd-8ede243c5c16",
+          "name": "Delete Portfolio Items",
+          "request": {
+            "name": "Delete Portfolio Items",
+            "description": {
+              "content": "Deletes the specified items in the portfolio with the given Id. If itemId is excluded, all items will be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Id of item(s) to remove"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Id of item(s) to remove"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5bfaf04e-ee2e-41a9-8c0a-0a6fc8bd1d99",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dc3a4d8-3610-4ab8-9f15-ac22f01dc85e",
+              "name": "Unauthorized to delete portfolio items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c577dc5e-ddd7-4e73-96a8-0da4addb58c1",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66d2375d-fced-4832-b637-84fa506f0493",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7432ad41-10d2-4eb2-b6ed-a75afa7154a8",
+          "name": "Delete Single Portfolio Item",
+          "request": {
+            "name": "Delete Single Portfolio Item",
+            "description": {
+              "content": "Deletes the specified item in the portfolio with the given Id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "portfolios",
+                ":portfolioId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) Id of item to remove"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf5f565b-ac58-4697-88db-98b9ea0182f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Id of item to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    },\n    {\n      \"id\": \"008000AA7\",\n      \"name\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea29eb71-fd36-497e-b73a-06d79874a9a2",
+              "name": "Unauthorized to delete portfolio items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Id of item to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a2e38f9-4d4e-4dfa-94b3-e995ffd473e8",
+              "name": "Portfolio with given Id not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Id of item to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9488b8bb-2e8e-4d9a-bf4f-e453b440c260",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "portfolios",
+                    ":portfolioId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) Id of item to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d671149-41e5-45d9-b161-14de0a90bab0",
+          "name": "Return API Version",
+          "request": {
+            "name": "Return API Version",
+            "description": {
+              "content": "Deprecated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolioapi",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f6826b1d-4604-48ae-9ee3-1f1c419539a4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3dc9cd-375d-4ff5-af97-3d4d1d257640",
+              "name": "Unauthorized to get version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d843cd36-0165-4fbb-801b-93b47732efb5",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolioapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3becb2d-6c5f-4632-8790-2f60beeb8ae3",
+    "name": "Bitvore Legacy Portfolio API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n ",
+      "type": "text/plain"
+    }
+  }
+}

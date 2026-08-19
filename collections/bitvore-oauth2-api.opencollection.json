@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Security O Auth2 API"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Access Token Generation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/oauth/accesstoken",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "username",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                },
+                {
+                  "name": "refreshToken",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Issues an access token based on the supplied grant. The server supports both the Resource Owner and Client Credentials grant types, however specific Bitvore API's may only support one. For example only the Client Credentials grant type is supported for the Bitvore News APIs. Please consult the documentation of the API you want to use for its requirements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

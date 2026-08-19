@@ -42,5 +42,25 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bitvore is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Bitvore Corp. runs **Cellenus**, an AI/NLP platform that reads unstructured public text — global news, press
+releases, SEC filings, earnings-call transcripts — and turns it into structured material business events, signals,
+trended sentiment, and growth/risk/ESG scores. It is sold as two separately licensed datasets, Cellenus Corporate
+Intelligence and Cellenus Municipal, reachable by REST API, bulk CSV dataset/changeset exports, and a
+Microsoft-certified Power Platform connector.
+
+BondWave LLC acquired Bitvore's fixed-income / data-analytics unit in November 2024. `bitvore.com` now 301s to
+`bondwave.com/muni-news/`, while `developer.bitvore.com` and `api.bitvore.com` remain live and serving the Cellenus
+API surface.
+
+**What this profile holds.** 16 refined OpenAPIs (121 operations, harvested from the six Swagger 2.0 groups Bitvore
+serves at `api.bitvore.com/v2/api-docs`), the published Signal Glossary (19 signals / 156 sub-signals) and dataset
+export schema (16 tables / 71 columns), authentication, OAuth scopes, conventions, error catalog, conformance,
+lifecycle, rate limits, plans, sandbox, data model, agentic-access, a candidate MCP tool surface with its crosswalk
+back to real operationIds, five generated Agent Skills, and Postman/OpenCollection exports.
+
+**What Bitvore does not publish** is recorded just as deliberately, in `apis.yml` under `x-not-published` — no
+`/.well-known/` documents on any of six hosts, no agent card, no MCP server, no GraphQL, no webhook or AsyncAPI
+surface, no SDKs, no status page, no security.txt or disclosure program, no trust center, and no pricing. Access is
+sales-gated: a free evaluation key by email, a licensed key from sales.
+
+Sourced via the API Evangelist harvest backlog (secondary-market): https://www.nasdaqprivatemarket.com/

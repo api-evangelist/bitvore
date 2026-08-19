@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corporate Organizations API API",
+    "version": "2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Organization by Alt-Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/organizations/byid/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Organization Id"
+              },
+              {
+                "name": "idScheme",
+                "value": "",
+                "type": "query",
+                "description": "Organization Id Scheme"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about the organization with the given Bitvore ID or Alternate ID. The following are the supported ID Scheme parameters: \n\n * BVID - Bitvore ID (default) \n * CUSIP - Requires license: 'CUSIP' \n * FIGI \n * ISIN - Requires license: 'ISIN' \n * SEDOL - Requires license: 'SEDOL' \n \n\n Example Request: \n\n \n\n ```js\n GET https://api.bitvore.com/v2/corp/organizations/byid/BBG001S5TD05?orgIdScheme=FIGI\n ```\n \n\n "
+        },
+        {
+          "info": {
+            "name": "Organization Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/organizations/lookup",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Lookup option. Value is used to match multiple fields."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "A lookup takes a single string as input to matching entities. The following are the matching rules used. The search results are ordered according to the rules. \n\n 1. Exact match on name (case insensitive)\n 2. Exact match on ticker\n 3. Exact match on domain name\n 4. Exact match on alias (case insensitive)\n 5. Starts with on name (case insensitive)\n 6. Starts with on ticker\n 7. Starts with on domain name\n 8. Starts with on alias (case insensitive)\n \n\n Example Request: \n\n \n\n ```js\n GET https://api."
+        },
+        {
+          "info": {
+            "name": "Organization Matching",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/v2/corp/organizations/match",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attempts to find companies matching input specifications made up of a list of property values. Multiple companies can be matched in a single call. For each organization to match a list of properties and values known by the client (the input specification) are passed in. If possible the system will return a single matching organization for each input specification. If more than one organization matches an input specification and there is not one organization that is more qualified than the others"
+        },
+        {
+          "info": {
+            "name": "Organization Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/v2/corp/organizations/search",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "One or more names to search for."
+              },
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "query",
+                "description": "One or more tickers to search for."
+              },
+              {
+                "name": "domainName",
+                "value": "",
+                "type": "query",
+                "description": "One or more domain names to search for."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "One or more locations organization must have their headquarters in."
+              },
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+              },
+              {
+                "name": "naicsCode",
+                "value": "",
+                "type": "query",
+                "description": "One or more NAICS codes identifying industries the companies must operate in."
+              },
+              {
+                "name": "sicCode",
+                "value": "",
+                "type": "query",
+                "description": "One or more SIC codes identifying industries the companies must operate in."
+              },
+              {
+                "name": "revRange",
+                "value": "",
+                "type": "query",
+                "description": "Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be ommited to report over 1B."
+              },
+              {
+                "name": "empRange",
+                "value": "",
+                "type": "query",
+                "description": "Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be ommited to report over 1B."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "A search query takes one or more search parameters. A parameter has a name and one or more values. The search will match the organization properties and relationships with the parameters and return only those that have an EXACT match on all input parameters. The following are the supported search parameters: \n\n * name - One or more names to search for \n * ticker - One or more tickers to search for \n * domainName - One or more domain names to search for. \n * location - One or more locations compa"
+        },
+        {
+          "info": {
+            "name": "Organization Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/organizations/:bvId",
+            "params": [
+              {
+                "name": "bvId",
+                "value": "",
+                "type": "path",
+                "description": "Organization BvId"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about the organization with the given Bitvore ID. The following are the supported ID Scheme parameters: \n\n * BVID - Bitvore ID\n \n\n Example Request: \n\n \n\n ```js\n GET https://api.bitvore.com/v2/corp/organizations/b00001axt\n ```\n \n\n "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

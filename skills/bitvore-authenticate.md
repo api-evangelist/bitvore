@@ -1,7 +1,7 @@
 ---
 name: Authenticate against the Bitvore Cellenus API
 description: Obtain and present Bitvore credentials correctly — API key in query or header, or an OAuth 2.0 client-credentials bearer token — before calling any Cellenus endpoint.
-api: openapi/bitvore-security-openapi.yml
+api: openapi/_original/bitvore-security-openapi.yml
 operations:
   - issueAccessTokenUsingPOST
 generated: '2026-08-07'

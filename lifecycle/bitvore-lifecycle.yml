@@ -27,19 +27,19 @@ deprecation:
     date: '2021-04-30'
     effect: Removed in v2 in favour of required startDate/endDate ranges.
 deprecated_operations:
-- openapi/bitvore-corporate-openapi.yml#downloadFilingsUsingGET_1
-- openapi/bitvore-corporate-openapi.yml#downloadFilingUsingGET_1
+- openapi/_original/bitvore-corporate-openapi.yml#downloadFilingsUsingGET_1
+- openapi/_original/bitvore-corporate-openapi.yml#downloadFilingUsingGET_1
 deprecated_api_groups:
 - group: z-Custom API I.T.
-  spec: openapi/bitvore-custom-api-it-openapi.yml
+  spec: openapi/_original/bitvore-custom-api-it-openapi.yml
   info_version: Deprecated 2019
   operations: 5
 - group: z-Custom API L.
-  spec: openapi/bitvore-custom-api-l-openapi.yml
+  spec: openapi/_original/bitvore-custom-api-l-openapi.yml
   info_version: Deprecated 2019
   operations: 24
 legacy_surface:
-  spec: openapi/bitvore-legacy-openapi.yml
+  spec: openapi/_original/bitvore-legacy-openapi.yml
   status: still served at api.bitvore.com
   docs: https://developer.bitvore.com/v1/docs/overview
 sla:

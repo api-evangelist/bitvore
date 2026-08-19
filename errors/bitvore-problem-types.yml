@@ -35,12 +35,12 @@ problems:
   - Invalid parameter used
   - Bad requet
   example_operations:
-  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST
-  - openapi/bitvore-security-openapi.yml#issueAccessTokenUsingPOST
-  - openapi/bitvore-corporate-openapi.yml#handleGetOrgUsingGET_1
-  - openapi/bitvore-corporate-openapi.yml#handleOrgLookupUsingGET_1
+  - openapi/_original/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST
+  - openapi/_original/bitvore-security-openapi.yml#issueAccessTokenUsingPOST
+  - openapi/_original/bitvore-corporate-openapi.yml#handleGetOrgUsingGET_1
+  - openapi/_original/bitvore-corporate-openapi.yml#handleOrgLookupUsingGET_1
 - status: 401
   title: Unauthorized
   occurrences: 104
@@ -58,12 +58,12 @@ problems:
   - Unauthorized to view filings
   - Unauthorized to add portfolio items
   example_operations:
-  - openapi/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
-  - openapi/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
-  - openapi/bitvore-legacy-openapi.yml#getVersionUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
+  - openapi/_original/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#getVersionUsingGET
 - status: 404
   title: Not found
   occurrences: 63
@@ -75,12 +75,12 @@ problems:
   - Foreign Id system could not be found
   - Foreign Id system or foreign Id could not be found
   example_operations:
-  - openapi/bitvore-legacy-openapi.yml#handleDownloadMapUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleAddMappingsUsingPOST
-  - openapi/bitvore-legacy-openapi.yml#handleDeleteMappingsUsingDELETE
-  - openapi/bitvore-legacy-openapi.yml#handleGetMappingUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleModifyMappingUsingPUT
-  - openapi/bitvore-legacy-openapi.yml#handleRemoveMappingUsingDELETE
+  - openapi/_original/bitvore-legacy-openapi.yml#handleDownloadMapUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleAddMappingsUsingPOST
+  - openapi/_original/bitvore-legacy-openapi.yml#handleDeleteMappingsUsingDELETE
+  - openapi/_original/bitvore-legacy-openapi.yml#handleGetMappingUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleModifyMappingUsingPUT
+  - openapi/_original/bitvore-legacy-openapi.yml#handleRemoveMappingUsingDELETE
 - status: 500
   title: Internal error
   occurrences: 106
@@ -92,9 +92,9 @@ problems:
   observed_descriptions:
   - Internal error
   example_operations:
-  - openapi/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
-  - openapi/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
-  - openapi/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST
+  - openapi/_original/bitvore-legacy-openapi.yml#handleCorpSimpleSearchUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleCorpAdvancedSearchUsingPOST
+  - openapi/_original/bitvore-legacy-openapi.yml#handleEconSearchUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleOrgLookupUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleGetOrgUsingGET
+  - openapi/_original/bitvore-legacy-openapi.yml#handleOrgMatchingUsingPOST

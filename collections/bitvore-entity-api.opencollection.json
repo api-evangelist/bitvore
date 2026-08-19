@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitvore Legacy Entity API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Organization Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/entityapi/entities",
+            "params": [
+              {
+                "name": "lookup",
+                "value": "",
+                "type": "query",
+                "description": "Lookup option. Value is used to match multiple fields."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "One or more names to search for."
+              },
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "query",
+                "description": "One or more tickers to search for."
+              },
+              {
+                "name": "domainName",
+                "value": "",
+                "type": "query",
+                "description": "One or more domain names to search for."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "One or more locations companies must have their headquarters in."
+              },
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+              },
+              {
+                "name": "naics",
+                "value": "",
+                "type": "query",
+                "description": "One or more NAICS codes identifying industries the companies must operate in."
+              },
+              {
+                "name": "sic",
+                "value": "",
+                "type": "query",
+                "description": "One or more SIC codes identifying industries the companies must operate in."
+              },
+              {
+                "name": "revRange",
+                "value": "",
+                "type": "query",
+                "description": "Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be ommited to report over 1B."
+              },
+              {
+                "name": "empRange",
+                "value": "",
+                "type": "query",
+                "description": "Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be ommited to report over 1B."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Search can be performed using one of two approaches, a lookup or a parameterized query. A lookup takes a single string as input to matching entities. The following are the matching rules used. The search results are ordered according to the rules. \n\n 1. Exact match on name (case insensitive)\n 2. Exact match on ticker\n 3. Exact match on domain name\n 4. Exact match on alias (case insensitive)\n 5. Starts with on name (case insensitive)\n 6. Starts with on ticker\n 7. Starts with on domain name\n 8. St"
+        },
+        {
+          "info": {
+            "name": "Organization Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/entityapi/entities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Returns detailed information about the company with the given Bitvore ID. The full set of company : fields are returned by this call. An example of retrieving the details of a company with a specified Bitvore ID is \n\n ```js\n GET /entityapi/entities/b0004i9h2 HTTP 1.1\n Accept: application/json\n X-CLIENTAPP-APPID: BVAPI\n ```\n \n\n A sample successful response is: \n\n ```js\n { \n \t\"id\": \"b0004i9h2\", \n \t\"name\": \"LinkedIn\", \n \t\"domainName\": \"linkedin.com\", \n \t\"revenue\": \"1000-\", \n \t\"employees\": \"5000-100"
+        },
+        {
+          "info": {
+            "name": "Organization Matching",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/entityapi/matches",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attempts to find companies matching input specifications made up of a list of property values. Multiple companies can be matched in a single call. For each company to match a list of properties and values known by the client (the input specification) are passed in. If possible the system will return a single matching company for each input specification. If more than one company matches an input specification and there is not one company that is more qualified than the others all the candidates "
+        },
+        {
+          "info": {
+            "name": "Return API Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/entityapi/version"
+          },
+          "docs": "Deprecated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

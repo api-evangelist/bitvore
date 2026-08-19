@@ -1,0 +1,1492 @@
+{
+  "item": [
+    {
+      "id": "cd84fa5f-bffe-4536-b85d-fe8dfa88b173",
+      "name": "Datasets API",
+      "description": {
+        "content": "Export Files and Reports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acb5ae48-9108-4710-ac14-d19d58cd6f76",
+          "name": "Changesets",
+          "request": {
+            "name": "Changesets",
+            "description": {
+              "content": "Returns the specified changesets by date range.\n Requests are limited to 31 days and up to 1000 results per page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "changesets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "changesets",
+                  "value": "fields-removed",
+                  "description": "One or more changeset type.\n Changesets: entities-added,entities-merged,entities-modified,entities-removed,fields-added,fields-modified,fields-removed,records-added,records-modified,records-removed"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start date of the changeset, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end date of the changeset, inclusive, maximum date range is 31."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "1000",
+                  "description": "Number of results out of the total result set per page to return, default is 1000, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7608c2e4-ca33-4226-ad6f-bce45f198433",
+              "name": "Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "changesets",
+                      "value": "entities-added"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "-26",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df64054a-c456-480d-9afd-fdff5ce78a13",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "changesets",
+                      "value": "entities-added"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"properties\": [\n      {\n        \"name\": \"string\",\n        \"value\": {}\n      },\n      {\n        \"name\": \"string\",\n        \"value\": {}\n      }\n    ],\n    \"timestamp\": \"2018-04-19T14:28:19.585Z\",\n    \"uuid\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"properties\": [\n      {\n        \"name\": \"string\",\n        \"value\": {}\n      },\n      {\n        \"name\": \"string\",\n        \"value\": {}\n      }\n    ],\n    \"timestamp\": \"1955-09-18T05:24:13.019Z\",\n    \"uuid\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aafa90b-c593-43b6-9f3d-c28c075d0484",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "changesets",
+                      "value": "entities-added"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf3eefee-e68a-41ac-8ac4-9b7c55eebfd2",
+          "name": "Changeset Report",
+          "request": {
+            "name": "Changeset Report",
+            "description": {
+              "content": "Returns a csv of the specified changeset type by date range provided. Limit of 1000 results per request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "changesets",
+                ":changeset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start date of the report, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end date of the report, exclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "compression",
+                  "value": "none",
+                  "description": "Optional compression"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "changeset",
+                  "description": "(Required) changeset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4ad75450-43d0-4811-a29d-c688b2c5b391",
+              "name": "Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "compression",
+                      "value": "none"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "-26",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e192f45-59c1-488f-bd34-e135a8402fe0",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "compression",
+                      "value": "none"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1309d2a8-ffd8-4ca1-970d-e0de20141700",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "compression",
+                      "value": "none"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8528c4c9-ca0a-4d78-870f-08072cdfc2bb",
+          "name": "Daily Changeset",
+          "request": {
+            "name": "Daily Changeset",
+            "description": {
+              "content": "Returns a url for a compressed changeset file for the specified day. Daily changesets will be available for 7 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "changesets",
+                ":changeset",
+                ":year",
+                ":month",
+                ":day"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "changeset",
+                  "description": "(Required) changeset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "year",
+                  "description": "(Required) year"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "month",
+                  "description": "(Required) month"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "day",
+                  "description": "(Required) day"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3d78ab1-945b-4dc0-9abe-8c4c59353a08",
+              "name": "Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "-26",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc12d694-6127-4353-82ef-5e18f329d79a",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2af55c49-2180-4747-8dd9-a18d33d3ac1a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "changesets",
+                    ":changeset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "changeset",
+                      "description": "(Required) changeset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe2922ec-de2a-4d8b-af6d-ad8f48ec840c",
+          "name": "Yearly Dataset",
+          "request": {
+            "name": "Yearly Dataset",
+            "description": {
+              "content": "Returns a url for a compressed dataset file for the specified year. Files can range from a few megabytes to hundreds of megabytes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "datasets",
+                ":dataset",
+                ":year"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset",
+                  "description": "(Required) dataset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "year",
+                  "description": "(Required) year"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b269e13b-7c8e-44d1-ad19-d3c7daef8390",
+              "name": "Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "-26",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a0b2622-1ad7-4984-bb64-1844b116c74e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1883bcf8-035f-46ec-b203-20ed415d74fd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7ff3e47-7041-455b-a840-4c2a83203f37",
+          "name": "Daily Dataset",
+          "request": {
+            "name": "Daily Dataset",
+            "description": {
+              "content": "Returns a url for a compressed dataset file for the specified day. Daily datasets will be available for 7 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "corp",
+                "datasets",
+                ":dataset",
+                ":year",
+                ":month",
+                ":day"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset",
+                  "description": "(Required) dataset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "year",
+                  "description": "(Required) year"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "month",
+                  "description": "(Required) month"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "day",
+                  "description": "(Required) day"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Global"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.bitvore.com/oauth/accesstoken"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d3ebfc32-f5a3-46af-89c9-fc1df47ebd47",
+              "name": "Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "-26",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1cc5a63-06f9-43d8-9a12-c191e9b05358",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e112ff14-8b4d-44bb-b6d3-a2bdd65e2458",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "corp",
+                    "datasets",
+                    ":dataset",
+                    ":year",
+                    ":month",
+                    ":day"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset",
+                      "description": "(Required) dataset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "year",
+                      "description": "(Required) year"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "month",
+                      "description": "(Required) month"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "day",
+                      "description": "(Required) day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4b5d18b1-bf50-486e-a55e-b281a186dce1",
+    "name": "Corporate Datasets API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "### Cellenus Corporate APIs\nThe Cellenus Corporate APIs consists of three main datasets, \"Corporate, Market & Industry\", \"ESG\", and \"Thematic Trending\" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them. Bitvore currently surveils most public companies traded on US and international exchanges, US companies and international companies. Additionally, new companies required by a customer can be requested to be added to our surveillance.\n\nThe Corporate APIs also includes access to economic news for geographic locations in the United States.\n\nA typical record in the dataset is depicted below.\n\n![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/corp-news-article.png)\n\nAccess to the Corporate Datasets using the Corporate APIs requires its own license and API key.  To register for an API Key please visit [here](http://developer.bitvore.com/v2/getting-started?section=obtain-api-key). \n\nThe Cellenus Corporate APIs, include [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Ecomomic News](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Organizations](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API), [Portfolio Integration](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API), [Sentiment Scores](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Sentiment%20Scores%20API), [Financial Filings](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) and [Datasets](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API).\n\nThe [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news based on company ID (Bitvore ID), portfolio, customer ID, industry, location, and certain company characteristics such as number of employees and annual revenue.\n\nThe [Economic News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news relevant to the economy of a location or region.\n\nThe [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API) provides the ability to search for companies by a variety of company characteristics such as name, web domain, ticker, industry, location, number of employees, and annual revenue. Each company is uniquely identified by a Bitvore ID which can be used as input to query the [News API](http://developer.bitvore.com/v2/docs/overview).\n\nThe [Portfolios API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API) provides the ability to either create and maintain portfolios of companies so that news can be queried in a single call from the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) for a given portfolio or to map your own company ID scheme to Bitvore's so you can query the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) with your own IDs.\n\nThe [Filings API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) provides direct access to the financial filings submitted to regulatory agencies such as the SEC on behalf of companies found in the [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API).\n\nThe [Datasets API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API) provides dataset and changeset exporting. This API provides offline data consumption that can be used with external tools.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

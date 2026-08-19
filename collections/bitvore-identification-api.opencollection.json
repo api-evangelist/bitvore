@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitvore Legacy Identification API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download Id Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              }
+            ]
+          },
+          "docs": "Downloads the identification map for the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Add Id Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/mappings",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a mapping for the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Delete Id Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/mappings",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              }
+            ]
+          },
+          "docs": "Deletes all mappings for the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Return Id Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/mappings/:foreignId",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              },
+              {
+                "name": "foreignId",
+                "value": "",
+                "type": "path",
+                "description": "foreignId"
+              }
+            ]
+          },
+          "docs": "Returns the mapping for a given foreign Id in the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Change Id Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/mappings/:foreignId",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              },
+              {
+                "name": "foreignId",
+                "value": "",
+                "type": "path",
+                "description": "foreignId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the mapping for a given foreign Id in the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Delete Id Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/mappings/:foreignId",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "foreignSystemName"
+              },
+              {
+                "name": "foreignId",
+                "value": "",
+                "type": "path",
+                "description": "foreignId"
+              }
+            ]
+          },
+          "docs": "Deletes the mapping for a given foreign Id in the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Upload Id Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/idapi/maps/:foreignSystemName/upload",
+            "params": [
+              {
+                "name": "foreignSystemName",
+                "value": "",
+                "type": "path",
+                "description": "Foreign Id system"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads additional mappings of an identification map for the specified foreign Id system."
+        },
+        {
+          "info": {
+            "name": "Return API Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/idapi/version"
+          },
+          "docs": "Deprecated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

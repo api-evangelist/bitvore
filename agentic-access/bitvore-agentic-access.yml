@@ -1,0 +1,1791 @@
+generated: '2026-08-14'
+method: generated
+source: openapi/bitvore-alert-api-api-openapi.yml, openapi/bitvore-bond-api-openapi.yml, openapi/bitvore-corporate-news-api-openapi.yml,
+  openapi/bitvore-datasets-api-api-openapi.yml, openapi/bitvore-economic-news-api-openapi.yml,
+  openapi/bitvore-entity-api-openapi.yml, openapi/bitvore-filings-api-api-openapi.yml, openapi/bitvore-financial-filings-api-openapi.yml,
+  openapi/bitvore-identification-api-openapi.yml, openapi/bitvore-intel-api-openapi.yml, openapi/bitvore-muni-api-api-openapi.yml,
+  openapi/bitvore-muni-news-api-openapi.yml, openapi/bitvore-news-api-api-openapi.yml, openapi/bitvore-oauth2-api-openapi.yml,
+  openapi/bitvore-organizations-api-api-openapi.yml, openapi/bitvore-portfolio-api-openapi.yml,
+  openapi/bitvore-portfolios-api-api-openapi.yml, openapi/bitvore-sentiment-scores-api-api-openapi.yml,
+  openapi/bitvore-sentiment-scores-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 121
+  by_action_class:
+    connected: 68
+    acting: 53
+  by_consequence:
+    read: 68
+    write: 53
+  human_in_the_loop_required: 0
+operations:
+- path: /muni/alerts
+  method: get
+  operationId: handleListAlertsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/alerts/limit/{alertId}/{limit}
+  method: post
+  operationId: handleSetAlertLimitUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/alerts/record/{rowkey}
+  method: get
+  operationId: handleAlertRecordUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/alerts/results/{transactionid}
+  method: get
+  operationId: handleAlertResultsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/alerts/transactions/{alertId}
+  method: get
+  operationId: handleAlertTransactionsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/alerts/version
+  method: get
+  operationId: handleAlertAPIVersionUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bondapi/cusip/{cusip}
+  method: get
+  operationId: handleGetCusipUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bondapi/stateSector/{state}/{sector}
+  method: get
+  operationId: handleStateSectorUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bondapi/version
+  method: get
+  operationId: getVersionUsingGET_4
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /corpnews
+  method: get
+  operationId: handleCorpSimpleSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /corpnews
+  method: post
+  operationId: handleCorpAdvancedSearchUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/changesets
+  method: get
+  operationId: getChangesetsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/changesets/{changeset}
+  method: get
+  operationId: downloadChangesetsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/changesets/{changeset}/{year}/{month}/{day}
+  method: get
+  operationId: getDailyDatasetsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/datasets/{dataset}/{year}
+  method: get
+  operationId: getYearlyDatasetsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/datasets/{dataset}/{year}/{month}/{day}
+  method: get
+  operationId: getDailyDatasetsUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /econnews
+  method: get
+  operationId: handleEconSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /entityapi/entities
+  method: get
+  operationId: handleOrgLookupUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /entityapi/entities/{id}
+  method: get
+  operationId: handleGetOrgUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /entityapi/matches
+  method: post
+  operationId: handleOrgMatchingUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /entityapi/version
+  method: get
+  operationId: getVersionUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/filings/financial/submissions
+  method: get
+  operationId: downloadFilingsUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/filings/financial/submissions/{filingId}
+  method: get
+  operationId: downloadFilingUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/filings/financial/summaries
+  method: get
+  operationId: getFilingsUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/filings/financial/{filingId}
+  method: get
+  operationId: getFilingUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /financialfiling/submissions
+  method: get
+  operationId: downloadFilingsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /financialfiling/submissions/{filingId}
+  method: get
+  operationId: downloadFilingUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /financialfiling/summaries
+  method: get
+  operationId: getFilingsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /idapi/maps/{foreignSystemName}
+  method: get
+  operationId: handleDownloadMapUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /idapi/maps/{foreignSystemName}/mappings
+  method: post
+  operationId: handleAddMappingsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /idapi/maps/{foreignSystemName}/mappings
+  method: delete
+  operationId: handleDeleteMappingsUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  method: get
+  operationId: handleGetMappingUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  method: put
+  operationId: handleModifyMappingUsingPUT
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  method: delete
+  operationId: handleRemoveMappingUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /idapi/maps/{foreignSystemName}/upload
+  method: post
+  operationId: handleUploadMapUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /idapi/version
+  method: get
+  operationId: getVersionUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /intelapi/intel
+  method: get
+  operationId: handleNewsSearchUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /intelapi/version
+  method: get
+  operationId: getVersionUsingGET_3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/api/search/cusip/{cusip}
+  method: get
+  operationId: searchWithCUSIPUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/api/search/portfolio/{watchlistId}
+  method: get
+  operationId: searchWithWatchListUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/api/search/vql
+  method: get
+  operationId: searchWithVqlUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/api/version
+  method: get
+  operationId: getVersionUsingGET_5
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muninews
+  method: get
+  operationId: handleMuniSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muninews
+  method: post
+  operationId: handleMuniAdvancedSearchUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/econnews/byfips
+  method: get
+  operationId: handleFipsEconSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/econnews/bylocation
+  method: get
+  operationId: handleEconSearchUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/news
+  method: get
+  operationId: handleNewsSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/news
+  method: post
+  operationId: handleCorpAdvancedSearchUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/news/byKey/enriched
+  method: post
+  operationId: handleGetEnrichedRecordUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/news/byKey/{recordKey}/enriched
+  method: get
+  operationId: handleGetEnrichedRecordUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/news/byid
+  method: get
+  operationId: handleNewsSearchUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/news/byportfolio
+  method: get
+  operationId: handlePortfolioNewsSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/econnews/byfips
+  method: get
+  operationId: handleFipsEconSearchUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/econnews/bylocation
+  method: get
+  operationId: handleEconSearchUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/news
+  method: get
+  operationId: handleCusipMuniSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/news
+  method: post
+  operationId: handleMuniAdvancedSearchUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/news/byfips
+  method: get
+  operationId: handleFipsMuniSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/news/bylocation
+  method: get
+  operationId: handleLocationMuniSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/news/byportfolio
+  method: get
+  operationId: handlePortfolioMuniSearchUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oauth/accesstoken
+  method: post
+  operationId: issueAccessTokenUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/organizations/byid/{id}
+  method: get
+  operationId: handleGetOrgUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/organizations/lookup
+  method: get
+  operationId: handleOrgLookupUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/organizations/match
+  method: post
+  operationId: handleOrgMatchingUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/organizations/search
+  method: post
+  operationId: handleOrgSearchUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/organizations/{bvId}
+  method: get
+  operationId: handleGetOrgUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /portfolioapi/portfolios
+  method: get
+  operationId: handleGetPortfoliosUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /portfolioapi/portfolios
+  method: post
+  operationId: handleAddPortfolioUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}
+  method: get
+  operationId: handleGetPortfolioUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /portfolioapi/portfolios/{portfolioId}
+  method: put
+  operationId: handleModifyPortfolioUsingPUT
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}
+  method: delete
+  operationId: handleDeletePortfolioUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}/itemUploads
+  method: post
+  operationId: handleUploadPortfolioItemsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}/items
+  method: get
+  operationId: handleGetPortfolioItemsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /portfolioapi/portfolios/{portfolioId}/items
+  method: post
+  operationId: handleAddPortfolioItemsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}/items
+  method: put
+  operationId: handleReplacePortfolioItemsUsingPUT
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}/items
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/portfolios/{portfolioId}/items/{itemId}
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /portfolioapi/version
+  method: get
+  operationId: getVersionUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/portfolios
+  method: get
+  operationId: handleGetPortfoliosUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/portfolios
+  method: post
+  operationId: handleAddPortfolioUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}
+  method: get
+  operationId: handleGetPortfolioUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/portfolios/{portfolioId}
+  method: put
+  operationId: handleModifyPortfolioUsingPUT_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}
+  method: delete
+  operationId: handleDeletePortfolioUsingDELETE_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/itemUploads
+  method: post
+  operationId: handleUploadPortfolioItemsUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items
+  method: get
+  operationId: handleGetPortfolioItemsUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/portfolios/{portfolioId}/items
+  method: post
+  operationId: handleAddPortfolioItemsUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items
+  method: put
+  operationId: handleReplacePortfolioItemsUsingPUT_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items/ids
+  method: get
+  operationId: handleGetPortfolioItemsByValuesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/corp/portfolios/{portfolioId}/items/ids
+  method: post
+  operationId: handleAddPortfolioItemsByValuesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items/ids
+  method: put
+  operationId: handleReplacePortfolioItemsByValuesUsingPUT
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/portfolios/{portfolioId}/items/{id}
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios
+  method: get
+  operationId: handleGetPortfoliosUsingGET_3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/portfolios
+  method: post
+  operationId: handleAddPortfolioUsingPOST_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}
+  method: get
+  operationId: handleGetPortfolioUsingGET_3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/portfolios/{portfolioId}
+  method: put
+  operationId: handleModifyPortfolioUsingPUT_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}
+  method: delete
+  operationId: handleDeletePortfolioUsingDELETE_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/itemUploads
+  method: post
+  operationId: handleUploadPortfolioItemsUsingPOST_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items
+  method: get
+  operationId: handleGetPortfolioItemsUsingGET_3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/portfolios/{portfolioId}/items
+  method: post
+  operationId: handleAddPortfolioItemsUsingPOST_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items
+  method: put
+  operationId: handleReplacePortfolioItemsUsingPUT_3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_6
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items/ids
+  method: get
+  operationId: handleGetPortfolioItemsByValuesUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /muni/portfolios/{portfolioId}/items/ids
+  method: post
+  operationId: handleAddPortfolioItemsByValuesUsingPOST_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items/ids
+  method: put
+  operationId: handleReplacePortfolioItemsByValuesUsingPUT_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /muni/portfolios/{portfolioId}/items/{id}
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_7
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios
+  method: get
+  operationId: handleGetPortfoliosUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/portfolios
+  method: post
+  operationId: handleAddPortfolioUsingPOST_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}
+  method: get
+  operationId: handleGetPortfolioUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/portfolios/{portfolioId}
+  method: put
+  operationId: handleModifyPortfolioUsingPUT_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}
+  method: delete
+  operationId: handleDeletePortfolioUsingDELETE_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/itemUploads
+  method: post
+  operationId: handleUploadPortfolioItemsUsingPOST_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items
+  method: get
+  operationId: handleGetPortfolioItemsUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/portfolios/{portfolioId}/items
+  method: post
+  operationId: handleAddPortfolioItemsUsingPOST_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items
+  method: put
+  operationId: handleReplacePortfolioItemsUsingPUT_2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_4
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items/ids
+  method: get
+  operationId: handleGetPortfolioItemsByValuesUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/muni/portfolios/{portfolioId}/items/ids
+  method: post
+  operationId: handleAddPortfolioItemsByValuesUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items/ids
+  method: put
+  operationId: handleReplacePortfolioItemsByValuesUsingPUT_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/muni/portfolios/{portfolioId}/items/{id}
+  method: delete
+  operationId: handleDeletePortfolioItemsUsingDELETE_5
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Global
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/corp/sentimentscores
+  method: get
+  operationId: handleSentimentScoreQueryUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sentimentscores
+  method: get
+  operationId: handleSentimentScoreQueryUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Global
+    token:
+      max-ttl: 3600
+    audit: none

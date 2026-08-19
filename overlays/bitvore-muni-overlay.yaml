@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Bitvore Muni API
   version: 1.0.0
-extends: openapi/bitvore-muni-openapi.yml
+extends: openapi/_original/bitvore-muni-openapi.yml
 actions:
 - target: $.info
   update:

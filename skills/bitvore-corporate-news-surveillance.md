@@ -1,7 +1,7 @@
 ---
 name: Surveil a company for material business events
 description: Resolve a company to a Bitvore bvId, pull its Cellenus corporate news and signals over a date range, and fetch the enriched record for anything material.
-api: openapi/bitvore-corporate-openapi.yml
+api: openapi/_original/bitvore-corporate-openapi.yml
 operations:
   - handleOrgLookupUsingGET_1
   - handleOrgMatchingUsingPOST_1

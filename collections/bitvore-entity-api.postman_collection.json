@@ -1,0 +1,1389 @@
+{
+  "item": [
+    {
+      "id": "2e0a169f-28ed-4bad-8648-39422a2adf5a",
+      "name": "Entity",
+      "description": {
+        "content": "Entity API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eac64d3a-9bad-44f8-8296-76e20ad54e11",
+          "name": "Organization Search",
+          "request": {
+            "name": "Organization Search",
+            "description": {
+              "content": "Search can be performed using one of two approaches, a lookup or a parameterized query. A lookup takes a single string as input to matching entities. The following are the matching rules used. The search results are ordered according to the rules. \n\n 1. Exact match on name (case insensitive)\n 2. Exact match on ticker\n 3. Exact match on domain name\n 4. Exact match on alias (case insensitive)\n 5. Starts with on name (case insensitive)\n 6. Starts with on ticker\n 7. Starts with on domain name\n 8. Starts with on alias (case insensitive)\n \n\n An example of performing a lookup is as follows: \n\n ```js\n GET /entityapi/entities?lookup=acme HTTP 1.1\n Accept: application/json\n ```\n A paramaterized query takes one or more search parameters. A parameter has a name and one or more values. The search will match the company properties and relationships with the parameters and return only those that match all input parameters. The following are the supported search parameters: \n\n * name - One or more names to search for \n * ticker - One or more tickers to search for \n * domainName - One or more domain names to search for. \n * location - One or more locations companies must have their headquarters in. Locations are in the format of city/state code/country. If city or state is unspecified the appropriate / delimiters must still be included, i.e., /California/United States.  Must not be used with fips or zip. \n * fips - One or more FIPS codes identifying counties or CBSAs (metropolitan/micropolitan statistical areas) companies must have their headquarters in. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). Must not be used with location or zip. \n * zip - One or more zip codes identifying ZIP Code Tabulation Areas (ZCTAs) companies must have their headquarters in.  Must not be used with location or fips. \n * naics - One or more [NAICS](https://www.naics.com/search/) codes identifying industries the companies must operate in. \n * sic - One or more [SIC](https://www.osha.gov/pls/imis/sicsearch.html) codes identifying industries the companies must operate in. \n * revRange - Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 500, 1000, 10000. The upper bound can be omitted to report over 10B. Note: On 1/11/2020 the range boundary of 200 was replaced with 500 and will be no longer supported on 7/1/2020. \n * empRange - Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 100, 250, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 10000. Note: On 1/11/2020 the range boundary of 200 was replaced by 100 and 250 and will be no longer supported on 7/1/2020. \n \n\n An example of performing a parameterized query by domain name is \n\n ```js\n GET /entityapi/entities?domainName=acme.com HTTP 1.1\n Accept: application/json\n ```\n \n\n 0 or more companies may be returned that match the supplied query criteria. Only summary information for each matching company is supplied which includes the following fields: \n\n * ID \n * Name \n * Domain Name \n * Ticker \n * State \n * Country \n * Parent \n * Monitoring State \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{ \n \t\t\t\"id\": \"b0004i9h2\", \n \t\t\t\"name\": \"LinkedIn\", \n \t\t\t\"domainName\": \"linkedin.com\", \n \t\t\t\"city\": \"Sunnyvale\", \n \t\t\t\"state\": \"CA\", \n \t\t\t\"country\": \"United States\", \n \t\t\t\"monitored\": \"active\", \n \t\t\t\"parent\": { \n \t\t\t\t\"id\": \"b00001adv\", \n \t\t\t\t\"name\": \"MICROSOFT CORPORATION\", \n \t\t\t\t\"ticker\": \"MSFT\", \n \t\t\t\t\"domainName\": \"microsoft.com\", \n \t\t\t\t\"state\": \"WA\", \n \t\t\t\t\"country\": \"United States\", \n \t\t\t\t\"monitored\": \"active\" \n \t\t\t} \n \t\t}, \n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"b00000000\",\n \t\"reasonSupport\": \"No company with BvId b00000000 found.\",\n \t\"returned\": 0,\n \t\"total\": 1\n }\n ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityapi",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lookup",
+                  "value": "<string>",
+                  "description": "Lookup option. Value is used to match multiple fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "One or more names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "One or more names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "One or more tickers to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "One or more tickers to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "domainName",
+                  "value": "<string>",
+                  "description": "One or more domain names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "domainName",
+                  "value": "<string>",
+                  "description": "One or more domain names to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "One or more locations companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "One or more locations companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "fips",
+                  "value": "<string>",
+                  "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "fips",
+                  "value": "<string>",
+                  "description": "One or more FIPS codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "One or more zip codes identifying locations the companies must have their headquarters in."
+                },
+                {
+                  "disabled": false,
+                  "key": "naics",
+                  "value": "<string>",
+                  "description": "One or more NAICS codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "naics",
+                  "value": "<string>",
+                  "description": "One or more NAICS codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "sic",
+                  "value": "<string>",
+                  "description": "One or more SIC codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "sic",
+                  "value": "<string>",
+                  "description": "One or more SIC codes identifying industries the companies must operate in."
+                },
+                {
+                  "disabled": false,
+                  "key": "revRange",
+                  "value": "<string>",
+                  "description": "Revenue range (in millions) companies must fall in. The range is formated as lower-upper where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be ommited to report over 1B."
+                },
+                {
+                  "disabled": false,
+                  "key": "empRange",
+                  "value": "<string>",
+                  "description": "Employee range companies must fall in. The range is formated as lower-upper where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be ommited to report over 1B."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7cbbe012-bee8-463c-9835-3438384ae385",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"returned\": 1,\n  \"total\": 10,\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"active\": true,\n      \"city\": \"Irvine\",\n      \"country\": \"UNITED STATES\",\n      \"domainName\": \"acme.com\",\n      \"id\": \"b00001aaa\",\n      \"mergedIntoId\": \"string\",\n      \"monitored\": \"active\",\n      \"name\": \"ACME Corp\",\n      \"parent\": {\n        \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n      },\n      \"state\": \"CALIFORNIA\",\n      \"ticker\": \"MSFT\"\n    },\n    {\n      \"active\": false,\n      \"city\": \"Irvine\",\n      \"country\": \"UNITED STATES\",\n      \"domainName\": \"acme.com\",\n      \"id\": \"b00001aaa\",\n      \"mergedIntoId\": \"string\",\n      \"monitored\": \"active\",\n      \"name\": \"ACME Corp\",\n      \"parent\": {\n        \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n      },\n      \"state\": \"CALIFORNIA\",\n      \"ticker\": \"MSFT\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e1a416-a59e-4106-a54c-57385bf73185",
+              "name": "Invalid parameter used",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84ed9966-b0bc-4a21-8391-683c538d9dc0",
+              "name": "Unauthorized to view organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccd97c83-4d58-4a5e-ba31-95786eacf733",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lookup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naics",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "empRange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32d47163-ebe7-42ee-bbb8-def29ef2bed2",
+          "name": "Organization Details",
+          "request": {
+            "name": "Organization Details",
+            "description": {
+              "content": "Returns detailed information about the company with the given Bitvore ID. The full set of company : fields are returned by this call. An example of retrieving the details of a company with a specified Bitvore ID is \n\n ```js\n GET /entityapi/entities/b0004i9h2 HTTP 1.1\n Accept: application/json\n X-CLIENTAPP-APPID: BVAPI\n ```\n \n\n A sample successful response is: \n\n ```js\n { \n \t\"id\": \"b0004i9h2\", \n \t\"name\": \"LinkedIn\", \n \t\"domainName\": \"linkedin.com\", \n \t\"revenue\": \"1000-\", \n \t\"employees\": \"5000-10000\", \n \t\"city\": \"Sunnyvale\", \n \t\"state\": \"CA\", \n \t\"country\": \"United States\", \n \t\"monitored\": \"active\", \n \t\"naicsIndustry\": { \n \t\t\"code\": \"54151\", \n \t\t\"name\": \"Computer Systems Design and Related Services\" \n \t}, \n \t\"sicIndustry\": { \n \t\t\"code\": \"737\", \n \t\t\"name\": \"Computer Programming, Data Processing, And Other Computerrelated\" \n \t}, \n \t\"parent\": { \n \t\t\"id\": \"b00001adv\", \n \t\t\"name\": \"MICROSOFT CORPORATION\", \n \t\t\"ticker\": \"MSFT\", \n \t\t\"domainName\": \"microsoft.com\", \n \t\t\"state\": \"WA\", \n \t\t\"country\": \"United States\", \n \t\t\"linkedInUrl\": \"https://www.linkedin.com/company/1337\", \n \t\t\"twitterUrl\": \"https://twitter.com/LinkedIn\", \n \t\t\"monitored\": \"active\" \n \t}, \n \t\"ultimateParent\": { \n \t\t\"id\": \"b00001adv\", \n \t\t\"name\": \"MICROSOFT CORPORATION\", \n \t\t\"ticker\": \"MSFT\", \n \t\t\"domainName\": \"microsoft.com\", \n \t\t\"state\": \"WA\", \n \t\t\"country\": \"United States\", \n \t\t\"monitored\": \"active\" \n \t} \n } \n ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityapi",
+                "entities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "079abdd5-1cb2-4faf-80ff-93123ddae10d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"aliases\": [\n    \"string\",\n    \"string\"\n  ],\n  \"city\": \"Irvine\",\n  \"country\": \"UNITED STATES\",\n  \"cusip\": \"string\",\n  \"description\": \"ACME is a manufacturer of cartoon explosives.\",\n  \"domainName\": \"acme.com\",\n  \"dunsNumber\": 832282375,\n  \"employees\": \"10-50\",\n  \"exchange\": {\n    \"alias\": \"NYSE\",\n    \"mic\": \"XNYS\",\n    \"symbol\": \"NYQ\"\n  },\n  \"facebookUrl\": \"string\",\n  \"figi\": \"BBG001S5TD05\",\n  \"fundingTotal\": 12000000,\n  \"id\": \"b00001aaa\",\n  \"isin\": \"US5949181045\",\n  \"lastFundingAmount\": 12000000,\n  \"lastFundingYear\": 2014,\n  \"linkedInUrl\": \"string\",\n  \"mergedIntoId\": \"string\",\n  \"monitored\": \"active\",\n  \"naicsIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"name\": \"ACME Corp\",\n  \"parent\": {\n    \"active\": true,\n    \"city\": \"Irvine\",\n    \"country\": \"UNITED STATES\",\n    \"domainName\": \"acme.com\",\n    \"id\": \"b00001aaa\",\n    \"mergedIntoId\": \"string\",\n    \"monitored\": \"active\",\n    \"name\": \"ACME Corp\",\n    \"parent\": {\n      \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n    },\n    \"state\": \"CALIFORNIA\",\n    \"ticker\": \"MSFT\"\n  },\n  \"revenue\": \"50-100\",\n  \"searchTerms\": [\n    {\n      \"searchTermType\": \"LEGAL_NAME\",\n      \"term\": \"Big Blue\"\n    },\n    {\n      \"searchTermType\": \"LEGACY_HINT\",\n      \"term\": \"Big Blue\"\n    }\n  ],\n  \"searchTermsAsSortedStrings\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sedol\": \"string\",\n  \"sicIndustry\": {\n    \"code\": \"string\",\n    \"name\": \"Corporate Financial Services\"\n  },\n  \"state\": \"CALIFORNIA\",\n  \"ticker\": \"MSFT\",\n  \"tickerExchange\": \"NAS\",\n  \"tickerRegion\": \"US\",\n  \"twitterUrl\": \"string\",\n  \"ultimateParent\": {\n    \"active\": false,\n    \"city\": \"Irvine\",\n    \"country\": \"UNITED STATES\",\n    \"domainName\": \"acme.com\",\n    \"id\": \"b00001aaa\",\n    \"mergedIntoId\": \"string\",\n    \"monitored\": \"active\",\n    \"name\": \"ACME Corp\",\n    \"parent\": {\n      \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n    },\n    \"state\": \"CALIFORNIA\",\n    \"ticker\": \"MSFT\"\n  },\n  \"yearClosed\": 2015,\n  \"yearFounded\": 1968\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd6b313f-cb8c-4fe8-8273-bbca80aeac13",
+              "name": "Invalid parameter used",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20754933-5833-4488-af98-ff2795481a98",
+              "name": "Unauthorized to view organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "815beaa3-5296-47a4-b8ed-d0dec1a22b73",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "592351bf-23fd-4368-bb89-c2114d5b899e",
+          "name": "Organization Matching",
+          "request": {
+            "name": "Organization Matching",
+            "description": {
+              "content": "Attempts to find companies matching input specifications made up of a list of property values. Multiple companies can be matched in a single call. For each company to match a list of properties and values known by the client (the input specification) are passed in. If possible the system will return a single matching company for each input specification. If more than one company matches an input specification and there is not one company that is more qualified than the others all the candidates will be returned. The following are the company properties that can be used in input specifications. More than one value can be supplied for each indicating a match of any of the values will be acceptable. \n * Name \n * DomainName \n * Ticker \n * NAICSCode \n * SICCode \n * City \n * StateCode \n * Country \n \n\n In the following example we'll try to match two companies. In this case they will actually be companies with the same name but by using different properties in the specifications we can see how the system matches differently. The first specification will include the company name and the state it's in. The second specification will include the company name and its domain name. \n\n ```js\n POST /matches \n Content-Type: application/json \n Accept: application/json \n X-BV-APIKEY: xyz123... \n\n [ \n \t{ \n \t\t\"Name\": [\"Bank of Commerce\"], \n \t\t\"StateCode\": [\"OK\"] \n \t}, \n \t{ \n \t\t\"Name\": [\"Bank of Commerce\"], \n \t\t\"DomainName\": [\"bocokonline.com\"] \n \t} \n ] \n ```\n The response to this request will have two sets of matching candidates: \n\n ```js\n [ \n \t{ \n \t\t\"spec\": { \n \t\t\t\"Name\": [\"Bank Of Commerce\"], \n \t\t\t\"StateCode\": [\"OK\"] \n \t\t}, \n \t\t\"candidates\": [ \n \t\t\t{ \n \t\t\t\t\"org\": { \n \t\t\t\t\t\"id\": \"d0007i2x0\", \n \t\t\t\t\t\"name\": \"Bank of Commerce\", \n \t\t\t\t\t\"domainName\": \"bocokonline.com\", \n \t\t\t\t\t\"state\": \"OK\", \n \t\t\t\t\t... \n \t\t\t\t}, \n \t\t\t\t\"hits\": [\"Name\",\"StateCode\"] \n \t\t\t}, \n \t\t\t{ \n \t\t\t\t\"org\": { \n \t\t\t\t\t\"id\": \"d00078oes\", \n \t\t\t\t\t\"name\": \"Bank of Commerce\", \n \t\t\t\t\t\"domainName\": \"bocokla.com\", \n \t\t\t\t\t\"state\": \"OK\", \n \t\t\t\t\t... \n \t\t\t\t}, \n \t\t\t\t\"hits\": [\"Name\",\"StateCode\"] \n \t\t\t}, \n \t\t\t{ \n \t\t\t\t\"org\": { \n \t\t\t\t\t\"id\": \"d0007v0mn\", \n \t\t\t\t\t\"name\": \"BANK OF COMMERCE\", \n \t\t\t\t\t\"state\": \"OK\", \n \t\t\t\t\t... \n \t\t\t\t}, \n \t\t\t\t\"hits\": [\"Name\",\"StateCode\"] \n \t\t\t} \n \t\t] \n \t}, \n \t{ \n \t\t\"spec\": { \n \t\t\t\"Name\": [\"Bank Of Commerce\"], \n \t\t\t\"DomainName\": [\"bocokonline.com\"] \n \t\t}, \n \t\t\"candidates\": [ \n \t\t\t{ \n \t\t\t\t\"org\": { \n \t\t\t\t\t\"id\": \"d0007i2x0\", \n \t\t\t\t\t\"name\": \"Bank of Commerce\", \n \t\t\t\t\t\"domainName\": \"bocokonline.com\", \n \t\t\t\t\t\"state\": \"OK\", \n \t\t\t\t\t... \n \t\t\t\t}, \n \t\t\t\t\"hits\": [\"Name\",\"DomainName\"] \n \t\t\t} \n \t\t] \n \t} \n ] \n ```\n The first set of candidates is returned for the name/state combination. There are three companies with the input name and state code. Since that is the only input the system could not narrow the candidates down any further. \n\n The second set of candidates is returned for the same name but with a domain name instead of a state code. This input specification matched only one company in the system which is returned. \n\n The properties that were matched for each candidate are returned in the \"hits\" field. These will match the input specification properties. However, when matching names the system will attempt to match the input name against the company names in the Knowledge Graph as well as any known aliases for companies. If the input name matched an alias instead of a company name the \"Alias\" property will be returned in \"hits\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityapi",
+                "matches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  },\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af48f8f0-ce2e-44f9-b711-f56963fdb39f",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  },\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"candidates\": [\n    {\n      \"hits\": [\n        \"Name\",\n        \"DomainName\"\n      ],\n      \"org\": {\n        \"active\": true,\n        \"city\": \"Irvine\",\n        \"country\": \"UNITED STATES\",\n        \"domainName\": \"acme.com\",\n        \"id\": \"b00001aaa\",\n        \"mergedIntoId\": \"string\",\n        \"monitored\": \"active\",\n        \"name\": \"ACME Corp\",\n        \"parent\": {\n          \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n        },\n        \"state\": \"CALIFORNIA\",\n        \"ticker\": \"MSFT\"\n      }\n    },\n    {\n      \"hits\": [\n        \"Name\",\n        \"DomainName\"\n      ],\n      \"org\": {\n        \"active\": false,\n        \"city\": \"Irvine\",\n        \"country\": \"UNITED STATES\",\n        \"domainName\": \"acme.com\",\n        \"id\": \"b00001aaa\",\n        \"mergedIntoId\": \"string\",\n        \"monitored\": \"active\",\n        \"name\": \"ACME Corp\",\n        \"parent\": {\n          \"value\": \"<Circular reference to #/components/schemas/OrganizationSummaryLegacy detected>\"\n        },\n        \"state\": \"CALIFORNIA\",\n        \"ticker\": \"MSFT\"\n      }\n    }\n  ],\n  \"spec\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5b1fafe-4108-44d1-b6db-7f74683a9816",
+              "name": "Invalid parameter used.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  },\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e6b1967-92a4-4aee-ba64-466187c6bbf4",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_1\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    },\n    \"key_2\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  },\n  {\n    \"key_0\": {\n      \"value\": \"reference #/components/schemas/List not found in the OpenAPI spec\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6090fc3d-0e3f-4d2a-b2ae-7e0433656e28",
+          "name": "Return API Version",
+          "request": {
+            "name": "Return API Version",
+            "description": {
+              "content": "Deprecated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityapi",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e6246b49-c99d-46f8-9112-f3059326d19d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68fdf573-0030-43f7-a112-690336e17073",
+              "name": "Unauthorized to get version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c51beb8-a84a-450b-b589-38f23c4dd628",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c12505b1-8d5b-4e01-a25c-10d38873328c",
+    "name": "Bitvore Legacy Entity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n ",
+      "type": "text/plain"
+    }
+  }
+}

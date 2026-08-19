@@ -1,0 +1,945 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitvore News API API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "News API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Economic News Search by FIPS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/econnews/byfips",
+            "params": [
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "FIPS code to retrieve municipal and economic news for."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to economy of a region: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://ww"
+        },
+        {
+          "info": {
+            "name": "Economic News Search by Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/econnews/bylocation",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State (code) to retrieve municipal and economic news for."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City to retrieve municipal and economic news for."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to economy of a location: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * Free Form Text Search - A search for words or phrases can be performed against the "
+        },
+        {
+          "info": {
+            "name": "Corporate News",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/news",
+            "params": [
+              {
+                "name": "bvIds",
+                "value": "",
+                "type": "query",
+                "description": "One or more Bitvore Ids identifying entities to retrieve news for."
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles to return. By default all types are returned."
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'Corporate, Market & Industry' and/or 'ESG')"
+              },
+              {
+                "name": "themes",
+                "value": "",
+                "type": "query",
+                "description": "One or more themes. (Requires license: 'Themes')"
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "similarity",
+                "value": "",
+                "type": "query",
+                "description": "Indicates which (if any) similar articles should be returned, options are \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they have different usage restrictions."
+              },
+              {
+                "name": "orgField",
+                "value": "",
+                "type": "query",
+                "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned."
+              }
+            ]
+          },
+          "docs": "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only news articles where the identified company is an actor in the story.\n * Signal - An article can be classified by one or more signals indicating that the a"
+        },
+        {
+          "info": {
+            "name": "Advanced Corporate News Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/v2/corp/news",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides an advanced corporate news search capability. The search criteria used when querying news includes a more advanced approach to identifying the company, or organization, scope of the news to return as well as the other content oriented options listed above. The following are the options supported for identifying the organization scope: \n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only news articles where the identifi"
+        },
+        {
+          "info": {
+            "name": "Enriched Record by Record Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/v2/corp/news/byKey/enriched",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enriched Record by Record Key"
+        },
+        {
+          "info": {
+            "name": "Enriched Record by Record Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/news/byKey/:recordKey/enriched",
+            "params": [
+              {
+                "name": "recordKey",
+                "value": "",
+                "type": "path",
+                "description": "Record Key to retrieve enriched news for."
+              }
+            ]
+          },
+          "docs": "Enriched Record by Record Key"
+        },
+        {
+          "info": {
+            "name": "Corporate News by Organization Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/news/byid",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Organization Id"
+              },
+              {
+                "name": "idScheme",
+                "value": "",
+                "type": "query",
+                "description": "Organization Id Scheme"
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles to return. By default all types are returned."
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'Corporate, Market & Industry' and/or 'ESG')"
+              },
+              {
+                "name": "themes",
+                "value": "",
+                "type": "query",
+                "description": "One or more themes. (Requires license: 'Themes')"
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "similarity",
+                "value": "",
+                "type": "query",
+                "description": "Indicates which (if any) similar articles should be returned, options are \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they have different usage restrictions."
+              },
+              {
+                "name": "orgField",
+                "value": "",
+                "type": "query",
+                "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned."
+              }
+            ]
+          },
+          "docs": "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Organization Id - An ID that uniquely identifies a company/organization. Querying by ID returns only news articles where the identified organization is an actor in the story. The organization's primary ID is always a BvID, however, if using an alternate ID, it will also b"
+        },
+        {
+          "info": {
+            "name": "Corporate News by Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/news/byportfolio",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Id identifying a portfolio to retrieve news for."
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles to return. By default all types are returned."
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'Corporate, Market & Industry' and/or 'ESG')"
+              },
+              {
+                "name": "themes",
+                "value": "",
+                "type": "query",
+                "description": "One or more themes. (Requires license: 'Themes')"
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news when not using a portfolio"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "similarity",
+                "value": "",
+                "type": "query",
+                "description": "Indicates which (if any) similar articles should be returned, options are \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they have different usage restrictions."
+              },
+              {
+                "name": "orgField",
+                "value": "",
+                "type": "query",
+                "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned."
+              }
+            ]
+          },
+          "docs": "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Portfolio - A portfolio is made up of one or more companies (BvIDs). Querying by portfolio returns only articles where at least one of the companies in the portfolio are an actor in the article. This option cannot be used with the BvID or Foreign ID options. \n * Signal - "
+        },
+        {
+          "info": {
+            "name": "Economic News Search by FIPS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/econnews/byfips",
+            "params": [
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "FIPS code to retrieve municipal and economic news for."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to economy of a region: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://ww"
+        },
+        {
+          "info": {
+            "name": "Economic News Search by Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/econnews/bylocation",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State (code) to retrieve municipal and economic news for."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City to retrieve municipal and economic news for."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to economy of a location: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * Free Form Text Search - A search for words or phrases can be performed against the "
+        },
+        {
+          "info": {
+            "name": "Municipal News Search by CUSIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/news",
+            "params": [
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "query",
+                "description": "One or more CUSIPs identifying the bonds to retrieve news for."
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'ESG')"
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "includeCusips",
+                "value": "",
+                "type": "query",
+                "description": "Return ALL cusips affected by the article. (Requires license: 'CUSIP')"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to municipal bonds. The search criteria used when querying news includes the following options: \n * CUSIP - Querying by CUSIP returns only news articles where the identified bond is somehow affected by the subject matter of an article.\n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* "
+        },
+        {
+          "info": {
+            "name": "Advanced Municipal News Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/v2/muni/news",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides an advanced municipal news search capability. The search criteria used when querying news includes a more advanced approach to identifying locations, sections, and a larger number of cusips. The following are the options supported for searching the news: \n * CUSIP - Querying by CUSIP returns only news articles where the identified bond is somehow affected by the subject matter of an article. Up to 10000 CUSIPs can be queried. \n * Portfolio - A portfolio is made up of one or more CUSIPs."
+        },
+        {
+          "info": {
+            "name": "Municipal News Search by FIPS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/news/byfips",
+            "params": [
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "FIPS code to retrieve news for"
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+              },
+              {
+                "name": "sector",
+                "value": "",
+                "type": "query",
+                "description": "Sector to retrieve news for"
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'ESG')"
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "includeCusips",
+                "value": "",
+                "type": "query",
+                "description": "Return ALL cusips affected by the article. (Requires license: 'CUSIP')"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to municipal bonds using a FIPS location identifier. The search criteria used when querying news includes the following options: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/pro"
+        },
+        {
+          "info": {
+            "name": "Municipal News Search by Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/news/bylocation",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State to retrieve news for."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City to retrieve news for."
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+              },
+              {
+                "name": "sector",
+                "value": "",
+                "type": "query",
+                "description": "Sector to retrieve news for"
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'ESG')"
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for news"
+              },
+              {
+                "name": "includeCusips",
+                "value": "",
+                "type": "query",
+                "description": "Return ALL cusips affected by the article. (Requires license: 'CUSIP')"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to municipal bonds using a location. The search criteria used when querying news includes the following options: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. "
+        },
+        {
+          "info": {
+            "name": "Municipal News Search by Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/muni/news/byportfolio",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Id identifying a portfolio to retrieve news for."
+              },
+              {
+                "name": "articleType",
+                "value": "",
+                "type": "query",
+                "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+              },
+              {
+                "name": "signals",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals. (Requires license: 'ESG')"
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+              },
+              {
+                "name": "includeCusips",
+                "value": "",
+                "type": "query",
+                "description": "Return ALL cusips affected by the article. (Requires license: 'CUSIP')"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to start from. Time offset will be converted to UTC (Z)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "News date to end with. Time offset will be converted to UTC (Z)"
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Provides the ability to search for news relevant to municipal bonds using a portfolio. The search criteria used when querying news includes the following options: \n * Portfolio - A portfolio is made up of one or more CUSIPs. Querying by portfolio returns only news articles where any of the bonds in the portfolio are affected by the subject matter of an article. \n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Deve"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

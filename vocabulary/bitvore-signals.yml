@@ -1,0 +1,462 @@
+generated: '2026-08-14'
+method: searched
+source: https://developer.bitvore.com/v2/docs/api-reference/signals
+source_note: The Signal Glossary page is a Quasar SPA route that renders from a table shipped inside the portal's own JavaScript
+  bundle (https://developer.bitvore.com/js/chunk-common.4999afd4.js). The taxonomy below is that published table, extracted
+  verbatim — names and descriptions are Bitvore's own words, unedited.
+name: Bitvore Cellenus Signal Glossary
+description: Signals are material events that can have an effect on the bottom line of a company. Each Signal may be further
+  classified by a set of more specific sub-signals. Signal values appear in the signals[] field of every Cellenus corporate
+  news record and drive the Growth, Risk and ESG score families.
+applies_to:
+- openapi/bitvore-corporate-news-api-openapi.yml
+- openapi/bitvore-news-api-api-openapi.yml
+- openapi/bitvore-sentiment-scores-api-openapi.yml
+- openapi/bitvore-muni-news-api-openapi.yml
+field:
+  name: signals
+  in: response
+  type: string[]
+  form: Signal.SubSignal — e.g. "MergeAcquisition.AcquisitionComplete" (see the getting-started example response)
+counts:
+  signals: 19
+  sub_signals: 156
+score_families:
+  source: https://developer.bitvore.com/v1/docs/dataset-exports?dataset=corp-score (SCORE_TYPE table)
+  families:
+  - id: Sentiment
+    includes: all articles regardless of signals present on the record
+  - id: Growth
+    includes:
+    - Recognitions
+    - FinancialHealth
+    - AssetTransactions
+    - Labor
+    - EquityTransactions
+    - Facilities
+    - Agreements
+    - MergersAcquisitions
+    - DebtTransactions
+    - ProductMarkets
+    - RealEstateTransactions
+    - Earnings
+  - id: Risk
+    includes:
+    - ExecutiveChanges
+    - BusinessRisk
+    - LegalIssues
+    - CreditRatings
+    - Bankruptcy
+  - id: ESG
+    includes: all articles under the Environment, Social and Governance signal class
+  - id: E
+    includes: Environment signal class
+  - id: S
+    includes: Social signal class
+  - id: G
+    includes: Governance signal class
+signals:
+- name: Agreement
+  description: Arrangements made between two business entities, typically negotiated, sometimes legally binding.
+  sub_signals:
+  - name: Bid Proposal
+    description: Activities performed in the attempt to win a deal.
+  - name: Deal
+    description: A legal agreement between two entities where money changes hands in one direction is formed.
+  - name: JointVenture
+    description: A commercial enterprise is undertaken jointly by two or more parties that otherwise retain their distinct
+      identities.
+  - name: Partnership
+    description: An agreement between two entities to do something together where no cash changes hands is formed.
+  - name: TentativeAgreement
+    description: A handshake agreement is made between companies, often leading to formal contract.
+  - name: StrategicAlliance
+    description: An agreement between two or more entities to take on projects that are mutually beneficial while retaining
+      independence.
+  - name: SupplyChain
+    description: All entities, people, processes, resources, information and activities involved in creating a product or
+      service.
+- name: AssetTransactions
+  description: A company purchases or sells assets other than real estate, such as power plants, oil fields, hotels etc.
+  sub_signals:
+  - name: SalePurchaseOfIntangibleAssets
+    description: Sale or Purchase of non physical assets such as goodwill, IP, patents, trademarks and copyrights.
+  - name: SalePurchaseOfTangibleAssets
+    description: Sale or Purchase of physical assets such as property and equipment.
+  - name: SpinoffRumor
+    description: Unverified news of a company planning to spinoff of some part of it as a new company.
+  - name: SpinoffAnnouncement
+    description: A company announces a spinoff of some part of it as a new company.
+  - name: SpinoffComplete
+    description: A company completes a spinoff of some part of it as a new company.
+- name: Bankruptcy
+  description: Occurrences of business entities legally filing for bankruptcy.
+  sub_signals:
+  - name: Chapter7
+    description: A company files Chapter 7. Chapter 7 of Title 11 of the U.S. bankruptcy code, controls the process of asset
+      liquidation.
+  - name: Chapter11
+    description: A company files Chapter 11. Chapter 11 is a form of bankruptcy that involves a reorganization of a debtor's
+      business affairs, debts and assets.
+  - name: DischargeCompletion
+    description: Permanent court order that releases a debtor from its liabilities for certain debts.
+  - name: GeneralNews
+    description: General news on all bankruptcy related news which include but not specific to Chapter 7 and 11 filings,
+      judgements, settlements and discharge.
+- name: BusinessRisk
+  description: Events or situations that introduce risk to a business entity.
+  sub_signals:
+  - name: Activism
+    description: Activism occurs against a specific company.
+  - name: CompetitiveRisk
+    description: Risk of negative business impact as a result of competition.
+  - name: Disaster
+    description: A natural disaster occurs that may impact a company's business operations.
+  - name: GeopoliticalUnrest
+    description: Disruptive issues occur caused by a political entity in a geographic area that can affect business operations.
+  - name: OperationalRisk
+    description: Risk of loss resulting from failed or inadequate internal processes, people and systems or from external
+      events such as legal issues.
+  - name: Regulation
+    description: Governmental/agency rules or regulations change that can affect business operations.
+  - name: ReputationalRisk
+    description: Risk of damage or harm to the reputation of a business.
+  - name: RegulatoryLossOfAccreditation
+    description: A company losing its technical competence and integrity.
+  - name: RiskMitigationImprovement
+    description: The act of preventing and improving risks to a business.
+  - name: Sanction
+    description: Punitive action is taken by countries to pressure another country that can affect business operations.
+  - name: SlumpingEconomyWeakDemand
+    description: Macro and Micro economic forces that cause a slowdown in business.
+  - name: TradeAgreement
+    description: Trade laws governing commerce between countries change that can affect business operations.
+- name: CreditRatings
+  description: Business entity credit ratings are announced or reported on by a credit rating agency.
+  sub_signals:
+  - name: Upgrade
+    description: A corporate credit rating is upgraded.
+  - name: Downgrade
+    description: A corporate credit rating is downgraded.
+  - name: Unchanged
+    description: A corporate credit rating remains unchanged from its previous rating.
+  - name: CreditWatch
+    description: A corporate credit rating transitions to Watch status.
+  - name: SpeculationsToRatings
+    description: Unconfirmed news of a corporate credit rating change.
+- name: DebtTransactions
+  description: Transactions where a business entity is taking on debt in some way.
+  sub_signals:
+  - name: BankLoan
+    description: A company takes a bank loan.
+  - name: Bond
+    description: A company issues one or more bonds.
+  - name: BridgeLoan
+    description: A company receives a sum of money lent by an entity to a company cover an interval between two transactions,
+      typically a funding round.
+  - name: CommercialPaper
+    description: A company issues commercial paper. Commercial paper is an unsecured, short-term debt instrument issued
+      by a corporation, typically for the financing of accounts receivable, inventories and meeting short-term liabilities.
+  - name: Debenture
+    description: A company issues debenture. A debenture is a type of debt instrument that is not secured by physical assets
+      or collateral. Debentures are backed only by the general creditworthiness and reputation of the issuer.
+  - name: CompanyDebtNewIssue
+    description: When a company raises capital in the form of a new debt agreement which is usually in the form of bonds,
+      notes, bills or asset backed securities.
+  - name: CompanyDebtUpdate
+    description: An update to a company's debt agreement.
+  - name: CompanyDebtDefault
+    description: When a company fails to fulfill its obligations on a debt.
+  - name: ConvertibleNote
+    description: A short-term debt that converts into equity at a later period.
+  - name: DebtFinancing
+    description: Financing in the form of a new debt agreement which is usually in the form of bonds, notes, bills or asset
+      backed securities.
+  - name: EquityCrowdfunding
+    description: A method of raising funds from the crowd, instead of the traditional route of angel investors, venture
+      capitalists and accredited investors.
+  - name: InitialCoinOffering
+    description: A method of raising money to create a new coin, app or service by issuing its own cryptocurrency.
+  - name: NonEquityAssistance
+    description: Assistance from an outside party such as mentorship, office space and services without receiving equity
+      in return.
+  - name: PostIPODebt
+    description: When a company raises capital after an IPO in the form of a new debt agreement which is usually in the
+      form of bonds, notes, bills or asset backed securities.
+  - name: ProductCrowdfunding
+    description: A method of raising funds for a product from the crowd, instead of the traditional route of angel investors,
+      venture capitalists and accredited investors.
+  - name: STLTLoansDefaults
+    description: When a company fails to meet its payment term on short-term and long-term loans.
+  - name: STLTLoansNew
+    description: Newly  issued short-term and long-term loan
+  - name: UCC1Filing
+    description: Legal notice by creditors declaring rights to collateral posted in case of default on business loans.
+  - name: UCC3Filing
+    description: Filing used to continue, assign, terminate or amend a legal notice by creditors declaring rights to collateral
+      posted in case of default on business loans.
+- name: Earnings
+  description: Earnings related events or information.
+  sub_signals:
+  - name: Announcement
+    description: A company makes an earnings announcement.
+  - name: EarningsSummary
+    description: A company's holds a call, a company publishes a press release, or third party summary is published about
+      earnings.
+  - name: EarningsCall
+    description: A conference call discussing a company's earnings.
+- name: EquityTransactions
+  description: Transactions involving a business entity's equity.
+  sub_signals:
+  - name: Delisting
+    description: A company is delisted from a security exchange (ie. NASDAQ or other stock exchanges).
+  - name: DividendPayment
+    description: A company issues a dividend payment.
+  - name: InsiderTrading
+    description: Company officers purchase/sell shares.
+  - name: IPOAnnouncement
+    description: An initial offering of stock to the public by a company is announced.
+  - name: IPOClosure
+    description: An initial offering of stock to the public by a company has closed.
+  - name: IPOWithdrawn
+    description: An initial offering of stock to the public by a company is withdrawn.
+  - name: PrivatePlacement
+    description: A capital raising event occurs that involves the sale of securities to a relatively small number of select
+      investors.
+  - name: PublicOffering
+    description: A post IPO public offering of company stock is made.
+  - name: ReverseStockSplit
+    description: A corporate action is taken in which a company reduces the total number of its outstanding shares.
+  - name: ShareBuyback
+    description: A company re-purchases their own stock.
+  - name: StockOptions
+    description: A company offers stocks/shares to employees.
+  - name: StockSplit
+    description: A corporate action is taken in which a company divides its existing shares into multiple shares to boost
+      the liquidity of the shares.
+  - name: TenderOffer
+    description: An offer to purchase some or all of shareholders' shares in a corporation is made.
+  - name: VentureFunding
+    description: A company receives venture funding from an investor.
+  - name: AngelRound
+    description: A method of raising funds from angel investors usually during the seed funding stage.
+  - name: CorporateRound
+    description: A method of raising funds from investments by another company.
+  - name: Grant
+    description: Funds that are not required to be repaid to the distributing party/parties.
+  - name: PostIPOEquity
+    description: When a company raises capital after an IPO in the form of a new equity agreement.
+  - name: PostIPOSecondary
+    description: When a company raises capital after an IPO from existing shareholders.
+  - name: PreSeedRound
+    description: A method of raising funds from investors in early stages of product ideation and startup formation.
+  - name: PrivateEquityInvestment
+    description: A method of raising funds from private equity firms.
+  - name: SecondaryMarket
+    description: A market transactions when a company raises capital after an IPO from existing shareholders.
+  - name: SeedRound
+    description: A method of raising funds during the initial fund raising round as a early stage company is gaining traction.
+  - name: SeriesARound
+    description: A method of raising funds after a company has achieved consistent sales growth or a key performance indicator
+      with the goal of growing its user base and/or product offerings.
+  - name: SeriesBRound
+    description: A method of raising funds after a series B round and past the development stage.
+  - name: SeriesCRound
+    description: A method of raising funds after a series C round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesDRound
+    description: A method of raising funds after a series D round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesERound
+    description: A method of raising funds after a series E round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesFRound
+    description: A method of raising funds after a series F round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesGRound
+    description: A method of raising funds after a series G round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesHRound
+    description: A method of raising funds after a series H round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesIRound
+    description: A method of raising funds after a series I round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: SeriesJRound
+    description: A method of raising funds after a series J round once a company is already successful. Fund raising could
+      be used to expand markets, develop products and make acquisitions.
+  - name: OtherCorporateActions
+    description: A company's actions that will affect or may affect equity or debt issued by the company
+- name: ExecutiveChanges
+  description: Changes to a business entity's executive staff or Board of Director.
+  sub_signals:
+  - name: BoardOfDirectors
+    description: Someone leaves or joins a company's Board of Directors.
+  - name: CLevelChanges
+    description: Any position changes from the c-suite.
+  - name: CompanyExecutive
+    description: An executive leaves or joins a company.
+  - name: ExecutiveCompensation
+    description: Any news related to changes, updates and announcements related to executive level compensation.
+- name: Facilities
+  description: Changes to a business entity's facilities.
+  sub_signals:
+  - name: Closing
+    description: A location or facility is closed or shuttered.
+  - name: MarketExpansion
+    description: A company expands its footprint beyond its home market.
+  - name: NewHeadquarters
+    description: A news headquarters opens.
+  - name: OpeningExpansion
+    description: A location or facility opens or expands.
+  - name: RenovationUpdate
+    description: A location or facility is renovated or updated.
+- name: FinancialFilings
+  description: Publicly traded company government filings.
+  sub_signals:
+  - name: 8K
+    description: A company files an 8-K.
+  - name: 10K
+    description: A company files a 10-K.
+  - name: 10Q
+    description: A company files a 10-Q.
+  - name: DEF_14A
+    description: Proxy Statement SEC filing (Form DEF 14A) required by companies to provide its shareholders with matters
+      that will be brought up at an annual or special stockholder meeting.
+  - name: S1
+    description: A company files an S-1.
+- name: FinancialHealth
+  description: Events or information that have a potential impact to the financial health of a business entity.
+  sub_signals:
+  - name: CompanyStrategy
+    description: A discussion of a company's strategy occurs.
+  - name: FinancialInvestmentRisk
+    description: Any markets risks related to a company that its shareholders or potential shareholders should be aware
+      of e.g. liquidity risk, currency risk, inflation risk.
+  - name: FinancialResults
+    description: A discussion of a company's financial results occurs.
+  - name: PriceIncreaseDecrease
+    description: A discussion of the increase or decrease in a company's products and/or services occurs.
+- name: Labor
+  description: Events that directly affect the employees of a business entity.
+  sub_signals:
+  - name: Hiring
+    description: A company hires employees.
+  - name: RelocationOfWorkforce
+    description: A company transferring employees to work from one location to another.
+  - name: Strike
+    description: A strike occurs.
+  - name: UnionizedEmployees
+    description: A company's employees unionize.
+  - name: UnionIssue
+    description: Any issues related to unions arise.
+  - name: UnionizedEmployees
+    description: A company's employees unionize.
+  - name: WorkforceReduction
+    description: A company terminates employees.
+  - name: WageIncrease
+    description: A company provides a wage increase to employees.
+  - name: WageDecrease
+    description: A company provides a wage decrease to employees.
+- name: LegalIssues
+  description: Events that occur involving a business entity that have or may have a legal impact.
+  sub_signals:
+  - name: Antitrust
+    description: A company or member of a company involved in antitrust issues.
+  - name: ClassAction
+    description: A class action lawsuit file against a company due to product or services safety of product /service safety
+      or quality issues.
+  - name: CriminalActivity
+    description: A company or member of a company involved in criminal activity.
+  - name: Investigation
+    description: A review into potential claims against a company's products or services.
+  - name: 'Lawsuit '
+    description: A lawsuit is announced.
+  - name: PatentTrademarkInfringement
+    description: A company is accused of patent or trademark infringement.
+  - name: RegulatoryFines
+    description: Fines charged or proposed to a company for breaking rules and regulations as a result of product /service
+      safety or quality issues.
+  - name: RegulatoryInvestigation
+    description: A company or member of a company involved in regulatory investigations.
+  - name: Settlements
+    description: A judgement is made, a settlement is reached, or a fines is levied against a company.
+- name: MergersAcquisitions
+  description: Mergers and Acquisitions activity.
+  sub_signals:
+  - name: Spinoff
+    description: A company announces a spinoff of some part of it as a new company.
+  - name: TenderOffer
+    description: An offer to purchase some or all of shareholders' shares in a corporation is made.
+  - name: TransactionAnnouncement
+    description: An acquisition, merger or divestiture of some portion of a company is announced.
+  - name: TransactionCompletion
+    description: An acquisition, merger or divestiture of some portion of a company is completed.
+  - name: TransactionFailure
+    description: An acquisition, merger or divestiture of some portion of a company failed.
+  - name: TransactionRumor
+    description: An acquisition, merger or divestiture of some portion of a company is rumored.
+- name: Patents
+  description: General patent news and related news that pertains to patent filings, updates, approvals and rejections.
+  sub_signals:
+  - name: PatentApproval
+    description: A patent is approved.
+  - name: PatentFiling
+    description: A patent is filed.
+  - name: PatentRejection
+    description: A rejection of a patent.
+- name: ProductsMarkets
+  description: Events or information impacting individual products or markets as a whole.
+  sub_signals:
+  - name: BusinessOpeningClosing
+    description: Business units or segments are opened or closed.
+  - name: DrugApproval
+    description: FDA approves a new drug.
+  - name: DrugDenial
+    description: FDA denies a new drug.
+  - name: DrugTrial
+    description: A pharmaceutical company announces a drug trial.
+  - name: ExistingProductNewMarket
+    description: A company goes abroad or enters a new market (e.g. new oil fields or mines, new airline routes, investments
+      in a geographical area).
+  - name: GlobalMarketReport
+    description: A report about the global market.
+  - name: NewMarket
+    description: A company goes abroad or enters a new market (ie. new oil fields or mines, new airline routes, investments
+      in a geographical area).
+  - name: RegulatoryClearance
+    description: A product (besides a drug) has received regulatory approval, permission to operate, etc.
+  - name: PatentApproval
+    description: A patent is approved.
+  - name: PatentPlanning
+    description: Planning related to upcoming products or changes/updates to existing products.
+  - name: ProductTesting
+    description: Testing related to upcoming products or changes/updates to existing products.
+  - name: ProductLaunch
+    description: A new product is announced.
+  - name: ProductPricing
+    description: Pricing related to upcoming products or changes/updates to existing products.
+  - name: ProductRecall
+    description: A product has been recalled due to defect.
+  - name: RegulatoryClearance
+    description: A product (besides a drug) has received regulatory approval, permission to operate, etc.
+- name: RealEstateTransactions
+  description: Transactions involving real estate.
+  sub_signals:
+  - name: Lease
+    description: A property is leased.
+  - name: PurchaseSale
+    description: A property is bought or sold (expanding/reducing a portfolio).
+- name: Recognitions
+  description: A business entity is recognized publicly in some way.
+  sub_signals:
+  - name: Award
+    description: A company receives an award.
+  - name: Certification
+    description: A company receives a significant certification.
+  - name: DonationsFundraisers
+    description: A company donates or raises funds for a cause.
+  - name: Grants
+    description: A company gives without requiring repayment for a specific purpose.
+  - name: Ranking
+    description: A company receives a ranking (Top xxx in Industry, etc.).

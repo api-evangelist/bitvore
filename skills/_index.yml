@@ -8,14 +8,14 @@ skills:
   name: Authenticate against the Bitvore Cellenus API
   description: Obtain and present Bitvore credentials correctly — API key in query or header, or an OAuth 2.0 client-credentials
     bearer token — before calling any Cellenus endpoint.
-  api: openapi/bitvore-security-openapi.yml
+  api: openapi/_original/bitvore-security-openapi.yml
   operations:
   - issueAccessTokenUsingPOST
 - file: bitvore-corporate-news-surveillance.md
   name: Surveil a company for material business events
   description: Resolve a company to a Bitvore bvId, pull its Cellenus corporate news and signals over a date range,
     and fetch the enriched record for anything material.
-  api: openapi/bitvore-corporate-openapi.yml
+  api: openapi/_original/bitvore-corporate-openapi.yml
   operations:
   - handleOrgLookupUsingGET_1
   - handleOrgMatchingUsingPOST_1
@@ -28,7 +28,7 @@ skills:
   name: Export Cellenus datasets and reconcile with changesets
   description: Bulk-download yearly or daily Cellenus corporate dataset exports, then keep an offline copy current
     using the added/modified/removed changeset feed.
-  api: openapi/bitvore-corporate-openapi.yml
+  api: openapi/_original/bitvore-corporate-openapi.yml
   operations:
   - getYearlyDatasetsUsingGET
   - getDailyDatasetsUsingGET_1
@@ -39,7 +39,7 @@ skills:
   name: Find municipal bond news by CUSIP, location or sector
   description: Query the Cellenus Municipal dataset for news and ESG events tied to bond issuers, by CUSIP, state/city,
     FIPS code, sector, or a saved CUSIP portfolio.
-  api: openapi/bitvore-muni-openapi.yml
+  api: openapi/_original/bitvore-muni-openapi.yml
   operations:
   - handleCusipMuniSearchUsingGET
   - handleLocationMuniSearchUsingGET
@@ -52,7 +52,7 @@ skills:
   name: Load a portfolio into Bitvore and monitor it
   description: Create a Cellenus portfolio (organizations or CUSIPs), load its members by API or CSV upload, then
     query news matched against that portfolio.
-  api: openapi/bitvore-corporate-openapi.yml
+  api: openapi/_original/bitvore-corporate-openapi.yml
   operations:
   - handleAddPortfolioUsingPOST_1
   - handleUploadPortfolioItemsUsingPOST_1

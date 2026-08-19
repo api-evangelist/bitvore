@@ -1,0 +1,188 @@
+openapi: 3.2.0
+info:
+  description: "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n "
+  version: '1.0'
+  title: Bitvore Legacy Sentiment Scores API
+  license:
+    name: Copyright Bitvore Corp. 2026
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: Sentiment Scores
+  description: Company Sentiment Score API
+paths:
+  /sentimentscores:
+    get:
+      tags:
+      - Sentiment Scores
+      summary: Sentiment Score Query
+      description: "### Sentiment Scores \n\n Returns the daily sentiment scores of a given type for the specified companies over a period of time. The scores of up to 10 companies identified by their Bitvore ID (BvId) can be returned in a single call. The time period requested can be up to one year. The call options are: \n * BvId - Up to 10 Bitvore ID's of companies to return scores for. \n * Score - Type of score to return. Options are growth, risk, and sentiment (overall sentiment for a company). \n * Start - First day of the time series to return. In the format of yyyy-MM-dd, 2019-10-01 for example. \n * End - Last day of the time series to return. In the format of yyyy-MM-dd, 2019-10-09 for example. \n \n\n The following is an example of using the API to return the growth scores for IBM, BvId b00001ab7, between October 1st and October 7th. \n\n ```js\n GET /sentimentscores?bvId=b00001ab7&score=growth&start=2019-10-01&end=2019-10-07&key=xyz123 HTTP 1.1\n Accept: application/json\n ```\n \n\n The API response will list the timeline of the returned data series as a range. It will then list the scores per day in that range separately for each company requested. The list of scores for a company will be identified by the company's BvId. An example of a response is as follows: \n\n ```js\n {\n \t\"success\": true,\n \t\"response\": {\n \t\t{\n \t\t\t\"timeline\": {\n \t\t\t\t\"start\": \"2019-10-01\",\n \t\t\t\t\"end\": \"2019-10-07\"\n \t\t\t},\n \t\t\t\"series\": [\n \t\t\t\t{\n \t\t\t\t\t\"bvId\": \"b00001ab7\",\n \t\t\t\t\t\"scores\": [\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.4936433,\n \t\t\t\t\t\t0.15462846,\n \t\t\t\t\t\t0.15462846,\n \t\t\t\t\t\t0.11870702,\n \t\t\t\t\t\t0.11870702\n \t\t\t\t\t]\n \t\t\t\t}\n \t\t\t]\n \t\t}\n \t}\n }\n ```\n"
+      operationId: handleSentimentScoreQueryUsingGET
+      parameters:
+      - name: bvId
+        in: query
+        description: Bitvore IDs (up to 10) of organizations to get sentiment scores for.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: score
+        in: query
+        description: Type of score to return. Acceptalbe values are sentiment, growth, risk.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Day of the first score to return. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: Day of the last score to return. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSentimentScoreResponseLegacy'
+                originalRef: OrganizationSentimentScoreResponseLegacy
+        '401':
+          description: Unauthorized to view intelligence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - BasicAuth:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    OrganizationSentimentScoreTimeSeriesLegacy:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization with the scores.
+        series:
+          type: array
+          description: List of organization scores over the timeline
+          items:
+            $ref: '#/components/schemas/OrganizationSentimentScoreSeriesLegacy'
+            originalRef: OrganizationSentimentScoreSeriesLegacy
+        timeline:
+          description: Timeline of the time series
+          $ref: '#/components/schemas/TimeSeriesTimeline'
+          originalRef: TimeSeriesTimeline
+      title: OrganizationSentimentScoreTimeSeriesLegacy
+      description: Time series of organization sentiment scores.
+    OrganizationSentimentScoreSeriesLegacy:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization with the scores.
+        scores:
+          type: array
+          description: List of floating point numbers representing sentiment scores ranging from -1.0 (negative) to 1.0 (positive).
+          items:
+            type: number
+            format: float
+      title: OrganizationSentimentScoreSeriesLegacy
+      description: Series of organization sentiment scores.
+    TimeSeriesTimeline:
+      type: object
+      properties:
+        end:
+          type: string
+          example: '2017-07-28'
+          description: Last day of the timeline
+        start:
+          type: string
+          example: '2017-06-29'
+          description: First day of the timeline
+      title: TimeSeriesTimeline
+      description: Lists the first and last days of the time series.
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    OrganizationSentimentScoreResponseLegacy:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          description: Response payload
+          $ref: '#/components/schemas/OrganizationSentimentScoreTimeSeriesLegacy'
+          originalRef: OrganizationSentimentScoreTimeSeriesLegacy
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: OrganizationSentimentScoreResponseLegacy
+      description: Response to organization sentiment score queries.
+  securitySchemes:
+    API_key:
+      type: apiKey
+      name: X-BV-APIKEY
+      in: header
+    BasicAuth:
+      type: http
+      scheme: basic
+    OAuth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          scopes:
+            Global: Includes all Bitvore APIs
+          tokenUrl: https://api.bitvore.com/oauth/accesstoken

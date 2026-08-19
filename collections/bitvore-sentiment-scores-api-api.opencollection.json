@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corporate Sentiment Scores API API",
+    "version": "2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sentiment Scores API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Organization Sentiment Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/sentimentscores",
+            "params": [
+              {
+                "name": "bvIds",
+                "value": "",
+                "type": "query",
+                "description": "Bitvore Ids (up to 10) of organizations to get sentiment scores for."
+              },
+              {
+                "name": "scoreType",
+                "value": "",
+                "type": "query",
+                "description": "Type of scores to return."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Day of the first score to return. Format is 'yyyy-MM-dd' according to America/New_York timezone."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Day of the last score to return. Format is 'yyyy-MM-dd' according to America/New_York timezone."
+              }
+            ]
+          },
+          "docs": "### Organization Sentiment Scores \n\n Returns the daily sentiment scores of a given type for the specified companies over a period of time. The scores of up to 10 companies identified by their Bitvore ID (BvID) can be returned in a single call. The time period requested can be up to one year. The call options are: \n * BvID - Up to 10 Bitvore ID's of companies to return scores for. \n * Score - Type of score to return. Options are growth, risk, and sentiment (overall sentiment for a company). \n * S"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

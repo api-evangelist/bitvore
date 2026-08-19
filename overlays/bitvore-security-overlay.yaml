@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Bitvore Security API
   version: 1.0.0
-extends: openapi/bitvore-security-openapi.yml
+extends: openapi/_original/bitvore-security-openapi.yml
 actions:
 - target: $.info
   update:

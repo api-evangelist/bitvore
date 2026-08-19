@@ -1,0 +1,109 @@
+generated: '2026-08-14'
+method: searched
+source: https://developer.bitvore.com/v2/docs/getting-started
+description: >-
+  Bitvore publishes NO pricing page, no plan tiers, no quota table and no self-serve checkout on any surface it
+  controls. Access to the Cellenus APIs is licensed by contract: a free evaluation key is requested by email from
+  products@bitvore.com, and a permanent key from sales@bitvore.com. The developer portal has no /pricing route —
+  the string "pricing" appears nowhere in its 34 JavaScript chunks — and bitvore.com now 301s to
+  bondwave.com/muni-news/, which carries a "Request a Demo" call to action rather than a price.
+plan_count: 0
+model: sales-gated / contract-licensed
+currency: null
+billing_period: null
+free_tier:
+  exists: true
+  kind: evaluation-only
+  name: Trial key
+  price: 0
+  obtain: 'email products@bitvore.com'
+  quota: not published
+  duration: not published
+  source: https://developer.bitvore.com/v2/docs/getting-started
+  quote: >-
+    "The products can be evaluated for free with a trial key. To obtain a trial key, contact Bitvore Support."
+  note: >-
+    This is an evaluation key issued on request, not a published free plan with stated limits. Counted here as a
+    documented access path, NOT as a priced tier — plan_count remains 0.
+plans: []
+licensed_products:
+- name: Cellenus Corporate Intelligence
+  description: >-
+    Corporate and economic news, organizations, financial filings, signals and sentiment/growth/risk scores.
+  price: not published
+  separately_licensed: true
+  api_scope: https://api.bitvore.com/v2/corp/
+- name: Cellenus Municipal
+  description: Municipal bond news by CUSIP, location, FIPS and sector, with the ESG signal layer.
+  price: not published
+  separately_licensed: true
+  api_scope: https://api.bitvore.com/v2/muni/
+- name: Cellenus dataset exports (CORE / PLUS)
+  description: >-
+    Bulk CSV dataset and changeset exports. The published table catalog marks 14 tables CORE and 2 tables
+    (RECORD_SIMILARITY, RECORD_STATUS) PLUS — a licensing tier boundary Bitvore publishes without publishing a
+    price for either side.
+  price: not published
+  schema: data-model/bitvore-dataset-export-schema.yml
+  source: https://developer.bitvore.com/v1/docs/dataset-exports
+third_party_listings:
+- marketplace: Datarade
+  product: Bitvore Cellenus for Corporate, Market and Industry
+  url: https://datarade.ai/data-products/bitvore-cellenus-for-corporate-market-and-industry-bitvore
+  price_claim: 'starts at USD 30,000 per year'
+  plans_claimed:
+  - Cellenus Corporate Intelligence — everything except ESG signals and scoring
+  - Cellenus ESG Intelligence — the ESG signals and scoring layer
+  delivery_claimed:
+  - REST API
+  - SFTP
+  formats_claimed:
+  - json
+  - csv
+  first_party: false
+  verified: false
+  evidence:
+    method: web search index snippet; a direct fetch was attempted and refused
+    direct_fetch_status: 403
+    fetched: '2026-08-14'
+  note: >-
+    Recorded as a third-party marketplace listing ONLY. It is not published by Bitvore, the direct page fetch
+    returned 403 to both curl and the fetch tool, and the figure could not be confirmed against any Bitvore-served
+    page. It does not count toward plan_count and must not be quoted as Bitvore's price.
+- marketplace: Microsoft Azure / commercial marketplace
+  product: Bitvore Cellenus (SaaS)
+  publisher: Bitvore Corp.
+  url: https://marketplace.microsoft.com/en-us/marketplace/apps/bitvore1578961172370.cellenus-saas-tx-1
+  price_claim: null
+  first_party: true
+  verified: false
+  evidence:
+    direct_fetch_status: 403
+    fetched: '2026-08-14'
+    note: >-
+      azuremarketplace.microsoft.com 308s to marketplace.microsoft.com, which then returns 403 to automated
+      fetches, so no tier or price could be read. The connected Power Platform connector reference
+      (https://learn.microsoft.com/en-us/connectors/bitvorecellenus/) publishes a throttle — 100 calls per
+      connection per 60 seconds — but no price.
+    related: rate-limits/bitvore-rate-limits.yml
+contacts:
+  evaluation: products@bitvore.com
+  sales: sales@bitvore.com
+  support: support@bitvore.com
+  parent: https://bondwave.com/contact-us/
+evidence:
+- url: https://developer.bitvore.com/v2/docs/getting-started
+  status: 200
+  finding: names the trial-key and licensed-key email paths; states no price
+- url: https://developer.bitvore.com/
+  status: 200
+  finding: SPA with no /pricing or /plans route in any of its 34 chunks
+- url: https://bitvore.com/
+  status: 301
+  finding: redirects to https://bondwave.com/muni-news/
+- url: https://bondwave.com/muni-news/
+  status: 200
+  finding: parent-brand product page with a "Request a Demo" CTA and no pricing
+- url: https://datarade.ai/data-products/bitvore-cellenus-for-corporate-market-and-industry-bitvore
+  status: 403
+  finding: third-party listing could not be fetched directly

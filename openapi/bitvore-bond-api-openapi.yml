@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  description: 'Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.
+
+
+    * The Intelligence API has been replaced by the Corp News API.
+
+    * The Municipal Bond API has been replaced by the Muni News API.'
+  version: Deprecated 2019
+  title: Deprecated Custom Bond API
+  license:
+    name: Copyright Bitvore Corp. 2026
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: Bond
+  description: Municipal Bond API
+paths:
+  /bondapi/cusip/{cusip}:
+    get:
+      tags:
+      - Bond
+      summary: Search for intelligence by CUSIP
+      description: "Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      operationId: handleGetCusipUsingGET
+      parameters:
+      - name: cusip
+        in: path
+        description: cusip
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: Intelligence published date to start from. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: Intelligence published date to end with. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: GMT
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsSearchResponse'
+                originalRef: MuniBondNewsSearchResponse
+        '401':
+          description: Unauthorized to view news.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /bondapi/stateSector/{state}/{sector}:
+    get:
+      tags:
+      - Bond
+      summary: Search for intelligence by state and sector.
+      description: "Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      operationId: handleStateSectorUsingGET
+      parameters:
+      - name: state
+        in: path
+        description: State (two character state code) to query about.
+        required: true
+        schema:
+          type: string
+      - name: sector
+        in: path
+        description: Sector to query about, i.e., Education.
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: Intelligence published date to start from. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: Intelligence published date to end with. Format is yyyy-mm-dd.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: GMT
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniBondNewsSearchResponse'
+                originalRef: MuniBondNewsSearchResponse
+        '401':
+          description: Unauthorized to view news.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+  /bondapi/version:
+    get:
+      tags:
+      - Bond
+      summary: Returns the API version
+      operationId: getVersionUsingGET_4
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '401':
+          description: Unauthorized to get version.
+        '500':
+          description: Internal error.
+      security:
+      - BasicAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
+    MuniBondNewsRecord:
+      type: object
+      properties:
+        recordType:
+          type: string
+          example: WEBCONTENT
+          description: Type of the record
+        rowKey:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely idenfiying the record
+        tags:
+          type: object
+          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
+        timestamp:
+          type: string
+          example: 2017-07-03T08:52:33+0000
+          description: Timestamp of the record
+      title: MuniBondNewsRecord
+      description: Single intelligence item.
+    MuniBondNewsSearchResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of news records returned by search
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniBondNewsRecord'
+            originalRef: MuniBondNewsRecord
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 10
+          description: Total number of news records that matched the search, may be more than returned
+      title: MuniBondNewsSearchResponse
+      description: News search response.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

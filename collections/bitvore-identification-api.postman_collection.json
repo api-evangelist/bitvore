@@ -1,0 +1,2401 @@
+{
+  "item": [
+    {
+      "id": "b28f64d1-62fd-461e-ae84-6d12309584bb",
+      "name": "Identification",
+      "description": {
+        "content": "Identification API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56616100-3a46-498b-9c0c-046b944ec6bb",
+          "name": "Download Id Map",
+          "request": {
+            "name": "Download Id Map",
+            "description": {
+              "content": "Downloads the identification map for the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "643cc317-55ad-4707-8bd4-58d526f55f40",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45f2dd84-a61f-4989-a975-ca7f3b0c413a",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32aa0d91-ac88-476b-a3a4-5fb08589ae2a",
+              "name": "Foreign Id system could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42a19786-f87a-467b-aab5-d2bc0675aa6d",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "114b5cf7-e05a-40e7-9c3a-5ae600361971",
+          "name": "Add Id Mapping",
+          "request": {
+            "name": "Add Id Mapping",
+            "description": {
+              "content": "Adds a mapping for the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"bvId\": \"<string>\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"<string>\"\n  },\n  {\n    \"bvId\": \"<string>\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8bb69127-f7b7-45eb-9c8d-036691f6d3db",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  },\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cbc9610-3c56-4513-8f9a-3f6ebd0062ac",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  },\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "061eee46-ed5b-4ec6-904a-b7b3f65ab314",
+              "name": "Foreign Id system could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  },\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba37ff19-8a84-446f-b5c2-7558dac8150c",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  },\n  {\n    \"bvId\": \"b00001ab7\",\n    \"foreignId\": \"<string>\",\n    \"bvName\": \"ACME Corp\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c40d16ab-6724-4c71-960c-80ed906c29fc",
+          "name": "Delete Id Mappings",
+          "request": {
+            "name": "Delete Id Mappings",
+            "description": {
+              "content": "Deletes all mappings for the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dc0fa29c-8aba-4730-bee7-4c1dde847bbe",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e237f9ea-f281-4003-ac6e-f7a0ed296294",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c57b6cd9-9334-4de8-bca2-04aa3f87e1a2",
+              "name": "Foreign Id system could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc630421-1e22-44ce-98ff-5fb69412d7ba",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "693b4591-8fad-497f-a634-e8862e36c93c",
+          "name": "Return Id Mapping",
+          "request": {
+            "name": "Return Id Mapping",
+            "description": {
+              "content": "Returns the mapping for a given foreign Id in the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "mappings",
+                ":foreignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignId",
+                  "description": "(Required) foreignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19d5d8e9-eea3-4a4c-9adb-fbe6515fda00",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a030770-e014-487a-a50c-eae9ac1ed8a5",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21b0366d-674e-4d59-a419-f37419589867",
+              "name": "Foreign Id system or foreign Id could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1e2436e-7ed9-4179-aeca-567f134caac5",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f1e3414-d336-4e14-a953-ccbf3f5726ec",
+          "name": "Change Id Mapping",
+          "request": {
+            "name": "Change Id Mapping",
+            "description": {
+              "content": "Changes the mapping for a given foreign Id in the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "mappings",
+                ":foreignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignId",
+                  "description": "(Required) foreignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bvId\": \"<string>\",\n  \"foreignId\": \"<string>\",\n  \"bvName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "963c8077-a7df-4ab2-a592-c10e8c171ec2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bvId\": \"b00001ab7\",\n  \"foreignId\": \"<string>\",\n  \"bvName\": \"ACME Corp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19951910-12f4-4e8f-b5df-9c6ee653ef5b",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bvId\": \"b00001ab7\",\n  \"foreignId\": \"<string>\",\n  \"bvName\": \"ACME Corp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32d98fc-d94e-47e8-95cc-3994314bb56d",
+              "name": "Foreign Id system or foreign Id could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bvId\": \"b00001ab7\",\n  \"foreignId\": \"<string>\",\n  \"bvName\": \"ACME Corp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5443c205-1702-40e7-9097-dde026eb7fe1",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bvId\": \"b00001ab7\",\n  \"foreignId\": \"<string>\",\n  \"bvName\": \"ACME Corp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2cad05d-6ff1-4529-8d35-5e730a500a8a",
+          "name": "Delete Id Mapping",
+          "request": {
+            "name": "Delete Id Mapping",
+            "description": {
+              "content": "Deletes the mapping for a given foreign Id in the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "mappings",
+                ":foreignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) foreignSystemName"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignId",
+                  "description": "(Required) foreignId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "073972c6-ab32-4012-b7f0-56e6b96e65d8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e4c892e-5f19-4fa0-a935-52fce0dab3ed",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f8f7ec6-0eb8-40b7-b292-b8f88b3c3e83",
+              "name": "Foreign Id system or foreign Id could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9db1caa-21b3-4275-b6e1-a4607767efdd",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "mappings",
+                    ":foreignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) foreignSystemName"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignId",
+                      "description": "(Required) foreignId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc4b72eb-64fc-4f52-bccb-a05d5ec2eea1",
+          "name": "Upload Id Map",
+          "request": {
+            "name": "Upload Id Map",
+            "description": {
+              "content": "Uploads additional mappings of an identification map for the specified foreign Id system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "maps",
+                ":foreignSystemName",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "foreignSystemName",
+                  "description": "(Required) Foreign Id system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "File to upload"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62a9657d-11d5-44de-a869-a8cc8388a4bb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) Foreign Id system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "File to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    },\n    {\n      \"bvId\": \"b00001ab7\",\n      \"foreignId\": \"<string>\",\n      \"bvName\": \"ACME Corp\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7516010-da89-4fb5-ba40-8019fa765bb9",
+              "name": "Unauthorized to access the specified foreign Id system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) Foreign Id system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "File to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92dc298a-cdc7-472d-8864-cb8e6e036664",
+              "name": "Foreign Id system could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) Foreign Id system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "File to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c306595b-d7e0-4291-ab89-fae5020396f0",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "maps",
+                    ":foreignSystemName",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "foreignSystemName",
+                      "description": "(Required) Foreign Id system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "File to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f459b7b-47da-45ec-9f72-dc14eb93cd69",
+          "name": "Return API Version",
+          "request": {
+            "name": "Return API Version",
+            "description": {
+              "content": "Deprecated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "idapi",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "16be3fc1-98d8-4f02-9d09-0501103044a0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "945746fa-7e3c-47bd-9559-1fa2942e6393",
+              "name": "Unauthorized to get version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4711eb9d-7717-4496-ac1f-ececd8c5660d",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "idapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6a2d983a-7b68-467f-bcc0-0ab2ac5f8967",
+    "name": "Bitvore Legacy Identification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n ",
+      "type": "text/plain"
+    }
+  }
+}

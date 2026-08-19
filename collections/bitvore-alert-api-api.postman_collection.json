@@ -1,0 +1,688 @@
+{
+  "item": [
+    {
+      "id": "bdc8da67-a4fd-482d-9000-b8299b47a7b4",
+      "name": "Alert API",
+      "description": {
+        "content": "Alerts API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "219d0f88-3b4b-4fb3-a637-ec8446793350",
+          "name": "Get a list of all Alerts",
+          "request": {
+            "name": "Get a list of all Alerts",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "uid"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b1fcca9-6ac6-4d24-af34-11ca7d1e67b3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"alertId\": 4260,\n  \"alertName\": \"string\",\n  \"alertTime\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41667767-87f9-4983-b97f-74737a373749",
+          "name": "Set alert limit",
+          "request": {
+            "name": "Set alert limit",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts",
+                "limit",
+                ":alertId",
+                ":limit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "alertId",
+                  "description": "(Required) alertId"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "limit",
+                  "description": "(Required) limit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3e4a8e2a-f7e6-468b-ae0b-b53e511f278d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts",
+                    "limit",
+                    ":alertId",
+                    ":limit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "alertId",
+                      "description": "(Required) alertId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "limit",
+                      "description": "(Required) limit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49ee4021-d1cd-4b9e-8d8d-ff1d5b09e3ca",
+          "name": "Get record",
+          "request": {
+            "name": "Get record",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts",
+                "record",
+                ":rowkey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alertId",
+                  "value": "<long>",
+                  "description": "alertId"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rowkey",
+                  "description": "(Required) rowkey"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "627abc02-ce0a-48c1-a378-afebfe03c27d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts",
+                    "record",
+                    ":rowkey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rowkey",
+                      "description": "(Required) rowkey"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"recordType\": \"WEBCONTENT\",\n  \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n  \"tags\": {},\n  \"timestamp\": \"2017-07-03T08:52:33+0000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad570749-4400-4a87-babf-b1567e65d469",
+          "name": "Get alert results",
+          "request": {
+            "name": "Get alert results",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts",
+                "results",
+                ":transactionid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "transactionid",
+                  "description": "(Required) transactionid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b87c5a49-109c-4c02-b720-eb0840c8ff19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts",
+                    "results",
+                    ":transactionid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "transactionid",
+                      "description": "(Required) transactionid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"cusips\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rowKey\": \"string\"\n    },\n    {\n      \"cusips\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rowKey\": \"string\"\n    }\n  ],\n  \"transactionId\": 9565\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08b37710-31db-4e69-bf8e-915357482a5b",
+          "name": "Get a alert transactions list",
+          "request": {
+            "name": "Get a alert transactions list",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts",
+                "transactions",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "alertId",
+                  "description": "(Required) alertId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2f7e2d5a-e209-4c9e-b979-110630d8f30d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts",
+                    "transactions",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "alertId",
+                      "description": "(Required) alertId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"alertId\": 5262,\n  \"transactions\": [\n    {\n      \"alertTime\": \"string\",\n      \"count\": 1988,\n      \"transactionId\": 6602\n    },\n    {\n      \"alertTime\": \"string\",\n      \"count\": 30,\n      \"transactionId\": 2799\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5c558d4-462c-4f37-af94-ceb85147ef8f",
+          "name": "Get API version",
+          "request": {
+            "name": "Get API version",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "alerts",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1c0b4dca-066a-4bc1-b270-ebbb73353f63",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "alerts",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d8c23b7a-10cc-4c33-88af-05af6107f20a",
+    "name": "Deprecated Custom Alert API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.\n\n* The Intelligence API has been replaced by the Corp News API.\n* The Municipal Bond API has been replaced by the Muni News API.",
+      "type": "text/plain"
+    }
+  }
+}

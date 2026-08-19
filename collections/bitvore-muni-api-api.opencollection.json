@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deprecated Custom Muni API API",
+    "version": "Deprecated 2019"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Muni API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for news by CUSIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/api/search/cusip/:cusip",
+            "params": [
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "path",
+                "description": "cusip"
+              },
+              {
+                "name": "deltaDays",
+                "value": "",
+                "type": "query",
+                "description": "deltaDays"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "count"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "startDate"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "endDate"
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "tz"
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "quality"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Search for news by CUSIP"
+        },
+        {
+          "info": {
+            "name": "Search for news by WatchList",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/api/search/portfolio/:watchlistId",
+            "params": [
+              {
+                "name": "watchlistId",
+                "value": "",
+                "type": "path",
+                "description": "watchlistId"
+              },
+              {
+                "name": "deltaDays",
+                "value": "",
+                "type": "query",
+                "description": "deltaDays"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "count"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "startDate"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "endDate"
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "tz"
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "quality"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Search for news by WatchList"
+        },
+        {
+          "info": {
+            "name": "Search for news using VQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/api/search/vql",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "q"
+              },
+              {
+                "name": "deltaDays",
+                "value": "",
+                "type": "query",
+                "description": "deltaDays"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "count"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "state"
+              },
+              {
+                "name": "citynews",
+                "value": "",
+                "type": "query",
+                "description": "citynews"
+              },
+              {
+                "name": "countynews",
+                "value": "",
+                "type": "query",
+                "description": "countynews"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "startDate"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "endDate"
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "tz"
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "quality"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Search for news using VQL"
+        },
+        {
+          "info": {
+            "name": "Returns the API version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/api/version",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the API version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

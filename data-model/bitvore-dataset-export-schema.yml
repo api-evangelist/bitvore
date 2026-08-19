@@ -1,0 +1,388 @@
+generated: '2026-08-14'
+method: searched
+source: https://developer.bitvore.com/v1/docs/dataset-exports
+source_note: The Dataset Exports reference is a Quasar SPA route whose table catalog ships inside the portal's own JavaScript
+  bundle (https://developer.bitvore.com/js/chunk-common.4999afd4.js). Extracted verbatim — table names, column names, data
+  types, descriptions and examples are Bitvore's own.
+name: Cellenus dataset export schema
+description: The flat-file schema of the Cellenus dataset and changeset exports served by the Datasets API (GET /v2/corp/datasets/...
+  and /v2/corp/changesets/...). Delivered as CSV. This is the bulk/SFTP projection of the same data the REST API returns
+  as JSON, and it is the only place Bitvore publishes column-level types.
+licensing_levels:
+  CORE: included in the base Cellenus dataset licence
+  PLUS: additional tables licensed separately (RECORD_SIMILARITY, RECORD_STATUS)
+related:
+- data-model/bitvore-data-model.yml
+- vocabulary/bitvore-signals.yml
+- openapi/bitvore-datasets-api-api-openapi.yml
+counts:
+  tables: 16
+  columns: 71
+  core: 14
+  plus: 2
+tables:
+- table: CUSIPS
+  level: CORE
+  description: A unique nine-digit identification number used to track bonds
+  columns:
+  - column: CID
+    type: NUMBER
+    description: Is the unique identification used to capture all the cusips in a given article
+    example: ''
+  - column: CUSIP
+    type: TEXT
+    description: A unique identifier to track all the bonds in the portfolio
+    example: ''
+- table: LICENSES
+  level: CORE
+  description: It states if the record is publicly available and if free from intellectual property laws or not.
+  columns:
+  - column: LICID
+    type: NUMBER
+    description: The license identification number for an article
+    example: ''
+  - column: LICENSE
+    type: TEXT
+    description: If the article is publicly available or not.
+    example: Publicly Available\nLexisNexis Licensed\nCLA\nNLA
+- table: ORGS
+  level: CORE
+  description: Organizations represent corporate entities, companies or organizations - both public and private
+  columns:
+  - column: YEARFOUNDED
+    type: NUMBER
+    description: Year the company was founded
+    example: 1987
+  - column: DOMAINNAME
+    type: TEXT
+    description: Website domain name of the company
+    example: alsn.com
+  - column: MIC
+    type: TEXT
+    description: Market Identifier Code of the company.
+    example: For Apple it is NasdaqGS
+  - column: NAICSINDUSTRY
+    type: TEXT
+    description: NAICS code for the industry the company primarily operates in
+    example: 334220 & 334111
+  - column: STATE
+    type: TEXT
+    description: The state the company’s headquarters is located in
+    example: CA
+  - column: EMPLOYEES
+    type: NUMBER
+    description: Number of employees for the selected company.
+    example: 15
+  - column: LASTMODIFIED
+    type: TIMESTAMP_TZ
+    description: The date a record was last changed as yyy-MM-dd hh:mm.
+    example: ''
+  - column: AVAILABLEAT
+    type: TIMESTAMP_TZ
+    description: The date a record was approved for release
+    example: ''
+  - column: TICKER
+    type: TEXT
+    description: An abbreviation used to uniquely identify publicly traded companies
+    example: ALSN
+  - column: SICINDUSTRY
+    type: TEXT
+    description: Standard Industrial Code identifying the industry the company primarily operates
+    example: 3571 (electronic computers)
+  - column: COUNTRY
+    type: TEXT
+    description: Country the company’s headquarters is located in
+    example: UNITED STATES
+  - column: FACEBOOKURL
+    type: TEXT
+    description: URL of the company’s Facebook page
+    example: https://www.facebook.com/apple
+  - column: LINKEDINURL
+    type: TEXT
+    description: URL of the company’s LinkedIn page
+    example: https://www.linkedin.com/company/apple
+  - column: TWITTERURL
+    type: TEXT
+    description: URL of the company’s Twitter page
+    example: https://twitter.com/apple
+  - column: ID
+    type: TEXT
+    description: Bitvore ID that uniquely identifies the company
+    example: b00001ab7
+  - column: CITY
+    type: TEXT
+    description: City where the company’s headquarters is located in
+    example: IRVINE
+  - column: NAME
+    type: TEXT
+    description: Name of the company
+    example: ACME Corp.
+  - column: PARENTID
+    type: TEXT
+    description: Bitvore ID that uniquely identifies the company’s immediate parent (if any)
+    example: b00001ab6
+  - column: ULTIMATEPARENTID
+    type: TEXT
+    description: Bitvore ID that uniquely identifies the company’s ultimate (root) parent (if any)
+    example: b00001ab5
+- table: RECORD
+  level: CORE
+  description: Record is an article for corporate entities, companies or organizations both public and private.
+  columns:
+  - column: LASTMODIFIED
+    type: TIMESTAMP_TZ
+    description: The date a record was last changed as yyyy-MM-dd hh:mm.
+    example: ''
+  - column: ARTICLETYPE
+    type: TEXT
+    description: Article Type - News or Press Release.
+    example: News
+  - column: SENTIMENT
+    type: FLOAT
+    description: Overall Sentiment of the record within a range of -1.0 (negative) and 1.0 (positive).
+    example: 0.2709757
+  - column: SOURCENAME
+    type: TEXT
+    description: Name (typically hostname) of the source of the record.
+    example: businesswire.com, The Washington Daybook
+  - column: ESGSENTIMENT
+    type: FLOAT
+    description: ESG Sentiment of the record within a range of -1.0 (negative) and 1.0 (positive).
+    example: ''
+  - column: SOURCEURL
+    type: TEXT
+    description: URL for the source of the record.
+    example: https://gulffire.mdmpublishing.com/250000th-allison-transmission-is-produced-in-hungary/
+  - column: KEY
+    type: TEXT
+    description: 56 character unique identifier for the data record, a record may be on multiple rows if more than one company
+      is associated with it.
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: PUBLISHED_DATE
+    type: TIMESTAMP_TZ
+    description: Date/time the record was initially published at as yyyy-MM-dd hh:mm.
+    example: ''
+  - column: TIMESTAMP
+    type: TIMESTAMP_TZ
+    description: Time the record was ingested as yyyy-MM-dd hh:mm.
+    example: ''
+  - column: BODY
+    type: TEXT
+    description: Body of any specified article
+    example: ''
+  - column: TITLE
+    type: TEXT
+    description: Title of any specified article
+    example: ALSN aquires Wile E. Coyote
+  - column: SIGNIFICANCE
+    type: TEXT
+    description: Articles are classified by their significance. A highly significant article is one that is alert worthy
+      whereas less significant articles are more relevant when performing research. This option will filter the results
+      returned by the previous options listed.
+    example: HIGH
+  - column: PREVIEWIMAGEURL
+    type: TEXT
+    description: URL to an image that was used originally as a visual preview.
+    example: http://acme.com/resources/coyote.jpg
+- table: RECORD_CUSIPS
+  level: CORE
+  description: Captures all the CUSIPs in a given article, One article can have many CUSIPs and one CUSIP can be linked
+    to many articles
+  columns:
+  - column: CID
+    type: NUMBER
+    description: Unique identifier that captures all cusips in a given article
+    example: ''
+  - column: KEY
+    type: TEXT
+    description: The identification number for a given article
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+- table: RECORD_LICENSE
+  level: CORE
+  description: Captures the license for an article. One article can have only one license.
+  columns:
+  - column: LICID
+    type: NUMBER
+    description: The license identification number for an article
+    example: ''
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+- table: RECORD_LOCATIONS
+  level: CORE
+  description: Captures the locations in the article. One article can mention multiple locations and one location can be
+    mentioned in many article.
+  columns:
+  - column: COUNTRY
+    type: TEXT
+    description: Derived country from a given article
+    example: UNITED STATES
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: STATE
+    type: TEXT
+    description: Derived state from a given article
+    example: California
+  - column: COUNTY
+    type: TEXT
+    description: Derived locality/county from a given article
+    example: Cupertino
+  - column: CITY
+    type: TEXT
+    description: Derived city from a given article
+    example: IRVINE
+  - column: USAGE
+    type: TEXT
+    description: The way the location relates to the article. The value in usage can be labeled as 'Article' or 'Source'.
+      If USAGE = 'Article' it means that that location is part of the article text. If USAGE = 'Source' then it means that
+      the location was the source of the article.
+    example: For a New York Times article that mentions India would have USA as Source and India as Article
+- table: RECORD_ORGS
+  level: CORE
+  description: Captures the companies mentioned in the article. One company can be mentioned in many articles and one article
+    can mention more than one company.
+  columns:
+  - column: NAME
+    type: TEXT
+    description: Name of the company.
+    example: ACME Corp.
+  - column: BVID
+    type: TEXT
+    description: Unique Bitvore alphanumeric identifier for any given organization
+    example: b00001ab7
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+- table: RECORD_SCORE
+  level: CORE
+  description: Captures the score type in an article. One record can have many scores.
+  columns:
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: SCORE
+    type: FLOAT
+    description: The score value raging from -1.0 to 1.0.
+    example: 0.23456
+  - column: SCORETYPE
+    type: NUMBER
+    description: The type of sentiment score, “growth”, “risk”, “sentiment”.
+    example: sentiment
+- table: RECORD_SECTORS\n
+  level: CORE
+  description: Captures all the sectors in a given article. One article can have many sectors. One sector can have many
+    articles referencing it
+  columns:
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: SECID
+    type: NUMBER
+    description: The ID number of any given sector
+    example: ''
+- table: RECORD_SIGNALS
+  level: CORE
+  description: Captures the topics in a given article. One article can have many topics and a there can be only one topic
+    in many articles.
+  columns:
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: SIGID
+    type: NUMBER
+    description: The ID number of any given signal
+    example: ''
+- table: RECORD_SIMILARITY
+  level: PLUS
+  description: An intermediary table that joins the RECORD table and the SIMILARITY table. One record can have only one
+    similarity ID. One signal can have many records
+  columns:
+  - column: SCORE
+    type: FLOAT
+    description: The score value raging from -1.0 to 1.0.
+    example: 0.23456
+  - column: CLUSTERID
+    type: TEXT
+    description: Each record is part of a similarity cluster. An identification for the row in the similarity table
+    example: ''
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: ISMASTER
+    type: BOOLEAN
+    description: An identification for a cluster table of the master records
+    example: ''
+  - column: ISLICENSEDMASTER
+    type: BOOLEAN
+    description: An identification for a cluster table of the master for licensed records
+    example: ''
+- table: RECORD_STATUS
+  level: PLUS
+  description: Status of the article
+  columns:
+  - column: KEY
+    type: TEXT
+    description: The identification number of any given article\nKey= Bitvore Record Rowkey
+    example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+  - column: CORPSTATUS
+    type: TEXT
+    description: Shows whether the article is approved, reviewed or auto-approved
+    example: ''
+  - column: MUNISTATUS
+    type: TEXT
+    description: Shows whether the article is approved, reviewed
+    example: ''
+  - column: REVIEWDATE
+    type: TIMESTAMP_TZ
+    description: The date an article was reviewed for accuracy by our content team
+    example: ''
+- table: SCORE_TYPE\n
+  level: CORE
+  description: 'There are 7 types of scores.\nSentiment: Scores for all articles regardless of signals present on the record\nGrowth:
+    Scores for articles with growth-specific signals including:\nRecognitions, FinancialHealth, AssetTransactions, Labor,
+    EquityTransactions, Facilities, Agreements, MergersAcquisitions, DebtTransactions, ProductMarkets, RealEstateTransactions,
+    Earnings\nRisk: Scores for articles with risk-specific signals including:\nExecutiveChanges, BusinessRisk, LegalIssues,
+    CreditRatings, Bankruptcy\nESG: Scores for articles with ESG-specific signals including all articles under the Environment,
+    Social, and Governance signal class.\nE: Scores for articles with Environment signal class\nS: Scores for articles with
+    Social signal class\nG: Scores for articles with Governance signal class\n'
+  columns:
+  - column: SCORETYPE
+    type: NUMBER
+    description: There are different types of scores like sentiment, ESG, growth and risk
+    example: sentiment
+  - column: NAME
+    type: TEXT
+    description: Name of the company.
+    example: ACME Corp.
+- table: SECTORS\n
+  level: CORE
+  description: Groups of companies that work in the same field of business.
+  columns:
+  - column: SECID
+    type: NUMBER
+    description: The ID number of any given sector
+    example: ''
+  - column: VALUE
+    type: TEXT
+    description: The sector name
+    example: ''
+- table: SIGNALS
+  level: CORE
+  description: Topics that are identified for any given company
+  columns:
+  - column: VALUE
+    type: TEXT
+    description: The signal value
+    example: Business Risk, Environmental
+  - column: SIGID
+    type: NUMBER
+    description: The ID number of any given signal
+    example: ''

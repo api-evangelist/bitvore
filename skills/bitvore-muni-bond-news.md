@@ -1,7 +1,7 @@
 ---
 name: Find municipal bond news by CUSIP, location or sector
 description: Query the Cellenus Municipal dataset for news and ESG events tied to bond issuers, by CUSIP, state/city, FIPS code, sector, or a saved CUSIP portfolio.
-api: openapi/bitvore-muni-openapi.yml
+api: openapi/_original/bitvore-muni-openapi.yml
 operations:
   - handleCusipMuniSearchUsingGET
   - handleLocationMuniSearchUsingGET

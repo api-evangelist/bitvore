@@ -1,0 +1,290 @@
+openapi: 3.2.0
+info:
+  description: "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n "
+  version: '1.0'
+  title: Bitvore Legacy Economic News API
+  license:
+    name: Copyright Bitvore Corp. 2026
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: Economic News
+  description: Economic News API
+paths:
+  /econnews:
+    get:
+      tags:
+      - Economic News
+      summary: Economic News Query
+      description: "Provides the ability to search for news relevant to economy of a location or region: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n can affect performance. In order to guarantee our SLA the number of articles returned will be reduced. \n \n\n The following is an example of using the API. \n\n To query for the economic news about Irvine, California between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET /econnews?state=ca&city=irvine&startDate=2018-07-01&endDate=2018-07-31&tz=PST HTTP 1.1\n Accept: application/json\n X-BV-APIKEY: xyz123... \n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleEconSearchUsingGET
+      parameters:
+      - name: state
+        in: query
+        description: State to retrieve municipal and economic news for. Must not be used with the cusip or portfolio parameters.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: City to retrieve municipal and economic news for, must be used with the state parameter and not with the cusip or portfolio parameters.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: fips
+        in: query
+        description: FIPS code to retrieve municipal and economic news for. Must not be used with the cusip or portfolio parameters.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news when not using a portfolio
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Format is yyyy-mm-dd for daily news or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: News date to end with. Format is yyyy-mm-dd for daily (inclusive) news or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Number of days back news should be returned for. Should not be used with startDate. Default is 31.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+      - name: tz
+        in: query
+        description: Timezone used in startDate and endDate.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: GMT
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuniNewsSearchResponseLegacy'
+                originalRef: MuniNewsSearchResponseLegacy
+        '401':
+          description: Unauthorized to view intelligence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - BasicAuth:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    MuniNewsSearchResponseLegacy:
+      type: object
+      required:
+      - returned
+      - total
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniNewsArticleLegacy'
+            originalRef: MuniNewsArticleLegacy
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of news articles returned by search, maximum amount dictated by the pageSize parameter used in search
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total Number of news articles found by search
+      title: MuniNewsSearchResponseLegacy
+      description: Muni news search response.
+    MuniNewsArticleLegacy:
+      type: object
+      properties:
+        articleType:
+          type: string
+          example: PressRelease
+          description: Type of article. Possible values are "News" and "PressRelease
+        availableAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date published
+        cusips:
+          type: array
+          example: 02361DAP5, 002824AV2
+          description: CUSIPs affected by the article. Required valid CUSIP license and permission.
+          items:
+            type: string
+        excerpt:
+          type: string
+          example: ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.
+          description: Fragment or snippet, of the article
+        key:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely identifying the article
+        locations:
+          type: array
+          example: Irvine//California/United States, /San Diego County/California/United States
+          description: Locations affected. A location is city or county level. It is encoded as city/county/state/country where if the city is specified the county will not be and vice-versa
+          items:
+            type: string
+        matchedCusips:
+          type: array
+          example: 02361DAP5, 002824AV2
+          description: CUSIPs affected by the article that match the input CUSIPs, or are contained in the supplied portfolio.
+          items:
+            type: string
+        previewImageUrl:
+          type: string
+          example: http://acme.com/resources/coyote.jpg
+          description: URL of a preview image
+        publishedAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date available
+        sectors:
+          type: array
+          example: Education, Utilities
+          description: Sectors which the article belongs to.
+          items:
+            type: string
+        sentiment:
+          type: number
+          format: double
+          example: 0.23456
+          description: Sentiment of the article. The value is a decimal value between -1 and 1, under 0 is negative while over 0 is positive.
+        significance:
+          type: string
+          example: HIGH
+          description: Significance of the article. Possible values are "HIGH" and "MEDIUM"
+        sourceName:
+          type: string
+          example: businesswire.com, The Washington Daybook
+          description: Name or host name of the publisher of the article
+        sourceUrl:
+          type: string
+          example: http://acme.com/press
+          description: URL to the original source of the article
+        title:
+          type: string
+          example: ACME acquires Wile E. Coyote, Inc.
+          description: Title
+      title: MuniNewsArticleLegacy
+      description: Muni news article.
+  securitySchemes:
+    API_key:
+      type: apiKey
+      name: X-BV-APIKEY
+      in: header
+    BasicAuth:
+      type: http
+      scheme: basic
+    OAuth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          scopes:
+            Global: Includes all Bitvore APIs
+          tokenUrl: https://api.bitvore.com/oauth/accesstoken

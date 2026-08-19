@@ -1,0 +1,448 @@
+generated: '2026-08-14'
+method: derived
+source: mcp/bitvore-mcp.yml (candidate tool surface) bound to operationIds in openapi/*.yml
+note: Bitvore publishes NO MCP server. This crosswalk binds the CANDIDATE tool surface in mcp/bitvore-mcp.yml to the real
+  operationIds it was derived from, so the mapping is auditable and so the 99 REST operations with no candidate tool are recorded
+  rather than silently dropped. Every rest[] operationId below was verified present in a refined OpenAPI in openapi/. No GraphQL
+  surface exists on any Bitvore host.
+surfaces:
+  openapi:
+    files: 16
+    operations: 121
+    source: https://api.bitvore.com/v2/api-docs?group=<group>
+    gated: false
+    groups:
+    - Legacy
+    - Security
+    - v2-Corp
+    - v2-Muni
+    - z-Custom API I.T.
+    - z-Custom API L.
+    probed: 2026-08-14 — https://api.bitvore.com/swagger-resources returned 200 listing all six groups
+  graphql:
+    endpoint: null
+    gated: null
+    note: No /graphql surface found on api.bitvore.com or developer.bitvore.com.
+  mcp:
+    url: null
+    status: candidate
+    gated: null
+    note: 'No hosted or stdio MCP server published by Bitvore (mcp/bitvore-mcp.yml deployment.mode: none).'
+coverage:
+  mcp_tools: 22
+  mapped_to_rest: 22
+  mcp_only: 0
+  rest_only: 99
+  rest_operations_total: 121
+  rest_coverage_pct: 18.2
+crosswalk:
+- tool: search_corporate_news
+  category: News
+  rest:
+  - handleNewsSearchUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/corp/news
+  binding: one-to-one
+  confidence: high
+- tool: search_corporate_news_advanced
+  category: News
+  rest:
+  - handleCorpAdvancedSearchUsingPOST_1
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: POST /v2/corp/news
+  binding: one-to-one
+  confidence: high
+- tool: get_enriched_record
+  category: News
+  rest:
+  - handleGetEnrichedRecordUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/corp/news/byKey/{recordKey}/enriched
+  binding: one-to-one
+  confidence: high
+- tool: search_news_by_portfolio
+  category: News
+  rest:
+  - handlePortfolioNewsSearchUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/corp/news/byportfolio
+  binding: one-to-one
+  confidence: high
+- tool: search_economic_news
+  category: News
+  rest:
+  - handleEconSearchUsingGET_1
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/corp/econnews/bylocation
+  binding: one-to-one
+  confidence: high
+- tool: lookup_organization
+  category: Organizations
+  rest:
+  - handleOrgLookupUsingGET_1
+  spec: openapi/bitvore-organizations-api-api-openapi.yml
+  http: GET /v2/corp/organizations/lookup
+  binding: one-to-one
+  confidence: high
+- tool: get_organization
+  category: Organizations
+  rest:
+  - handleGetOrgUsingGET_2
+  spec: openapi/bitvore-organizations-api-api-openapi.yml
+  http: GET /v2/corp/organizations/{bvId}
+  binding: one-to-one
+  confidence: high
+- tool: match_organizations
+  category: Organizations
+  rest:
+  - handleOrgMatchingUsingPOST_1
+  spec: openapi/bitvore-organizations-api-api-openapi.yml
+  http: POST /v2/corp/organizations/match
+  binding: one-to-one
+  confidence: high
+- tool: get_sentiment_scores
+  category: Sentiment
+  rest:
+  - handleSentimentScoreQueryUsingGET_1
+  spec: openapi/bitvore-sentiment-scores-api-api-openapi.yml
+  http: GET /v2/corp/sentimentscores
+  binding: one-to-one
+  confidence: high
+- tool: search_filings
+  category: Filings
+  rest:
+  - getFilingsUsingGET_1
+  spec: openapi/bitvore-filings-api-api-openapi.yml
+  http: GET /v2/corp/filings/financial/summaries
+  binding: one-to-one
+  confidence: high
+- tool: get_filing
+  category: Filings
+  rest:
+  - getFilingUsingGET
+  spec: openapi/bitvore-filings-api-api-openapi.yml
+  http: GET /v2/corp/filings/financial/{filingId}
+  binding: one-to-one
+  confidence: high
+- tool: list_portfolios
+  category: Portfolios
+  rest:
+  - handleGetPortfoliosUsingGET_1
+  spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  http: GET /v2/corp/portfolios
+  binding: one-to-one
+  confidence: high
+- tool: create_portfolio
+  category: Portfolios
+  rest:
+  - handleAddPortfolioUsingPOST_1
+  spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  http: POST /v2/corp/portfolios
+  binding: one-to-one
+  confidence: high
+- tool: add_portfolio_items
+  category: Portfolios
+  rest:
+  - handleAddPortfolioItemsUsingPOST_1
+  spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  http: POST /v2/corp/portfolios/{portfolioId}/items
+  binding: one-to-one
+  confidence: high
+- tool: upload_portfolio_items
+  category: Portfolios
+  rest:
+  - handleUploadPortfolioItemsUsingPOST_1
+  spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  http: POST /v2/corp/portfolios/{portfolioId}/itemUploads
+  binding: one-to-one
+  confidence: high
+- tool: list_datasets
+  category: Datasets
+  rest:
+  - getYearlyDatasetsUsingGET
+  spec: openapi/bitvore-datasets-api-api-openapi.yml
+  http: GET /v2/corp/datasets/{dataset}/{year}
+  binding: one-to-one
+  confidence: high
+- tool: get_changesets
+  category: Datasets
+  rest:
+  - getChangesetsUsingGET
+  spec: openapi/bitvore-datasets-api-api-openapi.yml
+  http: GET /v2/corp/changesets
+  binding: one-to-one
+  confidence: high
+- tool: search_muni_news_by_cusip
+  category: Muni
+  rest:
+  - handleCusipMuniSearchUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/muni/news
+  binding: one-to-one
+  confidence: high
+- tool: search_muni_news_by_location
+  category: Muni
+  rest:
+  - handleLocationMuniSearchUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/muni/news/bylocation
+  binding: one-to-one
+  confidence: high
+- tool: search_muni_news_by_portfolio
+  category: Muni
+  rest:
+  - handlePortfolioMuniSearchUsingGET
+  spec: openapi/bitvore-news-api-api-openapi.yml
+  http: GET /v2/muni/news/byportfolio
+  binding: one-to-one
+  confidence: high
+- tool: create_muni_portfolio
+  category: Muni
+  rest:
+  - handleAddPortfolioUsingPOST_2
+  spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  http: POST /v2/muni/portfolios
+  binding: one-to-one
+  confidence: high
+- tool: issue_access_token
+  category: Auth
+  rest:
+  - issueAccessTokenUsingPOST
+  spec: openapi/bitvore-oauth2-api-openapi.yml
+  http: POST /oauth/accesstoken
+  binding: one-to-one
+  confidence: high
+mcp_only: []
+rest_only:
+- spec: openapi/bitvore-alert-api-api-openapi.yml
+  operations:
+  - operationId: handleAlertAPIVersionUsingGET
+    http: GET /muni/alerts/version
+  - operationId: handleAlertRecordUsingGET
+    http: GET /muni/alerts/record/{rowkey}
+  - operationId: handleAlertResultsUsingGET
+    http: GET /muni/alerts/results/{transactionid}
+  - operationId: handleAlertTransactionsUsingGET
+    http: GET /muni/alerts/transactions/{alertId}
+  - operationId: handleListAlertsUsingGET
+    http: GET /muni/alerts
+  - operationId: handleSetAlertLimitUsingPOST
+    http: POST /muni/alerts/limit/{alertId}/{limit}
+- spec: openapi/bitvore-bond-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET_4
+    http: GET /bondapi/version
+  - operationId: handleGetCusipUsingGET
+    http: GET /bondapi/cusip/{cusip}
+  - operationId: handleStateSectorUsingGET
+    http: GET /bondapi/stateSector/{state}/{sector}
+- spec: openapi/bitvore-corporate-news-api-openapi.yml
+  operations:
+  - operationId: handleCorpAdvancedSearchUsingPOST
+    http: POST /corpnews
+  - operationId: handleCorpSimpleSearchUsingGET
+    http: GET /corpnews
+- spec: openapi/bitvore-datasets-api-api-openapi.yml
+  operations:
+  - operationId: downloadChangesetsUsingGET
+    http: GET /v2/corp/changesets/{changeset}
+  - operationId: getDailyDatasetsUsingGET
+    http: GET /v2/corp/changesets/{changeset}/{year}/{month}/{day}
+  - operationId: getDailyDatasetsUsingGET_1
+    http: GET /v2/corp/datasets/{dataset}/{year}/{month}/{day}
+- spec: openapi/bitvore-economic-news-api-openapi.yml
+  operations:
+  - operationId: handleEconSearchUsingGET
+    http: GET /econnews
+- spec: openapi/bitvore-entity-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET
+    http: GET /entityapi/version
+  - operationId: handleGetOrgUsingGET
+    http: GET /entityapi/entities/{id}
+  - operationId: handleOrgLookupUsingGET
+    http: GET /entityapi/entities
+  - operationId: handleOrgMatchingUsingPOST
+    http: POST /entityapi/matches
+- spec: openapi/bitvore-filings-api-api-openapi.yml
+  operations:
+  - operationId: downloadFilingUsingGET_1
+    http: GET /v2/corp/filings/financial/submissions/{filingId}
+  - operationId: downloadFilingsUsingGET_1
+    http: GET /v2/corp/filings/financial/submissions
+- spec: openapi/bitvore-financial-filings-api-openapi.yml
+  operations:
+  - operationId: downloadFilingUsingGET
+    http: GET /financialfiling/submissions/{filingId}
+  - operationId: downloadFilingsUsingGET
+    http: GET /financialfiling/submissions
+  - operationId: getFilingsUsingGET
+    http: GET /financialfiling/summaries
+- spec: openapi/bitvore-identification-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET_1
+    http: GET /idapi/version
+  - operationId: handleAddMappingsUsingPOST
+    http: POST /idapi/maps/{foreignSystemName}/mappings
+  - operationId: handleDeleteMappingsUsingDELETE
+    http: DELETE /idapi/maps/{foreignSystemName}/mappings
+  - operationId: handleDownloadMapUsingGET
+    http: GET /idapi/maps/{foreignSystemName}
+  - operationId: handleGetMappingUsingGET
+    http: GET /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  - operationId: handleModifyMappingUsingPUT
+    http: PUT /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  - operationId: handleRemoveMappingUsingDELETE
+    http: DELETE /idapi/maps/{foreignSystemName}/mappings/{foreignId}
+  - operationId: handleUploadMapUsingPOST
+    http: POST /idapi/maps/{foreignSystemName}/upload
+- spec: openapi/bitvore-intel-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET_3
+    http: GET /intelapi/version
+  - operationId: handleNewsSearchUsingGET_2
+    http: GET /intelapi/intel
+- spec: openapi/bitvore-muni-api-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET_5
+    http: GET /muni/api/version
+  - operationId: searchWithCUSIPUsingGET
+    http: GET /muni/api/search/cusip/{cusip}
+  - operationId: searchWithVqlUsingGET
+    http: GET /muni/api/search/vql
+  - operationId: searchWithWatchListUsingGET
+    http: GET /muni/api/search/portfolio/{watchlistId}
+- spec: openapi/bitvore-muni-news-api-openapi.yml
+  operations:
+  - operationId: handleMuniAdvancedSearchUsingPOST
+    http: POST /muninews
+  - operationId: handleMuniSearchUsingGET
+    http: GET /muninews
+- spec: openapi/bitvore-news-api-api-openapi.yml
+  operations:
+  - operationId: handleEconSearchUsingGET_2
+    http: GET /v2/muni/econnews/bylocation
+  - operationId: handleFipsEconSearchUsingGET
+    http: GET /v2/corp/econnews/byfips
+  - operationId: handleFipsEconSearchUsingGET_1
+    http: GET /v2/muni/econnews/byfips
+  - operationId: handleFipsMuniSearchUsingGET
+    http: GET /v2/muni/news/byfips
+  - operationId: handleGetEnrichedRecordUsingPOST
+    http: POST /v2/corp/news/byKey/enriched
+  - operationId: handleMuniAdvancedSearchUsingPOST_1
+    http: POST /v2/muni/news
+  - operationId: handleNewsSearchUsingGET_1
+    http: GET /v2/corp/news/byid
+- spec: openapi/bitvore-organizations-api-api-openapi.yml
+  operations:
+  - operationId: handleGetOrgUsingGET_1
+    http: GET /v2/corp/organizations/byid/{id}
+  - operationId: handleOrgSearchUsingPOST
+    http: POST /v2/corp/organizations/search
+- spec: openapi/bitvore-portfolio-api-openapi.yml
+  operations:
+  - operationId: getVersionUsingGET_2
+    http: GET /portfolioapi/version
+  - operationId: handleAddPortfolioItemsUsingPOST
+    http: POST /portfolioapi/portfolios/{portfolioId}/items
+  - operationId: handleAddPortfolioUsingPOST
+    http: POST /portfolioapi/portfolios
+  - operationId: handleDeletePortfolioItemsUsingDELETE
+    http: DELETE /portfolioapi/portfolios/{portfolioId}/items
+  - operationId: handleDeletePortfolioItemsUsingDELETE_1
+    http: DELETE /portfolioapi/portfolios/{portfolioId}/items/{itemId}
+  - operationId: handleDeletePortfolioUsingDELETE
+    http: DELETE /portfolioapi/portfolios/{portfolioId}
+  - operationId: handleGetPortfolioItemsUsingGET
+    http: GET /portfolioapi/portfolios/{portfolioId}/items
+  - operationId: handleGetPortfolioUsingGET
+    http: GET /portfolioapi/portfolios/{portfolioId}
+  - operationId: handleGetPortfoliosUsingGET
+    http: GET /portfolioapi/portfolios
+  - operationId: handleModifyPortfolioUsingPUT
+    http: PUT /portfolioapi/portfolios/{portfolioId}
+  - operationId: handleReplacePortfolioItemsUsingPUT
+    http: PUT /portfolioapi/portfolios/{portfolioId}/items
+  - operationId: handleUploadPortfolioItemsUsingPOST
+    http: POST /portfolioapi/portfolios/{portfolioId}/itemUploads
+- spec: openapi/bitvore-portfolios-api-api-openapi.yml
+  operations:
+  - operationId: handleAddPortfolioItemsByValuesUsingPOST
+    http: POST /v2/corp/portfolios/{portfolioId}/items/ids
+  - operationId: handleAddPortfolioItemsByValuesUsingPOST_1
+    http: POST /v2/muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleAddPortfolioItemsByValuesUsingPOST_2
+    http: POST /muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleAddPortfolioItemsUsingPOST_2
+    http: POST /v2/muni/portfolios/{portfolioId}/items
+  - operationId: handleAddPortfolioItemsUsingPOST_3
+    http: POST /muni/portfolios/{portfolioId}/items
+  - operationId: handleAddPortfolioUsingPOST_3
+    http: POST /muni/portfolios
+  - operationId: handleDeletePortfolioItemsUsingDELETE_2
+    http: DELETE /v2/corp/portfolios/{portfolioId}/items
+  - operationId: handleDeletePortfolioItemsUsingDELETE_3
+    http: DELETE /v2/corp/portfolios/{portfolioId}/items/{id}
+  - operationId: handleDeletePortfolioItemsUsingDELETE_4
+    http: DELETE /v2/muni/portfolios/{portfolioId}/items
+  - operationId: handleDeletePortfolioItemsUsingDELETE_5
+    http: DELETE /v2/muni/portfolios/{portfolioId}/items/{id}
+  - operationId: handleDeletePortfolioItemsUsingDELETE_6
+    http: DELETE /muni/portfolios/{portfolioId}/items
+  - operationId: handleDeletePortfolioItemsUsingDELETE_7
+    http: DELETE /muni/portfolios/{portfolioId}/items/{id}
+  - operationId: handleDeletePortfolioUsingDELETE_1
+    http: DELETE /v2/corp/portfolios/{portfolioId}
+  - operationId: handleDeletePortfolioUsingDELETE_2
+    http: DELETE /v2/muni/portfolios/{portfolioId}
+  - operationId: handleDeletePortfolioUsingDELETE_3
+    http: DELETE /muni/portfolios/{portfolioId}
+  - operationId: handleGetPortfolioItemsByValuesUsingGET
+    http: GET /v2/corp/portfolios/{portfolioId}/items/ids
+  - operationId: handleGetPortfolioItemsByValuesUsingGET_1
+    http: GET /v2/muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleGetPortfolioItemsByValuesUsingGET_2
+    http: GET /muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleGetPortfolioItemsUsingGET_1
+    http: GET /v2/corp/portfolios/{portfolioId}/items
+  - operationId: handleGetPortfolioItemsUsingGET_2
+    http: GET /v2/muni/portfolios/{portfolioId}/items
+  - operationId: handleGetPortfolioItemsUsingGET_3
+    http: GET /muni/portfolios/{portfolioId}/items
+  - operationId: handleGetPortfolioUsingGET_1
+    http: GET /v2/corp/portfolios/{portfolioId}
+  - operationId: handleGetPortfolioUsingGET_2
+    http: GET /v2/muni/portfolios/{portfolioId}
+  - operationId: handleGetPortfolioUsingGET_3
+    http: GET /muni/portfolios/{portfolioId}
+  - operationId: handleGetPortfoliosUsingGET_2
+    http: GET /v2/muni/portfolios
+  - operationId: handleGetPortfoliosUsingGET_3
+    http: GET /muni/portfolios
+  - operationId: handleModifyPortfolioUsingPUT_1
+    http: PUT /v2/corp/portfolios/{portfolioId}
+  - operationId: handleModifyPortfolioUsingPUT_2
+    http: PUT /v2/muni/portfolios/{portfolioId}
+  - operationId: handleModifyPortfolioUsingPUT_3
+    http: PUT /muni/portfolios/{portfolioId}
+  - operationId: handleReplacePortfolioItemsByValuesUsingPUT
+    http: PUT /v2/corp/portfolios/{portfolioId}/items/ids
+  - operationId: handleReplacePortfolioItemsByValuesUsingPUT_1
+    http: PUT /v2/muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleReplacePortfolioItemsByValuesUsingPUT_2
+    http: PUT /muni/portfolios/{portfolioId}/items/ids
+  - operationId: handleReplacePortfolioItemsUsingPUT_1
+    http: PUT /v2/corp/portfolios/{portfolioId}/items
+  - operationId: handleReplacePortfolioItemsUsingPUT_2
+    http: PUT /v2/muni/portfolios/{portfolioId}/items
+  - operationId: handleReplacePortfolioItemsUsingPUT_3
+    http: PUT /muni/portfolios/{portfolioId}/items
+  - operationId: handleUploadPortfolioItemsUsingPOST_2
+    http: POST /v2/muni/portfolios/{portfolioId}/itemUploads
+  - operationId: handleUploadPortfolioItemsUsingPOST_3
+    http: POST /muni/portfolios/{portfolioId}/itemUploads
+- spec: openapi/bitvore-sentiment-scores-api-openapi.yml
+  operations:
+  - operationId: handleSentimentScoreQueryUsingGET
+    http: GET /sentimentscores

@@ -1,0 +1,765 @@
+{
+  "item": [
+    {
+      "id": "1535efee-029b-4f12-b37c-5c694ac63d7a",
+      "name": "Bond",
+      "description": {
+        "content": "Municipal Bond API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70c42644-93d6-437d-941d-2e5391139fd0",
+          "name": "Search for intelligence by CUSIP",
+          "request": {
+            "name": "Search for intelligence by CUSIP",
+            "description": {
+              "content": "Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bondapi",
+                "cusip",
+                ":cusip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to start from. Format is yyyy-mm-dd."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to end with. Format is yyyy-mm-dd."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cusip",
+                  "description": "(Required) cusip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6fccff68-fea8-4a65-891e-c37d710b197a",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "cusip",
+                    ":cusip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusip",
+                      "description": "(Required) cusip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    }\n  ],\n  \"success\": true,\n  \"total\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54192f94-ff49-42f0-aaa3-433c13e79b4b",
+              "name": "Unauthorized to view news.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "cusip",
+                    ":cusip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusip",
+                      "description": "(Required) cusip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54e9c6e6-58b8-41c0-a298-7d70ff471c40",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "cusip",
+                    ":cusip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusip",
+                      "description": "(Required) cusip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38f47d45-ee13-4cfd-a30a-e68a51b830d0",
+          "name": "Search for intelligence by state and sector.",
+          "request": {
+            "name": "Search for intelligence by state and sector.",
+            "description": {
+              "content": "Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bondapi",
+                "stateSector",
+                ":state",
+                ":sector"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to start from. Format is yyyy-mm-dd."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to end with. Format is yyyy-mm-dd."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "state",
+                  "description": "(Required) State (two character state code) to query about."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sector",
+                  "description": "(Required) Sector to query about, i.e., Education."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2b60bb76-b1ff-4e5b-af14-1cf5e8a8aae4",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "stateSector",
+                    ":state",
+                    ":sector"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) State (two character state code) to query about."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sector",
+                      "description": "(Required) Sector to query about, i.e., Education."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    }\n  ],\n  \"success\": true,\n  \"total\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ca000d6-3873-45e3-9f58-e4d9974f12c0",
+              "name": "Unauthorized to view news.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "stateSector",
+                    ":state",
+                    ":sector"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) State (two character state code) to query about."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sector",
+                      "description": "(Required) Sector to query about, i.e., Education."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a5abf8a-657d-4bd1-8ee5-a23fac8afdca",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "stateSector",
+                    ":state",
+                    ":sector"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "state",
+                      "description": "(Required) State (two character state code) to query about."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sector",
+                      "description": "(Required) Sector to query about, i.e., Education."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d918c03-37c9-436b-bc56-6ae3782cafb0",
+          "name": "Returns the API version",
+          "request": {
+            "name": "Returns the API version",
+            "description": {},
+            "url": {
+              "path": [
+                "bondapi",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "47034159-e8af-42d3-bf04-1f81b479284e",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10e495a2-c87e-4b56-a2c2-4bcbf8c7fc59",
+              "name": "Unauthorized to get version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "202fd93e-72c1-4b1c-8cac-09582c025622",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bondapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8c10946e-d0e2-4c20-9d05-11b251771523",
+    "name": "Deprecated Custom Bond API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.\n\n* The Intelligence API has been replaced by the Corp News API.\n* The Municipal Bond API has been replaced by the Muni News API.",
+      "type": "text/plain"
+    }
+  }
+}

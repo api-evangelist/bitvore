@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deprecated Custom Alert API API",
+    "version": "Deprecated 2019"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alert API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/alerts",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "uid"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a list of all Alerts"
+        },
+        {
+          "info": {
+            "name": "Set alert limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/muni/alerts/limit/:alertId/:limit",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "alertId"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "path",
+                "description": "limit"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Set alert limit"
+        },
+        {
+          "info": {
+            "name": "Get record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/alerts/record/:rowkey",
+            "params": [
+              {
+                "name": "rowkey",
+                "value": "",
+                "type": "path",
+                "description": "rowkey"
+              },
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "query",
+                "description": "alertId"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get record"
+        },
+        {
+          "info": {
+            "name": "Get alert results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/alerts/results/:transactionid",
+            "params": [
+              {
+                "name": "transactionid",
+                "value": "",
+                "type": "path",
+                "description": "transactionid"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get alert results"
+        },
+        {
+          "info": {
+            "name": "Get a alert transactions list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/alerts/transactions/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "alertId"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a alert transactions list"
+        },
+        {
+          "info": {
+            "name": "Get API version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/muni/alerts/version",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get API version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

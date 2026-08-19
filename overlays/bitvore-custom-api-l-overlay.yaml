@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Bitvore Custom L (deprecated) API
   version: 1.0.0
-extends: openapi/bitvore-custom-api-l-openapi.yml
+extends: openapi/_original/bitvore-custom-api-l-openapi.yml
 actions:
 - target: $.info
   update:

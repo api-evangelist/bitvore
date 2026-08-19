@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitvore Legacy Sentiment Scores API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sentiment Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sentiment Score Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/sentimentscores",
+            "params": [
+              {
+                "name": "bvId",
+                "value": "",
+                "type": "query",
+                "description": "Bitvore IDs (up to 10) of organizations to get sentiment scores for."
+              },
+              {
+                "name": "score",
+                "value": "",
+                "type": "query",
+                "description": "Type of score to return. Acceptalbe values are sentiment, growth, risk."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Day of the first score to return. Format is yyyy-mm-dd."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "Day of the last score to return. Format is yyyy-mm-dd."
+              }
+            ]
+          },
+          "docs": "### Sentiment Scores \n\n Returns the daily sentiment scores of a given type for the specified companies over a period of time. The scores of up to 10 companies identified by their Bitvore ID (BvId) can be returned in a single call. The time period requested can be up to one year. The call options are: \n * BvId - Up to 10 Bitvore ID's of companies to return scores for. \n * Score - Type of score to return. Options are growth, risk, and sentiment (overall sentiment for a company). \n * Start - First "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

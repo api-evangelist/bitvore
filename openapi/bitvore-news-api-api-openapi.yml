@@ -1,0 +1,2389 @@
+openapi: 3.2.0
+info:
+  title: Bitvore News API API
+  license:
+    name: Copyright Bitvore Corp. 2026
+  version: '1.0'
+  description: 'Operations tagged News API across 2 of this provider''s published API definitions: bitvore-corporate-openapi.yml, bitvore-muni-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.bitvore.com/
+tags:
+- name: News API
+  description: Precision and Economic News
+paths:
+  /v2/corp/econnews/byfips:
+    get:
+      tags:
+      - News API
+      summary: Economic News Search by FIPS
+      description: "Provides the ability to search for news relevant to economy of a region: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n \n\n The following is an example of using the API. \n\n To query for the economic news about the Los Angeles region using the FIPS code 037 between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/econnews?fips=037&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleFipsEconSearchUsingGET
+      parameters:
+      - name: fips
+        in: query
+        description: FIPS code to retrieve municipal and economic news for.
+        required: true
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/corp/econnews/bylocation:
+    get:
+      tags:
+      - News API
+      summary: Economic News Search by Location
+      description: "Provides the ability to search for news relevant to economy of a location: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n \n\n The following is an example of using the API. \n\n To query for the economic news about Irvine, California between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/econnews?state=ca&city=irvine&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleEconSearchUsingGET_1
+      parameters:
+      - name: state
+        in: query
+        description: State (code) to retrieve municipal and economic news for.
+        required: true
+        allowEmptyValue: false
+        x-example: CA
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: City to retrieve municipal and economic news for.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/corp/news:
+    get:
+      tags:
+      - News API
+      summary: Corporate News
+      description: "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only news articles where the identified company is an actor in the story.\n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Similarity - Indicates which (if any) similar articles should be returned, options are \n \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they \n have different usage restrictions. In other word with this option two similar articles can be returned \n if one is FullUse and the other is FairUse. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency. \n \n\n The following are some examples of using the API. \n\n To query for M&A news between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/news?signal=MergerAcquisition&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvID/Name combinations identifying companies discussed in the article. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME aquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"bvId\" : \"a00001aab\", \"name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aac\", \"name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n \n\n Each article returned may have one or more groups of referenced articles. The referencedOrgs property holds the list of companies that were directly mentioned in the article and were considered the primary actors. In this example the article was about ACME merging with Wile E. Coyote which were considered the primary actors. \n\n If there is more than one primary actor in an article it is often the case that only a subset of those actors were in the original scope of the input query (bvIds or portfolio). The matchedArticleOrgs will hold that subset of primary actors which were part of the input query. The system will look for articles about subsidiaries of the companies in the original scope of the input query as well. When a subsidiary is the primary actor of a returned article it will be in the referencedOrgs and matchedArticlesOrg field, but the parent company that was specified in the query will be returned in the matchedOrgs property. \n\n In this example the original query was for articles about A Company Manufacturing Everything. The system found this article about its child company ACME. Therefore matchedArticleOrgs lists ACME and matchedOrgs lists A Company Manufacturing Everything which was in the original query. \n\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad bvId found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleNewsSearchUsingGET
+      parameters:
+      - name: bvIds
+        in: query
+        description: One or more Bitvore Ids identifying entities to retrieve news for.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: articleType
+        in: query
+        description: One or more types of articles to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - News
+          - PressRelease
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''Corporate, Market & Industry'' and/or ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: themes
+        in: query
+        description: 'One or more themes. (Requires license: ''Themes'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: similarity
+        in: query
+        description: Indicates which (if any) similar articles should be returned, options are "Usage" and "None", default is "None". "Usage" indicates similar articles can be returned if they have different usage restrictions.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: None
+      - name: orgField
+        in: query
+        description: One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name
+          - domainName
+          - ticker
+          - city
+          - state
+          - country
+          - cusip
+          - figi
+          - isin
+          - sedol
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CorpNewsResultsResponse'
+                originalRef: CorpNewsResultsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+    post:
+      tags:
+      - News API
+      summary: Advanced Corporate News Query
+      description: "Provides an advanced corporate news search capability. The search criteria used when querying news includes a more advanced approach to identifying the company, or organization, scope of the news to return as well as the other content oriented options listed above. The following are the options supported for identifying the organization scope: \n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only news articles where the identified company is an actor in the story.\n * Portfolio - A portfolio is made up of one or more companies (BvIDs). Querying by portfolio returns only articles where at least one of the companies in the portfolio are an actor in the article. This option cannot be used with the BvID or Foreign ID options. \n * Foreign ID - If the Identification API is used to map BvIDs to ID's foreign to the Bitvore system the ID's mapped to BvIDs are considered foreign ID's which can be used using this parameter instead of a BvID. This option cannot be used with the BvID or Portfolio options. \n * Employees - Returns all articles referencing companies with an estimated number of employees that falls within a specified range using the format of lower-upper, i.e. 50-250. The upper bound may be omitted (50-) to indicate an unbounded range. The ranges must be defined using the predefined measurements: 1, 10, 50, 100, 250, 500, 1000, 5000, 10000. This option cannot be used with the BvID, Foreign ID, or Portfolio options. Note: On 1/11/2020 the range boundary of 200 was replaced by 100 and 250 and will be no longer supported on 7/1/2020. \n * Revenue - Returns all articles referencing companies with an estimated revenue that falls within a specified range using the format of lower-upper, i.e. 500-1000. The upper bound may be omitted (500-) to indicate an unbounded range. The ranges must be defined using the predefined measurements:  0, 1, 10, 50, 100, 500, 1000, 10000. This option cannot be used with the BvID, Foreign ID, or Portfolio options. Note: On 1/11/2020 the range boundary of 200 was replaced with 500 and will be no longer supported on 7/1/2020. \n * NAICS Industry - Returns all articles referencing companies operating within the industry identified by the specified [NAICS](https://www.naics.com/search/) code. \n * SIC Industry - Returns all articles referencing companies operating within the industry identified by the specified [SIC](https://www.osha.gov/pls/imis/sicsearch.html) code. \n * HQ Location - Returns all articles referencing companies whose headquarters is located in the specified location. The location is in the format of city/state/country, i.e., Los Angeles/California/United States. \n * HQ FIPS Area - Returns all articles referencing companies whose headquarters is located in the county or CBSA identified by the given FIPS code. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n \n\n The following content oriented query options are also supported: \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](https://api.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Usage - A news article may have licensing restrictions placed on it. To filter search \n results to only fair use content specify \"FairUse\" for the Usage option. To filter results to only \n commercially licensed content that grants full use of the content specify \"FullUse\" for the Usage option. \n Specifying \"All\", which is the default option, does not filter the results at all. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency.\n \n\n The following are some examples of using the API. \n\n To query for the news about IBM, BvID b00001ab7, published within the last 3 days in the PST timezone (using HTTP header for api key): \n\n ```js\n POST https://api.bitvore.com/v2/corp/news \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"orgScope\": { \n \t\t\"ids\": [\"b00001ab7\"], \n \t\t\"orgIdScheme\": \"BVID\" \n \t}, \n \t\"startDate\": \"2018-07-01T09:00:00.000+07:00\", \n \t\"endDate\": \"2018-07-03T23:59:59.999+07:00\" \n } \n ```\n \n\n To query for the news about all executive changes between 9:00AM PST 7/1/2018 and 5:00PM PST on 7/31/2018: \n\n ```js\n POST https://api.bitvore.com/v2/corp/news \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"signal\": [\"ExecutiveChanges\"], \n \t\"startDate\": \"2018-07-01T09:00:00.000+07:00\", \n \t\"endDate\": \"2018-07-31T17:00:00.000+07:00\" \n } \n ```\n \n\n To query for the news about a companies with annual revenue between 50M and 100M in the last 30 days: \n\n ```js\n POST https://api.bitvore.com/v2/corp/news \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"orgScope\": { \n \t\t\"revRange\": \"50-100\" \n \t}, \n \t\"startDate\": \"2018-07-01T09:00:00.000Z\", \n \t\"endDate\": \"2018-07-31T17:00:00.000Z\" \n } \n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvID/Name combinations identifying companies discussed in the article. \n \n\n Example Response: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME acquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"bvId\" : \"a00001aab\", \"name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aac\", \"name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n "
+      operationId: handleCorpAdvancedSearchUsingPOST_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CorpNewsResultsResponse'
+                originalRef: CorpNewsResultsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporateNewsRequest'
+              originalRef: CorporateNewsRequest
+        description: request
+        required: true
+  /v2/corp/news/byKey/enriched:
+    post:
+      tags:
+      - News API
+      summary: Enriched Record by Record Key
+      operationId: handleGetEnrichedRecordUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnrichedRecordsResponse'
+                originalRef: EnrichedRecordsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: Record Keys to retrieve enriched news for.
+  /v2/corp/news/byKey/{recordKey}/enriched:
+    get:
+      tags:
+      - News API
+      summary: Enriched Record by Record Key
+      operationId: handleGetEnrichedRecordUsingGET
+      parameters:
+      - name: recordKey
+        in: path
+        description: Record Key to retrieve enriched news for.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnrichedRecordsResponse'
+                originalRef: EnrichedRecordsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/corp/news/byid:
+    get:
+      tags:
+      - News API
+      summary: Corporate News by Organization Id
+      description: "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Organization Id - An ID that uniquely identifies a company/organization. Querying by ID returns only news articles where the identified organization is an actor in the story. The organization's primary ID is always a BvID, however, if using an alternate ID, it will also be returned along with the organization. \n * Org Id Scheme - The type of Id being used. Can be BvID, CUSIP, FIGI, ISIN or SEDOL. Certain IDs require a valid license. \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Similarity - Indicates which (if any) similar articles should be returned, options are \n \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they \n have different usage restrictions. In other word with this option two similar articles can be returned \n if one is FullUse and the other is FairUse. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency. \n \n\n The following are some examples of using the API. \n\n To query for M&A news between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/news?signal=MergerAcquisition&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvID/Name combinations identifying companies discussed in the article. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME aquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"bvId\" : \"a00001aab\", \"name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aac\", \"name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n \n\n Each article returned may have one or more groups of referenced articles. The referencedOrgs property holds the list of companies that were directly mentioned in the article and were considered the primary actors. In this example the article was about ACME merging with Wile E. Coyote which were considered the primary actors. \n\n If there is more than one primary actor in an article it is often the case that only a subset of those actors were in the original scope of the input query (bvIds or portfolio). The matchedArticleOrgs will hold that subset of primary actors which were part of the input query. The system will look for articles about subsidiaries of the companies in the original scope of the input query as well. When a subsidiary is the primary actor of a returned article it will be in the referencedOrgs and matchedArticlesOrg field, but the parent company that was specified in the query will be returned in the matchedOrgs property. \n\n In this example the original query was for articles about A Company Manufacturing Everything. The system found this article about its child company ACME. Therefore matchedArticleOrgs lists ACME and matchedOrgs lists A Company Manufacturing Everything which was in the original query. \n\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad bvId found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleNewsSearchUsingGET_1
+      parameters:
+      - name: ids
+        in: query
+        description: Organization Id
+        required: true
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: idScheme
+        in: query
+        description: Organization Id Scheme
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          enum:
+          - BVID
+          - CUSIP
+          - ISIN
+          - SEDOL
+          - FIGI
+          default: BVID
+      - name: articleType
+        in: query
+        description: One or more types of articles to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - News
+          - PressRelease
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''Corporate, Market & Industry'' and/or ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: themes
+        in: query
+        description: 'One or more themes. (Requires license: ''Themes'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: similarity
+        in: query
+        description: Indicates which (if any) similar articles should be returned, options are "Usage" and "None", default is "None". "Usage" indicates similar articles can be returned if they have different usage restrictions.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: None
+      - name: orgField
+        in: query
+        description: One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name
+          - domainName
+          - ticker
+          - city
+          - state
+          - country
+          - cusip
+          - figi
+          - isin
+          - sedol
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CorpNewsResultsResponse'
+                originalRef: CorpNewsResultsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/corp/news/byportfolio:
+    get:
+      tags:
+      - News API
+      summary: Corporate News by Portfolio
+      description: "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Portfolio - A portfolio is made up of one or more companies (BvIDs). Querying by portfolio returns only articles where at least one of the companies in the portfolio are an actor in the article. This option cannot be used with the BvID or Foreign ID options. \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Similarity - Indicates which (if any) similar articles should be returned, options are \n \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they \n have different usage restrictions. In other word with this option two similar articles can be returned \n if one is FullUse and the other is FairUse. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency. \n \n\n The following are some examples of using the API. \n\n To query for the news about a portfolio between 1:00 and 2:00 PM PST on 7/1/2018 (using HTTP header for api key): \n\n ```js\n GET https://api.bitvore.com/v2/corp/news?portfolioId=12345&startDate=2018-07-01T13:00:00.000+07:00&endDate=2018-07-01T14:00:00.000+07:00\n ```\n \n\n To query for M&A news between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/news?signal=MergerAcquisition&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvID/Name combinations identifying companies discussed in the article. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME aquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"bvId\" : \"a00001aab\", \"name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aaa\", \"name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"bvId\" : \"a00001aac\", \"name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n \n\n Each article returned may have one or more groups of referenced articles. The referencedOrgs property holds the list of companies that were directly mentioned in the article and were considered the primary actors. In this example the article was about ACME merging with Wile E. Coyote which were considered the primary actors. \n\n If there is more than one primary actor in an article it is often the case that only a subset of those actors were in the original scope of the input query (bvIds or portfolio). The matchedArticleOrgs will hold that subset of primary actors which were part of the input query. The system will look for articles about subsidiaries of the companies in the original scope of the input query as well. When a subsidiary is the primary actor of a returned article it will be in the referencedOrgs and matchedArticlesOrg field, but the parent company that was specified in the query will be returned in the matchedOrgs property. \n\n In this example the original query was for articles about A Company Manufacturing Everything. The system found this article about its child company ACME. Therefore matchedArticleOrgs lists ACME and matchedOrgs lists A Company Manufacturing Everything which was in the original query. \n\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad bvId found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handlePortfolioNewsSearchUsingGET
+      parameters:
+      - name: portfolioId
+        in: query
+        description: Id identifying a portfolio to retrieve news for.
+        required: true
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int64
+      - name: articleType
+        in: query
+        description: One or more types of articles to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - News
+          - PressRelease
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''Corporate, Market & Industry'' and/or ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: themes
+        in: query
+        description: 'One or more themes. (Requires license: ''Themes'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news when not using a portfolio
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: similarity
+        in: query
+        description: Indicates which (if any) similar articles should be returned, options are "Usage" and "None", default is "None". "Usage" indicates similar articles can be returned if they have different usage restrictions.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: None
+      - name: orgField
+        in: query
+        description: One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name
+          - domainName
+          - ticker
+          - city
+          - state
+          - country
+          - cusip
+          - figi
+          - isin
+          - sedol
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CorpNewsResultsResponse'
+                originalRef: CorpNewsResultsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessDeniedResponse'
+                originalRef: AccessDeniedResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+                originalRef: InternalErrorResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/muni/econnews/byfips:
+    get:
+      tags:
+      - News API
+      summary: Economic News Search by FIPS
+      description: "Provides the ability to search for news relevant to economy of a region: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n \n\n The following is an example of using the API. \n\n To query for the economic news about the Los Angeles region using the FIPS code 037 between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/econnews?fips=037&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleFipsEconSearchUsingGET_1
+      parameters:
+      - name: fips
+        in: query
+        description: FIPS code to retrieve municipal and economic news for.
+        required: true
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/muni/econnews/bylocation:
+    get:
+      tags:
+      - News API
+      summary: Economic News Search by Location
+      description: "Provides the ability to search for news relevant to economy of a location: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n \n\n The following is an example of using the API. \n\n To query for the economic news about Irvine, California between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/corp/econnews?state=ca&city=irvine&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"esgSentiment\" : 0.78078979, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"Germany\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleEconSearchUsingGET_2
+      parameters:
+      - name: state
+        in: query
+        description: State (code) to retrieve municipal and economic news for.
+        required: true
+        allowEmptyValue: false
+        x-example: CA
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: City to retrieve municipal and economic news for.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReasonResponse'
+                originalRef: ReasonResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/muni/news:
+    get:
+      tags:
+      - News API
+      summary: Municipal News Search by CUSIP
+      description: "Provides the ability to search for news relevant to municipal bonds. The search criteria used when querying news includes the following options: \n * CUSIP - Querying by CUSIP returns only news articles where the identified bond is somehow affected by the subject matter of an article.\n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* Health \n \t* Housing \n \t* LocalGov \n \t* TaxRevenue \n \t* Transportation \n \t* Utility \n \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Environment.ClimateChange. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Environment.ClimateChange will return Environment.ClimateChange.AirQuality and Environment.ClimateChange.GHGEmissions etc. articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Include CUSIPs - Return all CUSIPs affected by the subject matter of an article. This option requires a verified CGS license. \n \n\n The metadata tags of articles specific to municipal news returned in addition to the common tags above are: \n * CUSIPs - 0 or more CUSIPs identifying bonds affected by the news article. \n * Sectors - 0 or more sectors the article is reporting news about. \n * Significance - The significance of the article, high or medium. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"matchedCusips\": [\"00037CSW1\"],\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sectors\": [\"Utilities\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"United States\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad cusips found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleCusipMuniSearchUsingGET
+      parameters:
+      - name: cusip
+        in: query
+        description: One or more CUSIPs identifying the bonds to retrieve news for.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: articleType
+        in: query
+        description: One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: includeCusips
+        in: query
+        description: 'Return ALL cusips affected by the article. (Requires license: ''CUSIP'')'
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+    post:
+      tags:
+      - News API
+      summary: Advanced Municipal News Search
+      description: "Provides an advanced municipal news search capability. The search criteria used when querying news includes a more advanced approach to identifying locations, sections, and a larger number of cusips. The following are the options supported for searching the news: \n * CUSIP - Querying by CUSIP returns only news articles where the identified bond is somehow affected by the subject matter of an article. Up to 10000 CUSIPs can be queried. \n * Portfolio - A portfolio is made up of one or more CUSIPs. Querying by portfolio returns only news articles where any of the bonds in the portfolio are affected by the subject matter of an article. This option cannot be used with the CUSIP option. \n * Location - Querying by city/state returns only news articles that have been written about events that have occurred within a city and/or state. Locations are in the format of city/state/country, i.e., Los Angeles/California/United States. United States is assumed if the country is not specified. \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* Health \n \t* Housing \n \t* LocalGov \n \t* TaxRevenue \n \t* Transportation \n \t* Utility \n \n This option cannot be combined with the CUSIP or Portfolio options. \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Environment.ClimateChange. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Environment.ClimateChange will return Environment.ClimateChange.AirQuality and Environment.ClimateChange.GHGEmissions etc. articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Include CUSIPs - Return ALL cusips affected by the subject matter of an article. This option requires a verified CGS license. \n \n\n The following are some examples of using the API. \n\n To query for the news about 2 CUSIPs published within the last 3 days in the PST timezone (using HTTP header for api key) : \n\n ```js\n POST https://api.bitvore.com/v2/muni/news \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"cusip\": [ \"123456789\", \"987654321\" ] \n \t\"startDate\": \"2018-07-01T09:00:00.000Z\", \n \t\"endDate\": \"2018-07-31T17:00:00.000Z\" \n } \n ```\n \n\n To query for the news about about education and development in Los Angeles and San Francisco between 9:00AM PST 7/1/2018 and 5:00PM PST on 7/31/2018 : \n\n ```js\n POST https://api.bitvore.com/v2/muni/news \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"sector\": [ \"education\", \"development\" ], \n \t\"location\": [ \"Los Angeles/California\", \"San Francisco/California\" ], \n \t\"startDate\": \"2018-07-01T09:00:00.000Z\", \n \t\"endDate\": \"2018-07-31T17:00:00.000Z\" \n } \n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"United States\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Invalid state specified\",\n \t\"reasonSupport\": \"san irvine\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleMuniAdvancedSearchUsingPOST_1
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MunicipalNewsRequest'
+              originalRef: MunicipalNewsRequest
+        description: request
+        required: true
+  /v2/muni/news/byfips:
+    get:
+      tags:
+      - News API
+      summary: Municipal News Search by FIPS
+      description: "Provides the ability to search for news relevant to municipal bonds using a FIPS location identifier. The search criteria used when querying news includes the following options: \n * FIPS - Querying by FIPS code returns only news articles that have been written about events that have occurred within the given county or CBSA. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* Health \n \t* Housing \n \t* LocalGov \n \t* TaxRevenue \n \t* Transportation \n \t* Utility \n \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Environment.ClimateChange. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Environment.ClimateChange will return Environment.ClimateChange.AirQuality and Environment.ClimateChange.GHGEmissions etc. articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Include CUSIPs - Return ALL cusips affected by the subject matter of an article. This option requires a verified CGS license. \n \n\n The metadata tags of articles specific to municipal news returned in addition to the common tags above are: \n * CUSIPs - 0 or more CUSIPs identifying bonds affected by the news article. \n * Sectors - 0 or more sectors the article is reporting news about. \n * Significance - The significance of the article, high or medium. \n \n\n The following is an example of using the API. \n\n To query for the news about the education sector in California between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/muni/news/byfips?fips=06059&sector=education&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"matchedCusips\": [\"00037CSW1\"],\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sectors\": [\"Utilities\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"United States\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad cusips found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleFipsMuniSearchUsingGET
+      parameters:
+      - name: fips
+        in: query
+        description: FIPS code to retrieve news for
+        required: true
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: articleType
+        in: query
+        description: One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sector
+        in: query
+        description: Sector to retrieve news for
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: includeCusips
+        in: query
+        description: 'Return ALL cusips affected by the article. (Requires license: ''CUSIP'')'
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/muni/news/bylocation:
+    get:
+      tags:
+      - News API
+      summary: Municipal News Search by Location
+      description: "Provides the ability to search for news relevant to municipal bonds using a location. The search criteria used when querying news includes the following options: \n * State - Querying by state returns only news articles that have been written about events that have occurred within the given state. \n * City - Querying by city returns only news articles that have been written about events that have occurred within the given city. This option requires the use of the State option to avoid ambiguity. \n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* Health \n \t* Housing \n \t* LocalGov \n \t* TaxRevenue \n \t* Transportation \n \t* Utility \n \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Environment.ClimateChange. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Environment.ClimateChange will return Environment.ClimateChange.AirQuality and Environment.ClimateChange.GHGEmissions etc. articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Include CUSIPs - Return ALL cusips affected by the subject matter of an article. This option requires a verified CGS license. \n \n\n The following are some examples of using the API. \n\n To query for the news about the education sector in California between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET https://api.bitvore.com/v2/muni/news/bylocation?state=ca&sector=education&startDate=2018-07-01T00:00:00.000+07:00&endDate=2018-07-31T23:59:59.999+07:00\n ```\n \n\n The metadata tags of articles specific to municipal news returned in addition to the common tags above are: \n * CUSIPs - 0 or more CUSIPs identifying bonds affected by the news article. \n * Sectors - 0 or more sectors the article is reporting news about. \n * Significance - The significance of the article, high or medium. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"matchedCusips\": [\"00037CSW1\"],\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sectors\": [\"Utilities\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"United States\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad cusips found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handleLocationMuniSearchUsingGET
+      parameters:
+      - name: state
+        in: query
+        description: State to retrieve news for.
+        required: true
+        allowEmptyValue: false
+        x-example: CA
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: City to retrieve news for.
+        required: false
+        allowEmptyValue: false
+        x-example: Los Angeles
+        schema:
+          type: string
+      - name: articleType
+        in: query
+        description: One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sector
+        in: query
+        description: Sector to retrieve news for
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: text
+        in: query
+        description: Keyword or phrase to search for news
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: includeCusips
+        in: query
+        description: 'Return ALL cusips affected by the article. (Requires license: ''CUSIP'')'
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized to view news
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+  /v2/muni/news/byportfolio:
+    get:
+      tags:
+      - News API
+      summary: Municipal News Search by Portfolio
+      description: "Provides the ability to search for news relevant to municipal bonds using a portfolio. The search criteria used when querying news includes the following options: \n * Portfolio - A portfolio is made up of one or more CUSIPs. Querying by portfolio returns only news articles where any of the bonds in the portfolio are affected by the subject matter of an article. \n * Sector - Querying by sector returns only news articles that are written about the given sector. The sectors supported are: \n \t* Development \n \t* Education \n \t* HigherEducation \n \t* PrimarySecondaryEducation \n \t* Health \n \t* Housing \n \t* LocalGov \n \t* TaxRevenue \n \t* Transportation \n \t* Utility \n \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Environment.ClimateChange. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Environment.ClimateChange will return Environment.ClimateChange.AirQuality and Environment.ClimateChange.GHGEmissions etc. articles. The signals currently supported can be found [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Include CUSIPs - Return ALL cusips affected by the subject matter of an article. This option requires a verified CGS license. \n \n\n The following are some examples of using the API. \n\n To query for the news about a portfolio between 1:00 and 2:00 PM PST on 7/1/2018 (using HTTP header for api key): \n\n ```js\n GET https://api.bitvore.com/v2/muni/news/byportfolio?portfolioId=12345&startDate=2018-07-01T13:00:00.000+07:00&endDate=2018-07-01T14:00:00.000+07:00 ```\n \n\n The metadata tags of articles specific to municipal news returned in addition to the common tags above are: \n * CUSIPs - 0 or more CUSIPs identifying bonds affected by the news article. \n * Sectors - 0 or more sectors the article is reporting news about. \n * Significance - The significance of the article, high or medium. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1, \n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"Irvine And Carlsbad Water Agreement\",\n \t\t\t\"sourceName\": \"dailyexpress.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://dailyexpress.com/resources/irvine-carlsbad.jpg\",\n \t\t\t\"excerpt\": \"Irvine has agreed to buy water from the City of Carlsbad. The Carlsbad desalination ...\",\n \t\t\t\"matchedCusips\": [\"00037CSW1\"],\n \t\t\t\"locations\": [\"/Orange County/California/United States\", \"Los Angeles//California/United States\"],\n \t\t\t\"sectors\": [\"Utilities\"],\n \t\t\t\"sentiment\" : 0.28571313, \n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"articleLocations\": [\"United States\"],\n \t\t\t\"sourceLocation\": \"United States\",\n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad cusips found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n"
+      operationId: handlePortfolioMuniSearchUsingGET
+      parameters:
+      - name: portfolioId
+        in: query
+        description: Id identifying a portfolio to retrieve news for.
+        required: true
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int64
+      - name: articleType
+        in: query
+        description: One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned.
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: signals
+        in: query
+        description: 'One or more signals. (Requires license: ''ESG'')'
+        required: false
+        allowEmptyValue: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: significance
+        in: query
+        description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: HIGH
+      - name: includeCusips
+        in: query
+        description: 'Return ALL cusips affected by the article. (Requires license: ''CUSIP'')'
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: News date to start from. Time offset will be converted to UTC (Z).
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-10T00:00:00Z'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: News date to end with. Time offset will be converted to UTC (Z)
+        required: false
+        allowEmptyValue: false
+        x-example: '2021-04-11T23:59:59Z'
+        schema:
+          type: string
+          format: date-time
+      - name: dateType
+        in: query
+        description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          default: published
+      - name: pageNo
+        in: query
+        description: Page number of the total result set to return, default is 1.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MuniNewsResponse'
+                originalRef: MuniNewsResponse
+        '401':
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+        '500':
+          description: Internal error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponse'
+                originalRef: BasicResponse
+      security:
+      - API key:
+        - Global
+      - OAuth:
+        - Global
+      deprecated: false
+components:
+  schemas:
+    MuniNewsArticle:
+      type: object
+      properties:
+        articleLocations:
+          type: array
+          example: United States
+          description: The countries that the article is likely about.
+          items:
+            type: string
+        articleType:
+          type: string
+          example: PressRelease
+          description: Type of article. Possible values are "News" and "PressRelease
+        availableAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date available
+        cusips:
+          type: array
+          example: 02361DAP5, 002824AV2
+          description: CUSIPs affected by the article. Required valid CUSIP license and permission.
+          items:
+            type: string
+        esgSentiment:
+          type: number
+          format: double
+          example: 0.78078
+          description: ESG Sentiment of the article. The value is a decimal value between -1 and 1, under 0 is negative while over 0 is positive.
+        excerpt:
+          type: string
+          example: ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.
+          description: Fragment or snippet, of the article
+        key:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely identifying the article
+        locations:
+          type: array
+          example: Irvine//California/United States, /San Diego County/California/United States
+          description: Locations affected. A location is city or county level. It is encoded as city/county/state/country where if the city is specified the county will not be and vice-versa
+          items:
+            type: string
+        matchedCusips:
+          type: array
+          example: 02361DAP5, 002824AV2
+          description: CUSIPs affected by the article that match the input CUSIPs, or are contained in the supplied portfolio.
+          items:
+            type: string
+        previewImageUrl:
+          type: string
+          example: http://acme.com/resources/coyote.jpg
+          description: URL of a preview image
+        publishedAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date published
+        sectors:
+          type: array
+          example: Education, Utilities
+          description: Sectors which the article belongs to.
+          items:
+            type: string
+        sentiment:
+          type: number
+          format: double
+          example: 0.23456
+          description: Sentiment of the article. The value is a decimal value between -1 and 1, under 0 is negative while over 0 is positive.
+        signals:
+          type: array
+          example:
+          - Environment.ClimateChange
+          - Social.EmployeeStandards.FairWagesBenefits
+          description: 'Signals and topics. See glossary for available values. (Requires license: ''ESG'')'
+          items:
+            type: string
+        significance:
+          type: string
+          example: HIGH
+          description: Significance of the article. Possible values are "HIGH" and "MEDIUM"
+        sourceLocation:
+          type: string
+          example: Germany
+          description: The country that is likely the source of the article.
+        sourceName:
+          type: string
+          example: businesswire.com, The Washington Daybook
+          description: Name or host name of the publisher of the article
+        sourceUrl:
+          type: string
+          example: http://acme.com/press
+          description: URL to the original source of the article
+        title:
+          type: string
+          example: ACME acquires Wile E. Coyote, Inc.
+          description: Title
+      title: MuniNewsArticle
+      description: Muni news article.
+    OrganizationScope:
+      type: object
+      properties:
+        customIds:
+          type: array
+          description: One or more custom Ids identifying the entities to retrieve news for, the Ids must be mapped in the supplied portfolio
+          items:
+            type: string
+        ids:
+          type: array
+          description: One or more Bitvore IDs identifying entities to retrieve news for.
+          items:
+            type: string
+        orgIdScheme:
+          type: string
+          enum:
+          - BVID
+          - CUSIP
+          - ISIN
+          - SEDOL
+          - FIGI
+        orgQuery:
+          description: Query criteria identifying the entities to retrieve news for.
+          $ref: '#/components/schemas/OrganizationQueryCriteria'
+          originalRef: OrganizationQueryCriteria
+        portfolioId:
+          type: integer
+          format: int64
+          description: Id identifying a portfolio to retrieve news for.
+      title: OrganizationScope
+      description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
+    CorpNewsArticle:
+      type: object
+      properties:
+        articleLocations:
+          type: array
+          example: United States
+          description: The countries that the article is likely about.
+          items:
+            type: string
+        articleType:
+          type: string
+          example: PressRelease
+          description: Type of article. Possible values are "News" and "PressRelease
+        availableAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date available
+        esgSentiment:
+          type: number
+          format: double
+          example: 0.78078
+          description: ESG Sentiment of the article. The value is a decimal value between -1 and 1, under 0 is negative while over 0 is positive.
+        excerpt:
+          type: string
+          example: ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.
+          description: Fragment or snippet, of the article
+        key:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely identifying the article
+        matchedArticleOrgs:
+          type: array
+          description: Organizations that are the primary actors either directly or indirectly.
+          items:
+            $ref: '#/components/schemas/Organization'
+            originalRef: Organization
+        matchedOrgs:
+          type: array
+          description: Organizations that match the input organization scope that are primary actors in the article or related to those primary actors.
+          items:
+            $ref: '#/components/schemas/Organization'
+            originalRef: Organization
+        phrases:
+          type: array
+          example: referendum, embassy_attack
+          description: 'Key phrases identified in Themed news. (Requires license: ''Themes'')'
+          items:
+            type: string
+        previewImageUrl:
+          type: string
+          example: http://acme.com/resources/coyote.jpg
+          description: URL of a preview image
+        publishedAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date published
+        referencedOrgHierarchy:
+          type: array
+          description: Organizations who are the primary actors in the article and their parent Organizations.
+          items:
+            $ref: '#/components/schemas/Organization'
+            originalRef: Organization
+        referencedOrgs:
+          type: array
+          description: Organizations who are the primary actors in the article.
+          items:
+            $ref: '#/components/schemas/Organization'
+            originalRef: Organization
+        sentiment:
+          type: number
+          format: double
+          example: 0.23456
+          description: Sentiment of the article. The value is a decimal value between -1 and 1, under 0 is negative while over 0 is positive.
+        signals:
+          type: array
+          example:
+          - Business.Labor
+          - Business.Labor.Hiring
+          description: 'Signals and topics. See glossary for available values. (Requires license: ''Corporate, Market & Industry'' and/or ''ESG'')'
+          items:
+            type: string
+        significance:
+          type: string
+          example: HIGH
+          description: Significance of the article. Possible values are "HIGH" and "MEDIUM"
+        similarityClusterId:
+          type: string
+          example: 075005015cf083aba01f0826ecfe718e965b577c572166b14a77652e
+          description: Id of the similarity cluster it belongs to.
+        sourceLocation:
+          type: string
+          example: Germany
+          description: The country that is likely the source of the article.
+        sourceName:
+          type: string
+          example: businesswire.com, The Washington Daybook
+          description: Name or host name of the publisher of the article
+        sourceUrl:
+          type: string
+          example: http://acme.com/press
+          description: URL to the original source of the article
+        themes:
+          type: array
+          example:
+          - Brexit
+          - TradeWar
+          description: 'Trending Themes. See glossary for available values. (Requires license: ''Themes'')'
+          items:
+            type: string
+        title:
+          type: string
+          example: ACME acquires Wile E. Coyote, Inc.
+          description: Title
+      title: CorpNewsArticle
+      description: Corp news article.
+    CorpNewsResultsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/CorpNewsArticle'
+            originalRef: CorpNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: CorpNewsResultsResponse
+      description: A paged result response.
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    EnrichedRecordsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/EnrichedRecord'
+            originalRef: EnrichedRecord
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: EnrichedRecordsResponse
+    Listing:
+      type: object
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
+    Organization:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        city:
+          type: string
+          example: Irvine
+          description: City the organization is headquartered in.
+        country:
+          type: string
+          example: United States
+          description: Country the organization is headquartered in.
+        domainName:
+          type: string
+          example: acme.com
+          description: Domain name of the organization.
+        factSetId:
+          type: string
+        isin:
+          type: string
+          example: US5949181045
+          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
+        listings:
+          type: array
+          description: The exchange listings of the organization.
+          items:
+            $ref: '#/components/schemas/Listing'
+            originalRef: Listing
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization.
+        state:
+          type: string
+          example: CA
+          description: State (code) the organization is headquartered in.
+        ticker:
+          type: string
+          description: The primary ticker symbol the organization.
+      title: Organization
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    OrganizationQueryCriteria:
+      type: object
+      properties:
+        empRange:
+          type: string
+          example: 200-5000
+          description: Employee range companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 1B.
+        fips:
+          type: array
+          example:
+          - '35620'
+          description: One or more FIPS codes identifying locations the companies must have their headquarters in.
+          items:
+            type: string
+        location:
+          type: array
+          example:
+          - Los Angeles/California/United States
+          description: One or more locations companies must have their headquarters in.
+          items:
+            type: string
+        naics:
+          type: array
+          example:
+          - '221114'
+          - '221115'
+          description: One or more NAICS codes identifying industries the companies must operate in.
+          items:
+            type: string
+        revRange:
+          type: string
+          example: 50-200
+          description: Revenue range (in millions) companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be omitted to report over 1B.
+        sic:
+          type: array
+          example:
+          - '1311'
+          - '1381'
+          description: One or more SIC codes identifying industries the companies must operate in.
+          items:
+            type: string
+      title: OrganizationQueryCriteria
+      description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
+    MuniNewsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniNewsArticle'
+            originalRef: MuniNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: MuniNewsResponse
+      description: A paged result response.
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
+    EnrichedRecord:
+      type: object
+      properties:
+        enriched:
+          type: object
+          description: Enriched data for the given record
+        errorMessage:
+          type: string
+          description: An error message, if there is one.
+        key:
+          type: string
+          description: Record Key
+        publishedAt:
+          type: string
+          example: '2022-06-29T21:41:21.109Z'
+          description: Date published
+        timestamp:
+          type: string
+          example: '2022-06-29T21:41:21.109Z'
+          description: Request timestamp
+      title: EnrichedRecord
+    MunicipalNewsRequest:
+      type: object
+      properties:
+        articleType:
+          type: array
+          example:
+          - PressRelease
+          description: One or more types of arcticles (i.e., News, PressRelease) to return. By default all types are returned.
+          items:
+            type: string
+        cusip:
+          type: array
+          example:
+          - '123456789'
+          - '987654321'
+          description: One or more CUSIPs identifying the bonds to retrieve news for, should not be used with the portfolio property.
+          items:
+            type: string
+        dateType:
+          type: string
+          example: available
+          description: Indicates whether dates to query by should be published dates "published" or available dates (processing completed) "available". Default is published.
+        endDate:
+          type: string
+          format: date-time
+          example: '2021-04-11T23:59:59.999Z'
+          description: News date to end with. Time offset will be converted to UTC (Z)
+        fips:
+          type: array
+          example:
+          - '31080'
+          - '06037'
+          description: One or more FIPS codes to restrict the returned news to. Must not be used with the cusip or portfolio properties.
+          items:
+            type: string
+        includeCusips:
+          type: boolean
+          example: true
+          description: Return ALL cusips affected by the article. This option requires a verified CGS license, default is false
+        location:
+          type: array
+          example:
+          - los angeles/ca
+          - fl
+          description: One or more locations to restrict the returned news to. Can be a state code or a city/state combination. Must not be used with the cusip or portfolio properties.
+          items:
+            type: string
+        pageNo:
+          type: integer
+          format: int32
+          example: 1
+          description: Page number of the total result set to return, default is 1.
+        pageSize:
+          type: integer
+          format: int32
+          example: 100
+          description: Number of results out of the total result set per page to return, default is 100, maximum is 1000.
+        portfolioId:
+          type: integer
+          format: int64
+          example: 10001
+          description: Id identifying a portfolio to retrieve news for, should not be used with the cusip property.
+        sector:
+          type: array
+          example:
+          - education
+          description: Sector to retrieve news for, must be used with the location property and not with the cusip, or portfolio properties.
+          items:
+            type: string
+        signals:
+          type: array
+          example:
+          - Environment.ClimateChange
+          - Social.EmployeeStandards.FairWagesBenefits
+          description: 'Signals and events. See glossary for available values. (Requires license: ''ESG'')'
+          items:
+            type: string
+        significance:
+          type: string
+          example: HIGH
+          description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The property is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+        startDate:
+          type: string
+          format: date-time
+          example: '2021-04-10T00:00:00.000Z'
+          description: News date to start from. Time offset will be converted to UTC (Z)
+        text:
+          type: string
+          example: blockchain
+          description: Keyword or phrase to search for news when not using a portfolio
+      title: MunicipalNewsRequest
+      description: Query criteria for returning municipal news.
+    CorporateNewsRequest:
+      type: object
+      properties:
+        articleTypes:
+          type: array
+          example:
+          - News
+          - PressRelease
+          description: One or more types of arcticles to return. By default all types are returned.
+          items:
+            type: string
+            enum:
+            - News
+            - PressRelease
+        dateType:
+          type: string
+          description: Date type to consider while searching news. Either when the content was 'published', or when the content was made first 'available' after analysis.
+          enum:
+          - available
+          - published
+        endDate:
+          type: string
+          format: date-time
+          example: '2021-04-11T23:59:59.000Z'
+          description: Date to end with. Time offset will be converted to UTC (Z)
+        orgField:
+          type: array
+          description: One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned.
+          items:
+            type: string
+            enum:
+            - name
+            - domainName
+            - ticker
+            - city
+            - state
+            - country
+            - cusip
+            - figi
+            - isin
+            - sedol
+        orgScope:
+          description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
+          $ref: '#/components/schemas/OrganizationScope'
+          originalRef: OrganizationScope
+        pageNo:
+          type: integer
+          format: int32
+          example: 1
+          description: Page number of the total result set to return.
+        pageSize:
+          type: integer
+          format: int32
+          example: 100
+          description: Number of results out of the total result set per page to return, maximum is 1000.
+        signals:
+          type: array
+          example:
+          - Business.MergerAcquisitions
+          - Business.FinancialFilings
+          description: 'Signals and events. See glossary for available values. (Requires license: ''Corporate, Market & Industry'' and/or ''ESG'')'
+          items:
+            type: string
+        significance:
+          type: string
+          example: HIGH
+          description: Significance of articles to return, possible values are "HIGH" and "MEDIUM", default is "HIGH". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles.
+          enum:
+          - HIGH
+          - MEDIUM
+        similarity:
+          type: string
+          description: Indicates which (if any) similar articles should be returned, options are "Usage" and "None", default is "None". "Usage" indicates similar articles can be returned if they have different usage restrictions.
+        startDate:
+          type: string
+          format: date-time
+          example: '2021-04-10T00:00:00.000Z'
+          description: Date to start from. Time offset will be converted to UTC (Z)
+        text:
+          type: string
+          example: blockchain
+          description: Keyword search.
+        themes:
+          type: array
+          example:
+          - Brexit
+          - TradeWar
+          description: 'Trending Themes. See glossary for available values. (Requires license: ''Themes'')'
+          items:
+            type: string
+      title: CorporateNewsRequest
+      description: Corporate news search request.
+  securitySchemes:
+    API_key:
+      type: apiKey
+      name: X-BV-APIKEY
+      in: header
+    OAuth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          scopes:
+            Global: Includes all Bitvore APIs
+          tokenUrl: https://api.bitvore.com/oauth/accesstoken
+x-refined-from:
+- bitvore-corporate-openapi.yml
+- bitvore-muni-openapi.yml
+x-info:
+  description: Cellenus Corporate APIs, v2
+  url: https://developer.bitvore.com
+x-tagDescriptions:
+  Datasets API: "## Datasets API \n\n The Datasets API provides two types of data that can be exported. These are Dataset and Changeset files. An API key is required to download the files.\n\n ## Dataset Files \n\n Datasets can be exported and downloaded in CSV file format. The dataset files holding data for the current year are updated once daily. \n\n Available Datasets:\n* Corporate Sentiment Scores \n * Corporate Signals \n * ESG Signals \n * Entities (Organizations) \n \n\n ### Corporate Sentiment Scores \n\n The Corporate Sentiment Scores file will contain the daily sentiment scores for an Organization. \n All scores are calculated based on input for 90 day moving windows. \n\n The scores calculated are the following:\n* sentiment - Overall corporate sentiment.\n* growth - Corporate sentiment strictly with regard to growth.\n* risk - Corporate sentiment strictly with regard to risk.\n\n\n There are two types of exports that are available; Yearly and Daily:\n\n * corp-sentiment-scores-2021.csv.gz - Yearly sentiment scores\n* corp-sentiment-scores-2021-05-04.csv.gz - Daily sentiment scores\n\n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/datasets/corp-sentiment-scores/2021?key=xyz123\n ```\n \n\n Each file will have the following columns:\n* CompanyId - Bitvore ID that uniquely identifies the company that is the subject of the score(s).\n* CompanyName - Name of the company that is the subject of the score(s).\n* ScoreType - The type of sentiment score, \"growth\", \"risk\", \"sentiment\".\n* Score - The score value raging from -1.0 to 1.0.\n* Date - Date of the score.\n\n\n ### Corporate Signals \n\n The Corporate Signal Dataset consists of curated news, events, press releases, and filings that represent signals relevant to corporate entities. There are two types of exports that are available; Yearly and Daily: \n\n * corp-signals-2021.csv.gz - Yearly corporate signals\n* corp-signals-daily-2021-05-04.csv.gz - Daily corporate signals\n\n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/datasets/corp-signals/2021?key=xyz123\n ```\n \n\n Each file will have the following columns:\n* Key - 56 character unique identifier of the data record, a record may be on multiple rows if more than one company is associated with it.\n* ArticleType - Type of the record, News or Press Release.\n* AvailableAt - Date/time the record was made available by the system formatted as yyyy-MM-dd hh:mm.\n* PublishedAt - Date/time the record was initially published at as yyyy-MM-dd hh:mm.\n* CompanyId - Bitvore ID that uniquely identifies the company directly referenced by the record.\n* CompanyName - Name of the company directly referenced by the record.\n* Signal - Signal identified by the record. See the list of signals [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n* Sentiment - Sentiment of the record within a range of -1.0 (negative) and 1.0 (positive).\n* SourceUrl - URL for the source of the record.\n* SourceName - Name (typically hostname) of the source of the record.\n* PreviewImageUrl - URL to an image that was used originally as a visual preview.\n* Title - Title, or brief summary, of the record.\n* Excerpt - An excerpt of the original full body content of the record.\n* SimilarityId - A record may be similar to another record, essentially reporting the same event. When records are similar they are grouped together in a similarity cluster. The SimilarityId identifies the cluster the records are grouped in.\n* SourceLocation - The location of the source of the article.\n* ArticleLocation - The location that the article is about or located.\n* LastModified - The date a record was last changed as yyy-MM-dd hh:mm. It's not often but on occasion a record can be changed to reflect either new information extracted from it or improvements to models to get more accurate information, such as a sentiment value.\n\n\n ### ESG Signals \n\n The ESG Signal Dataset consists of curated news, events, press releases, and filings that represent signals relevant to corporate entities. There are two types of exports that are available; Yearly and Daily: \n\n * esg-signals-2021.csv.gz - Yearly ESG signals\n* esg-signals-daily-2021-05-04.csv.gz - Daily ESG signals\n\n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/datasets/esg-signals/2021?key=xyz123\n ```\n \n\n Each file will have the following columns:\n* Key - 56 character unique identifier of the data record, a record may be on multiple rows if more than one company is associated with it.\n* ArticleType - Type of the record, News or Press Release.\n* AvailableAt - Date/time the record was made available by the system formatted as yyyy-MM-dd hh:mm.\n* PublishedAt - Date/time the record was initially published at as yyyy-MM-dd hh:mm.\n* CompanyId - Bitvore ID that uniquely identifies the company directly referenced by the record.\n* CompanyName - Name of the company directly referenced by the record.\n* Signal - Signal identified by the record. See the list of signals [here](http://developer.bitvore.com/v2/docs/api-reference/signals).\n* Sentiment - Sentiment of the record within a range of -1.0 (negative) and 1.0 (positive).\n* SourceUrl - URL for the source of the record.\n* SourceName - Name (typically hostname) of the source of the record.\n* PreviewImageUrl - URL to an image that was used originally as a visual preview.\n* Title - Title, or brief summary, of the record.\n* Excerpt - An excerpt of the original full body content of the record.\n* SimilarityId - A record may be similar to another record, essentially reporting the same event. When records are similar they are grouped together in a similarity cluster. The SimilarityId identifies the cluster the records are grouped in.\n* SourceLocation - The location of the source of the article.\n* ArticleLocation - The location that the article is about or located.\n* LastModified - The date a record was last changed as yyy-MM-dd hh:mm. It's not often but on occasion a record can be changed to reflect either new information extracted from it or improvements to models to get more accurate information, such as a sentiment value.\n\n\n ### Entities (Organizations) \n\n The Corporate Entity Dataset consists of information about the companies that are covered in the Corporate datasets above. A daily, up-to-date dataset is available: \n\n * entities-daily-2021-05-04.csv.gz - Daily up-to-date entities dataset\n\n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/datasets/entities/2021/05/04?key=xyz123\n ```\n \n\n Each file will have the following columns:\n* Id - Bitvore ID that uniquely identifies the company.\n* Name - Name of the company.\n* Ticker - Ticker the company is traded under (if public).\n* MIC - MIC code of the exchange the ticker is traded on.\n* DomainName - Website domain name of the company.\n* City - City the company's headquarters is located in.\n* State - State code of the state the company's headquarters is located in.\n* Country - Country the company's headquarters is located in.\n* Employees - Number of employees for the company within a range. The ranges are 1-10, 10-50, 50-100, 100-250, 250-500, 500-1000, 1000-5000, 5000-10000, > 10000\n* NAICSIndustry - NAICS industry code for the industry the company primarily operates in.\n* SICIndustry - SIC industry code for the industry the company primarily operates in.\n* YearFounded - Year the company was founded.\n* FacebookUrl - URL of the company's Facebook page.\n* LinkedInUrl - URL of the company's LinkedIn page.\n* TwitterUrl - URL of the company's Twitter page.\n* ParentId - Bitvore ID that uniquely identifies the company's immediate parent (if any).\n* UltimateParentId - Bitvore ID that uniquely identifies the company's ultimate (root) parent (if any).\n* LastModified - The date a record was last changed as yyy-MM-dd hh:mm.\n\n ### Changesets \n\n Get a list of changes by date range, with optional changesets. \n Requests are limited to 31 days and up to 1000 results per page.\n \n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/changesets?changesets=entities-added&endDate=2021-05-12T23%3A59%3A59.999Z&pageNo=1&pageSize=1000&startDate=2021-05-10T00%3A00%3A00.000Z&key=xyz123\n GET https://api.bitvore.com/v2/corp/changesets?changesets=fields-modified,records-modified&endDate=2021-05-12T23%3A59%3A59.999Z&pageNo=1&pageSize=1000&startDate=2021-05-10T00%3A00%3A00.000Z&key=xyz123\n ```\n \n\n ### Changeset CSV File \n\n Files are produce on a daily basis and rolled into yearly file. Daily files are available for the last 7 days. \n\n Example Request:\n\n ```js\nGET https://api.bitvore.com/v2/corp/changeset/records-added/2020?key=xyz123\n GET https://api.bitvore.com/v2/corp/changeset/fields-removed/2020/05/04?key=xyz123\n ```\n \n\n "
+  Filings API: "## Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\nFilings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\nFilings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\nResponses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\nBoth the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\nThis instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n\nThe above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\nIn this example the next response will return the 101st to 200th filings in the result set. \n\nThe Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v2/docs/security) page.\n\n"
+  News API: "## News API \n\n The News APIs provide access to curated news annotated with metadata tags. There are two APIs that access their own datasets; Corporate and Economic. Each API has a specific way of querying the data sets and specific data they return, which is described in the [Corporate and Economic News API](http://developer.bitvore.com/v2/docs/api-reference/corp?tagname=News%20API).  \n\n A news article is tagged with metadata that describes the content of the article. Each dataset has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried within a specified time window. The dates used can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, use the available date instead of published date. \n\n Results are limited to 1000 articles. To accommodate queries that match more than the maximum size, paging is supported. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal datasets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v2/docs/security) page. \n\n"
+  Organizations API: "## Organizations API \n\n Organizations is a general term that represent corporate entities, companies or organizations. These organizations are identified in articles the Corporate News API. The Organizations API provides access to the information about those entities. \n\n ![Organization Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Organizations can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an organization in the Bitvore system. When using the Bitvore ID the entire organization profile will be returned for that single organization. If one is unsure what the Bitvore ID of a organization is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact organization being searched for. Once the Bitvore ID is found news can be retrieved for the organization using the Corporate News API. \n\n ![Organization Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for an organization does not change, however, organizations can be merged into other organizations either due to an actual 'merger' event or in the case there are actual duplicate organization. When this happens, the organization will be marked as inactive and the active organization's ID will need to be used. \n\n The Organizations API is part of the corporate dataset and requires a corporate dataset API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v2/docs/security) page.\n\n"
+  Portfolios API: "## Portfolios API \n\n Bitvore RESTful APIs useful for integrating with a portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. \n\n A Corporate News API key can be used to access any of the Portfolio APIs. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v2/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate a portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by Bitvore IDs (for organizations). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of organizations in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a organization's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that organization will be returned. \n\n A set of sample CSV files listing organizations found [here](http://developer.bitvore.com/v2/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new organization (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v2/docs/api-reference/corp?tagname=Portfolios%20API) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v2/docs/api-reference/corp?tagname=News%20API). \n\n ## Custom Ids (Id Mapping) \n\n Portfolio items support the mapping of custom ids. These custom Ids are not required, but when used along with the other APIs, it helps facilitate the mapping, discovery and identification of these ids to existing Bitvore Ids. \n\n To include a mapping, construct an PortfolioItem and ItemCustomId as followed \n\n ```js\n { \n \t \"id\": \"b0004hrm6\", \n \t \"customIds\": \n \t\t[{ \n \t\t\"id\": \"0x000201\", \n \t\t\"type\": \"FOREIGN_ID\" \n \t}, \n \t{ \n \t\t\"id\": \"0x000202\", \n \t\t\"type\": \"FOREIGN_ID\" \n \t}] \n } \n ```\n \n\n Please note when using the Portfolio API, you should not mix the use of update items by 'Ids' and 'Items' as they can overwrite existing data. \n \n\n "
+  Sentiment Scores API: "## Sentiment Scores API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Sentiment Scores API](http://developer.bitvore.com/v2/docs/api-reference/corp?tagname=Sentiment%20Scores%20API) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v2/docs/security) page.\n\n "

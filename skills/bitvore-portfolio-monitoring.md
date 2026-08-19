@@ -1,7 +1,7 @@
 ---
 name: Load a portfolio into Bitvore and monitor it
 description: Create a Cellenus portfolio (organizations or CUSIPs), load its members by API or CSV upload, then query news matched against that portfolio.
-api: openapi/bitvore-corporate-openapi.yml
+api: openapi/_original/bitvore-corporate-openapi.yml
 operations:
   - handleAddPortfolioUsingPOST_1
   - handleUploadPortfolioItemsUsingPOST_1

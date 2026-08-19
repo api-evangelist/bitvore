@@ -1,0 +1,694 @@
+{
+  "item": [
+    {
+      "id": "4f83b83c-86a8-449a-ba61-b21ebb3e1021",
+      "name": "Muni API",
+      "description": {
+        "content": "Municipal API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69d80dfa-e010-4dbd-b0df-814fe3045827",
+          "name": "Search for news by CUSIP",
+          "request": {
+            "name": "Search for news by CUSIP",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "api",
+                "search",
+                "cusip",
+                ":cusip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deltaDays",
+                  "value": "<string>",
+                  "description": "deltaDays"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "50",
+                  "description": "count"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "startDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "endDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "UTC",
+                  "description": "tz"
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "ALERT",
+                  "description": "quality"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cusip",
+                  "description": "(Required) cusip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd2fab02-9ce7-463e-acb1-e2a06566ca5d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "api",
+                    "search",
+                    "cusip",
+                    ":cusip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deltaDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "ALERT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusip",
+                      "description": "(Required) cusip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    }\n  ],\n  \"success\": true,\n  \"total\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a317c93-86b4-49e9-9243-8d985bb29fc2",
+          "name": "Search for news by WatchList",
+          "request": {
+            "name": "Search for news by WatchList",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "api",
+                "search",
+                "portfolio",
+                ":watchlistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deltaDays",
+                  "value": "<string>",
+                  "description": "deltaDays"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "50",
+                  "description": "count"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "startDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "endDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "UTC",
+                  "description": "tz"
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "ALERT",
+                  "description": "quality"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "watchlistId",
+                  "description": "(Required) watchlistId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "72946cef-c2ee-41fe-92b3-b415b3529509",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "api",
+                    "search",
+                    "portfolio",
+                    ":watchlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deltaDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "ALERT"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "watchlistId",
+                      "description": "(Required) watchlistId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    }\n  ],\n  \"success\": true,\n  \"total\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6945e114-4419-43b9-9c91-1dcb7a8749ff",
+          "name": "Search for news using VQL",
+          "request": {
+            "name": "Search for news using VQL",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "api",
+                "search",
+                "vql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "q"
+                },
+                {
+                  "disabled": false,
+                  "key": "deltaDays",
+                  "value": "<string>",
+                  "description": "deltaDays"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "50",
+                  "description": "count"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "state"
+                },
+                {
+                  "disabled": false,
+                  "key": "citynews",
+                  "value": "<string>",
+                  "description": "citynews"
+                },
+                {
+                  "disabled": false,
+                  "key": "countynews",
+                  "value": "<string>",
+                  "description": "countynews"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "startDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "endDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "UTC",
+                  "description": "tz"
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "ALERT",
+                  "description": "quality"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "737e037b-cbb6-4c84-bffe-694b98bfb97e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "api",
+                    "search",
+                    "vql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deltaDays",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "50"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "citynews",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countynews",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "ALERT"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"rowKey\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"tags\": {},\n      \"timestamp\": \"2017-07-03T08:52:33+0000\"\n    }\n  ],\n  \"success\": true,\n  \"total\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d104bfb-3827-4abc-ab47-2b8fe492f18f",
+          "name": "Returns the API version",
+          "request": {
+            "name": "Returns the API version",
+            "description": {},
+            "url": {
+              "path": [
+                "muni",
+                "api",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf74aeb7-9c82-41dc-9fad-319f4c3d577e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "muni",
+                    "api",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7d97c2c-1783-470e-9537-758f9f3b04d7",
+    "name": "Deprecated Custom Muni API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.\n\n* The Intelligence API has been replaced by the Corp News API.\n* The Municipal Bond API has been replaced by the Muni News API.",
+      "type": "text/plain"
+    }
+  }
+}

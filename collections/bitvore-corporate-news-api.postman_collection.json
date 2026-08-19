@@ -1,0 +1,839 @@
+{
+  "item": [
+    {
+      "id": "df928169-afb0-45d5-84a7-86cd37489da4",
+      "name": "Corporate News",
+      "description": {
+        "content": "Corp News API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57efe004-1bed-48b7-ae13-b579ddeba5d6",
+          "name": "Corporate News Query",
+          "request": {
+            "name": "Corporate News Query",
+            "description": {
+              "content": "Provides a simple GET oriented corporate news search capability. The search criteria used when querying news includes the following options specified as query parameters which can used together to refine the search results: \n * Bitvore ID - A Bitvore ID, known as a BvId, uniquely identifies a company/organization. Querying by BvId returns only news articles where the identified company is an actor in the story.\n * Portfolio - A portfolio is made up of one or more companies (BvIds). Querying by portfolio returns only articles where at least one of the companies in the portfolio are an actor in the article. This option cannot be used with the BvId or Foreign ID options. \n * Foreign ID - If the Identification API is used to map BvIds to ID's foreign to the Bitvore system the ID's mapped to BvIds are considered foreign ID's which can be used using this parameter instead of a BvId. This option cannot be used with the BvId or Portfolio options. \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](http://developer.bitvore.com/v1/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Similarity - Indicates which (if any) similar articles should be returned, options are \n \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they \n have different usage restrictions. In other word with this option two similar articles can be returned \n if one is FullUse and the other is FairUse. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency. \n \n\n The following are some examples of using the API. \n\n To query for the news about IBM, BvId b00001ab7, published within the last 3 days in the PST timezone (using query param for api key): \n\n ```js\n GET /corpnews?bvId=b00001ab7&offset=3&tz=PST&key=xyz123 HTTP 1.1\n Accept: application/json\n ```\n \n\n To query for the news about a portfolio between 1:00 and 2:00 PM PST on 7/1/2018 (using HTTP header for api key): \n\n ```js\n GET /corpnews?portfolioId=12345&startDate=2018-07-01T13:00:00&endDate=2018-07-01T14:00:00&tz=PST HTTP 1.1\n Accept: application/json\n X-BV-APIKEY: xyz123... \n ```\n \n\n To query for the news about a company with a proprietary ID mapped to a BvId using the Identification API: \n\n ```js\n GET /corpnews?foreignId=PROPRIETARYID&offset=3&tz=PST&key=xyz123 HTTP 1.1\n Accept: application/json\n ```\n \n\n To query for M&A news between 7/1/2018 and 7/31/2018 : \n\n ```js\n GET /corpnews?signal=MergerAcquisition&startDate=2018-07-01&endDate=2018-07-31&tz=PST HTTP 1.1\n Accept: application/json\n X-BV-APIKEY: xyz123... \n ```\n \n\n To query for the news published within the last 3 days in the PST timezone and return tickers and domain names \n\n ```js\n GET /corpnews?&offset=3&tz=PST&orgField=ticker&orgField=domainName&key=xyz123 HTTP 1.1\n Accept: application/json\n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvId/Name combinations identifying companies discussed in the article. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME aquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aaa\", \"Name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"BvId\" : \"a00001aab\", \"Name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aaa\", \"Name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aac\", \"Name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n \n\n Each article returned may have one or more groups of referenced articles. The referencedOrgs property holds the list of companies that were directly mentioned in the article and were considered the primary actors. In this example the article was about ACME merging with Wile E. Coyote which were considered the primary actors. \n\n If there is more than one primary actor in an article it is often the case that only a subset of those actors were in the original scope of the input query (bvIds or portfolio). The matchedArticleOrgs will hold that subset of primary actors which were part of the input query. The system will look for articles about subsidiaries of the companies in the original scope of the input query as well. When a subsidiary is the primary actor of a returned article it will be in the referencedOrgs and matchedArticlesOrg field, but the parent company that was specified in the query will be returned in the matchedOrgs property. \n\n In this example the original query was for articles about A Company Manufacturing Everything. The system found this article about its child company ACME. Therefore matchedArticleOrgs lists ACME and matchedOrgs lists A Company Manufacturing Everything which was in the original query. \n\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad bvId found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "corpnews"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "One or more Bitvore Iss identifying entities to retrieve news for, should not be used with the portfolio or foreignId parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "One or more Bitvore Iss identifying entities to retrieve news for, should not be used with the portfolio or foreignId parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Id identifying a portfolio to retrieve news for, should not be used with the bvId or foreignId parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "articleType",
+                  "value": "<string>",
+                  "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "articleType",
+                  "value": "<string>",
+                  "description": "One or more types of articles (i.e., News, PressRelease) to return. By default all types are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "signal",
+                  "value": "<string>",
+                  "description": "One or more signals (i.e., Bankruptcy, Labor.Hiring) to restrict the returned news to."
+                },
+                {
+                  "disabled": false,
+                  "key": "signal",
+                  "value": "<string>",
+                  "description": "One or more signals (i.e., Bankruptcy, Labor.Hiring) to restrict the returned news to."
+                },
+                {
+                  "disabled": false,
+                  "key": "theme",
+                  "value": "<string>",
+                  "description": "One or more themes (i.e., Brexit, TradeWar) to restrict the returned news to."
+                },
+                {
+                  "disabled": false,
+                  "key": "theme",
+                  "value": "<string>",
+                  "description": "One or more themes (i.e., Brexit, TradeWar) to restrict the returned news to."
+                },
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "Keyword or phrase to search for news when not using a portfolio"
+                },
+                {
+                  "disabled": false,
+                  "key": "foreignId",
+                  "value": "<string>",
+                  "description": "One or more Foreign IDs identifying the entities to retrieve news for, the IDs must be registered in an identification scheme associated with the API client. Should not be used with the bvId or portfolio parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "foreignId",
+                  "value": "<string>",
+                  "description": "One or more Foreign IDs identifying the entities to retrieve news for, the IDs must be registered in an identification scheme associated with the API client. Should not be used with the bvId or portfolio parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "News date to start from. Format is yyyy-mm-dd for daily news or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "News date to end with. Format is yyyy-mm-dd for daily (inclusive) news or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of days back news should be returned for. Should not be used with startDate. Default is 31."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateType",
+                  "value": "published",
+                  "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page number of the total result set to return, default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of results out of the total result set per page to return, default is 100, maximum is 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "significance",
+                  "value": "HIGH",
+                  "description": "Significance of articles to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significance articles."
+                },
+                {
+                  "disabled": false,
+                  "key": "similarity",
+                  "value": "None",
+                  "description": "Indicates which (if any) similar articles should be returned, options are \"Usage\" and \"None\", default is \"None\". \"Usage\" indicates similar articles can be returned if they have different usage restrictions."
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "orgField",
+                  "value": "<string>",
+                  "description": "One or more fields to return for each organization associated with the returned articles, by default only the organization's Id and name is returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31cb61be-1f28-4888-bd23-17e9ae7a2254",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    },
+                    {
+                      "key": "similarity",
+                      "value": "None"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"returned\": 10,\n  \"total\": 100,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"articleType\": \"PressRelease\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"excerpt\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"matchedArticleOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"matchedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"phrases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgHierarchy\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"sentiment\": 0.23456,\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"similarityClusterId\": \"075005015cf083aba01f0826ecfe718e965b577c572166b14a77652e\",\n      \"sourceName\": \"businesswire.com, The Washington Daybook\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"themes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME acquires Wile E. Coyote, Inc.\"\n    },\n    {\n      \"articleType\": \"PressRelease\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"excerpt\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"matchedArticleOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"matchedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"phrases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgHierarchy\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"sentiment\": 0.23456,\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"similarityClusterId\": \"075005015cf083aba01f0826ecfe718e965b577c572166b14a77652e\",\n      \"sourceName\": \"businesswire.com, The Washington Daybook\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"themes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME acquires Wile E. Coyote, Inc.\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "432b89a9-2a21-4e67-af32-d46fec6695cf",
+              "name": "Unauthorized to view intelligence",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    },
+                    {
+                      "key": "similarity",
+                      "value": "None"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb2178b-7c8d-47f7-97a1-f7ec8f843cfa",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "articleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    },
+                    {
+                      "key": "similarity",
+                      "value": "None"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orgField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9cf5aa0-7782-429e-b678-8d1b1de0e0d3",
+          "name": "Advanced Corporate News Query",
+          "request": {
+            "name": "Advanced Corporate News Query",
+            "description": {
+              "content": "Provides an advanced corporate news search capability. The search criteria used when querying news includes a more advanced approach to identifying the company, or organization, scope of the news to return as well as the other content oriented options listed above. The following are the options supported for identifying the organization scope: \n * Bitvore ID - A Bitvore ID, known as a BvId, uniquely identifies a company/organization. Querying by BvId returns only news articles where the identified company is an actor in the story.\n * Portfolio - A portfolio is made up of one or more companies (BvIds). Querying by portfolio returns only articles where at least one of the companies in the portfolio are an actor in the article. This option cannot be used with the BvId or Foreign ID options. \n * Foreign ID - If the Identification API is used to map BvIds to ID's foreign to the Bitvore system the ID's mapped to BvIds are considered foreign ID's which can be used using this parameter instead of a BvId. This option cannot be used with the BvId or Portfolio options. \n * Employees - Returns all articles referencing companies with an estimated number of employees that falls within a specified range using the format of lower-upper, i.e. 50-250. The upper bound may be omitted (50-) to indicate an unbounded range. The ranges must be defined using the predefined measurements: 1, 10, 50, 100, 250, 500, 1000, 5000, 10000. This option cannot be used with the BvId, Foreign ID, or Portfolio options. Note: On 1/11/2020 the range boundary of 200 was replaced by 100 and 250 and will be no longer supported on 7/1/2020. \n * Revenue - Returns all articles referencing companies with an estimated revenue that falls within a specified range using the format of lower-upper, i.e. 500-1000. The upper bound may be omitted (500-) to indicate an unbounded range. The ranges must be defined using the predefined measurements:  0, 1, 10, 50, 100, 500, 1000, 10000. This option cannot be used with the BvId, Foreign ID, or Portfolio options. Note: On 1/11/2020 the range boundary of 200 was replaced with 500 and will be no longer supported on 7/1/2020. \n * NAICS Industry - Returns all articles referencing companies operating within the industry identified by the specified [NAICS](https://www.naics.com/search/) code. \n * SIC Industry - Returns all articles referencing companies operating within the industry identified by the specified [SIC](https://www.osha.gov/pls/imis/sicsearch.html) code. \n * HQ Location - Returns all articles referencing companies whose headquarters is located in the specified location. The location is in the format of city/state/country, i.e., Los Angeles/California/United States. \n * HQ FIPS Area - Returns all articles referencing companies whose headquarters is located in the county or CBSA identified by the given FIPS code. FIPS codes for counties can be found [here](https://www.census.gov/prod/techdoc/cbp/95-96cd/fips-st.pdf). FIPS codes for CBSAs can be found [here](https://www2.census.gov/programs-surveys/cps/methodology/2015%20Geography%20Cover.pdf). Maps of CBSAs can be found [here](https://www.census.gov/geographies/reference-maps/2020/geo/cbsa.html). \n \n\n The following content oriented query options are also supported: \n * Signal - An article can be classified by one or more signals indicating that the article describes an event, or events, identified in the Bitvore Signal taxonomy. The taxonomy is hierarchical and signal values are '.' encoded to represent that hierarchy, i.e., Labor.Hiring. Querying by signal returns only articles classified by the given signal. All child signals in the signal hierarchy will also be returned. For example querying for Labor will return Labor.Hiring and Labor.Strike articles. The signals currently supported can be found [here](http://developer.bitvore.com/v1/docs/api-reference/signals).\n * Free Form Text Search - A search for words or phrases can be performed against the articles matching any of the previous options listed. \n * Article Type - Type of articles to return, News or PressRelease. By default all types are returned.\n * Significance - Articles are classified by their significance. A highly significant article is one that is alert worthy whereas less significant articles are more relevant when performing research. This option will filter the results returned by the previous options listed. \n * Usage - A news article may have licensing restrictions placed on it. If an article is governed by \n a fair use license Bitvore can only return excerpts to the article's content. To filter search \n results to only fair use content specify \"FairUse\" for the Usage option. To filter results to only \n commercially licensed content that grants full use of the content specify \"FullUse\" for the Usage option. \n Specifying \"All\", which is the default option, does not filter the results at all. \n * Org Field - By default each company referenced in an article is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org objects (ReferencedOrgs, MatchedOrgs, and MatchedArticleOrgs) in the article. Note: Returning additional fields may cause a small increase in latency.\n \n\n The following are some examples of using the API. \n\n To query for the news about IBM, BvId b00001ab7, published within the last 3 days in the PST timezone (using HTTP header for api key): \n\n ```js\n POST /corpnews \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"orgScope\": { \n \t\t\"ids\": [\"b00001ab7\"], \n \t\t\"orgIdScheme\": \"BVID\" \n \t}, \n \t\"offset\": 3, \n \t\"timezone\": \"PST\" \n } \n ```\n \n\n To query for the news about all executive changes between 9:00AM PST 7/1/2018 and 5:00PM PST on 7/31/2018: \n\n ```js\n POST /corpnews \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"signal\": [\"ExecutiveChanges\"], \n \t\"startDate\": \"2018-07-01T09:00:00\", \n \t\"endDate\": \"2018-07-31T17:00:00\", \n \t\"timezone\": \"PST\" \n } \n ```\n \n\n To query for the news about a companies with annual revenue between 50M and 100M in the last 30 days: \n\n ```js\n POST /corpnews \n Accept: application/json\n X-BV-APIKEY: xyz123... \n\n { \n \t\"orgScope\": { \n \t\t\"revRange\": \"50-100\" \n \t}, \n \t\"offset\": 30, \n \t\"timezone\": \"PST\" \n } \n ```\n \n\n The metadata tags of articles returned specific to corporate news in addition to the common tags above are: \n * Signals - 0 or more signals detected in the article encoded with '.' notation such as Labor.Hiring. \n * Referenced Orgs - 0 or more BvId/Name combinations identifying companies discussed in the article. \n \n\n A sample successful response is: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n \t\t\t\"articleType\": \"News\",\n \t\t\t\"title\": \"ACME acquires Wile E. Coyote\",\n \t\t\t\"sourceName\": \"acme.com\",\n \t\t\t\"sourceUrl\": \"http://ct.moreover.com/?a=41646891667&p=5jw&v=1&x=yg6DsqTFf8IC8ym026-o0A\",\n \t\t\t\"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n \t\t\t\"excerpt\": \"The ACME corporation has completed the merger with Wile E. Coyote today ...\",\n \t\t\t\"signals\": [\"MergeAcquisition.AcquisitionComplete\"],\n \t\t\t\"referencedOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aaa\", \"Name\" : \"ACME Corp\" }, \n \t\t\t\t{ \"BvId\" : \"a00001aab\", \"Name\" : \"Wile E. Coyote Inc\" } \n \t\t\t],\n \t\t\t\"matchedArticleOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aaa\", \"Name\" : \"ACME Corp\" } \n \t\t\t],\n \t\t\t\"matchedOrgs\": [ \n \t\t\t\t{ \"BvId\" : \"a00001aac\", \"Name\" : \"A Company Manufacturing Everything\" } \n \t\t\t],\n \t\t\t\"significance\": \"HIGH\",\n \t\t\t\"sentiment\" : 0.22555919, \n \t\t\t\"publishedAt\": \"2017-06-29T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-29T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n A sample unsuccessful response is: \n\n ```js\n {\n \t\"success\": false,\n \t\"reason\": \"Bad bvId found\",\n \t\"reasonSupport\": \"123456789 987654321\",\n \t\"count\": 0\n }\n ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "corpnews"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"articleType\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dateType\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"offset\": \"<integer>\",\n  \"orgField\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"orgScope\": {\n    \"bvId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"foreignId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"orgQuery\": {\n      \"empRange\": \"<string>\",\n      \"fips\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"naics\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"revRange\": \"<string>\",\n      \"sic\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"portfolioId\": \"<string>\"\n  },\n  \"pageNo\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"signal\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"significance\": \"<string>\",\n  \"similarity\": \"<string>\",\n  \"startDate\": \"<string>\",\n  \"text\": \"<string>\",\n  \"theme\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"timezone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b811295-1a8a-4d60-af41-78647742091e",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"articleType\": [\n    \"News\",\n    \"PressRelease\"\n  ],\n  \"dateType\": \"available\",\n  \"endDate\": \"2018-08-01T12:00:00\",\n  \"offset\": 14,\n  \"orgField\": [\n    \"name\",\n    \"ticker\"\n  ],\n  \"orgScope\": {\n    \"bvId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"foreignId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"orgQuery\": {\n      \"empRange\": \"200-5000\",\n      \"fips\": [\n        \"35620\"\n      ],\n      \"location\": [\n        \"Los Angeles/California/United States\"\n      ],\n      \"naics\": [\n        \"221114\",\n        \"221115 \"\n      ],\n      \"revRange\": \"50-200\",\n      \"sic\": [\n        \"1311\",\n        \"1381\"\n      ]\n    },\n    \"portfolioId\": \"<string>\"\n  },\n  \"pageNo\": 1,\n  \"pageSize\": 100,\n  \"signal\": [\n    \"Business.MergerAcquisitions\",\n    \"Business.FinancialFilings\"\n  ],\n  \"significance\": \"HIGH\",\n  \"similarity\": \"<string>\",\n  \"startDate\": \"2018-08-01T12:00:00\",\n  \"text\": \"blockchain\",\n  \"theme\": [\n    \"Brexit\",\n    \"TradeWar\"\n  ],\n  \"timezone\": \"PST\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"returned\": 10,\n  \"total\": 100,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"articleType\": \"PressRelease\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"excerpt\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"matchedArticleOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"matchedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"phrases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgHierarchy\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"sentiment\": 0.23456,\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"similarityClusterId\": \"075005015cf083aba01f0826ecfe718e965b577c572166b14a77652e\",\n      \"sourceName\": \"businesswire.com, The Washington Daybook\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"themes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME acquires Wile E. Coyote, Inc.\"\n    },\n    {\n      \"articleType\": \"PressRelease\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"excerpt\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"matchedArticleOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"matchedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"phrases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgHierarchy\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"city\": \"IRVINE\",\n          \"country\": \"UNITED STATES\",\n          \"domainName\": \"acme.com\",\n          \"factsetId\": \"000DWY-E\",\n          \"isin\": \"US5949181045\",\n          \"name\": \"ACME Corp\",\n          \"state\": \"CA\",\n          \"ticker\": \"ACME\"\n        }\n      ],\n      \"sentiment\": 0.23456,\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"similarityClusterId\": \"075005015cf083aba01f0826ecfe718e965b577c572166b14a77652e\",\n      \"sourceName\": \"businesswire.com, The Washington Daybook\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"themes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME acquires Wile E. Coyote, Inc.\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e71873fa-339a-4a3c-b962-90a8046be5bc",
+              "name": "Unauthorized to view intelligence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"articleType\": [\n    \"News\",\n    \"PressRelease\"\n  ],\n  \"dateType\": \"available\",\n  \"endDate\": \"2018-08-01T12:00:00\",\n  \"offset\": 14,\n  \"orgField\": [\n    \"name\",\n    \"ticker\"\n  ],\n  \"orgScope\": {\n    \"bvId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"foreignId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"orgQuery\": {\n      \"empRange\": \"200-5000\",\n      \"fips\": [\n        \"35620\"\n      ],\n      \"location\": [\n        \"Los Angeles/California/United States\"\n      ],\n      \"naics\": [\n        \"221114\",\n        \"221115 \"\n      ],\n      \"revRange\": \"50-200\",\n      \"sic\": [\n        \"1311\",\n        \"1381\"\n      ]\n    },\n    \"portfolioId\": \"<string>\"\n  },\n  \"pageNo\": 1,\n  \"pageSize\": 100,\n  \"signal\": [\n    \"Business.MergerAcquisitions\",\n    \"Business.FinancialFilings\"\n  ],\n  \"significance\": \"HIGH\",\n  \"similarity\": \"<string>\",\n  \"startDate\": \"2018-08-01T12:00:00\",\n  \"text\": \"blockchain\",\n  \"theme\": [\n    \"Brexit\",\n    \"TradeWar\"\n  ],\n  \"timezone\": \"PST\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac1015d7-dfe1-465f-b079-79530f21ef91",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "corpnews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"articleType\": [\n    \"News\",\n    \"PressRelease\"\n  ],\n  \"dateType\": \"available\",\n  \"endDate\": \"2018-08-01T12:00:00\",\n  \"offset\": 14,\n  \"orgField\": [\n    \"name\",\n    \"ticker\"\n  ],\n  \"orgScope\": {\n    \"bvId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"foreignId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"orgQuery\": {\n      \"empRange\": \"200-5000\",\n      \"fips\": [\n        \"35620\"\n      ],\n      \"location\": [\n        \"Los Angeles/California/United States\"\n      ],\n      \"naics\": [\n        \"221114\",\n        \"221115 \"\n      ],\n      \"revRange\": \"50-200\",\n      \"sic\": [\n        \"1311\",\n        \"1381\"\n      ]\n    },\n    \"portfolioId\": \"<string>\"\n  },\n  \"pageNo\": 1,\n  \"pageSize\": 100,\n  \"signal\": [\n    \"Business.MergerAcquisitions\",\n    \"Business.FinancialFilings\"\n  ],\n  \"significance\": \"HIGH\",\n  \"similarity\": \"<string>\",\n  \"startDate\": \"2018-08-01T12:00:00\",\n  \"text\": \"blockchain\",\n  \"theme\": [\n    \"Brexit\",\n    \"TradeWar\"\n  ],\n  \"timezone\": \"PST\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": {},\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7963ae5-6a26-46be-886a-9b84e0b13b86",
+    "name": "Bitvore Legacy Corporate News API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Precision News API \n\n The Precision News APIs provide access to curated news annotated with metadata tags. There are three APIs that access their own data sets, municipal, economic, and corporate. Each API has a specific way of querying the data sets and specific data they return, which is described in each of the respective API descriptions, the [Municipal News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Economic News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) and the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). All of the API's are built on a common foundation described below. \n\n A news article is tagged with metadata that describes the content of the article. Each data set has its own set of unique tags but there is a common set depicted below \n\n ![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-article.png) \n\n News queries are time based. The news can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the published date of an article or the date which the article was made available by the system. When using a polling strategy to query the latest news using the API, the available date is recommended as published dates can be less predictable. Due to the large number of news articles that may be returned because of a broad criteria or a large window a limit on the number of articles to return by the system can be specified. \n\n Responses to queries are capped at 1000 articles. It is possible however that there are more than 1000 articles that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of articles returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. Each API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 articles in it. Each news response will identify the number of articles returned for the current page and the total number of articles in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 articles are in the response but there were a total of 1000 articles that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th article in the result set. \n\n The corporate and municipal data sets require their own API key. The economic data set is shared between the corporate and municipal data sets and does not require its own key. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n## Entity API \n\n The corporate entities, companies or organizations, that the articles the Corporate News API returns are persisted in the Bitvore Knowledge Graph. The Entity API provides access to the information about those corporate entities. \n\n ![Entity Information](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity.png) \n\n Companies can be searched for based on some criteria or directly using a Bitvore ID which uniquely identifies an entity in the Bitvore system. When using the Bitvore ID the entire company profile will be returned for that single company. If one is unsure what the Bitvore ID of a company is a search can be performed using different profile properties such as name, ticker, industry, etc. The API will return all companies that match the search criteria. Only summary information is returned but it should be enough information to identify the exact company being searched for. Once the Bitvore ID is found news can be retrieved for the company using the Corporate News API. \n\n ![Entity Lookup](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-lookup.png) \n\n The Bitvore ID for a company never changes so it is recommended that clients save the Bitvore IDs for future use instead of calling the Entity API each time if possible. \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n The Entity API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Portfolio API \n\n Bitvore RESTful APIs useful for integrating with a business portfolio so that querying news articles can be focused on business relevant entities and performed in a simplified manner. Two separate APIs are provided to support two different integration approaches. \n\n * The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. \n * The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. \n \n\n Access to any of the Portfolio APIs requires an API key or an API user account for backwards compatibility with 1.0 customers. \n\n A Bitvore Corporate News API key can be used to access any of the Portfolio APIs. A Bitvore Municipal News API key can be used to access the Portfolio Management API only. To register for an API Key please contact [customer support](mailto:support@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page. \n\n ### Portfolio Management API \n\n The Portfolio Management API provides the ability to create, or replicate, a business portfolio in the Bitvore system. The entities to be tracked in the portfolio are identified by either CUSIPs (for bonds) or Bitvore IDs (for companies). The benefit of creating a portfolio in Bitvore is the news APIs both take a portfolio ID as a parameter making it easy to retrieve news for a portfolio. \n\n If creating a portfolio of companies in Bitvore the Bitvore ID of each company will be needed. This ID can be obtained from a company's profile using the Entity API. \n\n ![Create Portfolios using Entity API](https://bitvorestaticassets.blob.core.windows.net/api-docs/entity-to-portfolio.png) \n\n The returned Bitvore ID can then be added to the portfolio. When querying for news about the portfolio the news for that company will be returned. \n\n A set of sample CSV files listing companies found [here](http://developer.bitvore.com/v1/docs/api-reference/portfolios) can be used to quickly create portfolios of your own. Simply download the CSV file you want to create your portfolio with, create a new company (BVID) portfolio, and then use the [Upload Portfolio Items](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) API call to fill the new portfolio from the CSV file. Note the portfolio ID generated and then use that ID when querying for portfolio news using the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). \n\n Each company has a monitoring state field which can have the value \"active\" or \"inactive\". Active companies are being monitored by Bitvore so news is being currently collected. An inactive company will need to be activated in order to start news collection. Simply adding an inactive company to your portfolio will not start news collection. If you see an inactive company you would like activated please contact [customer support](mailto:support@bitvore.com). \n\n ### Identification API \n\n The Identification API maps custom identifiers to Bitvore IDs so that the business portfolio does not have to be replicated in the Bitvore system. Portfolios typically reference companies using their own identification scheme. The portfolio will remain in an external store and only a mapping of the IDs of the companies using that identification scheme need be mapped to entities in the Bitvore system. This is only required for company based portfolios as no mapping is needed for CUSIPs. \n The API provides the ability to create, modify, and delete an ID map. The map consists of a list of ID mappings. Each mapping associates the external company ID with an internal Bitvore ID. \n\n ![ID Map Creation](https://bitvorestaticassets.blob.core.windows.net/api-docs/id-map-create.png) \n\n Once the map is created clients can invoke the Corporate News API using the IDs in their own identification scheme instead of Bitvore IDs. \n\n ![News Call Using ID Map](https://bitvorestaticassets.blob.core.windows.net/api-docs/news-using-id-map.png) \n\n The API client will provide a list of external IDs to the News API. The News API will find the Bitvore IDs for each external ID from the ID map created by the same API Client (as identified by their API key). The news is then returned for those associated Bitvore IDs. If there is no mapping in the system for an external ID an error will be returned.\n\n## Financial Filings API \n\n The financial filings submitted by companies or organizations in the Bitvore Knowledge Graph can be obtained through the Financial Filing API. \n\n Filings can be searched for based on filing type (8-K, 10-Q, etc.), company Bitvore ID, and time frame. The API provides the option of returning summary information about each filing such as the filing company information and filing type or returning the entire filing submission. Filing submissions consist of multiple files and will be returned in compressed file downloads. \n\n Filings queries are time based. The filings can be queried either within a specified time window or by a number of days back in history from the current day. The dates used when specifying a time window can be based on the submission date of a filing or the date which the filing was made available by the system. When using a polling strategy to query the latest filings using the API, the available date is recommended as submission dates can be less predictable. Due to the large number (and size) of filings that may be returned because of a broad criteria or a large window a limit on the number of filings to return by the system can be specified. \n\n Responses to summary queries are capped at 1000 filings while responses to submission queries are capped at 200. It is possible however that there are more than the capped amount of filings that match a given query. To accommodate queries that match more than the maximum size the concept of paging is supported. A page is a set of filings returned by a single query. It may be less than the total result set. The client can indicate which page they want returned on each call. This allows the client to loop through the result set one page at a time until the entire result set is returned. \n\n Both the page to return and the size of the page are specified by the client with the pageNo and pageSize parameters respectively. The API will list these parameter options as either query parameters or properties of the input message body. A query parameter example is as follows: \n\n ```js\n GET ...&pageNo=1&pageSize=100 HTTP 1.1\n ```\n \n\n This instructs the API to return the first page with a maximum of 100 filings in it. Each response will identify the number of filings returned for the current page and the total number of filings in the result set so the client can loop if needed. For example: \n\n ```js\n {\n \t\"success\": true,\n \t\"returned\": 100,\n \t\"total\": 1000, \n \t... \n ``` \n The above response indicates the requested page of 100 filings are in the response but there were a total of 1000 filings that matched the query. To then ask for the second page of the result set the pageNo parameter would be incremented as follows: \n\n ```js\n GET ...&pageNo=2&pageSize=100 HTTP 1.1\n ```\n \n\n In this example the next response will return the 101st to 200th filings in the result set. \n\n The Financial Filings API is part of the corporate data set and requires a corporate data set API key for access. To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n## Score API \n\n The Score APIs provide access to the different scores Bitvore generates, such as company sentiment scores. Scores are calculated by gathering data over a period of time and aggregated in some manner to produce a numerical score that can be used to compare, trend, and correlate with other information. The scores are calculated periodically and are made available in a time series format by the APIs. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) provides scores measuring the sentiment about a company in regards to a given topic, such as a growth, risk, or an overall sentiment. The company sentiment score is calculated daily. Scores for each day are returned for each company requested over a given time period. \n\n The [Company Sentiment Score API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api) uses the same API as the [Corporate News API](http://developer.bitvore.com/v1/docs/api-reference/legacy-api). To register for an API Key please contact the [Products Team](mailto:products@bitvore.com). The API key can be used directly or to obtain an OAuth access token as described on the [Security APIs](http://developer.bitvore.com/v1/docs/security) page.\n\n ",
+      "type": "text/plain"
+    }
+  }
+}

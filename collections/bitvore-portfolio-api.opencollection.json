@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bitvore Legacy Portfolio API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Portfolio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return User's Portfolios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios"
+          },
+          "docs": "Returns the user's portfolios"
+        },
+        {
+          "info": {
+            "name": "Add Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a portfolio. The added porfolio is returned"
+        },
+        {
+          "info": {
+            "name": "Return Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ]
+          },
+          "docs": "Returns the porfolio with the given Id"
+        },
+        {
+          "info": {
+            "name": "Change Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the portfolio with the given Id, the result of the changes are returned as a portfolio"
+        },
+        {
+          "info": {
+            "name": "Delete Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ]
+          },
+          "docs": "Deletes the portfolio with the given Id"
+        },
+        {
+          "info": {
+            "name": "Upload Portfolio Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/itemUploads",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a CSV file of portfolio items. The Bitvore Id of each item must be present in a column labeled BvID on a header line."
+        },
+        {
+          "info": {
+            "name": "Return Portfolio Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/items",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ]
+          },
+          "docs": "Returns the items in the portfolio with the given Id"
+        },
+        {
+          "info": {
+            "name": "Add Portfolio Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/items",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds items to the portfolio with the given Id, the added items are returned"
+        },
+        {
+          "info": {
+            "name": "Replace Portfolio Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/items",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the items in the portfolio with the given Id, the added items are returned"
+        },
+        {
+          "info": {
+            "name": "Delete Portfolio Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/items",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Id of item(s) to remove"
+              }
+            ]
+          },
+          "docs": "Deletes the specified items in the portfolio with the given Id. If itemId is excluded, all items will be deleted."
+        },
+        {
+          "info": {
+            "name": "Delete Single Portfolio Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bitvore.com/portfolioapi/portfolios/:portfolioId/items/:itemId",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio Id"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Id of item to remove"
+              }
+            ]
+          },
+          "docs": "Deletes the specified item in the portfolio with the given Id"
+        },
+        {
+          "info": {
+            "name": "Return API Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/portfolioapi/version"
+          },
+          "docs": "Deprecated"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

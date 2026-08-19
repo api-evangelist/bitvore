@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deprecated Custom Bond API",
+    "version": "Deprecated 2019"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bond",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for intelligence by CUSIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/bondapi/cusip/:cusip",
+            "params": [
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "path",
+                "description": "cusip"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to start from. Format is yyyy-mm-dd."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to end with. Format is yyyy-mm-dd."
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "Timezone used in startDate and endDate."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+        },
+        {
+          "info": {
+            "name": "Search for intelligence by state and sector.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/bondapi/stateSector/:state/:sector",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "path",
+                "description": "State (two character state code) to query about."
+              },
+              {
+                "name": "sector",
+                "value": "",
+                "type": "path",
+                "description": "Sector to query about, i.e., Education."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to start from. Format is yyyy-mm-dd."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to end with. Format is yyyy-mm-dd."
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "Timezone used in startDate and endDate."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+        },
+        {
+          "info": {
+            "name": "Returns the API version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/bondapi/version",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the API version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

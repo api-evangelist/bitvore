@@ -39,6 +39,6 @@ connectors:
   - handleOrgMatchingUsingPOST
   - handleOrgLookupUsingGET
   - getVersionUsingGET_2
-  backing_spec: openapi/bitvore-legacy-openapi.yml
+  backing_spec: openapi/_original/bitvore-legacy-openapi.yml
   throttle: 100 API calls per connection per 60 seconds
   documented: '2024-03-01'

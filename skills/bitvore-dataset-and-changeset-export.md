@@ -1,7 +1,7 @@
 ---
 name: Export Cellenus datasets and reconcile with changesets
 description: Bulk-download yearly or daily Cellenus corporate dataset exports, then keep an offline copy current using the added/modified/removed changeset feed.
-api: openapi/bitvore-corporate-openapi.yml
+api: openapi/_original/bitvore-corporate-openapi.yml
 operations:
   - getYearlyDatasetsUsingGET
   - getDailyDatasetsUsingGET_1

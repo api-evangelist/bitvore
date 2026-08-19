@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corporate Datasets API API",
+    "version": "2.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Changesets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/changesets",
+            "params": [
+              {
+                "name": "changesets",
+                "value": "",
+                "type": "query",
+                "description": "One or more changeset type.\n Changesets: entities-added,entities-merged,entities-modified,entities-removed,fields-added,fields-modified,fields-removed,records-added,records-modified,records-removed"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the changeset, inclusive."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the changeset, inclusive, maximum date range is 31."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page number of the total result set to return, default is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results out of the total result set per page to return, default is 1000, maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Returns the specified changesets by date range.\n Requests are limited to 31 days and up to 1000 results per page."
+        },
+        {
+          "info": {
+            "name": "Changeset Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/changesets/:changeset",
+            "params": [
+              {
+                "name": "changeset",
+                "value": "",
+                "type": "path",
+                "description": "changeset"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the report, inclusive."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the report, exclusive."
+              },
+              {
+                "name": "compression",
+                "value": "",
+                "type": "query",
+                "description": "Optional compression"
+              }
+            ]
+          },
+          "docs": "Returns a csv of the specified changeset type by date range provided. Limit of 1000 results per request."
+        },
+        {
+          "info": {
+            "name": "Daily Changeset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/changesets/:changeset/:year/:month/:day",
+            "params": [
+              {
+                "name": "changeset",
+                "value": "",
+                "type": "path",
+                "description": "changeset"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "year"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "path",
+                "description": "month"
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "day"
+              }
+            ]
+          },
+          "docs": "Returns a url for a compressed changeset file for the specified day. Daily changesets will be available for 7 days."
+        },
+        {
+          "info": {
+            "name": "Yearly Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/datasets/:dataset/:year",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "path",
+                "description": "dataset"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "year"
+              }
+            ]
+          },
+          "docs": "Returns a url for a compressed dataset file for the specified year. Files can range from a few megabytes to hundreds of megabytes."
+        },
+        {
+          "info": {
+            "name": "Daily Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/v2/corp/datasets/:dataset/:year/:month/:day",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "path",
+                "description": "dataset"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "path",
+                "description": "year"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "path",
+                "description": "month"
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "day"
+              }
+            ]
+          },
+          "docs": "Returns a url for a compressed dataset file for the specified day. Daily datasets will be available for 7 days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

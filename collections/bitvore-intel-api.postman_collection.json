@@ -1,0 +1,771 @@
+{
+  "item": [
+    {
+      "id": "5dcaa6f5-fab5-4828-9023-2a8df32afd15",
+      "name": "Intel",
+      "description": {
+        "content": "Intelligence API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77f4cf7c-21f6-4263-b59b-73dedb7aafc2",
+          "name": "Search for business intelligence",
+          "request": {
+            "name": "Search for business intelligence",
+            "description": {
+              "content": "Intelligence is returned for companies, cusips, states, cities, or sectors baed on supplied parameters. Intelligence can be pulled for at most 31 days. A specific timeframe can be specified in the call using a date range or a number of days back in time.\n\nCorporate intelligence can be gathered by searching with a Bitvore ID (BvId) identifying a company, a portfolio ID (a named set of companies), a coprorate business signal, or a foreign ID mapped to a company using the Identification API. An example of a request using a BvId is as follows:\n\n    GET /intelapi/intel?bvId=b1000abc&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nMunicipal and economic intelligence can be gathered by searching with a CUSIP, city, state, or sector. An example of using a cusip is:\n\n    GET /intelapi/intel?cusip=123456789&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of using a state and sector is:\n\n    GET /intelapi/intel?state=ca&amp;sector=education&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "intelapi",
+                "intel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "One or more Bitvore IDs identifying entities to retrieve corporate intel for, should not be used with other identifying parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "bvId",
+                  "value": "<string>",
+                  "description": "One or more Bitvore IDs identifying entities to retrieve corporate intel for, should not be used with other identifying parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "ID identifying a portfolio to retrieve intel for, should not be used with other identifying parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "cusip",
+                  "value": "<string>",
+                  "description": "One or more CUSIPs identifying the bonds to retrieve intel for, should not be used with other identifying parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "cusip",
+                  "value": "<string>",
+                  "description": "One or more CUSIPs identifying the bonds to retrieve intel for, should not be used with other identifying parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State to retrieve municipal and economic intel for. Must not be used with the bvId or cusip parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City to retrieve municipal and economic intel for, must be used with the state parameter and not with the bvId or cusip parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "sector",
+                  "value": "<string>",
+                  "description": "Sector to retrieve municipal and economic intel for, must be used with the state parameter and not with the bvId, cusip, or economic parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "economic",
+                  "value": "false",
+                  "description": "Restrict to economic news for an area, must be used with the state or city parameter and notwith the bvId, cusip, or sector parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "signal",
+                  "value": "<string>",
+                  "description": "One or more signals (i.e., Bankruptcy, Wrongdoing) to restrict the returned corporate intel to."
+                },
+                {
+                  "disabled": false,
+                  "key": "signal",
+                  "value": "<string>",
+                  "description": "One or more signals (i.e., Bankruptcy, Wrongdoing) to restrict the returned corporate intel to."
+                },
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "Keyword or phrase to search for intel when not using a portfolio"
+                },
+                {
+                  "disabled": false,
+                  "key": "foreignId",
+                  "value": "<string>",
+                  "description": "One or more Foreign IDs identifying the entities to retrieve corporate intel for, the IDs must be registered in an identification scheme associated with the API client."
+                },
+                {
+                  "disabled": false,
+                  "key": "foreignId",
+                  "value": "<string>",
+                  "description": "One or more Foreign IDs identifying the entities to retrieve corporate intel for, the IDs must be registered in an identification scheme associated with the API client."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to start from. Format is yyyy-mm-dd for daily intel or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Intelligence published date to end with. Format is yyyy-mm-dd for daily (inclusive) intel or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of days back intelligence should be returned for. Should not be used with startDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "tz",
+                  "value": "GMT",
+                  "description": "Timezone used in startDate and endDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateType",
+                  "value": "published",
+                  "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of record to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "significance",
+                  "value": "HIGH",
+                  "description": "Significance of records to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significant records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "82d3eeff-7d98-4e93-a16e-afd191a94cd6",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "intel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "economic",
+                      "value": "false"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"reason\": \"Could not locate subject.\",\n  \"reasonSupport\": \"Longer description of the missing subject.\",\n  \"response\": [\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"body\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday. ACME literally paid peanuts.\",\n      \"cities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"collectedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"collectedSourceUrl\": \"http:/aggregator.com?id=11\",\n      \"counties\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cusips\": [\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"ACME announces long awaited acquisition. To continue reading this document, click here for the original version.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"name\": \"ACME Corp\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"name\": \"ACME Corp\"\n        }\n      ],\n      \"sectors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"states\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME aquires Wile E. Coyote\"\n    },\n    {\n      \"recordType\": \"WEBCONTENT\",\n      \"availableAt\": \"2017-06-29T21:41:21.109Z\",\n      \"body\": \"ACME announces long awaited acquisition. The acquisition of Wile E. Coyote was announced Thursday. ACME literally paid peanuts.\",\n      \"cities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"collectedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"collectedSourceUrl\": \"http:/aggregator.com?id=11\",\n      \"counties\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cusips\": [\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"ACME announces long awaited acquisition. To continue reading this document, click here for the original version.\",\n      \"key\": \"070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c\",\n      \"previewImageUrl\": \"http://acme.com/resources/coyote.jpg\",\n      \"publishedAt\": \"2017-06-29T21:41:21.109Z\",\n      \"referencedOrgs\": [\n        {\n          \"bvId\": \"b00001ab7\",\n          \"name\": \"ACME Corp\"\n        },\n        {\n          \"bvId\": \"b00001ab7\",\n          \"name\": \"ACME Corp\"\n        }\n      ],\n      \"sectors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"signals\": [\n        \"string\",\n        \"string\"\n      ],\n      \"significance\": \"HIGH\",\n      \"sourceUrl\": \"http://acme.com/press\",\n      \"states\": [\n        \"string\",\n        \"string\"\n      ],\n      \"title\": \"ACME aquires Wile E. Coyote\"\n    }\n  ],\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28b1b691-15c3-412e-8972-daa2cf262f7a",
+              "name": "Unauthorized to view intelligence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "intel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "economic",
+                      "value": "false"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d73c529c-bb40-4a09-9b2b-87412d48caf0",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "intel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bvId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cusip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "economic",
+                      "value": "false"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "foreignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tz",
+                      "value": "GMT"
+                    },
+                    {
+                      "key": "dateType",
+                      "value": "published"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "significance",
+                      "value": "HIGH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84c7767f-87c3-42f2-b8b3-4afce47ff89d",
+          "name": "Returns the API version",
+          "request": {
+            "name": "Returns the API version",
+            "description": {},
+            "url": {
+              "path": [
+                "intelapi",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73a3cead-64a8-468b-94fa-a590999d52a2",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9792c61-513e-4d07-ab6d-c5d875f127b0",
+              "name": "Unauthorized to get version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e7e740a-c3e1-4626-973a-92623576700e",
+              "name": "Internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelapi",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {},\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bitvore.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e9ea46a1-a381-4038-9920-449a4acf76ef",
+    "name": "Deprecated Custom Intel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bitvore Deprecated APIs. These APIs are still functional, but will be phased out. Please transition to the latest API version to avoid possible disruption.\n\n* The Intelligence API has been replaced by the Corp News API.\n* The Municipal Bond API has been replaced by the Muni News API.",
+      "type": "text/plain"
+    }
+  }
+}

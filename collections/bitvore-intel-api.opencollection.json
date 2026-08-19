@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deprecated Custom Intel API",
+    "version": "Deprecated 2019"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Intel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for business intelligence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/intelapi/intel",
+            "params": [
+              {
+                "name": "bvId",
+                "value": "",
+                "type": "query",
+                "description": "One or more Bitvore IDs identifying entities to retrieve corporate intel for, should not be used with other identifying parameters."
+              },
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "ID identifying a portfolio to retrieve intel for, should not be used with other identifying parameters."
+              },
+              {
+                "name": "cusip",
+                "value": "",
+                "type": "query",
+                "description": "One or more CUSIPs identifying the bonds to retrieve intel for, should not be used with other identifying parameters."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State to retrieve municipal and economic intel for. Must not be used with the bvId or cusip parameters."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City to retrieve municipal and economic intel for, must be used with the state parameter and not with the bvId or cusip parameters."
+              },
+              {
+                "name": "sector",
+                "value": "",
+                "type": "query",
+                "description": "Sector to retrieve municipal and economic intel for, must be used with the state parameter and not with the bvId, cusip, or economic parameters."
+              },
+              {
+                "name": "economic",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to economic news for an area, must be used with the state or city parameter and notwith the bvId, cusip, or sector parameters."
+              },
+              {
+                "name": "signal",
+                "value": "",
+                "type": "query",
+                "description": "One or more signals (i.e., Bankruptcy, Wrongdoing) to restrict the returned corporate intel to."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Keyword or phrase to search for intel when not using a portfolio"
+              },
+              {
+                "name": "foreignId",
+                "value": "",
+                "type": "query",
+                "description": "One or more Foreign IDs identifying the entities to retrieve corporate intel for, the IDs must be registered in an identification scheme associated with the API client."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to start from. Format is yyyy-mm-dd for daily intel or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. Should not be used if offset parameter is."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence published date to end with. Format is yyyy-mm-dd for daily (inclusive) intel or yyyy-mm-dd'T'HH:mm if you want it down to the hour or minute. If startDate is used and endDate is not the default endDate is today."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back intelligence should be returned for. Should not be used with startDate."
+              },
+              {
+                "name": "tz",
+                "value": "",
+                "type": "query",
+                "description": "Timezone used in startDate and endDate."
+              },
+              {
+                "name": "dateType",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether dates to query by should be published dates \"published\" or available dates (processing completed) \"available\". Default is published."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of record to return."
+              },
+              {
+                "name": "significance",
+                "value": "",
+                "type": "query",
+                "description": "Significance of records to return, possible values are \"HIGH\" and \"MEDIUM\", default is \"HIGH\". The parameter is a threshold so a value of MEDIUM will return MEDIUM and HIGH significant records."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Intelligence is returned for companies, cusips, states, cities, or sectors baed on supplied parameters. Intelligence can be pulled for at most 31 days. A specific timeframe can be specified in the call using a date range or a number of days back in time.\n\nCorporate intelligence can be gathered by searching with a Bitvore ID (BvId) identifying a company, a portfolio ID (a named set of companies), a coprorate business signal, or a foreign ID mapped to a company using the Identification API. An exa"
+        },
+        {
+          "info": {
+            "name": "Returns the API version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bitvore.com/intelapi/version",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns the API version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
