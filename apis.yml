@@ -15,7 +15,7 @@ image: https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/u/shgogna
 url: https://raw.githubusercontent.com/api-evangelist/bitvore/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-08-07'
 modified: '2026-08-14'
 tags:
