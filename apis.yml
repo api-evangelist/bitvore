@@ -19,6 +19,19 @@ specificationVersion: '0.23'
 created: '2026-08-07'
 modified: '2026-08-14'
 tags:
+- Financial Data
+- Market Intelligence
+- Alternative Data
+- News API
+- NLP
+- ESG
+- Municipal Bonds
+- Credit Risk
+- Company Data
+- Sentiment Analysis
+- Unstructured Data
+- Fixed Income
+tags_raw:
 - financial-data
 - market-intelligence
 - alternative-data
@@ -324,6 +337,8 @@ apis:
   humanURL: https://developer.bitvore.com/v2/docs/security
   baseURL: https://api.bitvore.com/oauth/
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
