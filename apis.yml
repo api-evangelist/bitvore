@@ -11,6 +11,18 @@ description: >-
   exports, and a Microsoft-certified Power Platform connector. Bitvore's fixed-income data-analytics
   unit was acquired by BondWave in November 2024; bitvore.com now redirects to bondwave.com/muni-news/,
   while developer.bitvore.com and api.bitvore.com remain live and serving the Cellenus API surface.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/u/shgogna/version-mismatches-special-train/1.0.1670.3520/bitvorecellenus/icon.png
 url: https://raw.githubusercontent.com/api-evangelist/bitvore/refs/heads/main/apis.yml
 x-type: company
