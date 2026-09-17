@@ -358,30 +358,6 @@ apis:
     url: https://developer.bitvore.com/v2/docs/security
   - type: Documentation
     url: https://developer.bitvore.com/v1/docs/overview
-- aid: bitvore:bitvore-oauth2-api
-  name: Bitvore O Auth2 API
-  description: Bitvore OAuth2 Authorization Server API
-  humanURL: https://developer.bitvore.com/v2/docs/security
-  baseURL: https://api.bitvore.com/oauth/
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth2
-  properties:
-  - type: OpenAPI
-    url: openapi/bitvore-oauth2-api-openapi.yml
-  - type: Documentation
-    url: https://developer.bitvore.com/v2/docs/overview/corp
-  - type: APIReference
-    url: https://developer.bitvore.com/v2/docs/api-reference/corp
-  - type: Documentation
-    url: https://developer.bitvore.com/v2/docs/overview/muni
-  - type: APIReference
-    url: https://developer.bitvore.com/v2/docs/api-reference/muni
-  - type: Documentation
-    url: https://developer.bitvore.com/v2/docs/security
-  - type: Documentation
-    url: https://developer.bitvore.com/v1/docs/overview
 - aid: bitvore:bitvore-organizations-api-api
   name: Bitvore Organizations API
   description: Organization Details and Search
@@ -480,6 +456,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/bitvore-sentiment-scores-api-openapi.yml
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/corp
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/corp
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/overview/muni
+  - type: APIReference
+    url: https://developer.bitvore.com/v2/docs/api-reference/muni
+  - type: Documentation
+    url: https://developer.bitvore.com/v2/docs/security
+  - type: Documentation
+    url: https://developer.bitvore.com/v1/docs/overview
+- aid: bitvore:bitvore-oauth2-api
+  name: Bitvore O Auth2 API
+  description: Bitvore OAuth2 Authorization Server API
+  humanURL: https://developer.bitvore.com/v2/docs/overview/muni
+  baseURL: https://api.bitvore.com/muni/alerts/
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/bitvore-oauth2-api-openapi.yml
   - type: Documentation
     url: https://developer.bitvore.com/v2/docs/overview/corp
   - type: APIReference
