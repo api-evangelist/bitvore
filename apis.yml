@@ -474,6 +474,8 @@ apis:
   humanURL: https://developer.bitvore.com/v2/docs/overview/muni
   baseURL: https://api.bitvore.com/muni/alerts/
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
