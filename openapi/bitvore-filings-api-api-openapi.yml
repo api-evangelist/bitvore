@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  description: "### Cellenus Corporate APIs\nThe Cellenus Corporate APIs consists of three main datasets, \"Corporate, Market & Industry\", \"ESG\", and \"Thematic Trending\" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them. Bitvore currently surveils most public companies traded on US and international exchanges, US companies and international companies. Additionally, new companies required by a customer can be requested to be added to our surveillance.\n\nThe Corporate APIs also includes access to economic news for geographic locations in the United States.\n\nA typical record in the dataset is depicted below.\n\n![News Article](https://bitvorestaticassets.blob.core.windows.net/api-docs/corp-news-article.png)\n\nAccess to the Corporate Datasets using the Corporate APIs requires its own license and API key.  To register for an API Key please visit [here](http://developer.bitvore.com/v2/getting-started?section=obtain-api-key). \n\nThe Cellenus Corporate APIs, include [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Ecomomic News](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API), [Organizations](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API), [Portfolio Integration](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API), [Sentiment Scores](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Sentiment%20Scores%20API), [Financial Filings](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) and [Datasets](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API).\n\nThe [Corporate News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news based on company ID (Bitvore ID), portfolio, customer ID, industry, location, and certain company characteristics such as number of employees and annual revenue.\n\nThe [Economic News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) provides direct access to the curated news relevant to the economy of a location or region.\n\nThe [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API) provides the ability to search for companies by a variety of company characteristics such as name, web domain, ticker, industry, location, number of employees, and annual revenue. Each company is uniquely identified by a Bitvore ID which can be used as input to query the [News API](http://developer.bitvore.com/v2/docs/overview).\n\nThe [Portfolios API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Portfolios%20API) provides the ability to either create and maintain portfolios of companies so that news can be queried in a single call from the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) for a given portfolio or to map your own company ID scheme to Bitvore's so you can query the [News API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=News%20API) with your own IDs.\n\nThe [Filings API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Filings%20API) provides direct access to the financial filings submitted to regulatory agencies such as the SEC on behalf of companies found in the [Organizations API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Organizations%20API).\n\nThe [Datasets API](http://developer.bitvore.com/v2/docs/overview/corp?tagname=Datasets%20API) provides dataset and changeset exporting. This API provides offline data consumption that can be used with external tools.\n\n"
+  description: '### Cellenus Corporate APIs
+
+    The Cellenus Corporate APIs consists of three main datasets, "Corporate, Market & Industry", "ESG", and "Thematic Trending" which provide news, events, press releases relevant to corporate entities, typically identifying signals that affect them.'
   version: '2.1'
-  title: Corporate Filings API API
+  title: Corporate Filings API
   license:
     name: Copyright Bitvore Corp. 2026
 servers:
@@ -16,7 +18,16 @@ paths:
       tags:
       - Filings API
       summary: Financial Filings Submissions Search
-      description: "Returns the submission with the given key. The key is a unique identifier that can be found in the response to the Get Summaries call. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default).  An example of downloading a gzipped submission is \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/submissions/060000016b9045f018c6e719ba884ef6605ccf6503a4733cf377651c\n ```\n A sample successful response will be a gzipped tar file of the files from the original submission. If the submission was made to the SEC html files (with accompanying images) as well as a master text file will be included."
+      description: 'Returns the submission with the given key. The key is a unique identifier that can be found in the response to the Get Summaries call. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default). An example of downloading a gzipped submission is
+
+
+        ```js
+
+        GET https://api.bitvore.com/v2/corp/filings/financial/submissions/060000016b9045f018c6e719ba884ef6605ccf6503a4733cf377651c
+
+        ```
+
+        A sample successful response will be a gzipped tar file of the files from the original submission. If the submission was made to the SEC html files (with accompanying images) as well as a master text file will be included.'
       operationId: downloadFilingsUsingGET_1
       parameters:
       - name: filingType
@@ -167,7 +178,20 @@ paths:
       tags:
       - Filings API
       summary: Financial Filing Submission
-      description: "Returns full submission for the financial filing by filing id. This API operation is a file download operation. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default). \n\nThe following are some examples of using the API. \n\n To query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone using gzip compression (using query param for api key): \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/submissions/70858-000148105721004046&key=xyz123\n ```\n \n\n"
+      description: 'Returns full submission for the financial filing by filing id. This API operation is a file download operation. This call will download a compressed file holding the individual files from the original submission. Based on the Accept header provided by the client, the download file will either be a gzipped tar file (application/x-gzip) or a zip file (application/zip and the default).
+
+
+        The following are some examples of using the API.
+
+
+        To query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone using gzip compression (using query param for api key):
+
+
+        ```js
+
+        GET https://api.bitvore.com/v2/corp/filings/financial/submissions/70858-000148105721004046&key=xyz123
+
+        ```'
       operationId: downloadFilingUsingGET_1
       parameters:
       - name: filingId
@@ -221,7 +245,99 @@ paths:
       tags:
       - Filings API
       summary: Financial Filing Summaries Search
-      description: "Returns summary information for the financial filings that meet the supplied criteria. Financial filings can be selected with the following options:  \n * Filing Type - Type of filing, i.e., 8-K, 10-Q, etc.\n * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only filings submitted by that company.\n * Free Form Text Search - A search for words or phrases can be performed against the filings matching any of the previous options listed. \n * Org Field - By default the subject company of a filing is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org object in the summary. Note: Returning additional fields may cause a small increase in latency. \n \n\nThe following are some examples of using the API. \n\nTo query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone (using query param for api key): \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/summaries?bvId=b00001ab7&offset=30&tz=PST&key=xyz123\n ```\n \n\nTo query for all the 10-Q filings submitted within the last 30 days in the PST timezone: \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/summaries?filingType=10-Q&offset=30&tz=PST&key=xyz123\n ```\n \n\nThe filing summaries are essentially a set of metadata about the filings themselves. The metadata fields are: \n * Key - A unique string identifying the submission in the Bitvore system. \n * Filing Type - The type of filing (i.e., 8-K, 10-Q, etc.). \n * Title - Title of the filing as reported by the regulatory agency. \n * Source URL - A URL to the filing provided by the regulatory agency. \n * Text - A text representation of the filing. For SEC filings this will be the text of the primary filing document only. * Org - A structure that holds identifying information about the company the filing is about. By default the structure will have the Bitvore ID and name of the company. Other fields may be included based on the Org Field parameter. \n * Available At - The date at which the filing was made available by the system. \n * Published At - The date the filing was submitted to the regulatory agency. \n \n\nA sample successful response is: \n\n```js\n {\n \t\"success\": true,\n \t\"returned\": 1,\n \t\"total\": 1,\n \t\"response\": [\n \t\t{\n \t\t\t\"key\": \"040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c\",\n \t\t\t\"filingId\": \"70858-000148105721004046\",\n \t\t\t\"filingType\": \"8-K\",\n \t\t\t\"files\": [\"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm\", \"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg\"],\n \t\t\t\"title\": \" 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)\",\n \t\t\t\"sourceUrl\": \"https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm\",\n \t\t\t\"org\": { \"BvId\" : \"b0004hvv7\", \"Name\" : \"BlueLinx Holdings Inc\" }, \n \t\t\t\"publishedAt\": \"2019-06-24T21:41:19.109Z\",\n \t\t\t\"availableAt\": \"2017-06-24T21:41:21.109Z\",\n \t\t}\n \t]\n }\n ```\n "
+      description: 'Returns summary information for the financial filings that meet the supplied criteria. Financial filings can be selected with the following options:
+
+        * Filing Type - Type of filing, i.e., 8-K, 10-Q, etc.
+
+        * Bitvore ID - A Bitvore ID, known as a BvID, uniquely identifies a company/organization. Querying by BvID returns only filings submitted by that company.
+
+        * Free Form Text Search - A search for words or phrases can be performed against the filings matching any of the previous options listed.
+
+        * Org Field - By default the subject company of a filing is identified by its ID and its name. Additional fields will be returned for each company if specified here. The available options are name, domainName, ticker, city, state, and country. If available the additional fields will be returned in the Org object in the summary. Note: Returning additional fields may cause a small increase in latency.
+
+
+        The following are some examples of using the API.
+
+
+        To query for the filings submitted by IBM, BvID b00001ab7 within the last 30 days in the PST timezone (using query param for api key):
+
+
+        ```js
+
+        GET https://api.bitvore.com/v2/corp/filings/financial/summaries?bvId=b00001ab7&offset=30&tz=PST&key=xyz123
+
+        ```
+
+
+        To query for all the 10-Q filings submitted within the last 30 days in the PST timezone:
+
+
+        ```js
+
+        GET https://api.bitvore.com/v2/corp/filings/financial/summaries?filingType=10-Q&offset=30&tz=PST&key=xyz123
+
+        ```
+
+
+        The filing summaries are essentially a set of metadata about the filings themselves. The metadata fields are:
+
+        * Key - A unique string identifying the submission in the Bitvore system.
+
+        * Filing Type - The type of filing (i.e., 8-K, 10-Q, etc.).
+
+        * Title - Title of the filing as reported by the regulatory agency.
+
+        * Source URL - A URL to the filing provided by the regulatory agency.
+
+        * Text - A text representation of the filing. For SEC filings this will be the text of the primary filing document only. * Org - A structure that holds identifying information about the company the filing is about. By default the structure will have the Bitvore ID and name of the company. Other fields may be included based on the Org Field parameter.
+
+        * Available At - The date at which the filing was made available by the system.
+
+        * Published At - The date the filing was submitted to the regulatory agency.
+
+
+        A sample successful response is:
+
+
+        ```js
+
+        {
+
+        "success": true,
+
+        "returned": 1,
+
+        "total": 1,
+
+        "response": [
+
+        {
+
+        "key": "040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c",
+
+        "filingId": "70858-000148105721004046",
+
+        "filingType": "8-K",
+
+        "files": ["https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm", "https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg"],
+
+        "title": " 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)",
+
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm",
+
+        "org": { "BvId" : "b0004hvv7", "Name" : "BlueLinx Holdings Inc" },
+
+        "publishedAt": "2019-06-24T21:41:19.109Z",
+
+        "availableAt": "2017-06-24T21:41:21.109Z",
+
+        }
+
+        ]
+
+        }
+
+        ```'
       operationId: getFilingsUsingGET_1
       parameters:
       - name: filingType
@@ -353,7 +469,44 @@ paths:
       tags:
       - Filings API
       summary: Financial Filing
-      description: "Returns a specific financial filing by id. \n\n```js\n GET https://api.bitvore.com/v2/corp/filings/financial/70858-000148105721004046&key=xyz123\n ```\n \n\nA sample successful response is: \n\n```js\n \t{\n \t\t\"key\": \"040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c\",\n \t\t\"filingId\": \"70858-000148105721004046\",\n \t\t\"filingType\": \"8-K\",\n \t\t\"files\": [\"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm\", \"https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg\"],\n \t\t\"title\": \" 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)\",\n \t\t\"sourceUrl\": \"https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm\",\n \t\t\"org\": { \"BvId\" : \"b0004hvv7\", \"Name\" : \"BlueLinx Holdings Inc\" }, \n \t\t\"publishedAt\": \"2019-06-24T21:41:19.109Z\",\n \t\t\"availableAt\": \"2017-06-24T21:41:21.109Z\",\n \t}\n ```\n "
+      description: 'Returns a specific financial filing by id.
+
+
+        ```js
+
+        GET https://api.bitvore.com/v2/corp/filings/financial/70858-000148105721004046&key=xyz123
+
+        ```
+
+
+        A sample successful response is:
+
+
+        ```js
+
+        {
+
+        "key": "040000016b8b62e290bcb7e16fcb95b79000ad663679cbdb8566671c",
+
+        "filingId": "70858-000148105721004046",
+
+        "filingType": "8-K",
+
+        "files": ["https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/form424b2.htm", "https://www.sec.gov/Archives/edgar/data/70858/000148105721004046/image_cover.jpg"],
+
+        "title": " 8-K - BlueLinx Holdings Inc. (0001301787) (Filer)",
+
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1301787/000130178719000056/0001301787-19-000056-index.htm",
+
+        "org": { "BvId" : "b0004hvv7", "Name" : "BlueLinx Holdings Inc" },
+
+        "publishedAt": "2019-06-24T21:41:19.109Z",
+
+        "availableAt": "2017-06-24T21:41:21.109Z",
+
+        }
+
+        ```'
       operationId: getFilingUsingGET
       parameters:
       - name: filingId
@@ -408,34 +561,6 @@ components:
           type: boolean
           example: false
       title: InternalErrorResponse
-    URL:
-      type: object
-      properties:
-        authority:
-          type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
     FinancialFiling:
       type: object
       properties:
@@ -479,6 +604,46 @@ components:
           description: Title of the filing
       title: FinancialFiling
       description: A financial filing for an organization.
+    InputStreamResource:
+      type: object
+      properties:
+        description:
+          type: string
+        file:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+          originalRef: InputStream
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          $ref: '#/components/schemas/URI'
+          originalRef: URI
+        url:
+          $ref: '#/components/schemas/URL'
+          originalRef: URL
+      title: InputStreamResource
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
     Organization:
       type: object
       properties:
@@ -522,30 +687,73 @@ components:
           type: string
           description: The primary ticker symbol the organization.
       title: Organization
-    InputStreamResource:
+    URL:
       type: object
       properties:
-        description:
+        authority:
           type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
         file:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        filename:
           type: string
-        inputStream:
-          $ref: '#/components/schemas/InputStream'
-          originalRef: InputStream
-        open:
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
+    InputStream:
+      type: object
+      title: InputStream
+    FinancialFilingsSearchResponse:
+      type: object
+      required:
+      - returned
+      - total
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/FinancialFiling'
+            originalRef: FinancialFiling
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
+        success:
           type: boolean
-        readable:
-          type: boolean
-        uri:
-          $ref: '#/components/schemas/URI'
-          originalRef: URI
-        url:
-          $ref: '#/components/schemas/URL'
-          originalRef: URL
-      title: InputStreamResource
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of financial filings found by search
+      title: FinancialFilingsSearchResponse
+      description: Financial filings search response.
     File:
       type: object
       properties:
@@ -586,45 +794,6 @@ components:
           type: integer
           format: int64
       title: File
-    FinancialFilingsSearchResponse:
-      type: object
-      required:
-      - returned
-      - total
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/FinancialFiling'
-            originalRef: FinancialFiling
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of financial filings found by search
-      title: FinancialFilingsSearchResponse
-      description: Financial filings search response.
-    InputStream:
-      type: object
-      title: InputStream
     URI:
       type: object
       properties:
@@ -684,22 +853,6 @@ components:
           example: ACME
           description: Primary ticker symbol the organization.
       title: Listing
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
   securitySchemes:
     API_key:
       type: apiKey

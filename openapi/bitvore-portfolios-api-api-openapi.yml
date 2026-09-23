@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Bitvore Portfolios API API
+  title: Bitvore Portfolios API
   license:
     name: Copyright Bitvore Corp. 2026
   version: '1.0'
@@ -102,6 +102,8 @@ paths:
               originalRef: PortfolioSummary
         description: portfolio
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /v2/corp/portfolios/{portfolioId}:
     get:
       tags:
@@ -253,6 +255,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /v2/corp/portfolios/{portfolioId}/itemUploads:
     post:
       tags:
@@ -317,6 +321,8 @@ paths:
                   format: binary
               required:
               - file
+    servers:
+    - url: https://api.bitvore.com/
   /v2/corp/portfolios/{portfolioId}/items:
     get:
       tags:
@@ -540,6 +546,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /v2/corp/portfolios/{portfolioId}/items/ids:
     get:
       tags:
@@ -706,6 +714,8 @@ paths:
                 type: string
         description: ids
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /v2/corp/portfolios/{portfolioId}/items/{id}:
     delete:
       tags:
@@ -757,6 +767,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios:
     get:
       tags:
@@ -844,6 +856,8 @@ paths:
               originalRef: PortfolioSummary
         description: portfolio
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios/{portfolioId}:
     get:
       tags:
@@ -989,6 +1003,8 @@ paths:
       - BasicAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios/{portfolioId}/itemUploads:
     post:
       tags:
@@ -1051,6 +1067,8 @@ paths:
                   format: binary
               required:
               - file
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios/{portfolioId}/items:
     get:
       tags:
@@ -1266,6 +1284,8 @@ paths:
       - BasicAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios/{portfolioId}/items/ids:
     get:
       tags:
@@ -1426,6 +1446,8 @@ paths:
                 type: string
         description: ids
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /muni/portfolios/{portfolioId}/items/{id}:
     delete:
       tags:
@@ -1475,6 +1497,8 @@ paths:
       - BasicAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios:
     get:
       tags:
@@ -1566,6 +1590,8 @@ paths:
               originalRef: PortfolioSummary
         description: portfolio
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios/{portfolioId}:
     get:
       tags:
@@ -1717,6 +1743,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios/{portfolioId}/itemUploads:
     post:
       tags:
@@ -1781,6 +1809,8 @@ paths:
                   format: binary
               required:
               - file
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios/{portfolioId}/items:
     get:
       tags:
@@ -2004,6 +2034,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios/{portfolioId}/items/ids:
     get:
       tags:
@@ -2170,6 +2202,8 @@ paths:
                 type: string
         description: ids
         required: true
+    servers:
+    - url: https://api.bitvore.com/
   /v2/muni/portfolios/{portfolioId}/items/{id}:
     delete:
       tags:
@@ -2221,6 +2255,8 @@ paths:
       - OAuth:
         - Global
       deprecated: false
+    servers:
+    - url: https://api.bitvore.com/
 components:
   schemas:
     PortfolioItemIdsResponse:
@@ -2282,21 +2318,6 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioResponse
       description: Portfolio response.
-    ItemCustomId:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 00XAD6
-          description: A custom id of the portfolio item
-          maxLength: 40
-        type:
-          type: string
-          example: FOREIGN_ID
-          description: A type or name of the custom id
-          maxLength: 40
-      title: ItemCustomId
-      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
     PortfolioItem:
       type: object
       required:
@@ -2318,6 +2339,21 @@ components:
           description: Name of the portfolio item, not required for API input but will be returned from API calls
       title: PortfolioItem
       description: Identifies an item in a portfolio
+    ItemCustomId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 00XAD6
+          description: A custom id of the portfolio item
+          maxLength: 40
+        type:
+          type: string
+          example: FOREIGN_ID
+          description: A type or name of the custom id
+          maxLength: 40
+      title: ItemCustomId
+      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
     PortfolioItemResponse:
       type: object
       required:

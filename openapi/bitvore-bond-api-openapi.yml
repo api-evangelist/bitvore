@@ -21,7 +21,17 @@ paths:
       tags:
       - Bond
       summary: Search for intelligence by CUSIP
-      description: "Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      description: 'Intelligence is returned for a single bond identified by a CUSIP. Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:
+
+
+        GET /cusip/008000AA7?offset=3&tz=GMT HTTP 1.1
+
+        Accept: application/json
+
+        X-CLIENTAPP-APPID: BVAPI
+
+
+        An example of a response is below.'
       operationId: handleGetCusipUsingGET
       parameters:
       - name: cusip
@@ -72,8 +82,18 @@ paths:
     get:
       tags:
       - Bond
-      summary: Search for intelligence by state and sector.
-      description: "Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:\n\n    GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      summary: Search for intelligence by state and sector
+      description: 'Intelligence is returned for a state and sector Intelligence can be pulled for at most 30 days. A specific timeframe can be specified in the call using a date range or a number of days back in time. An example of a request is as follows:
+
+
+        GET /stateSector/ca/education?offset=3&tz=GMT HTTP 1.1
+
+        Accept: application/json
+
+        X-CLIENTAPP-APPID: BVAPI
+
+
+        An example of a response is below.'
       operationId: handleStateSectorUsingGET
       parameters:
       - name: state
@@ -150,38 +170,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
-    MuniBondNewsRecord:
-      type: object
-      properties:
-        recordType:
-          type: string
-          example: WEBCONTENT
-          description: Type of the record
-        rowKey:
-          type: string
-          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
-          description: Key uniquely idenfiying the record
-        tags:
-          type: object
-          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
-        timestamp:
-          type: string
-          example: 2017-07-03T08:52:33+0000
-          description: Timestamp of the record
-      title: MuniBondNewsRecord
-      description: Single intelligence item.
     MuniBondNewsSearchResponse:
       type: object
       required:
@@ -217,6 +205,38 @@ components:
           description: Total number of news records that matched the search, may be more than returned
       title: MuniBondNewsSearchResponse
       description: News search response.
+    MuniBondNewsRecord:
+      type: object
+      properties:
+        recordType:
+          type: string
+          example: WEBCONTENT
+          description: Type of the record
+        rowKey:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely idenfiying the record
+        tags:
+          type: object
+          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
+        timestamp:
+          type: string
+          example: 2017-07-03T08:52:33+0000
+          description: Timestamp of the record
+      title: MuniBondNewsRecord
+      description: Single intelligence item.
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
   securitySchemes:
     BasicAuth:
       type: http

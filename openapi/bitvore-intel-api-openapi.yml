@@ -21,7 +21,40 @@ paths:
       tags:
       - Intel
       summary: Search for business intelligence
-      description: "Intelligence is returned for companies, cusips, states, cities, or sectors baed on supplied parameters. Intelligence can be pulled for at most 31 days. A specific timeframe can be specified in the call using a date range or a number of days back in time.\n\nCorporate intelligence can be gathered by searching with a Bitvore ID (BvId) identifying a company, a portfolio ID (a named set of companies), a coprorate business signal, or a foreign ID mapped to a company using the Identification API. An example of a request using a BvId is as follows:\n\n    GET /intelapi/intel?bvId=b1000abc&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nMunicipal and economic intelligence can be gathered by searching with a CUSIP, city, state, or sector. An example of using a cusip is:\n\n    GET /intelapi/intel?cusip=123456789&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of using a state and sector is:\n\n    GET /intelapi/intel?state=ca&amp;sector=education&offset=3&tz=GMT HTTP 1.1\n    Accept: application/json\n    X-CLIENTAPP-APPID: BVAPI\n\nAn example of a response is below."
+      description: 'Intelligence is returned for companies, cusips, states, cities, or sectors baed on supplied parameters. Intelligence can be pulled for at most 31 days. A specific timeframe can be specified in the call using a date range or a number of days back in time.
+
+
+        Corporate intelligence can be gathered by searching with a Bitvore ID (BvId) identifying a company, a portfolio ID (a named set of companies), a coprorate business signal, or a foreign ID mapped to a company using the Identification API. An example of a request using a BvId is as follows:
+
+
+        GET /intelapi/intel?bvId=b1000abc&offset=3&tz=GMT HTTP 1.1
+
+        Accept: application/json
+
+        X-CLIENTAPP-APPID: BVAPI
+
+
+        Municipal and economic intelligence can be gathered by searching with a CUSIP, city, state, or sector. An example of using a cusip is:
+
+
+        GET /intelapi/intel?cusip=123456789&offset=3&tz=GMT HTTP 1.1
+
+        Accept: application/json
+
+        X-CLIENTAPP-APPID: BVAPI
+
+
+        An example of using a state and sector is:
+
+
+        GET /intelapi/intel?state=ca&sector=education&offset=3&tz=GMT HTTP 1.1
+
+        Accept: application/json
+
+        X-CLIENTAPP-APPID: BVAPI
+
+
+        An example of a response is below.'
       operationId: handleNewsSearchUsingGET_2
       parameters:
       - name: bvId
@@ -226,6 +259,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
     OrganizationReference:
       type: object
       properties:
@@ -269,18 +314,6 @@ components:
           description: Indicates whether the call was successful or not
       title: IntelligenceSearchResponse
       description: Intelligence search response.
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
     IntelligenceRecord:
       type: object
       required:

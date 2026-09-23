@@ -7,7 +7,7 @@ info:
 
     * The Municipal Bond API has been replaced by the Muni News API.'
   version: Deprecated 2019
-  title: Deprecated Custom Muni API API
+  title: Deprecated Custom Muni API
   license:
     name: Copyright Bitvore Corp. 2026
 servers:
@@ -285,38 +285,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
-    MuniBondNewsRecord:
-      type: object
-      properties:
-        recordType:
-          type: string
-          example: WEBCONTENT
-          description: Type of the record
-        rowKey:
-          type: string
-          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
-          description: Key uniquely idenfiying the record
-        tags:
-          type: object
-          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
-        timestamp:
-          type: string
-          example: 2017-07-03T08:52:33+0000
-          description: Timestamp of the record
-      title: MuniBondNewsRecord
-      description: Single intelligence item.
     MuniBondNewsSearchResponse:
       type: object
       required:
@@ -352,6 +320,38 @@ components:
           description: Total number of news records that matched the search, may be more than returned
       title: MuniBondNewsSearchResponse
       description: News search response.
+    MuniBondNewsRecord:
+      type: object
+      properties:
+        recordType:
+          type: string
+          example: WEBCONTENT
+          description: Type of the record
+        rowKey:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely idenfiying the record
+        tags:
+          type: object
+          description: 'Tags for the record. The property is a JSON object with 0 or more single or multi-valued properties representing each tag like { "city" : [ "Irvine"] }'
+        timestamp:
+          type: string
+          example: 2017-07-03T08:52:33+0000
+          description: Timestamp of the record
+      title: MuniBondNewsRecord
+      description: Single intelligence item.
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
   securitySchemes:
     BasicAuth:
       type: http

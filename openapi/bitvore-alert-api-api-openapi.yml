@@ -7,7 +7,7 @@ info:
 
     * The Municipal Bond API has been replaced by the Muni News API.'
   version: Deprecated 2019
-  title: Deprecated Custom Alert API API
+  title: Deprecated Custom Alert API
   license:
     name: Copyright Bitvore Corp. 2026
 servers:
@@ -208,6 +208,16 @@ components:
             $ref: '#/components/schemas/AlertTransactionEntry'
             originalRef: AlertTransactionEntry
       title: AlertTransactions
+    AlertResult:
+      type: object
+      properties:
+        cusips:
+          type: array
+          items:
+            type: string
+        rowKey:
+          type: string
+      title: AlertResult
     AlertResults:
       type: object
       properties:
@@ -220,27 +230,6 @@ components:
           type: integer
           format: int64
       title: AlertResults
-    AlertDefinition:
-      type: object
-      properties:
-        alertId:
-          type: integer
-          format: int64
-        alertName:
-          type: string
-        alertTime:
-          type: string
-      title: AlertDefinition
-    AlertResult:
-      type: object
-      properties:
-        cusips:
-          type: array
-          items:
-            type: string
-        rowKey:
-          type: string
-      title: AlertResult
     AlertTransactionEntry:
       type: object
       properties:
@@ -253,6 +242,17 @@ components:
           type: integer
           format: int64
       title: AlertTransactionEntry
+    AlertDefinition:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int64
+        alertName:
+          type: string
+        alertTime:
+          type: string
+      title: AlertDefinition
   securitySchemes:
     BasicAuth:
       type: http
