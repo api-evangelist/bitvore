@@ -2259,6 +2259,92 @@ paths:
     - url: https://api.bitvore.com/
 components:
   schemas:
+    PortfolioItem:
+      type: object
+      required:
+      - id
+      properties:
+        customIds:
+          type: array
+          description: 'Optional: Up to 4 client defined custom ids. Convenience property to map client Ids with Bitvore Ids.'
+          items:
+            $ref: '#/components/schemas/ItemCustomId'
+            originalRef: ItemCustomId
+        id:
+          type: string
+          example: 008000AA7
+          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the portfolio
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the portfolio item, not required for API input but will be returned from API calls
+      title: PortfolioItem
+      description: Identifies an item in a portfolio
+    PortfolioItemResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of portfolio items returned
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/PortfolioItem'
+            originalRef: PortfolioItem
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: PortfolioItemResponse
+      description: Portfolio item response.
+    ItemCustomId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 00XAD6
+          description: A custom id of the portfolio item
+          maxLength: 40
+        type:
+          type: string
+          example: FOREIGN_ID
+          description: A type or name of the custom id
+          maxLength: 40
+      title: ItemCustomId
+      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
+    PortfolioSummary:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 25
+          description: Unique Id of the portfolio
+        idScheme:
+          type: string
+          description: Scheme used for identifying porfolio items, supported values are "cusip" for Muni API and "bvid" for Corp API
+        name:
+          type: string
+          example: My Portfolio
+          description: Name of the portfolio
+      title: PortfolioSummary
+      description: Summary information about a portfolio.
     PortfolioItemIdsResponse:
       type: object
       required:
@@ -2287,6 +2373,26 @@ components:
           example: true
           description: Indicates whether the call was successful or not
       title: PortfolioItemIdsResponse
+      description: A response used to explain a failure or issue with the request.
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
     PortfolioResponse:
       type: object
@@ -2318,112 +2424,6 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioResponse
       description: Portfolio response.
-    PortfolioItem:
-      type: object
-      required:
-      - id
-      properties:
-        customIds:
-          type: array
-          description: 'Optional: Up to 4 client defined custom ids. Convenience property to map client Ids with Bitvore Ids.'
-          items:
-            $ref: '#/components/schemas/ItemCustomId'
-            originalRef: ItemCustomId
-        id:
-          type: string
-          example: 008000AA7
-          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the portfolio
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the portfolio item, not required for API input but will be returned from API calls
-      title: PortfolioItem
-      description: Identifies an item in a portfolio
-    ItemCustomId:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 00XAD6
-          description: A custom id of the portfolio item
-          maxLength: 40
-        type:
-          type: string
-          example: FOREIGN_ID
-          description: A type or name of the custom id
-          maxLength: 40
-      title: ItemCustomId
-      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
-    PortfolioItemResponse:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of portfolio items returned
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/PortfolioItem'
-            originalRef: PortfolioItem
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: PortfolioItemResponse
-      description: Portfolio item response.
-    PortfolioSummary:
-      type: object
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 25
-          description: Unique Id of the portfolio
-        idScheme:
-          type: string
-          description: Scheme used for identifying porfolio items, supported values are "cusip" for Muni API and "bvid" for Corp API
-        name:
-          type: string
-          example: My Portfolio
-          description: Name of the portfolio
-      title: PortfolioSummary
-      description: Summary information about a portfolio.
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
   securitySchemes:
     API_key:
       type: apiKey

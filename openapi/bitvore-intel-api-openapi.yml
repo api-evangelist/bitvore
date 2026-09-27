@@ -259,31 +259,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
-    OrganizationReference:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization
-      title: OrganizationReference
-      description: Reference to an organization
     IntelligenceSearchResponse:
       type: object
       required:
@@ -314,6 +289,31 @@ components:
           description: Indicates whether the call was successful or not
       title: IntelligenceSearchResponse
       description: Intelligence search response.
+    OrganizationReference:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization
+      title: OrganizationReference
+      description: Reference to an organization
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
     IntelligenceRecord:
       type: object
       required:

@@ -511,6 +511,14 @@ paths:
       deprecated: false
 components:
   schemas:
+    EventProperty:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: object
+      title: EventProperty
     Changeset:
       type: object
       properties:
@@ -547,14 +555,6 @@ components:
           description: Indicates whether the call was successful or not
       title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
-    EventProperty:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: object
-      title: EventProperty
   securitySchemes:
     API_key:
       type: apiKey

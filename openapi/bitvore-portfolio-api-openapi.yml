@@ -649,36 +649,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    PortfolioResponse:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of portfolios returned
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/PortfolioSummary'
-            originalRef: PortfolioSummary
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: PortfolioResponse
-      description: Portfolio response.
     PortfolioItem:
       type: object
       required:
@@ -764,6 +734,36 @@ components:
           description: Indicates whether the call was successful or not
       title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
+    PortfolioResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of portfolios returned
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/PortfolioSummary'
+            originalRef: PortfolioSummary
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: PortfolioResponse
+      description: Portfolio response.
   securitySchemes:
     API_key:
       type: apiKey

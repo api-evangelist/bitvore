@@ -446,6 +446,34 @@ paths:
       deprecated: false
 components:
   schemas:
+    URL:
+      type: object
+      properties:
+        authority:
+          type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
     InputStreamResource:
       type: object
       properties:
@@ -470,6 +498,46 @@ components:
           $ref: '#/components/schemas/URL'
           originalRef: URL
       title: InputStreamResource
+    File:
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        absoluteFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        absolutePath:
+          type: string
+        canonicalFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        canonicalPath:
+          type: string
+        directory:
+          type: boolean
+        file:
+          type: boolean
+        freeSpace:
+          type: integer
+          format: int64
+        hidden:
+          type: boolean
+        name:
+          type: string
+        parent:
+          type: string
+        parentFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        path:
+          type: string
+        totalSpace:
+          type: integer
+          format: int64
+        usableSpace:
+          type: integer
+          format: int64
+      title: File
     FinancialFilingLegacy:
       type: object
       properties:
@@ -508,6 +576,9 @@ components:
           description: Title of the filing
       title: FinancialFilingLegacy
       description: An entity's financial filing.
+    InputStream:
+      type: object
+      title: InputStream
     OrganizationReference:
       type: object
       properties:
@@ -585,77 +656,6 @@ components:
           description: Total number of financial filings found by search
       title: FinancialFilingsSearchResponseLegacy
       description: Financial filings search response.
-    URL:
-      type: object
-      properties:
-        authority:
-          type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
-    InputStream:
-      type: object
-      title: InputStream
-    File:
-      type: object
-      properties:
-        absolute:
-          type: boolean
-        absoluteFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        absolutePath:
-          type: string
-        canonicalFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        canonicalPath:
-          type: string
-        directory:
-          type: boolean
-        file:
-          type: boolean
-        freeSpace:
-          type: integer
-          format: int64
-        hidden:
-          type: boolean
-        name:
-          type: string
-        parent:
-          type: string
-        parentFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        path:
-          type: string
-        totalSpace:
-          type: integer
-          format: int64
-        usableSpace:
-          type: integer
-          format: int64
-      title: File
     URI:
       type: object
       properties:

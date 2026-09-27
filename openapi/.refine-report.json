@@ -29,9 +29,7 @@
     "bitvore-sentiment-scores-api-openapi.yml",
     "bitvore-oauth2-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [
     "bitvore-legacy-openapi.yml: dangling $ref: #/definitions/List"
   ],
@@ -49,8 +47,7 @@
     "bitvore-security-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "tag 'News API' spans 2 source specs (bitvore-corporate-openapi.yml, bitvore-muni-openapi.yml): per-path servers applied",
     "tag 'Portfolios API' spans 3 source specs (bitvore-corporate-openapi.yml, bitvore-custom-api-l-openapi.yml, bitvore-muni-openapi.yml): per-path servers applied",
-    "superseded outputs removed: bitvore-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 19 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "_original/bitvore-security-swagger.json: archived document superseded by a larger archived document",
@@ -72,7 +69,7 @@
     "bitvore-muni-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "bitvore-muni-news-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "bitvore-news-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "bitvore-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bitvore-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "bitvore-organizations-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "bitvore-portfolio-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "bitvore-portfolios-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",

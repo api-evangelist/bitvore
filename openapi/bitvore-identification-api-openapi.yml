@@ -453,50 +453,36 @@ paths:
       deprecated: false
 components:
   schemas:
-    InputStreamResource:
-      type: object
-      properties:
-        description:
-          type: string
-        file:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        filename:
-          type: string
-        inputStream:
-          $ref: '#/components/schemas/InputStream'
-          originalRef: InputStream
-        open:
-          type: boolean
-        readable:
-          type: boolean
-        uri:
-          $ref: '#/components/schemas/URI'
-          originalRef: URI
-        url:
-          $ref: '#/components/schemas/URL'
-          originalRef: URL
-      title: InputStreamResource
-    IDMapping:
+    IDMapResponse:
       type: object
       required:
-      - bvId
-      - foreignId
+      - count
       properties:
-        bvId:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of mappings returned.
+        reason:
           type: string
-          example: b00001ab7
-          description: Bitvore Id being mapped to
-        bvName:
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
           type: string
-          example: ACME Corp
-          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
-        foreignId:
-          type: string
-          example: 4295904307
-          description: Foreign Id being mapped from, for example a Perm Id
-      title: IDMapping
-      description: Id mapping, maps a foreign Id to a Bitvore Id.
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/IDMapping'
+            originalRef: IDMapping
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: IDMapResponse
+      description: Id map response.
     URL:
       type: object
       properties:
@@ -525,9 +511,30 @@ components:
         userInfo:
           type: string
       title: URL
-    InputStream:
+    InputStreamResource:
       type: object
-      title: InputStream
+      properties:
+        description:
+          type: string
+        file:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+          originalRef: InputStream
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          $ref: '#/components/schemas/URI'
+          originalRef: URI
+        url:
+          $ref: '#/components/schemas/URL'
+          originalRef: URL
+      title: InputStreamResource
     File:
       type: object
       properties:
@@ -568,36 +575,29 @@ components:
           type: integer
           format: int64
       title: File
-    IDMapResponse:
+    InputStream:
+      type: object
+      title: InputStream
+    IDMapping:
       type: object
       required:
-      - count
+      - bvId
+      - foreignId
       properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of mappings returned.
-        reason:
+        bvId:
           type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
+          example: b00001ab7
+          description: Bitvore Id being mapped to
+        bvName:
           type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/IDMapping'
-            originalRef: IDMapping
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: IDMapResponse
-      description: Id map response.
+          example: ACME Corp
+          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
+        foreignId:
+          type: string
+          example: 4295904307
+          description: Foreign Id being mapped from, for example a Perm Id
+      title: IDMapping
+      description: Id mapping, maps a foreign Id to a Bitvore Id.
     URI:
       type: object
       properties:

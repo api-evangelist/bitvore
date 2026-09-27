@@ -168,51 +168,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    InternalErrorResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
-        response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
-    TimeSeriesTimeline:
-      type: object
-      properties:
-        end:
-          type: string
-          example: '2017-07-28'
-          description: Last day of the timeline
-        start:
-          type: string
-          example: '2017-06-29'
-          description: First day of the timeline
-      title: TimeSeriesTimeline
-      description: Lists the first and last days of the time series.
     OrganizationSentimentScoreTimeSeries:
       type: object
       properties:
@@ -247,6 +202,51 @@ components:
             format: float
       title: OrganizationSentimentScoreSeries
       description: Series of organization sentiment scores.
+    TimeSeriesTimeline:
+      type: object
+      properties:
+        end:
+          type: string
+          example: '2017-07-28'
+          description: Last day of the timeline
+        start:
+          type: string
+          example: '2017-06-29'
+          description: First day of the timeline
+      title: TimeSeriesTimeline
+      description: Lists the first and last days of the time series.
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
     BasicResponse:
       type: object
       properties:

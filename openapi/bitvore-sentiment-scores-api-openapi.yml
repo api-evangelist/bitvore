@@ -167,6 +167,25 @@ paths:
       deprecated: false
 components:
   schemas:
+    OrganizationSentimentScoreTimeSeriesLegacy:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization with the scores.
+        series:
+          type: array
+          description: List of organization scores over the timeline
+          items:
+            $ref: '#/components/schemas/OrganizationSentimentScoreSeriesLegacy'
+            originalRef: OrganizationSentimentScoreSeriesLegacy
+        timeline:
+          description: Timeline of the time series
+          $ref: '#/components/schemas/TimeSeriesTimeline'
+          originalRef: TimeSeriesTimeline
+      title: OrganizationSentimentScoreTimeSeriesLegacy
+      description: Time series of organization sentiment scores.
     OrganizationSentimentScoreResponseLegacy:
       type: object
       properties:
@@ -188,6 +207,19 @@ components:
           description: Indicates whether the call was successful or not
       title: OrganizationSentimentScoreResponseLegacy
       description: Response to organization sentiment score queries.
+    TimeSeriesTimeline:
+      type: object
+      properties:
+        end:
+          type: string
+          example: '2017-07-28'
+          description: Last day of the timeline
+        start:
+          type: string
+          example: '2017-06-29'
+          description: First day of the timeline
+      title: TimeSeriesTimeline
+      description: Lists the first and last days of the time series.
     OrganizationSentimentScoreSeriesLegacy:
       type: object
       properties:
@@ -203,38 +235,6 @@ components:
             format: float
       title: OrganizationSentimentScoreSeriesLegacy
       description: Series of organization sentiment scores.
-    TimeSeriesTimeline:
-      type: object
-      properties:
-        end:
-          type: string
-          example: '2017-07-28'
-          description: Last day of the timeline
-        start:
-          type: string
-          example: '2017-06-29'
-          description: First day of the timeline
-      title: TimeSeriesTimeline
-      description: Lists the first and last days of the time series.
-    OrganizationSentimentScoreTimeSeriesLegacy:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization with the scores.
-        series:
-          type: array
-          description: List of organization scores over the timeline
-          items:
-            $ref: '#/components/schemas/OrganizationSentimentScoreSeriesLegacy'
-            originalRef: OrganizationSentimentScoreSeriesLegacy
-        timeline:
-          description: Timeline of the time series
-          $ref: '#/components/schemas/TimeSeriesTimeline'
-          originalRef: TimeSeriesTimeline
-      title: OrganizationSentimentScoreTimeSeriesLegacy
-      description: Time series of organization sentiment scores.
     ReasonResponse:
       type: object
       properties:
