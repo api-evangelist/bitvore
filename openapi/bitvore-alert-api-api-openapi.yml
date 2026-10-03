@@ -186,6 +186,18 @@ components:
         rowKey:
           type: string
       title: AlertResult
+    AlertTransactionEntry:
+      type: object
+      properties:
+        alertTime:
+          type: string
+        count:
+          type: integer
+          format: int32
+        transactionId:
+          type: integer
+          format: int64
+      title: AlertTransactionEntry
     MuniBondNewsRecord:
       type: object
       properties:
@@ -218,29 +230,6 @@ components:
           type: integer
           format: int64
       title: AlertResults
-    AlertDefinition:
-      type: object
-      properties:
-        alertId:
-          type: integer
-          format: int64
-        alertName:
-          type: string
-        alertTime:
-          type: string
-      title: AlertDefinition
-    AlertTransactionEntry:
-      type: object
-      properties:
-        alertTime:
-          type: string
-        count:
-          type: integer
-          format: int32
-        transactionId:
-          type: integer
-          format: int64
-      title: AlertTransactionEntry
     AlertTransactions:
       type: object
       properties:
@@ -253,6 +242,17 @@ components:
             $ref: '#/components/schemas/AlertTransactionEntry'
             originalRef: AlertTransactionEntry
       title: AlertTransactions
+    AlertDefinition:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int64
+        alertName:
+          type: string
+        alertTime:
+          type: string
+      title: AlertDefinition
   securitySchemes:
     BasicAuth:
       type: http

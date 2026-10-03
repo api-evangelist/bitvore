@@ -545,42 +545,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
-    Listing:
-      type: object
-      properties:
-        exchange:
-          type: string
-          example: NAS
-          description: The exchange the ticker belongs to.
-        mic:
-          type: string
-          example: XNAS
-          description: The MIC code of the exchange
-        region:
-          type: string
-          example: US
-          description: The geographic region of the exchange
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker symbol the organization.
-      title: Listing
     URL:
       type: object
       properties:
@@ -609,49 +573,6 @@ components:
         userInfo:
           type: string
       title: URL
-    Organization:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        city:
-          type: string
-          example: Irvine
-          description: City the organization is headquartered in.
-        country:
-          type: string
-          example: United States
-          description: Country the organization is headquartered in.
-        domainName:
-          type: string
-          example: acme.com
-          description: Domain name of the organization.
-        factSetId:
-          type: string
-        isin:
-          type: string
-          example: US5949181045
-          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
-        listings:
-          type: array
-          description: The exchange listings of the organization.
-          items:
-            $ref: '#/components/schemas/Listing'
-            originalRef: Listing
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization.
-        state:
-          type: string
-          example: CA
-          description: State (code) the organization is headquartered in.
-        ticker:
-          type: string
-          description: The primary ticker symbol the organization.
-      title: Organization
     InputStreamResource:
       type: object
       properties:
@@ -716,9 +637,121 @@ components:
           type: integer
           format: int64
       title: File
-    InputStream:
+    Listing:
       type: object
-      title: InputStream
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
+    FinancialFiling:
+      type: object
+      properties:
+        availableAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date submitted
+        files:
+          type: array
+          description: Files related to the filing source.
+          items:
+            type: string
+        filingId:
+          type: string
+          description: Id of the filing unique to the filing source, the Id format may be different per source.
+        filingType:
+          type: string
+          example: 10-K
+          description: Type of the filing, i.e., 10-K, 8-Q
+        key:
+          type: string
+          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
+          description: Key uniquely identifying the filing in Bitvore
+        org:
+          description: Organization the filing is about.
+          $ref: '#/components/schemas/Organization'
+          originalRef: Organization
+        publishedAt:
+          type: string
+          example: '2017-06-29T21:41:21.109Z'
+          description: Date available
+        sourceUrl:
+          type: string
+          example: https://www.sec.gov
+          description: URL to the original source of the filing
+        text:
+          type: string
+          description: Text of the primary section of the filing. Filings are initially in HTML, all markup is removed and remaining text is returned. No exhibits or addendums are included.
+        title:
+          type: string
+          description: Title of the filing
+      title: FinancialFiling
+      description: A financial filing for an organization.
+    FinancialFilingsSearchResponse:
+      type: object
+      required:
+      - returned
+      - total
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/FinancialFiling'
+            originalRef: FinancialFiling
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of financial filings found by search
+      title: FinancialFilingsSearchResponse
+      description: Financial filings search response.
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
     URI:
       type: object
       properties:
@@ -774,85 +807,52 @@ components:
           type: boolean
           example: false
       title: InternalErrorResponse
-    FinancialFilingsSearchResponse:
-      type: object
-      required:
-      - returned
-      - total
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/FinancialFiling'
-            originalRef: FinancialFiling
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of financial filings found by search
-      title: FinancialFilingsSearchResponse
-      description: Financial filings search response.
-    FinancialFiling:
+    Organization:
       type: object
       properties:
-        availableAt:
+        bvId:
           type: string
-          example: '2017-06-29T21:41:21.109Z'
-          description: Date submitted
-        files:
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        city:
+          type: string
+          example: Irvine
+          description: City the organization is headquartered in.
+        country:
+          type: string
+          example: United States
+          description: Country the organization is headquartered in.
+        domainName:
+          type: string
+          example: acme.com
+          description: Domain name of the organization.
+        factSetId:
+          type: string
+        isin:
+          type: string
+          example: US5949181045
+          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
+        listings:
           type: array
-          description: Files related to the filing source.
+          description: The exchange listings of the organization.
           items:
-            type: string
-        filingId:
+            $ref: '#/components/schemas/Listing'
+            originalRef: Listing
+        name:
           type: string
-          description: Id of the filing unique to the filing source, the Id format may be different per source.
-        filingType:
+          example: ACME Corp
+          description: Name of the organization.
+        state:
           type: string
-          example: 10-K
-          description: Type of the filing, i.e., 10-K, 8-Q
-        key:
+          example: CA
+          description: State (code) the organization is headquartered in.
+        ticker:
           type: string
-          example: 070000015cf083aba01f0826ecfe718e965b577c572166b14a77651c
-          description: Key uniquely identifying the filing in Bitvore
-        org:
-          description: Organization the filing is about.
-          $ref: '#/components/schemas/Organization'
-          originalRef: Organization
-        publishedAt:
-          type: string
-          example: '2017-06-29T21:41:21.109Z'
-          description: Date available
-        sourceUrl:
-          type: string
-          example: https://www.sec.gov
-          description: URL to the original source of the filing
-        text:
-          type: string
-          description: Text of the primary section of the filing. Filings are initially in HTML, all markup is removed and remaining text is returned. No exhibits or addendums are included.
-        title:
-          type: string
-          description: Title of the filing
-      title: FinancialFiling
-      description: A financial filing for an organization.
+          description: The primary ticker symbol the organization.
+      title: Organization
+    InputStream:
+      type: object
+      title: InputStream
   securitySchemes:
     API_key:
       type: apiKey

@@ -2280,51 +2280,26 @@ components:
           description: Name of the portfolio item, not required for API input but will be returned from API calls
       title: PortfolioItem
       description: Identifies an item in a portfolio
-    PortfolioItemResponse:
+    ReasonResponse:
       type: object
-      required:
-      - count
       properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of portfolio items returned
         reason:
           type: string
           example: Could not locate subject.
           description: Text reason for the failure (if not successful)
         reasonSupport:
-          type: string
+          type: object
           example: Longer description of the missing subject.
           description: Additional information about the failure (if not successful)
         response:
-          type: array
+          type: object
           description: Response payload
-          items:
-            $ref: '#/components/schemas/PortfolioItem'
-            originalRef: PortfolioItem
         success:
           type: boolean
           example: true
           description: Indicates whether the call was successful or not
-      title: PortfolioItemResponse
-      description: Portfolio item response.
-    ItemCustomId:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 00XAD6
-          description: A custom id of the portfolio item
-          maxLength: 40
-        type:
-          type: string
-          example: FOREIGN_ID
-          description: A type or name of the custom id
-          maxLength: 40
-      title: ItemCustomId
-      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     PortfolioSummary:
       type: object
       required:
@@ -2374,26 +2349,51 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioItemIdsResponse
       description: A response used to explain a failure or issue with the request.
-    ReasonResponse:
+    PortfolioItemResponse:
       type: object
+      required:
+      - count
       properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of portfolio items returned
         reason:
           type: string
           example: Could not locate subject.
           description: Text reason for the failure (if not successful)
         reasonSupport:
-          type: object
+          type: string
           example: Longer description of the missing subject.
           description: Additional information about the failure (if not successful)
         response:
-          type: object
+          type: array
           description: Response payload
+          items:
+            $ref: '#/components/schemas/PortfolioItem'
+            originalRef: PortfolioItem
         success:
           type: boolean
           example: true
           description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
+      title: PortfolioItemResponse
+      description: Portfolio item response.
+    ItemCustomId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 00XAD6
+          description: A custom id of the portfolio item
+          maxLength: 40
+        type:
+          type: string
+          example: FOREIGN_ID
+          description: A type or name of the custom id
+          maxLength: 40
+      title: ItemCustomId
+      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
     PortfolioResponse:
       type: object
       required:

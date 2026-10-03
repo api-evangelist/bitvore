@@ -168,6 +168,34 @@ paths:
       deprecated: false
 components:
   schemas:
+    TimeSeriesTimeline:
+      type: object
+      properties:
+        end:
+          type: string
+          example: '2017-07-28'
+          description: Last day of the timeline
+        start:
+          type: string
+          example: '2017-06-29'
+          description: First day of the timeline
+      title: TimeSeriesTimeline
+      description: Lists the first and last days of the time series.
+    OrganizationSentimentScoreSeries:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization with the scores.
+        scores:
+          type: array
+          description: List of floating point numbers representing sentiment scores ranging from -1.0 (negative) to 1.0 (positive).
+          items:
+            type: number
+            format: float
+      title: OrganizationSentimentScoreSeries
+      description: Series of organization sentiment scores.
     OrganizationSentimentScoreTimeSeries:
       type: object
       properties:
@@ -187,50 +215,6 @@ components:
           originalRef: TimeSeriesTimeline
       title: OrganizationSentimentScoreTimeSeries
       description: Time series of organization sentiment scores.
-    OrganizationSentimentScoreSeries:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization with the scores.
-        scores:
-          type: array
-          description: List of floating point numbers representing sentiment scores ranging from -1.0 (negative) to 1.0 (positive).
-          items:
-            type: number
-            format: float
-      title: OrganizationSentimentScoreSeries
-      description: Series of organization sentiment scores.
-    TimeSeriesTimeline:
-      type: object
-      properties:
-        end:
-          type: string
-          example: '2017-07-28'
-          description: Last day of the timeline
-        start:
-          type: string
-          example: '2017-06-29'
-          description: First day of the timeline
-      title: TimeSeriesTimeline
-      description: Lists the first and last days of the time series.
-    InternalErrorResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
-        response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
     AccessDeniedResponse:
       type: object
       properties:
@@ -260,6 +244,22 @@ components:
           description: Indicates whether the call was successful or not
       title: BasicResponse
       description: Default response wrapper for API requests.
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
   securitySchemes:
     API_key:
       type: apiKey

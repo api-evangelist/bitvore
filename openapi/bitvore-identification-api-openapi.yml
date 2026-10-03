@@ -453,6 +453,26 @@ paths:
       deprecated: false
 components:
   schemas:
+    IDMapping:
+      type: object
+      required:
+      - bvId
+      - foreignId
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id being mapped to
+        bvName:
+          type: string
+          example: ACME Corp
+          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
+        foreignId:
+          type: string
+          example: 4295904307
+          description: Foreign Id being mapped from, for example a Perm Id
+      title: IDMapping
+      description: Id mapping, maps a foreign Id to a Bitvore Id.
     IDMapResponse:
       type: object
       required:
@@ -511,6 +531,26 @@ components:
         userInfo:
           type: string
       title: URL
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     InputStreamResource:
       type: object
       properties:
@@ -575,29 +615,6 @@ components:
           type: integer
           format: int64
       title: File
-    InputStream:
-      type: object
-      title: InputStream
-    IDMapping:
-      type: object
-      required:
-      - bvId
-      - foreignId
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id being mapped to
-        bvName:
-          type: string
-          example: ACME Corp
-          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
-        foreignId:
-          type: string
-          example: 4295904307
-          description: Foreign Id being mapped from, for example a Perm Id
-      title: IDMapping
-      description: Id mapping, maps a foreign Id to a Bitvore Id.
     URI:
       type: object
       properties:
@@ -637,26 +654,9 @@ components:
         userInfo:
           type: string
       title: URI
-    ReasonResponse:
+    InputStream:
       type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
+      title: InputStream
   securitySchemes:
     API_key:
       type: apiKey

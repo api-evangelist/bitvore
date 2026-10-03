@@ -474,6 +474,26 @@ components:
         userInfo:
           type: string
       title: URL
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     InputStreamResource:
       type: object
       properties:
@@ -576,9 +596,6 @@ components:
           description: Title of the filing
       title: FinancialFilingLegacy
       description: An entity's financial filing.
-    InputStream:
-      type: object
-      title: InputStream
     OrganizationReference:
       type: object
       properties:
@@ -620,42 +637,6 @@ components:
           description: Primary ticker of the organization (if public).
       title: OrganizationReference
       description: Reference to an organization
-    FinancialFilingsSearchResponseLegacy:
-      type: object
-      required:
-      - returned
-      - total
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/FinancialFilingLegacy'
-            originalRef: FinancialFilingLegacy
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of financial filings found by search
-      title: FinancialFilingsSearchResponseLegacy
-      description: Financial filings search response.
     URI:
       type: object
       properties:
@@ -695,26 +676,45 @@ components:
         userInfo:
           type: string
       title: URI
-    ReasonResponse:
+    FinancialFilingsSearchResponseLegacy:
       type: object
+      required:
+      - returned
+      - total
       properties:
         reason:
           type: string
           example: Could not locate subject.
           description: Text reason for the failure (if not successful)
         reasonSupport:
-          type: object
+          type: string
           example: Longer description of the missing subject.
           description: Additional information about the failure (if not successful)
         response:
-          type: object
+          type: array
           description: Response payload
+          items:
+            $ref: '#/components/schemas/FinancialFilingLegacy'
+            originalRef: FinancialFilingLegacy
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
         success:
           type: boolean
           example: true
           description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of financial filings found by search
+      title: FinancialFilingsSearchResponseLegacy
+      description: Financial filings search response.
+    InputStream:
+      type: object
+      title: InputStream
   securitySchemes:
     API_key:
       type: apiKey

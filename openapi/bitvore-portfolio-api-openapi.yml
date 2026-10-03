@@ -664,6 +664,46 @@ components:
           description: Name of the portfolio item, not required for API input but will be returned from API calls
       title: PortfolioItem
       description: Identifies an item in a portolio, i.e., a bond or organization.
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    PortfolioSummary:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: 25
+          description: Unique Id of the portfolio
+        idScheme:
+          type: string
+          example: cusip
+          description: Scheme used for identifying porfolio items, supported values are "cusip" and "bvid", default is "cusip"
+        name:
+          type: string
+          example: My Portfolio
+          description: Name of the portfolio
+      title: PortfolioSummary
+      description: Summary information about a portfolio.
     PortfolioItemResponse:
       type: object
       required:
@@ -694,46 +734,6 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioItemResponse
       description: Portfolio item response.
-    PortfolioSummary:
-      type: object
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: string
-          example: 25
-          description: Unique Id of the portfolio
-        idScheme:
-          type: string
-          example: cusip
-          description: Scheme used for identifying porfolio items, supported values are "cusip" and "bvid", default is "cusip"
-        name:
-          type: string
-          example: My Portfolio
-          description: Name of the portfolio
-      title: PortfolioSummary
-      description: Summary information about a portfolio.
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
     PortfolioResponse:
       type: object
       required:

@@ -244,6 +244,62 @@ paths:
       deprecated: false
 components:
   schemas:
+    MuniNewsSearchResponseLegacy:
+      type: object
+      required:
+      - returned
+      - total
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniNewsArticleLegacy'
+            originalRef: MuniNewsArticleLegacy
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of news articles returned by search, maximum amount dictated by the pageSize parameter used in search
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total Number of news articles found by search
+      title: MuniNewsSearchResponseLegacy
+      description: Muni news search response.
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     MuniNewsArticleLegacy:
       type: object
       properties:
@@ -318,62 +374,6 @@ components:
           description: Title
       title: MuniNewsArticleLegacy
       description: Muni news article.
-    MuniNewsSearchResponseLegacy:
-      type: object
-      required:
-      - returned
-      - total
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/MuniNewsArticleLegacy'
-            originalRef: MuniNewsArticleLegacy
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of news articles returned by search, maximum amount dictated by the pageSize parameter used in search
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total Number of news articles found by search
-      title: MuniNewsSearchResponseLegacy
-      description: Muni news search response.
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
   securitySchemes:
     API_key:
       type: apiKey

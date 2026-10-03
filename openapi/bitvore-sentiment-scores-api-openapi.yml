@@ -167,6 +167,19 @@ paths:
       deprecated: false
 components:
   schemas:
+    TimeSeriesTimeline:
+      type: object
+      properties:
+        end:
+          type: string
+          example: '2017-07-28'
+          description: Last day of the timeline
+        start:
+          type: string
+          example: '2017-06-29'
+          description: First day of the timeline
+      title: TimeSeriesTimeline
+      description: Lists the first and last days of the time series.
     OrganizationSentimentScoreTimeSeriesLegacy:
       type: object
       properties:
@@ -186,6 +199,26 @@ components:
           originalRef: TimeSeriesTimeline
       title: OrganizationSentimentScoreTimeSeriesLegacy
       description: Time series of organization sentiment scores.
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     OrganizationSentimentScoreResponseLegacy:
       type: object
       properties:
@@ -207,19 +240,6 @@ components:
           description: Indicates whether the call was successful or not
       title: OrganizationSentimentScoreResponseLegacy
       description: Response to organization sentiment score queries.
-    TimeSeriesTimeline:
-      type: object
-      properties:
-        end:
-          type: string
-          example: '2017-07-28'
-          description: Last day of the timeline
-        start:
-          type: string
-          example: '2017-06-29'
-          description: First day of the timeline
-      title: TimeSeriesTimeline
-      description: Lists the first and last days of the time series.
     OrganizationSentimentScoreSeriesLegacy:
       type: object
       properties:
@@ -235,26 +255,6 @@ components:
             format: float
       title: OrganizationSentimentScoreSeriesLegacy
       description: Series of organization sentiment scores.
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
   securitySchemes:
     API_key:
       type: apiKey

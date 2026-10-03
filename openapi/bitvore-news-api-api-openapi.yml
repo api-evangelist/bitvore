@@ -2609,74 +2609,40 @@ paths:
     - url: https://api.bitvore.com/
 components:
   schemas:
-    CorpNewsResultsResponse:
+    EnrichedRecordsResponse:
       type: object
       properties:
         response:
           type: array
           description: Response payload
           items:
-            $ref: '#/components/schemas/CorpNewsArticle'
-            originalRef: CorpNewsArticle
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of items return
+            $ref: '#/components/schemas/EnrichedRecord'
+            originalRef: EnrichedRecord
         success:
           type: boolean
           example: true
           description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of items available
-      title: CorpNewsResultsResponse
-      description: A paged result response.
-    OrganizationQueryCriteria:
+      title: EnrichedRecordsResponse
+    ReasonResponse:
       type: object
       properties:
-        empRange:
+        reason:
           type: string
-          example: 200-5000
-          description: Employee range companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 1B.
-        fips:
-          type: array
-          example:
-          - '35620'
-          description: One or more FIPS codes identifying locations the companies must have their headquarters in.
-          items:
-            type: string
-        location:
-          type: array
-          example:
-          - Los Angeles/California/United States
-          description: One or more locations companies must have their headquarters in.
-          items:
-            type: string
-        naics:
-          type: array
-          example:
-          - '221114'
-          - '221115'
-          description: One or more NAICS codes identifying industries the companies must operate in.
-          items:
-            type: string
-        revRange:
-          type: string
-          example: 50-200
-          description: Revenue range (in millions) companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be omitted to report over 1B.
-        sic:
-          type: array
-          example:
-          - '1311'
-          - '1381'
-          description: One or more SIC codes identifying industries the companies must operate in.
-          items:
-            type: string
-      title: OrganizationQueryCriteria
-      description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
     Listing:
       type: object
       properties:
@@ -2697,74 +2663,6 @@ components:
           example: ACME
           description: Primary ticker symbol the organization.
       title: Listing
-    Organization:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        city:
-          type: string
-          example: Irvine
-          description: City the organization is headquartered in.
-        country:
-          type: string
-          example: United States
-          description: Country the organization is headquartered in.
-        domainName:
-          type: string
-          example: acme.com
-          description: Domain name of the organization.
-        factSetId:
-          type: string
-        isin:
-          type: string
-          example: US5949181045
-          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
-        listings:
-          type: array
-          description: The exchange listings of the organization.
-          items:
-            $ref: '#/components/schemas/Listing'
-            originalRef: Listing
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization.
-        state:
-          type: string
-          example: CA
-          description: State (code) the organization is headquartered in.
-        ticker:
-          type: string
-          description: The primary ticker symbol the organization.
-      title: Organization
-    MuniNewsResponse:
-      type: object
-      properties:
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/MuniNewsArticle'
-            originalRef: MuniNewsArticle
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of items return
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of items available
-      title: MuniNewsResponse
-      description: A paged result response.
     EnrichedRecord:
       type: object
       properties:
@@ -2883,6 +2781,37 @@ components:
           description: Title
       title: MuniNewsArticle
       description: Muni news article.
+    OrganizationScope:
+      type: object
+      properties:
+        customIds:
+          type: array
+          description: One or more custom Ids identifying the entities to retrieve news for, the Ids must be mapped in the supplied portfolio
+          items:
+            type: string
+        ids:
+          type: array
+          description: One or more Bitvore IDs identifying entities to retrieve news for.
+          items:
+            type: string
+        orgIdScheme:
+          type: string
+          enum:
+          - BVID
+          - CUSIP
+          - ISIN
+          - SEDOL
+          - FIGI
+        orgQuery:
+          description: Query criteria identifying the entities to retrieve news for.
+          $ref: '#/components/schemas/OrganizationQueryCriteria'
+          originalRef: OrganizationQueryCriteria
+        portfolioId:
+          type: integer
+          format: int64
+          description: Id identifying a portfolio to retrieve news for.
+      title: OrganizationScope
+      description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
     CorporateNewsRequest:
       type: object
       properties:
@@ -2975,103 +2904,6 @@ components:
             type: string
       title: CorporateNewsRequest
       description: Corporate news search request.
-    InternalErrorResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
-        response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
-    EnrichedRecordsResponse:
-      type: object
-      properties:
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/EnrichedRecord'
-            originalRef: EnrichedRecord
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: EnrichedRecordsResponse
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
-    OrganizationScope:
-      type: object
-      properties:
-        customIds:
-          type: array
-          description: One or more custom Ids identifying the entities to retrieve news for, the Ids must be mapped in the supplied portfolio
-          items:
-            type: string
-        ids:
-          type: array
-          description: One or more Bitvore IDs identifying entities to retrieve news for.
-          items:
-            type: string
-        orgIdScheme:
-          type: string
-          enum:
-          - BVID
-          - CUSIP
-          - ISIN
-          - SEDOL
-          - FIGI
-        orgQuery:
-          description: Query criteria identifying the entities to retrieve news for.
-          $ref: '#/components/schemas/OrganizationQueryCriteria'
-          originalRef: OrganizationQueryCriteria
-        portfolioId:
-          type: integer
-          format: int64
-          description: Id identifying a portfolio to retrieve news for.
-      title: OrganizationScope
-      description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
     CorpNewsArticle:
       type: object
       properties:
@@ -3187,6 +3019,174 @@ components:
           description: Title
       title: CorpNewsArticle
       description: Corp news article.
+    OrganizationQueryCriteria:
+      type: object
+      properties:
+        empRange:
+          type: string
+          example: 200-5000
+          description: Employee range companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 1B.
+        fips:
+          type: array
+          example:
+          - '35620'
+          description: One or more FIPS codes identifying locations the companies must have their headquarters in.
+          items:
+            type: string
+        location:
+          type: array
+          example:
+          - Los Angeles/California/United States
+          description: One or more locations companies must have their headquarters in.
+          items:
+            type: string
+        naics:
+          type: array
+          example:
+          - '221114'
+          - '221115'
+          description: One or more NAICS codes identifying industries the companies must operate in.
+          items:
+            type: string
+        revRange:
+          type: string
+          example: 50-200
+          description: Revenue range (in millions) companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be omitted to report over 1B.
+        sic:
+          type: array
+          example:
+          - '1311'
+          - '1381'
+          description: One or more SIC codes identifying industries the companies must operate in.
+          items:
+            type: string
+      title: OrganizationQueryCriteria
+      description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
+    MuniNewsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniNewsArticle'
+            originalRef: MuniNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: MuniNewsResponse
+      description: A paged result response.
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    Organization:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        city:
+          type: string
+          example: Irvine
+          description: City the organization is headquartered in.
+        country:
+          type: string
+          example: United States
+          description: Country the organization is headquartered in.
+        domainName:
+          type: string
+          example: acme.com
+          description: Domain name of the organization.
+        factSetId:
+          type: string
+        isin:
+          type: string
+          example: US5949181045
+          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
+        listings:
+          type: array
+          description: The exchange listings of the organization.
+          items:
+            $ref: '#/components/schemas/Listing'
+            originalRef: Listing
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization.
+        state:
+          type: string
+          example: CA
+          description: State (code) the organization is headquartered in.
+        ticker:
+          type: string
+          description: The primary ticker symbol the organization.
+      title: Organization
+    CorpNewsResultsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/CorpNewsArticle'
+            originalRef: CorpNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: CorpNewsResultsResponse
+      description: A paged result response.
     MunicipalNewsRequest:
       type: object
       properties:

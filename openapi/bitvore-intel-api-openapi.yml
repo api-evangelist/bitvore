@@ -259,61 +259,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    IntelligenceSearchResponse:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of intelligence records returned by search
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/IntelligenceRecord'
-            originalRef: IntelligenceRecord
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: IntelligenceSearchResponse
-      description: Intelligence search response.
-    OrganizationReference:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization
-      title: OrganizationReference
-      description: Reference to an organization
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
     IntelligenceRecord:
       type: object
       required:
@@ -411,6 +356,61 @@ components:
           description: Title
       title: IntelligenceRecord
       description: Single intelligence item.
+    OrganizationReference:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization
+      title: OrganizationReference
+      description: Reference to an organization
+    IntelligenceSearchResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of intelligence records returned by search
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/IntelligenceRecord'
+            originalRef: IntelligenceRecord
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: IntelligenceSearchResponse
+      description: Intelligence search response.
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
   securitySchemes:
     BasicAuth:
       type: http

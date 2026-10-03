@@ -250,6 +250,48 @@ paths:
         required: true
 components:
   schemas:
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    OrganizationScopeLegacy:
+      type: object
+      properties:
+        bvId:
+          type: array
+          description: One or more Bitvore IDs identifying entities to retrieve news for.
+          items:
+            type: string
+        foreignId:
+          type: array
+          description: One or more Foreign Ids identifying the entities to retrieve news for, the Ids must be registered in an identification scheme associated with the API client.
+          items:
+            type: string
+        orgQuery:
+          description: Query criteria identifying the entities to retrieve news for.
+          $ref: '#/components/schemas/OrganizationQueryCriteriaLegacy'
+          originalRef: OrganizationQueryCriteriaLegacy
+        portfolioId:
+          type: string
+          description: Id identifying a portfolio to retrieve news for.
+      title: OrganizationScopeLegacy
+      description: Identifies the companies/organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
     CorpNewsSearchResponseLegacy:
       type: object
       required:
@@ -465,28 +507,47 @@ components:
           description: Timezone used in startDate and endDate.
       title: CorporateNewsRequestLegacy
       description: Query criteria for returning corporate news.
-    OrganizationScopeLegacy:
+    OrganizationReference:
       type: object
       properties:
         bvId:
-          type: array
-          description: One or more Bitvore IDs identifying entities to retrieve news for.
-          items:
-            type: string
-        foreignId:
-          type: array
-          description: One or more Foreign Ids identifying the entities to retrieve news for, the Ids must be registered in an identification scheme associated with the API client.
-          items:
-            type: string
-        orgQuery:
-          description: Query criteria identifying the entities to retrieve news for.
-          $ref: '#/components/schemas/OrganizationQueryCriteriaLegacy'
-          originalRef: OrganizationQueryCriteriaLegacy
-        portfolioId:
           type: string
-          description: Id identifying a portfolio to retrieve news for.
-      title: OrganizationScopeLegacy
-      description: Identifies the companies/organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        city:
+          type: string
+          example: IRVINE
+          description: City the organization is headquartered in.
+        country:
+          type: string
+          example: UNITED STATES
+          description: Country the organization is headquartered in.
+        domainName:
+          type: string
+          example: acme.com
+          description: Domain name of the organization.
+        factsetId:
+          type: string
+          example: 000DWY-E
+          description: 'FactSet ID of the organization. (Requires License: ''FACTSET_ID'')'
+        isin:
+          type: string
+          example: US5949181045
+          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization.
+        state:
+          type: string
+          example: CA
+          description: State (code) the organization is headquartered in.
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker of the organization (if public).
+      title: OrganizationReference
+      description: Reference to an organization
     OrganizationQueryCriteriaLegacy:
       type: object
       properties:
@@ -530,67 +591,6 @@ components:
             type: string
       title: OrganizationQueryCriteriaLegacy
       description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
-    OrganizationReference:
-      type: object
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        city:
-          type: string
-          example: IRVINE
-          description: City the organization is headquartered in.
-        country:
-          type: string
-          example: UNITED STATES
-          description: Country the organization is headquartered in.
-        domainName:
-          type: string
-          example: acme.com
-          description: Domain name of the organization.
-        factsetId:
-          type: string
-          example: 000DWY-E
-          description: 'FactSet ID of the organization. (Requires License: ''FACTSET_ID'')'
-        isin:
-          type: string
-          example: US5949181045
-          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization.
-        state:
-          type: string
-          example: CA
-          description: State (code) the organization is headquartered in.
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker of the organization (if public).
-      title: OrganizationReference
-      description: Reference to an organization
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
   securitySchemes:
     API_key:
       type: apiKey
