@@ -1,0 +1,27 @@
+slug: bitvore
+provider: Bitvore
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: News API
+  spec_file: bitvore-news-api-api-openapi.yml
+  capability_id: BC-400.30
+  capability_id_l1: BC-400
+  capability_name: Market Intelligence Management
+  confidence: 0.7
+  evidence: GET /v2/corp/news handleNewsSearchUsingGET "Corporate News"; GET /v2/corp/news/byportfolio
+    "Corporate News by Portfolio"; schemas CorpNewsArticle, EnrichedRecord
+  reason: The surface searches and enriches corporate and economic news scoped to organisations and watch
+    portfolios — systematic external signal gathering about companies and markets, i.e. market and competitive
+    intelligence. Highest confidence of the news tags because multiple operations consistently describe
+    enriched corporate/economic news analysis.
