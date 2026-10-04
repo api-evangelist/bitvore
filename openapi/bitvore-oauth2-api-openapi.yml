@@ -67,14 +67,6 @@ paths:
                   description: Refresh token
 components:
   schemas:
-    OAuthError:
-      type: object
-      properties:
-        error:
-          type: string
-        error_description:
-          type: string
-      title: OAuthError
     AccessTokenGrantResponse:
       type: object
       properties:
@@ -94,3 +86,11 @@ components:
           example: Bearer
           description: Type of token returned
       title: AccessTokenGrantResponse
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
+      title: OAuthError

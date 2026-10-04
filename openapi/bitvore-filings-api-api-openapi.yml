@@ -545,34 +545,22 @@ paths:
       deprecated: false
 components:
   schemas:
-    URL:
+    AccessDeniedResponse:
       type: object
       properties:
-        authority:
+        reason:
           type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
+          example: access_denied
+        reasonSupport:
           type: string
-        host:
+          example: You are not authorized for this resource.
+        response:
           type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
     InputStreamResource:
       type: object
       properties:
@@ -597,66 +585,6 @@ components:
           $ref: '#/components/schemas/URL'
           originalRef: URL
       title: InputStreamResource
-    File:
-      type: object
-      properties:
-        absolute:
-          type: boolean
-        absoluteFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        absolutePath:
-          type: string
-        canonicalFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        canonicalPath:
-          type: string
-        directory:
-          type: boolean
-        file:
-          type: boolean
-        freeSpace:
-          type: integer
-          format: int64
-        hidden:
-          type: boolean
-        name:
-          type: string
-        parent:
-          type: string
-        parentFile:
-          $ref: '#/components/schemas/File'
-          originalRef: File
-        path:
-          type: string
-        totalSpace:
-          type: integer
-          format: int64
-        usableSpace:
-          type: integer
-          format: int64
-      title: File
-    Listing:
-      type: object
-      properties:
-        exchange:
-          type: string
-          example: NAS
-          description: The exchange the ticker belongs to.
-        mic:
-          type: string
-          example: XNAS
-          description: The MIC code of the exchange
-        region:
-          type: string
-          example: US
-          description: The geographic region of the exchange
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker symbol the organization.
-      title: Listing
     FinancialFiling:
       type: object
       properties:
@@ -736,22 +664,46 @@ components:
           description: Total number of financial filings found by search
       title: FinancialFilingsSearchResponse
       description: Financial filings search response.
-    AccessDeniedResponse:
+    File:
       type: object
       properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
+        absolute:
           type: boolean
-          example: false
-      title: AccessDeniedResponse
+        absoluteFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        absolutePath:
+          type: string
+        canonicalFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        canonicalPath:
+          type: string
+        directory:
+          type: boolean
+        file:
+          type: boolean
+        freeSpace:
+          type: integer
+          format: int64
+        hidden:
+          type: boolean
+        name:
+          type: string
+        parent:
+          type: string
+        parentFile:
+          $ref: '#/components/schemas/File'
+          originalRef: File
+        path:
+          type: string
+        totalSpace:
+          type: integer
+          format: int64
+        usableSpace:
+          type: integer
+          format: int64
+      title: File
     URI:
       type: object
       properties:
@@ -791,22 +743,34 @@ components:
         userInfo:
           type: string
       title: URI
-    InternalErrorResponse:
+    URL:
       type: object
       properties:
-        reason:
+        authority:
           type: string
-          example: internal_error
-        reasonSupport:
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
           type: string
-          example: An internal error occured.
-        response:
+        host:
           type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
     Organization:
       type: object
       properties:
@@ -850,6 +814,42 @@ components:
           type: string
           description: The primary ticker symbol the organization.
       title: Organization
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    Listing:
+      type: object
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
     InputStream:
       type: object
       title: InputStream

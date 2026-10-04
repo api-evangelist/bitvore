@@ -453,84 +453,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    IDMapping:
-      type: object
-      required:
-      - bvId
-      - foreignId
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id being mapped to
-        bvName:
-          type: string
-          example: ACME Corp
-          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
-        foreignId:
-          type: string
-          example: 4295904307
-          description: Foreign Id being mapped from, for example a Perm Id
-      title: IDMapping
-      description: Id mapping, maps a foreign Id to a Bitvore Id.
-    IDMapResponse:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of mappings returned.
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/IDMapping'
-            originalRef: IDMapping
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: IDMapResponse
-      description: Id map response.
-    URL:
-      type: object
-      properties:
-        authority:
-          type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
     ReasonResponse:
       type: object
       properties:
@@ -654,6 +576,84 @@ components:
         userInfo:
           type: string
       title: URI
+    URL:
+      type: object
+      properties:
+        authority:
+          type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
+    IDMapping:
+      type: object
+      required:
+      - bvId
+      - foreignId
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id being mapped to
+        bvName:
+          type: string
+          example: ACME Corp
+          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
+        foreignId:
+          type: string
+          example: 4295904307
+          description: Foreign Id being mapped from, for example a Perm Id
+      title: IDMapping
+      description: Id mapping, maps a foreign Id to a Bitvore Id.
+    IDMapResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of mappings returned.
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/IDMapping'
+            originalRef: IDMapping
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: IDMapResponse
+      description: Id map response.
     InputStream:
       type: object
       title: InputStream

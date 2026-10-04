@@ -765,6 +765,134 @@ paths:
       deprecated: false
 components:
   schemas:
+    ReasonResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: object
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: ReasonResponse
+      description: A response used to explain a failure or issue with the request.
+    Exchange:
+      type: object
+      properties:
+        alias:
+          type: string
+          example: NYSE
+          description: More commonly used acronym for the exchange
+        mic:
+          type: string
+          example: XNYS
+          description: Market Identifier Code (MIC). Deprecated in favor of the market symbol.
+        symbol:
+          type: string
+          example: NYQ
+          description: Exchange symbol
+      title: Exchange
+    OrganizationSearchResponseLegacy:
+      type: object
+      required:
+      - returned
+      - total
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Deprecated, replaced by the returned property
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/OrganizationSummaryLegacy'
+            originalRef: OrganizationSummaryLegacy
+        returned:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of organizations returned by search, may be less than total if paging used
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 10
+          description: Total number of organizations matching search criteria
+      title: OrganizationSearchResponseLegacy
+      description: Organization search response.
+    SearchTerm:
+      type: object
+      properties:
+        searchTermType:
+          type: string
+          example: formerName
+          description: Search term type
+          enum:
+          - NAME
+          - SHORT_NAME
+          - LEGAL_NAME
+          - DBA_NAME
+          - LOCAL_NAME
+          - FORMER_NAME
+          - LEGACY_ALIAS
+          - LEGACY_HINT
+          - MANUAL_ALIAS
+          - MANUAL_HINT
+          - ACCENTS_STRIPPED
+          - TRIMMED
+          - LEGACY_NAME
+        term:
+          type: string
+          example: Big Blue
+          description: Search term used for entity search and for collecting intelligence data.
+      title: SearchTerm
+      description: Full information about a search term, includes both aliases and company hints.
+    SingleOrganizationMatchingResultLegacy:
+      type: object
+      properties:
+        candidates:
+          type: array
+          description: List of candidate matches
+          items:
+            $ref: '#/components/schemas/PotentialOrganizationMatchLegacy'
+            originalRef: PotentialOrganizationMatchLegacy
+        spec:
+          type: object
+          description: Input organization specification used to find candidates
+          additionalProperties:
+            type: array
+            items:
+              type: object
+      title: SingleOrganizationMatchingResultLegacy
+      description: Results of trying to match an organization using the input specification.
+    OrganizationMatchingSpecification:
+      type: object
+      title: OrganizationMatchingSpecification
+      additionalProperties:
+        $ref: '#/components/schemas/List'
+        originalRef: List
     OrganizationSummaryLegacy:
       type: object
       properties:
@@ -831,44 +959,6 @@ components:
           originalRef: OrganizationSummaryLegacy
       title: PotentialOrganizationMatchLegacy
       description: One potential matching organization.
-    ReasonResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: object
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: ReasonResponse
-      description: A response used to explain a failure or issue with the request.
-    SingleOrganizationMatchingResultLegacy:
-      type: object
-      properties:
-        candidates:
-          type: array
-          description: List of candidate matches
-          items:
-            $ref: '#/components/schemas/PotentialOrganizationMatchLegacy'
-            originalRef: PotentialOrganizationMatchLegacy
-        spec:
-          type: object
-          description: Input organization specification used to find candidates
-          additionalProperties:
-            type: array
-            items:
-              type: object
-      title: SingleOrganizationMatchingResultLegacy
-      description: Results of trying to match an organization using the input specification.
     IndustrySummary:
       type: object
       properties:
@@ -882,6 +972,18 @@ components:
           description: Name of the industry
       title: IndustrySummary
       description: Summary information about an industry.
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          description: Response payload
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
     OrganizationDetails:
       type: object
       properties:
@@ -1056,108 +1158,6 @@ components:
           description: Year the organization was founded
       title: OrganizationDetails
       description: Detailed information about an organization.
-    SearchTerm:
-      type: object
-      properties:
-        searchTermType:
-          type: string
-          example: formerName
-          description: Search term type
-          enum:
-          - NAME
-          - SHORT_NAME
-          - LEGAL_NAME
-          - DBA_NAME
-          - LOCAL_NAME
-          - FORMER_NAME
-          - LEGACY_ALIAS
-          - LEGACY_HINT
-          - MANUAL_ALIAS
-          - MANUAL_HINT
-          - ACCENTS_STRIPPED
-          - TRIMMED
-          - LEGACY_NAME
-        term:
-          type: string
-          example: Big Blue
-          description: Search term used for entity search and for collecting intelligence data.
-      title: SearchTerm
-      description: Full information about a search term, includes both aliases and company hints.
-    OrganizationMatchingSpecification:
-      type: object
-      title: OrganizationMatchingSpecification
-      additionalProperties:
-        $ref: '#/components/schemas/List'
-        originalRef: List
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
-    OrganizationSearchResponseLegacy:
-      type: object
-      required:
-      - returned
-      - total
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Deprecated, replaced by the returned property
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/OrganizationSummaryLegacy'
-            originalRef: OrganizationSummaryLegacy
-        returned:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of organizations returned by search, may be less than total if paging used
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 10
-          description: Total number of organizations matching search criteria
-      title: OrganizationSearchResponseLegacy
-      description: Organization search response.
-    Exchange:
-      type: object
-      properties:
-        alias:
-          type: string
-          example: NYSE
-          description: More commonly used acronym for the exchange
-        mic:
-          type: string
-          example: XNYS
-          description: Market Identifier Code (MIC). Deprecated in favor of the market symbol.
-        symbol:
-          type: string
-          example: NYQ
-          description: Exchange symbol
-      title: Exchange
   securitySchemes:
     API_key:
       type: apiKey

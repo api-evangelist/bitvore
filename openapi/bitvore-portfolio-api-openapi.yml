@@ -649,21 +649,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    PortfolioItem:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          example: 008000AA7
-          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the porftolio
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the portfolio item, not required for API input but will be returned from API calls
-      title: PortfolioItem
-      description: Identifies an item in a portolio, i.e., a bond or organization.
     ReasonResponse:
       type: object
       properties:
@@ -684,56 +669,6 @@ components:
           description: Indicates whether the call was successful or not
       title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
-    PortfolioSummary:
-      type: object
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: string
-          example: 25
-          description: Unique Id of the portfolio
-        idScheme:
-          type: string
-          example: cusip
-          description: Scheme used for identifying porfolio items, supported values are "cusip" and "bvid", default is "cusip"
-        name:
-          type: string
-          example: My Portfolio
-          description: Name of the portfolio
-      title: PortfolioSummary
-      description: Summary information about a portfolio.
-    PortfolioItemResponse:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of portfolio items returned
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/PortfolioItem'
-            originalRef: PortfolioItem
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: PortfolioItemResponse
-      description: Portfolio item response.
     PortfolioResponse:
       type: object
       required:
@@ -764,6 +699,71 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioResponse
       description: Portfolio response.
+    PortfolioItemResponse:
+      type: object
+      required:
+      - count
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of portfolio items returned
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/PortfolioItem'
+            originalRef: PortfolioItem
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: PortfolioItemResponse
+      description: Portfolio item response.
+    PortfolioItem:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          example: 008000AA7
+          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the porftolio
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the portfolio item, not required for API input but will be returned from API calls
+      title: PortfolioItem
+      description: Identifies an item in a portolio, i.e., a bond or organization.
+    PortfolioSummary:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          example: 25
+          description: Unique Id of the portfolio
+        idScheme:
+          type: string
+          example: cusip
+          description: Scheme used for identifying porfolio items, supported values are "cusip" and "bvid", default is "cusip"
+        name:
+          type: string
+          example: My Portfolio
+          description: Name of the portfolio
+      title: PortfolioSummary
+      description: Summary information about a portfolio.
   securitySchemes:
     API_key:
       type: apiKey

@@ -176,16 +176,17 @@ paths:
       deprecated: false
 components:
   schemas:
-    AlertResult:
+    AlertDefinition:
       type: object
       properties:
-        cusips:
-          type: array
-          items:
-            type: string
-        rowKey:
+        alertId:
+          type: integer
+          format: int64
+        alertName:
           type: string
-      title: AlertResult
+        alertTime:
+          type: string
+      title: AlertDefinition
     AlertTransactionEntry:
       type: object
       properties:
@@ -198,6 +199,28 @@ components:
           type: integer
           format: int64
       title: AlertTransactionEntry
+    AlertTransactions:
+      type: object
+      properties:
+        alertId:
+          type: integer
+          format: int64
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertTransactionEntry'
+            originalRef: AlertTransactionEntry
+      title: AlertTransactions
+    AlertResult:
+      type: object
+      properties:
+        cusips:
+          type: array
+          items:
+            type: string
+        rowKey:
+          type: string
+      title: AlertResult
     MuniBondNewsRecord:
       type: object
       properties:
@@ -230,29 +253,6 @@ components:
           type: integer
           format: int64
       title: AlertResults
-    AlertTransactions:
-      type: object
-      properties:
-        alertId:
-          type: integer
-          format: int64
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertTransactionEntry'
-            originalRef: AlertTransactionEntry
-      title: AlertTransactions
-    AlertDefinition:
-      type: object
-      properties:
-        alertId:
-          type: integer
-          format: int64
-        alertName:
-          type: string
-        alertTime:
-          type: string
-      title: AlertDefinition
   securitySchemes:
     BasicAuth:
       type: http

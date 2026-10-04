@@ -617,45 +617,23 @@ paths:
       deprecated: false
 components:
   schemas:
-    Channel:
+    PotentialOrganizationMatch:
       type: object
       properties:
-        channel:
-          type: string
-          enum:
-          - FACEBOOK
-          - LINKEDIN
-          - TWITTER
-        location:
-          type: string
-          example: https://www.facebook.com/ACME
-          description: Direct source to the organizations channel
-      title: Channel
-    OrgResultsResponse:
-      type: object
-      properties:
-        response:
+        hits:
           type: array
-          description: Response payload
+          example:
+          - Name
+          - DomainName
+          description: List of the properties in the input specification that this organization has matches for
           items:
-            $ref: '#/components/schemas/Organization'
-            originalRef: Organization
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of items return
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of items available
-      title: OrgResultsResponse
-      description: Organization search response
+            type: string
+        org:
+          description: Summary information for this potential match
+          $ref: '#/components/schemas/Organization'
+          originalRef: Organization
+      title: PotentialOrganizationMatch
+      description: A potential matched organization.
     ReasonResponse:
       type: object
       properties:
@@ -676,26 +654,22 @@ components:
           description: Indicates whether the call was successful or not
       title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
-    Listing:
+    AccessDeniedResponse:
       type: object
       properties:
-        exchange:
+        reason:
           type: string
-          example: NAS
-          description: The exchange the ticker belongs to.
-        mic:
+          example: access_denied
+        reasonSupport:
           type: string
-          example: XNAS
-          description: The MIC code of the exchange
-        region:
+          example: You are not authorized for this resource.
+        response:
           type: string
-          example: US
-          description: The geographic region of the exchange
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker symbol the organization.
-      title: Listing
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
     IndustrySummary:
       type: object
       properties:
@@ -724,63 +698,45 @@ components:
           originalRef: OrgSpec
       title: SingleOrganizationMatchingResult
       description: Results of trying to match an organization using the input specification.
-    OrganizationDetails:
+    OrgResultsResponse:
       type: object
       properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id of the organization
-        channels:
+        response:
           type: array
-          description: Official social and communication channels of the organization
+          description: Response payload
           items:
-            $ref: '#/components/schemas/Channel'
-            originalRef: Channel
-        city:
+            $ref: '#/components/schemas/Organization'
+            originalRef: Organization
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: OrgResultsResponse
+      description: Organization search response
+    Channel:
+      type: object
+      properties:
+        channel:
           type: string
-          example: Irvine
-          description: City the organization is headquartered in.
-        country:
+          enum:
+          - FACEBOOK
+          - LINKEDIN
+          - TWITTER
+        location:
           type: string
-          example: United States
-          description: Country the organization is headquartered in.
-        domainName:
-          type: string
-          example: acme.com
-          description: Domain name of the organization.
-        factSetId:
-          type: string
-        isin:
-          type: string
-          example: US5949181045
-          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
-        listings:
-          type: array
-          description: The exchange listings of the organization.
-          items:
-            $ref: '#/components/schemas/Listing'
-            originalRef: Listing
-        naicsIndustry:
-          description: NAICS Industry the organization operates in
-          $ref: '#/components/schemas/IndustrySummary'
-          originalRef: IndustrySummary
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the organization.
-        sicIndustry:
-          description: SIC Industry the organization operates in
-          $ref: '#/components/schemas/IndustrySummary'
-          originalRef: IndustrySummary
-        state:
-          type: string
-          example: CA
-          description: State (code) the organization is headquartered in.
-        ticker:
-          type: string
-          description: The primary ticker symbol the organization.
-      title: OrganizationDetails
+          example: https://www.facebook.com/ACME
+          description: Direct source to the organizations channel
+      title: Channel
     OrgSpec:
       type: object
       properties:
@@ -872,55 +828,6 @@ components:
           items:
             type: string
       title: OrgSpec
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
-    InternalErrorResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
-        response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
-    PotentialOrganizationMatch:
-      type: object
-      properties:
-        hits:
-          type: array
-          example:
-          - Name
-          - DomainName
-          description: List of the properties in the input specification that this organization has matches for
-          items:
-            type: string
-        org:
-          description: Summary information for this potential match
-          $ref: '#/components/schemas/Organization'
-          originalRef: Organization
-      title: PotentialOrganizationMatch
-      description: A potential matched organization.
     Organization:
       type: object
       properties:
@@ -964,6 +871,99 @@ components:
           type: string
           description: The primary ticker symbol the organization.
       title: Organization
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    Listing:
+      type: object
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
+    OrganizationDetails:
+      type: object
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id of the organization
+        channels:
+          type: array
+          description: Official social and communication channels of the organization
+          items:
+            $ref: '#/components/schemas/Channel'
+            originalRef: Channel
+        city:
+          type: string
+          example: Irvine
+          description: City the organization is headquartered in.
+        country:
+          type: string
+          example: United States
+          description: Country the organization is headquartered in.
+        domainName:
+          type: string
+          example: acme.com
+          description: Domain name of the organization.
+        factSetId:
+          type: string
+        isin:
+          type: string
+          example: US5949181045
+          description: 'ISIN of the organization. (Requires License: ''ISIN'')'
+        listings:
+          type: array
+          description: The exchange listings of the organization.
+          items:
+            $ref: '#/components/schemas/Listing'
+            originalRef: Listing
+        naicsIndustry:
+          description: NAICS Industry the organization operates in
+          $ref: '#/components/schemas/IndustrySummary'
+          originalRef: IndustrySummary
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the organization.
+        sicIndustry:
+          description: SIC Industry the organization operates in
+          $ref: '#/components/schemas/IndustrySummary'
+          originalRef: IndustrySummary
+        state:
+          type: string
+          example: CA
+          description: State (code) the organization is headquartered in.
+        ticker:
+          type: string
+          description: The primary ticker symbol the organization.
+      title: OrganizationDetails
   securitySchemes:
     API_key:
       type: apiKey
