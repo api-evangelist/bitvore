@@ -497,6 +497,76 @@ components:
           $ref: '#/components/schemas/URL'
           originalRef: URL
       title: InputStreamResource
+    URL:
+      type: object
+      properties:
+        authority:
+          type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
+    URI:
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        authority:
+          type: string
+        fragment:
+          type: string
+        host:
+          type: string
+        opaque:
+          type: boolean
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        query:
+          type: string
+        rawAuthority:
+          type: string
+        rawFragment:
+          type: string
+        rawPath:
+          type: string
+        rawQuery:
+          type: string
+        rawSchemeSpecificPart:
+          type: string
+        rawUserInfo:
+          type: string
+        scheme:
+          type: string
+        schemeSpecificPart:
+          type: string
+        userInfo:
+          type: string
+      title: URI
+    InputStream:
+      type: object
+      title: InputStream
     File:
       type: object
       properties:
@@ -537,93 +607,6 @@ components:
           type: integer
           format: int64
       title: File
-    URI:
-      type: object
-      properties:
-        absolute:
-          type: boolean
-        authority:
-          type: string
-        fragment:
-          type: string
-        host:
-          type: string
-        opaque:
-          type: boolean
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        query:
-          type: string
-        rawAuthority:
-          type: string
-        rawFragment:
-          type: string
-        rawPath:
-          type: string
-        rawQuery:
-          type: string
-        rawSchemeSpecificPart:
-          type: string
-        rawUserInfo:
-          type: string
-        scheme:
-          type: string
-        schemeSpecificPart:
-          type: string
-        userInfo:
-          type: string
-      title: URI
-    URL:
-      type: object
-      properties:
-        authority:
-          type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
-    IDMapping:
-      type: object
-      required:
-      - bvId
-      - foreignId
-      properties:
-        bvId:
-          type: string
-          example: b00001ab7
-          description: Bitvore Id being mapped to
-        bvName:
-          type: string
-          example: ACME Corp
-          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
-        foreignId:
-          type: string
-          example: 4295904307
-          description: Foreign Id being mapped from, for example a Perm Id
-      title: IDMapping
-      description: Id mapping, maps a foreign Id to a Bitvore Id.
     IDMapResponse:
       type: object
       required:
@@ -654,9 +637,26 @@ components:
           description: Indicates whether the call was successful or not
       title: IDMapResponse
       description: Id map response.
-    InputStream:
+    IDMapping:
       type: object
-      title: InputStream
+      required:
+      - bvId
+      - foreignId
+      properties:
+        bvId:
+          type: string
+          example: b00001ab7
+          description: Bitvore Id being mapped to
+        bvName:
+          type: string
+          example: ACME Corp
+          description: Name of the Bitvore entity being mapped to. Returned by API calls, not needed for input to API calls
+        foreignId:
+          type: string
+          example: 4295904307
+          description: Foreign Id being mapped from, for example a Perm Id
+      title: IDMapping
+      description: Id mapping, maps a foreign Id to a Bitvore Id.
   securitySchemes:
     API_key:
       type: apiKey

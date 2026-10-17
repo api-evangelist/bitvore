@@ -2259,6 +2259,21 @@ paths:
     - url: https://api.bitvore.com/
 components:
   schemas:
+    ItemCustomId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 00XAD6
+          description: A custom id of the portfolio item
+          maxLength: 40
+        type:
+          type: string
+          example: FOREIGN_ID
+          description: A type or name of the custom id
+          maxLength: 40
+      title: ItemCustomId
+      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
     ReasonResponse:
       type: object
       properties:
@@ -2339,27 +2354,6 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioItemResponse
       description: Portfolio item response.
-    PortfolioItem:
-      type: object
-      required:
-      - id
-      properties:
-        customIds:
-          type: array
-          description: 'Optional: Up to 4 client defined custom ids. Convenience property to map client Ids with Bitvore Ids.'
-          items:
-            $ref: '#/components/schemas/ItemCustomId'
-            originalRef: ItemCustomId
-        id:
-          type: string
-          example: 008000AA7
-          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the portfolio
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the portfolio item, not required for API input but will be returned from API calls
-      title: PortfolioItem
-      description: Identifies an item in a portfolio
     PortfolioSummary:
       type: object
       required:
@@ -2380,21 +2374,6 @@ components:
           description: Name of the portfolio
       title: PortfolioSummary
       description: Summary information about a portfolio.
-    ItemCustomId:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 00XAD6
-          description: A custom id of the portfolio item
-          maxLength: 40
-        type:
-          type: string
-          example: FOREIGN_ID
-          description: A type or name of the custom id
-          maxLength: 40
-      title: ItemCustomId
-      description: A user managed id of the portfolio item. Can be used to map customer Ids to Bitvore Ids.
     PortfolioItemIdsResponse:
       type: object
       required:
@@ -2424,6 +2403,27 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioItemIdsResponse
       description: A response used to explain a failure or issue with the request.
+    PortfolioItem:
+      type: object
+      required:
+      - id
+      properties:
+        customIds:
+          type: array
+          description: 'Optional: Up to 4 client defined custom ids. Convenience property to map client Ids with Bitvore Ids.'
+          items:
+            $ref: '#/components/schemas/ItemCustomId'
+            originalRef: ItemCustomId
+        id:
+          type: string
+          example: 008000AA7
+          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the portfolio
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the portfolio item, not required for API input but will be returned from API calls
+      title: PortfolioItem
+      description: Identifies an item in a portfolio
   securitySchemes:
     API_key:
       type: apiKey

@@ -184,19 +184,6 @@ components:
           type: boolean
           example: false
       title: AccessDeniedResponse
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          description: Response payload
-          $ref: '#/components/schemas/OrganizationSentimentScoreTimeSeries'
-          originalRef: OrganizationSentimentScoreTimeSeries
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
     TimeSeriesTimeline:
       type: object
       properties:
@@ -260,6 +247,19 @@ components:
             format: float
       title: OrganizationSentimentScoreSeries
       description: Series of organization sentiment scores.
+    BasicResponse:
+      type: object
+      properties:
+        response:
+          description: Response payload
+          $ref: '#/components/schemas/OrganizationSentimentScoreTimeSeries'
+          originalRef: OrganizationSentimentScoreTimeSeries
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
   securitySchemes:
     API_key:
       type: apiKey

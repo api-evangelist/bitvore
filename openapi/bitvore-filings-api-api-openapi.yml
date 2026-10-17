@@ -561,6 +561,22 @@ components:
           type: boolean
           example: false
       title: AccessDeniedResponse
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
     InputStreamResource:
       type: object
       properties:
@@ -585,6 +601,93 @@ components:
           $ref: '#/components/schemas/URL'
           originalRef: URL
       title: InputStreamResource
+    URL:
+      type: object
+      properties:
+        authority:
+          type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
+    Listing:
+      type: object
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
+    URI:
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        authority:
+          type: string
+        fragment:
+          type: string
+        host:
+          type: string
+        opaque:
+          type: boolean
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        query:
+          type: string
+        rawAuthority:
+          type: string
+        rawFragment:
+          type: string
+        rawPath:
+          type: string
+        rawQuery:
+          type: string
+        rawSchemeSpecificPart:
+          type: string
+        rawUserInfo:
+          type: string
+        scheme:
+          type: string
+        schemeSpecificPart:
+          type: string
+        userInfo:
+          type: string
+      title: URI
     FinancialFiling:
       type: object
       properties:
@@ -628,42 +731,9 @@ components:
           description: Title of the filing
       title: FinancialFiling
       description: A financial filing for an organization.
-    FinancialFilingsSearchResponse:
+    InputStream:
       type: object
-      required:
-      - returned
-      - total
-      properties:
-        reason:
-          type: string
-          example: Could not locate subject.
-          description: Text reason for the failure (if not successful)
-        reasonSupport:
-          type: string
-          example: Longer description of the missing subject.
-          description: Additional information about the failure (if not successful)
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/FinancialFiling'
-            originalRef: FinancialFiling
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of financial filings found by search
-      title: FinancialFilingsSearchResponse
-      description: Financial filings search response.
+      title: InputStream
     File:
       type: object
       properties:
@@ -704,73 +774,42 @@ components:
           type: integer
           format: int64
       title: File
-    URI:
+    FinancialFilingsSearchResponse:
       type: object
+      required:
+      - returned
+      - total
       properties:
-        absolute:
+        reason:
+          type: string
+          example: Could not locate subject.
+          description: Text reason for the failure (if not successful)
+        reasonSupport:
+          type: string
+          example: Longer description of the missing subject.
+          description: Additional information about the failure (if not successful)
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/FinancialFiling'
+            originalRef: FinancialFiling
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of filings returned by search, maximum amount dictated by the pageSize parameter used in search
+        success:
           type: boolean
-        authority:
-          type: string
-        fragment:
-          type: string
-        host:
-          type: string
-        opaque:
-          type: boolean
-        path:
-          type: string
-        port:
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
           type: integer
           format: int32
-        query:
-          type: string
-        rawAuthority:
-          type: string
-        rawFragment:
-          type: string
-        rawPath:
-          type: string
-        rawQuery:
-          type: string
-        rawSchemeSpecificPart:
-          type: string
-        rawUserInfo:
-          type: string
-        scheme:
-          type: string
-        schemeSpecificPart:
-          type: string
-        userInfo:
-          type: string
-      title: URI
-    URL:
-      type: object
-      properties:
-        authority:
-          type: string
-        content:
-          type: object
-        defaultPort:
-          type: integer
-          format: int32
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
+          example: 100
+          description: Total number of financial filings found by search
+      title: FinancialFilingsSearchResponse
+      description: Financial filings search response.
     Organization:
       type: object
       properties:
@@ -814,45 +853,6 @@ components:
           type: string
           description: The primary ticker symbol the organization.
       title: Organization
-    InternalErrorResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
-        response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
-        success:
-          type: boolean
-          example: false
-      title: InternalErrorResponse
-    Listing:
-      type: object
-      properties:
-        exchange:
-          type: string
-          example: NAS
-          description: The exchange the ticker belongs to.
-        mic:
-          type: string
-          example: XNAS
-          description: The MIC code of the exchange
-        region:
-          type: string
-          example: US
-          description: The geographic region of the exchange
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker symbol the organization.
-      title: Listing
-    InputStream:
-      type: object
-      title: InputStream
   securitySchemes:
     API_key:
       type: apiKey

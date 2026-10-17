@@ -2629,6 +2629,126 @@ components:
           description: Indicates whether the call was successful or not
       title: ReasonResponse
       description: A response used to explain a failure or issue with the request.
+    AccessDeniedResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: access_denied
+        reasonSupport:
+          type: string
+          example: You are not authorized for this resource.
+        response:
+          type: string
+          example: UNAUTHORIZED
+        success:
+          type: boolean
+          example: false
+      title: AccessDeniedResponse
+    OrganizationQueryCriteria:
+      type: object
+      properties:
+        empRange:
+          type: string
+          example: 200-5000
+          description: Employee range companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 1B.
+        fips:
+          type: array
+          example:
+          - '35620'
+          description: One or more FIPS codes identifying locations the companies must have their headquarters in.
+          items:
+            type: string
+        location:
+          type: array
+          example:
+          - Los Angeles/California/United States
+          description: One or more locations companies must have their headquarters in.
+          items:
+            type: string
+        naics:
+          type: array
+          example:
+          - '221114'
+          - '221115'
+          description: One or more NAICS codes identifying industries the companies must operate in.
+          items:
+            type: string
+        revRange:
+          type: string
+          example: 50-200
+          description: Revenue range (in millions) companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be omitted to report over 1B.
+        sic:
+          type: array
+          example:
+          - '1311'
+          - '1381'
+          description: One or more SIC codes identifying industries the companies must operate in.
+          items:
+            type: string
+      title: OrganizationQueryCriteria
+      description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
+    OrganizationScope:
+      type: object
+      properties:
+        customIds:
+          type: array
+          description: One or more custom Ids identifying the entities to retrieve news for, the Ids must be mapped in the supplied portfolio
+          items:
+            type: string
+        ids:
+          type: array
+          description: One or more Bitvore IDs identifying entities to retrieve news for.
+          items:
+            type: string
+        orgIdScheme:
+          type: string
+          enum:
+          - BVID
+          - CUSIP
+          - ISIN
+          - SEDOL
+          - FIGI
+        orgQuery:
+          description: Query criteria identifying the entities to retrieve news for.
+          $ref: '#/components/schemas/OrganizationQueryCriteria'
+          originalRef: OrganizationQueryCriteria
+        portfolioId:
+          type: integer
+          format: int64
+          description: Id identifying a portfolio to retrieve news for.
+      title: OrganizationScope
+      description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
+    InternalErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: internal_error
+        reasonSupport:
+          type: string
+          example: An internal error occured.
+        response:
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        success:
+          type: boolean
+          example: false
+      title: InternalErrorResponse
+    EnrichedRecordsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/EnrichedRecord'
+            originalRef: EnrichedRecord
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+      title: EnrichedRecordsResponse
     CorpNewsArticle:
       type: object
       properties:
@@ -2744,57 +2864,51 @@ components:
           description: Title
       title: CorpNewsArticle
       description: Corp news article.
-    EnrichedRecordsResponse:
+    Listing:
+      type: object
+      properties:
+        exchange:
+          type: string
+          example: NAS
+          description: The exchange the ticker belongs to.
+        mic:
+          type: string
+          example: XNAS
+          description: The MIC code of the exchange
+        region:
+          type: string
+          example: US
+          description: The geographic region of the exchange
+        ticker:
+          type: string
+          example: ACME
+          description: Primary ticker symbol the organization.
+      title: Listing
+    CorpNewsResultsResponse:
       type: object
       properties:
         response:
           type: array
           description: Response payload
           items:
-            $ref: '#/components/schemas/EnrichedRecord'
-            originalRef: EnrichedRecord
+            $ref: '#/components/schemas/CorpNewsArticle'
+            originalRef: CorpNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
         success:
           type: boolean
           example: true
           description: Indicates whether the call was successful or not
-      title: EnrichedRecordsResponse
-    EnrichedRecord:
-      type: object
-      properties:
-        enriched:
-          type: object
-          description: Enriched data for the given record
-        errorMessage:
-          type: string
-          description: An error message, if there is one.
-        key:
-          type: string
-          description: Record Key
-        publishedAt:
-          type: string
-          example: '2022-06-29T21:41:21.109Z'
-          description: Date published
-        timestamp:
-          type: string
-          example: '2022-06-29T21:41:21.109Z'
-          description: Request timestamp
-      title: EnrichedRecord
-    AccessDeniedResponse:
-      type: object
-      properties:
-        reason:
-          type: string
-          example: access_denied
-        reasonSupport:
-          type: string
-          example: You are not authorized for this resource.
-        response:
-          type: string
-          example: UNAUTHORIZED
-        success:
-          type: boolean
-          example: false
-      title: AccessDeniedResponse
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: CorpNewsResultsResponse
+      description: A paged result response.
     CorporateNewsRequest:
       type: object
       properties:
@@ -2887,150 +3001,6 @@ components:
             type: string
       title: CorporateNewsRequest
       description: Corporate news search request.
-    OrganizationQueryCriteria:
-      type: object
-      properties:
-        empRange:
-          type: string
-          example: 200-5000
-          description: Employee range companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 1, 10, 50, 200, 500, 1000, 5000, 10000. The upper bound can be omitted to report over 1B.
-        fips:
-          type: array
-          example:
-          - '35620'
-          description: One or more FIPS codes identifying locations the companies must have their headquarters in.
-          items:
-            type: string
-        location:
-          type: array
-          example:
-          - Los Angeles/California/United States
-          description: One or more locations companies must have their headquarters in.
-          items:
-            type: string
-        naics:
-          type: array
-          example:
-          - '221114'
-          - '221115'
-          description: One or more NAICS codes identifying industries the companies must operate in.
-          items:
-            type: string
-        revRange:
-          type: string
-          example: 50-200
-          description: Revenue range (in millions) companies must fall in. The range is formatted as <lower>-<upper> where lower and upper must be one of 0, 1, 10, 50, 100, 200, 1000. The upper bound can be omitted to report over 1B.
-        sic:
-          type: array
-          example:
-          - '1311'
-          - '1381'
-          description: One or more SIC codes identifying industries the companies must operate in.
-          items:
-            type: string
-      title: OrganizationQueryCriteria
-      description: Query criteria identifying the companies/organizations that should be the subject of the news to be returned.
-    CorpNewsResultsResponse:
-      type: object
-      properties:
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/CorpNewsArticle'
-            originalRef: CorpNewsArticle
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of items return
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of items available
-      title: CorpNewsResultsResponse
-      description: A paged result response.
-    Listing:
-      type: object
-      properties:
-        exchange:
-          type: string
-          example: NAS
-          description: The exchange the ticker belongs to.
-        mic:
-          type: string
-          example: XNAS
-          description: The MIC code of the exchange
-        region:
-          type: string
-          example: US
-          description: The geographic region of the exchange
-        ticker:
-          type: string
-          example: ACME
-          description: Primary ticker symbol the organization.
-      title: Listing
-    OrganizationScope:
-      type: object
-      properties:
-        customIds:
-          type: array
-          description: One or more custom Ids identifying the entities to retrieve news for, the Ids must be mapped in the supplied portfolio
-          items:
-            type: string
-        ids:
-          type: array
-          description: One or more Bitvore IDs identifying entities to retrieve news for.
-          items:
-            type: string
-        orgIdScheme:
-          type: string
-          enum:
-          - BVID
-          - CUSIP
-          - ISIN
-          - SEDOL
-          - FIGI
-        orgQuery:
-          description: Query criteria identifying the entities to retrieve news for.
-          $ref: '#/components/schemas/OrganizationQueryCriteria'
-          originalRef: OrganizationQueryCriteria
-        portfolioId:
-          type: integer
-          format: int64
-          description: Id identifying a portfolio to retrieve news for.
-      title: OrganizationScope
-      description: Identifies the organizations that should be the subject of the news to be returned. Only one of the supported options should be used at a time.
-    MuniNewsResponse:
-      type: object
-      properties:
-        response:
-          type: array
-          description: Response payload
-          items:
-            $ref: '#/components/schemas/MuniNewsArticle'
-            originalRef: MuniNewsArticle
-        returned:
-          type: integer
-          format: int32
-          example: 10
-          description: Number of items return
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-        total:
-          type: integer
-          format: int32
-          example: 100
-          description: Total number of items available
-      title: MuniNewsResponse
-      description: A paged result response.
     MuniNewsArticle:
       type: object
       properties:
@@ -3128,6 +3098,52 @@ components:
           description: Title
       title: MuniNewsArticle
       description: Muni news article.
+    MuniNewsResponse:
+      type: object
+      properties:
+        response:
+          type: array
+          description: Response payload
+          items:
+            $ref: '#/components/schemas/MuniNewsArticle'
+            originalRef: MuniNewsArticle
+        returned:
+          type: integer
+          format: int32
+          example: 10
+          description: Number of items return
+        success:
+          type: boolean
+          example: true
+          description: Indicates whether the call was successful or not
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of items available
+      title: MuniNewsResponse
+      description: A paged result response.
+    EnrichedRecord:
+      type: object
+      properties:
+        enriched:
+          type: object
+          description: Enriched data for the given record
+        errorMessage:
+          type: string
+          description: An error message, if there is one.
+        key:
+          type: string
+          description: Record Key
+        publishedAt:
+          type: string
+          example: '2022-06-29T21:41:21.109Z'
+          description: Date published
+        timestamp:
+          type: string
+          example: '2022-06-29T21:41:21.109Z'
+          description: Request timestamp
+      title: EnrichedRecord
     Organization:
       type: object
       properties:
@@ -3171,22 +3187,18 @@ components:
           type: string
           description: The primary ticker symbol the organization.
       title: Organization
-    InternalErrorResponse:
+    BasicResponse:
       type: object
       properties:
-        reason:
-          type: string
-          example: internal_error
-        reasonSupport:
-          type: string
-          example: An internal error occured.
         response:
-          type: string
-          example: INTERNAL_SERVER_ERROR
+          type: object
+          description: Response payload
         success:
           type: boolean
-          example: false
-      title: InternalErrorResponse
+          example: true
+          description: Indicates whether the call was successful or not
+      title: BasicResponse
+      description: Default response wrapper for API requests.
     MunicipalNewsRequest:
       type: object
       properties:
@@ -3279,18 +3291,6 @@ components:
           description: Keyword or phrase to search for news when not using a portfolio
       title: MunicipalNewsRequest
       description: Query criteria for returning municipal news.
-    BasicResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          description: Response payload
-        success:
-          type: boolean
-          example: true
-          description: Indicates whether the call was successful or not
-      title: BasicResponse
-      description: Default response wrapper for API requests.
   securitySchemes:
     API_key:
       type: apiKey

@@ -729,21 +729,6 @@ components:
           description: Indicates whether the call was successful or not
       title: PortfolioItemResponse
       description: Portfolio item response.
-    PortfolioItem:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          example: 008000AA7
-          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the porftolio
-        name:
-          type: string
-          example: ACME Corp
-          description: Name of the portfolio item, not required for API input but will be returned from API calls
-      title: PortfolioItem
-      description: Identifies an item in a portolio, i.e., a bond or organization.
     PortfolioSummary:
       type: object
       required:
@@ -764,6 +749,21 @@ components:
           description: Name of the portfolio
       title: PortfolioSummary
       description: Summary information about a portfolio.
+    PortfolioItem:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          example: 008000AA7
+          description: Unique Id of the portfolio item, the format is dictated by the Id scheme used by the porftolio
+        name:
+          type: string
+          example: ACME Corp
+          description: Name of the portfolio item, not required for API input but will be returned from API calls
+      title: PortfolioItem
+      description: Identifies an item in a portolio, i.e., a bond or organization.
   securitySchemes:
     API_key:
       type: apiKey
