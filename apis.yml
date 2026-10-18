@@ -50,7 +50,7 @@ tags:
 - Market Intelligence
 - Alternative Data
 - News API
-- NLP
+- Natural Language Processing
 - ESG
 - Municipal Bonds
 - Credit Risk
@@ -71,6 +71,7 @@ tags_raw:
 - sentiment-analysis
 - unstructured-data
 - fixed-income
+- NLP
 apis:
 - aid: bitvore:bitvore-alert-api-api
   name: Bitvore Alert API
