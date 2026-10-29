@@ -64,25 +64,170 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bitvore Corp. runs **Cellenus**, an AI/NLP platform that reads unstructured public text — global news, press
-releases, SEC filings, earnings-call transcripts — and turns it into structured material business events, signals,
-trended sentiment, and growth/risk/ESG scores. It is sold as two separately licensed datasets, Cellenus Corporate
-Intelligence and Cellenus Municipal, reachable by REST API, bulk CSV dataset/changeset exports, and a
-Microsoft-certified Power Platform connector.
+Bitvore Corp. builds Cellenus, an AI/NLP platform that reads unstructured public text — global news, press releases, SEC filings and proxy statements, earnings-call transcripts — and turns it into structured material business events, signals, trended sentiment, and growth and risk scores. Coverage spans 500,000+ surveilled companies across 60,000+ sources, sold as two separately licensed datasets: Cellenus Corporate Intelligence (corporate and economic news, organizations, financial filings, sentiment scores) and Cellenus Municipal (municipal bond news by CUSIP, location, FIPS and sector), with an ESG signal and scoring layer over both. Access is by REST API, bulk dataset and changeset exports, and a Microsoft-certified Power Platform connector. Bitvore's fixed-income data-analytics unit was acquired by BondWave in November 2024; bitvore.com now redirects to bondwave.com/muni-news/, while developer.bitvore.com and api.bitvore.com remain live and serving the Cellenus API surface.
 
-BondWave LLC acquired Bitvore's fixed-income / data-analytics unit in November 2024. `bitvore.com` now 301s to
-`bondwave.com/muni-news/`, while `developer.bitvore.com` and `api.bitvore.com` remain live and serving the Cellenus
-API surface.
+**Areas:** Financial Data · Market Intelligence · Alternative Data · News API · Natural Language Processing · ESG · Municipal Bonds · Credit Risk · Company Data · Sentiment Analysis · Unstructured Data · Fixed Income
 
-**What this profile holds.** 16 refined OpenAPIs (121 operations, harvested from the six Swagger 2.0 groups Bitvore
-serves at `api.bitvore.com/v2/api-docs`), the published Signal Glossary (19 signals / 156 sub-signals) and dataset
-export schema (16 tables / 71 columns), authentication, OAuth scopes, conventions, error catalog, conformance,
-lifecycle, rate limits, plans, sandbox, data model, agentic-access, a candidate MCP tool surface with its crosswalk
-back to real operationIds, five generated Agent Skills, and Postman/OpenCollection exports.
+## Bitvore on APIs.io
 
-**What Bitvore does not publish** is recorded just as deliberately, in `apis.yml` under `x-not-published` — no
-`/.well-known/` documents on any of six hosts, no agent card, no MCP server, no GraphQL, no webhook or AsyncAPI
-surface, no SDKs, no status page, no security.txt or disclosure program, no trust center, and no pricing. Access is
-sales-gated: a free evaluation key by email, a licensed key from sales.
+Everything profiled for Bitvore is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bitvore/](https://apis.io/providers/bitvore/)** — or go straight to one of the APIs or properties below.
 
-Sourced via the API Evangelist harvest backlog (secondary-market): https://www.nasdaqprivatemarket.com/
+### APIs (19)
+
+- [Bitvore Alert API](https://apis.io/apis/bitvore/bitvore-alert-api-api/) — Alerts API
+- [Bitvore Bond API](https://apis.io/apis/bitvore/bitvore-bond-api/) — Municipal Bond API
+- [Bitvore Corporate News API](https://apis.io/apis/bitvore/bitvore-corporate-news-api/) — Corp News API
+- [Bitvore Datasets API](https://apis.io/apis/bitvore/bitvore-datasets-api-api/) — Export Files and Reports
+- [Bitvore Economic News API](https://apis.io/apis/bitvore/bitvore-economic-news-api/) — Economic News API
+- [Bitvore Entity API](https://apis.io/apis/bitvore/bitvore-entity-api/) — Entity API
+- [Bitvore Filings API](https://apis.io/apis/bitvore/bitvore-filings-api-api/) — Financial Filings, Submissions and Summaries
+- [Bitvore Financial Filings API](https://apis.io/apis/bitvore/bitvore-financial-filings-api/) — Financial Filings API
+- [Bitvore Identification API](https://apis.io/apis/bitvore/bitvore-identification-api/) — Identification API
+- [Bitvore Intel API](https://apis.io/apis/bitvore/bitvore-intel-api/) — Intelligence API
+- [Bitvore Muni API](https://apis.io/apis/bitvore/bitvore-muni-api-api/) — Municipal API
+- [Bitvore Muni News API](https://apis.io/apis/bitvore/bitvore-muni-news-api/) — Muni News API
+- [Bitvore News API](https://apis.io/apis/bitvore/bitvore-news-api-api/) — Precision and Economic News
+- [Bitvore Organizations API](https://apis.io/apis/bitvore/bitvore-organizations-api-api/) — Organization Details and Search
+- [Bitvore Portfolio API](https://apis.io/apis/bitvore/bitvore-portfolio-api/) — Portfolio API
+- [Bitvore Portfolios API](https://apis.io/apis/bitvore/bitvore-portfolios-api-api/) — Manage Organization-based Portfolios
+- [Bitvore Sentiment Scores API](https://apis.io/apis/bitvore/bitvore-sentiment-scores-api-api/) — Organization Scores
+- [Bitvore Sentiment Scores API](https://apis.io/apis/bitvore/bitvore-sentiment-scores-api/) — Company Sentiment Score API
+- [Bitvore O Auth2 API](https://apis.io/apis/bitvore/bitvore-oauth2-api/) — Bitvore OAuth2 Authorization Server API
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Bitvore Agentic Access](https://apis.io/agentic-access/bitvore/bitvore-agentic-access/)
+
+#### Collections (19)
+
+Postman and Open Collection request collections.
+
+- [Deprecated Custom Alert API API](https://apis.io/collections/bitvore/open-bitvore-alert-api-api/)
+- [Deprecated Custom Bond API](https://apis.io/collections/bitvore/open-bitvore-bond-api/)
+- [Bitvore Legacy Corporate News API](https://apis.io/collections/bitvore/open-bitvore-corporate-news-api/)
+- [Corporate Datasets API API](https://apis.io/collections/bitvore/open-bitvore-datasets-api-api/)
+- [Bitvore Legacy Economic News API](https://apis.io/collections/bitvore/open-bitvore-economic-news-api/)
+- [Bitvore Legacy Entity API](https://apis.io/collections/bitvore/open-bitvore-entity-api/)
+- [Corporate Filings API API](https://apis.io/collections/bitvore/open-bitvore-filings-api-api/)
+- [Bitvore Legacy Financial Filings API](https://apis.io/collections/bitvore/open-bitvore-financial-filings-api/)
+- [Bitvore Legacy Identification API](https://apis.io/collections/bitvore/open-bitvore-identification-api/)
+- [Deprecated Custom Intel API](https://apis.io/collections/bitvore/open-bitvore-intel-api/)
+- [Deprecated Custom Muni API API](https://apis.io/collections/bitvore/open-bitvore-muni-api-api/)
+- [Bitvore Legacy Muni News API](https://apis.io/collections/bitvore/open-bitvore-muni-news-api/)
+- [Bitvore News API API](https://apis.io/collections/bitvore/open-bitvore-news-api-api/)
+- [Security O Auth2 API](https://apis.io/collections/bitvore/open-bitvore-oauth2-api/)
+- [Corporate Organizations API API](https://apis.io/collections/bitvore/open-bitvore-organizations-api-api/)
+- [Bitvore Legacy Portfolio API](https://apis.io/collections/bitvore/open-bitvore-portfolio-api/)
+- [Bitvore Portfolios API API](https://apis.io/collections/bitvore/open-bitvore-portfolios-api-api/)
+- [Bitvore Legacy Sentiment Scores API](https://apis.io/collections/bitvore/open-bitvore-sentiment-scores-api/)
+- [Corporate Sentiment Scores API API](https://apis.io/collections/bitvore/open-bitvore-sentiment-scores-api-api/)
+
+#### Overlays (6)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Bitvore Corporate Overlay](https://apis.io/overlays/bitvore/bitvore-corporate-overlay/)
+- [Bitvore Custom Api It Overlay](https://apis.io/overlays/bitvore/bitvore-custom-api-it-overlay/)
+- [Bitvore Custom Api L Overlay](https://apis.io/overlays/bitvore/bitvore-custom-api-l-overlay/)
+- [Bitvore Legacy Overlay](https://apis.io/overlays/bitvore/bitvore-legacy-overlay/)
+- [Bitvore Muni Overlay](https://apis.io/overlays/bitvore/bitvore-muni-overlay/)
+- [Bitvore Security Overlay](https://apis.io/overlays/bitvore/bitvore-security-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bitvore Authentication](https://apis.io/security/bitvore/bitvore-authentication/)
+- [Bitvore Domain Security](https://apis.io/security/bitvore/bitvore-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Bitvore Scopes](https://apis.io/scopes/bitvore/bitvore-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Bitvore Plans Pricing](https://apis.io/plans/bitvore/bitvore-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Bitvore Rate Limits](https://apis.io/rate-limits/bitvore/bitvore-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://bondwave.com/muni-news/)
+- [Documentation](https://developer.bitvore.com/v2/docs/api-reference)
+- [Getting started](https://developer.bitvore.com/v2/getting-started)
+- [API reference](https://developer.bitvore.com/v2/docs/api-reference)
+- [Sign up](https://developer.bitvore.com/get-access)
+- [Changelog](https://developer.bitvore.com/v2/release)
+- [Blog](https://bondwave.com/posts-archive/)
+- [Terms of service](https://bondwave.com/legal-information/)
+- [Privacy policy](https://bondwave.com/privacy-policy/)
+- [GitHub](https://github.com/bitvore)
+
+## API Evangelist rating
+
+**Kin Score 36.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 49.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 28.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 26.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 34.3** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bitvore/](https://apis.io/providers/bitvore/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Bitvore: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bitvore/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
